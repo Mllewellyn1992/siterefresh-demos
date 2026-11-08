@@ -229,7 +229,7 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
     <ul class="qt-sug" id="qt-sug" role="listbox" aria-label="Matching addresses" hidden></ul></div>
     <p class="qt-area" id="qt-area">Sreeju covers places up to 30 min drive from Hamilton.</p>
     <p class="qt-msg" id="qt-findmsg" aria-live="polite"></p><button type="button" class="qt-link" id="qt-notmine" hidden>Not your part?</button></form>
-   <button type="button" class="btn qt-aibtn" id="qt-ai" hidden>Draw my lawn for me</button><p class="qt-msg" id="qt-aimsg" aria-live="polite"></p>
+   <p class="qt-msg" id="qt-aimsg" aria-live="polite"></p>
    <p class="qt-step">2. What do you need? <span>Pick as many as you like.</span></p>
    <div class="qt-svc" id="qt-svcs" role="group" aria-label="Jobs"></div>
    <div id="qt-fields"></div>
@@ -262,7 +262,7 @@ window.addEventListener('DOMContentLoaded',()=>{
  const centre=p=>L.latLng(p.reduce((t,q)=>t+q.lat,0)/p.length,p.reduce((t,q)=>t+q.lng,0)/p.length);
 
  const sel={}, val={};
- let home=null, homePt=null, place='', travelKm=null, parcelLayer=null, zoneLayer=null, clInfo=null, pick=null, touched=false;
+ let home=null, homePt=null, place='', travelKm=null, parcelLayer=null, zoneLayer=null, clInfo=null, pick=null, touched=false, locked=false;
  // map-traced things (lawn, driveway, deck, paths): one "target" per map_area field
  const targets=[];
  Q.services.forEach(s=>s.fields.forEach(f=>{if(f.type==='map_area')targets.push({key:f.layer,svc:s.id,f,shapes:[{pts:[],assumed:false}],cur:0});}));
@@ -293,7 +293,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     const isCur=t.key===active&&si===t.cur;
     const poly=(p.length>2?L.polygon(p,{color:'#fff',weight:2,dashArray:s.assumed?'6 5':null,fillColor:col,fillOpacity:.4,interactive:false})
      :L.polyline(p,{color:'#fff',weight:2,interactive:false})).addTo(shapeLayer);
-    if(t.key===active)p.forEach((q,j)=>{const m=L.marker(q,{draggable:true,autoPan:false,icon:L.divIcon({className:isCur?'qt-v':'qt-v qt-sm',iconSize:[24,24],
+    if(t.key===active&&!locked)p.forEach((q,j)=>{const m=L.marker(q,{draggable:true,autoPan:false,icon:L.divIcon({className:isCur?'qt-v':'qt-v qt-sm',iconSize:[24,24],
        html:'<i style="background:'+(isCur?'#ffd84d':col)+'"></i>'})}).addTo(shapeLayer);
      m.on('drag',e=>{p[j]=e.target.getLatLng();poly.setLatLngs(p);});
      m.on('dragend',()=>{touched=true;drawShapes();update();});
@@ -366,7 +366,7 @@ window.addEventListener('DOMContentLoaded',()=>{
  function refreshTools(){
   const live=targets.filter(t=>sel[t.svc]).map(t=>[t.key,t.f.label]);
   if(roofSvc&&sel[roofSvc.id]&&roofs.length)live.push(['__roof','Roofs (gutters)']);
-  tools.hidden=!live.length;
+  tools.hidden=!live.length||locked;
   tsel.innerHTML='';live.forEach(([k,l])=>{const o=mk('option','','Marking: '+l);o.value=k;tsel.appendChild(o);});
   if(live.length&&!live.some(([k])=>k===active))active=live[0][0];tsel.value=active;tsel.hidden=live.length<2;row.hidden=active==='__roof';}
 
@@ -395,7 +395,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   const body='Hi '+Q.owner+', I got an instant price on your website'+(place?' for '+place:'')+'. '+lines.map(l=>l.t+' ('+l.d+') '+l.p).join('; ')+(travel?'. '+travel:'')+'. Estimate $'+lo+'-$'+hi+'. Can you confirm?';
   const a=$('qt-send');a.href='sms:'+Q.tel+'?&body='+encodeURIComponent(body);a.hidden=false;
  }
- map.on('click',e=>{if(active==='__roof')return;touched=true;if(!targets.some(t=>sel[t.svc]))toggle(targets[0].svc,true);const t=T0();t.shapes[t.cur].pts.push(e.latlng);drawShapes();update();});
+ map.on('click',e=>{if(locked||active==='__roof')return;touched=true;if(!targets.some(t=>sel[t.svc]))toggle(targets[0].svc,true);const t=T0();t.shapes[t.cur].pts.push(e.latlng);drawShapes();update();});
 
  async function loadRoofs(){
   roofs=[];
@@ -409,15 +409,15 @@ window.addEventListener('DOMContentLoaded',()=>{
   refreshTools();drawRoofs();update();autoStoreys();
  }
  async function loadParcel(msg){
-  if(!Q.parcel)return;if(parcelLayer){map.removeLayer(parcelLayer);parcelLayer=null;}if(zoneLayer){map.removeLayer(zoneLayer);zoneLayer=null;}
-  try{const r=await fetch(Q.parcel+'?lat='+homePt.lat+'&lng='+homePt.lng);if(!r.ok)return;const d=await r.json();
+  if(!Q.parcel){runAI();return;}if(parcelLayer){map.removeLayer(parcelLayer);parcelLayer=null;}if(zoneLayer){map.removeLayer(zoneLayer);zoneLayer=null;}
+  try{const r=await fetch(Q.parcel+'?lat='+homePt.lat+'&lng='+homePt.lng);if(!r.ok){runAI();return;}const d=await r.json();
    parcelLayer=L.polygon(d.points,{interactive:false,color:'#ff4fd8',weight:3,dashArray:'8 6',fill:false}).addTo(map);
    msg.textContent='Found '+place+'. Your section is '+Math.round(d.area).toLocaleString()+' m², outlined in pink.';
    clInfo=d.crosslease||null;pick=clInfo&&clInfo.homes?clInfo.mine:null;
    if(clInfo){showPart();if($('qt-notmine'))$('qt-notmine').hidden=!clInfo.homes;}
    else if($('qt-notmine'))$('qt-notmine').hidden=true;
-   startAI();
   }catch(e){}
+  runAI();
  }
  // Address: suggestions as you type (Photon, OpenStreetMap data, biased to the base), then the drive-time check
  const qIn=$('qt-q'),sug=$('qt-sug'),msg0=$('qt-findmsg');let sugs=[],sugSel=-1,picked=null,sugT=null,sugN=0;
@@ -468,7 +468,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   homePt=pt;place=where;travelKm=km;
   map.setView(homePt,20);if(home)map.removeLayer(home);
   home=L.circleMarker(homePt,{radius:8,color:'#fff',weight:3,fillOpacity:0,interactive:false}).addTo(map);
-  msg.textContent='Found '+place+'.';if($('qt-ai')&&Q.ai)$('qt-ai').hidden=false;
+  msg.textContent='Found '+place+'.';
   loadRoofs();loadParcel(msg);
   update();
  }
@@ -499,7 +499,7 @@ window.addEventListener('DOMContentLoaded',()=>{
  const nm=$('qt-notmine');
  if(nm)nm.addEventListener('click',()=>{if(!clInfo||!clInfo.homes)return;const n=clInfo.homes.length;
   pick=pick==='whole'?clInfo.mine:(pick+1)%n===clInfo.mine?'whole':(pick+1)%n;
-  nm.textContent=pick==='whole'?'Just my part':'Not your part?';showPart();startAI();});
+  nm.textContent=pick==='whole'?'Just my part':'Not your part?';showPart();runAI();});
 
  // AI pre-draw: lawn, driveway, deck and paths, which the customer then adjusts. Two versions start as soon as the
  // address is found: a quick draft (AI on low effort, ~30 s) and a careful one (~70 s, a closer match). The page shows
@@ -522,39 +522,45 @@ window.addEventListener('DOMContentLoaded',()=>{
  function doneText(d){
   const assumed=targets.some(t=>t.shapes.some(s=>s.assumed));
   const split=d.crosslease?(d.crosslease.split==='fences'?' We’ve followed the fences between the homes for your part.':' We couldn’t see a clear fence between the homes, so your part is the half nearest your home.'):'';
-  return 'Check the shapes on the photo and drag any corner that’s off.'+split+(assumed?' Dashed shapes run under trees or a roof, so we’ve assumed where they go.':'')+(d.notes?' '+d.notes:'');}
+  return 'Measured from the aerial photo.'+split+(assumed?' Dashed shapes run under trees or a roof, so we’ve estimated them.':'')+' '+Q.owner+' confirms the price before any work starts.';}
+ // Card text: in AI mode the lawn is measured for the customer; otherwise they tap around it
+ function setHow(aiMode){Q.services.forEach(s=>{const fs=s.fields.filter(f=>f.type==='map_area');if(!fs.length)return;
+  const p=document.querySelector('#qt-card-'+s.id+' .qt-how');if(!p)return;
+  const ls=fs.map(f=>f.label.toLowerCase()),what=ls.length>1?ls.slice(0,-1).join(', ')+' and '+ls[ls.length-1]:ls[0];
+  p.textContent=aiMode?'We measure your '+what+' from the aerial photo for you as soon as you find your address.':(s.how||'').replace(', or use Draw it for me','');});}
+ function setLock(v){locked=v;refreshTools();drawShapes();}
  // Pitch mode: ../tunnel.json names Mike's PC; if it answers, switch on the AI drawing and the LINZ section outline
  if(Q.remote)fetch(Q.remote+'?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(async t=>{
   if(!t||!t.api)return;
   const up=await fetch(t.api+'/api/ping',{cache:'no-store'}).then(r=>r.ok).catch(()=>false);if(!up)return;
   Q.ai=t.api+'/api/trace';Q.parcel=t.api+'/api/parcel';Q.storeysApi=t.api+'/api/storeys';
-  Q.services.forEach(s=>{if(s.how_ai){const p=document.querySelector('#qt-card-'+s.id+' .qt-how');if(p)p.textContent=s.how_ai;}});
-  if(homePt){if($('qt-ai'))$('qt-ai').hidden=false;loadParcel($('qt-findmsg'));}
+  setHow(true);
+  if(homePt)loadParcel($('qt-findmsg'));
  }).catch(()=>{});
- const ai=$('qt-ai');
- if(ai)ai.addEventListener('click',async()=>{if(!homePt)return;
-  const msg=$('qt-aimsg'),jobs=startAI(),key=aiKey;ai.disabled=true;
-  msg.textContent='Looking at your property from above… this takes up to a minute.';
-  const fail=()=>{aiJobs=null;msg.textContent='Auto-draw isn’t available right now. You can still tap around each area yourself.';};
+ // Automatic drawing: starts as soon as the address is found; the shapes are locked (the customer can't change them).
+ // Hand-drawing is only offered if the automatic drawing isn't available.
+ async function runAI(){if(!Q.ai||!homePt)return;
+  const msg=$('qt-aimsg'),jobs=startAI(),key=aiKey;if(!jobs||!msg)return;
+  targets.forEach(t=>{t.shapes=[{pts:[],assumed:false}];t.cur=0;});setLock(true);update();
+  msg.textContent='Measuring your lawn from the aerial photo… about 30 seconds.';
+  const fail=t=>{if(aiKey!==key)return;aiJobs=null;setLock(false);setHow(false);
+   msg.textContent=t||'We couldn’t measure it automatically right now. Tap around each lawn on the photo instead.';};
   try{
    const first=await Promise.race([jobs.full.then(x=>({x,full:true})),jobs.fast.then(x=>({x,full:false}))]);
+   if(aiKey!==key)return;
    let res=first.x,full=first.full;
    if(!res.ok){res=await (full?jobs.fast:jobs.full);full=!full;}
+   if(aiKey!==key)return;
    if(!res.ok)return fail();
-   if(!res.d.property_found){msg.textContent='We couldn’t work out which property is yours. Tap around each area yourself instead.';return;}
-   if(!applyAI(res.d)){msg.textContent='We couldn’t spot anything to measure. Tap around each area yourself instead.';return;}
-   if(full){msg.textContent='Done. '+doneText(res.d);return;}
-   msg.textContent='Here’s a quick first draft. A more careful drawing is on its way and will replace it in under a minute. '+doneText(res.d);
+   if(!res.d.property_found)return fail('We couldn’t work out which property is yours. Tap around each lawn on the photo instead.');
+   if(!applyAI(res.d))return fail('We couldn’t spot a lawn to measure. Tap around each lawn on the photo instead.');
+   if(full){msg.textContent=doneText(res.d);return;}
+   msg.textContent='First measurement done. A more careful one will replace it in a few seconds. '+doneText(res.d);
    jobs.full.then(r=>{if(aiKey!==key)return;
-    if(!r.ok||!r.d.property_found){msg.textContent='Done. '+doneText(res.d);return;}
-    if(!touched){applyAI(r.d);msg.textContent='Updated with our more careful drawing. '+doneText(r.d);return;}
-    msg.textContent='Our more careful drawing is ready. ';
-    const use=document.createElement('button');use.type='button';use.className='qt-link';use.textContent='Use it instead of my changes';
-    use.addEventListener('click',()=>{applyAI(r.d);msg.textContent='Updated with our more careful drawing. '+doneText(r.d);});
-    msg.appendChild(use);});
+    if(r.ok&&r.d.property_found&&applyAI(r.d))msg.textContent=doneText(r.d);else msg.textContent=doneText(res.d);});
   }catch(e){fail();}
-  finally{ai.disabled=false;}
- });
+ }
+ if(Q.ai)setHow(true);
  toggle(targets[0].svc,true);
  window.__qt={map,targets};
 });
