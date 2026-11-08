@@ -228,14 +228,14 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
    <div id="qt-fields"></div>
    <div class="qt-out" id="qt-out" aria-live="polite"></div>
    <a class="btn btn--primary" id="qt-send" hidden>Text this price to Sreeju</a>
-   <p class="qt-demo">Preview: these are example prices. Sreeju sets his own rates before the site goes live.</p>
+   <p class="qt-demo">Preview: these are example prices. Sreeju sets the real rates before the site goes live.</p>
   </div>
   <div class="qt-mapcol"><div id="qt-map" class="map qt-map" role="application" aria-label="Aerial photo. Tap around an area to measure it, or drag a corner to adjust it."></div><div class="qt-maptools" id="qt-tools"></div></div>
  </div>
 </div></section>
 <script>
 window.addEventListener('DOMContentLoaded',()=>{
- const Q={"base": {"lat": -37.787, "lng": 175.279, "label": "Hamilton"}, "owner": "Sreeju", "tel": "+642102950774", "services": [{"id": "lawn", "label": "Lawn mowing", "unit_note": "per mow", "base": 35, "min": 40, "fields": [{"id": "area", "type": "map_area", "layer": "lawn", "label": "Lawn", "color": "#3fae4a", "per": 0.07, "max": 5000}, {"id": "berm", "type": "map_area", "layer": "berm", "label": "Roadside berm", "color": "#c5e86c", "per": 0.07, "max": 1500}], "how": "Tap around each lawn on the photo. Front and back? Finish one, tap New area, then do the next. Want the grass verge by the road done too? Choose Marking: Roadside berm and mark it. Drag any corner to adjust."}, {"id": "hedge", "label": "Hedge trimming", "unit_note": "one-off", "base": 30, "min": 80, "fields": [{"id": "len", "type": "number", "label": "Total hedge length", "unit": "m", "per": 4.5, "default": 10, "hint": "One big step is about a metre.", "max": 300}, {"id": "h", "type": "select", "label": "Height", "options": [{"label": "Up to waist height", "x": 0.8}, {"label": "About head height", "x": 1}, {"label": "Taller, needs a ladder", "x": 1.6}], "default": 1}]}, {"id": "clear", "label": "Section tidy-up", "unit_note": "one-off, green waste taken away", "base": 0, "min": 150, "fields": [{"id": "size", "type": "select", "label": "How much", "options": [{"label": "A garden bed or corner", "add": 150}, {"label": "Part of the section", "add": 400}, {"label": "A whole overgrown section", "add": 900}], "default": 0}, {"id": "growth", "type": "select", "label": "How bad is it", "options": [{"label": "Light weeds", "x": 0.8}, {"label": "Properly overgrown", "x": 1}, {"label": "Ivy, vines or blackberry", "x": 1.5}], "default": 1}]}], "travel": {"free_km": 20, "per_km": 1.0}, "ai": null, "parcel": null, "storeysApi": null, "linz": "https://services.arcgis.com/xdsHIIxuCWByZiCB/ArcGIS/rest/services/LINZ_NZ_Building_Outlines/FeatureServer/0/query"};
+ const Q={"base": {"lat": -37.787, "lng": 175.279, "label": "Hamilton"}, "owner": "Sreeju", "tel": "+642102950774", "maxMin": 30, "services": [{"id": "lawn", "label": "Lawn mowing", "unit_note": "per mow", "base": 35, "min": 40, "fields": [{"id": "area", "type": "map_area", "layer": "lawn", "label": "Lawn", "color": "#3fae4a", "per": 0.07, "max": 5000}, {"id": "berm", "type": "map_area", "layer": "berm", "label": "Roadside berm", "color": "#c5e86c", "per": 0.07, "max": 1500}], "how": "Tap around each lawn on the photo. Front and back? Finish one, tap New area, then do the next. Want the grass verge by the road done too? Choose Marking: Roadside berm and mark it. Drag any corner to adjust."}, {"id": "hedge", "label": "Hedge trimming", "unit_note": "one-off", "base": 30, "min": 80, "fields": [{"id": "len", "type": "number", "label": "Total hedge length", "unit": "m", "per": 4.5, "default": 10, "hint": "One big step is about a metre.", "max": 300}, {"id": "h", "type": "select", "label": "Height", "options": [{"label": "Up to waist height", "x": 0.8}, {"label": "About head height", "x": 1}, {"label": "Taller, needs a ladder", "x": 1.6}], "default": 1}]}, {"id": "clear", "label": "Section tidy-up", "unit_note": "one-off, green waste taken away", "base": 0, "min": 150, "fields": [{"id": "size", "type": "select", "label": "How much", "options": [{"label": "A garden bed or corner", "add": 150}, {"label": "Part of the section", "add": 400}, {"label": "A whole overgrown section", "add": 900}], "default": 0}, {"id": "growth", "type": "select", "label": "How bad is it", "options": [{"label": "Light weeds", "x": 0.8}, {"label": "Properly overgrown", "x": 1}, {"label": "Ivy, vines or blackberry", "x": 1.5}], "default": 1}]}], "travel": {"free_km": 20, "per_km": 1.0}, "ai": null, "parcel": null, "storeysApi": null, "linz": "https://services.arcgis.com/xdsHIIxuCWByZiCB/ArcGIS/rest/services/LINZ_NZ_Building_Outlines/FeatureServer/0/query"};
  const $=id=>document.getElementById(id), mk=(t,c,txt)=>{const e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e;};
  const ink=getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim()||'#2f7a2f';
  const map=L.map('qt-map',{scrollWheelZoom:false,doubleClickZoom:false,maxZoom:21}).setView([Q.base.lat,Q.base.lng],15);
@@ -377,7 +377,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   const out=$('qt-out');out.innerHTML='';
   if(!lines.length){
    out.append(mk('p','qt-big',bigs.length?'That’s a big job':'Your price appears here'),
-    mk('p','qt-sub',bigs.length?Q.owner+' will price '+bigs.join(' and ').toLowerCase()+' after a quick look. Give him a call.':'Pick a job above, then mark it on the photo or answer a question or two.'));
+    mk('p','qt-sub',bigs.length?Q.owner+' will price '+bigs.join(' and ').toLowerCase()+' after a quick look. Just call.':'Pick a job above, then mark it on the photo or answer a question or two.'));
    $('qt-send').hidden=true;badge.hidden=true;return;}
   const ul=mk('ul','qt-lines');
   lines.forEach(l=>{const li=mk('li');const a=mk('span');a.append(mk('b','',l.t),document.createTextNode(' '+l.d+' ('+l.u+')'));li.append(a,mk('strong','',l.p));ul.appendChild(li);});
@@ -415,18 +415,24 @@ window.addEventListener('DOMContentLoaded',()=>{
  $('qt-find').addEventListener('submit',async ev=>{ev.preventDefault();const q=$('qt-q').value.trim();if(!q)return;
   const msg=$('qt-findmsg');msg.textContent='Finding your property…';
   try{const b=Q.base,vb=[b.lng-0.6,b.lat+0.45,b.lng+0.6,b.lat-0.45].join(',');
-   const nm=bd=>fetch('https://nominatim.openstreetmap.org/search?format=json&countrycodes=nz&limit=10&viewbox='+vb+bd+'&q='+encodeURIComponent(q)).then(x=>x.json());
-   let r=await nm('&bounded=1');if(r.length)r.sort((x,y)=>dist(b,{lat:+x.lat,lng:+x.lon})-dist(b,{lat:+y.lat,lng:+y.lon}));else r=await nm('');
-   if(!r.length){msg.textContent='We couldn’t find that address. Try adding the suburb, or move the map yourself.';return;}
-   homePt=L.latLng(+r[0].lat,+r[0].lon);const pp=r[0].display_name.split(',').map(t=>t.trim());
-   place=(/^[0-9]/.test(pp[0])?pp[0]+' '+pp[1]+(pp[2]?', '+pp[2]:''):pp[0]+(pp[1]?', '+pp[1]:''));
+   const r=await fetch('https://nominatim.openstreetmap.org/search?format=json&countrycodes=nz&limit=10&bounded=1&viewbox='+vb+'&q='+encodeURIComponent(q)).then(x=>x.json());
+   if(!r.length){msg.textContent='We couldn’t find that address near '+b.label+'. Try adding the suburb, or call '+Q.owner+'.';return;}
+   r.sort((x,y)=>dist(b,{lat:+x.lat,lng:+x.lon})-dist(b,{lat:+y.lat,lng:+y.lon}));
+   const pt=L.latLng(+r[0].lat,+r[0].lon),pp=r[0].display_name.split(',').map(t=>t.trim());
+   const where=(/^[0-9]/.test(pp[0])?pp[0]+' '+pp[1]+(pp[2]?', '+pp[2]:''):pp[0]+(pp[1]?', '+pp[1]:''));
+   let km=dist(b,pt)/1000*1.3,mins=km/50*60;
+   try{const o=await fetch('https://router.project-osrm.org/route/v1/driving/'+pt.lng+','+pt.lat+';'+b.lng+','+b.lat+'?overview=false').then(x=>x.json());
+    if(o.routes&&o.routes[0]){km=o.routes[0].distance/1000;mins=o.routes[0].duration/60;}}catch(e){}
+   if(mins>Q.maxMin){
+    if(home){map.removeLayer(home);home=null;}homePt=null;travelKm=null;if($('qt-ai'))$('qt-ai').hidden=true;
+    map.setView(pt,15);
+    msg.textContent='Found '+where+'. That’s about '+Math.round(mins)+' min drive from '+b.label+', outside the area '+Q.owner+' covers (up to '+Q.maxMin+' min). Call '+Q.owner+' to check.';
+    update();return;}
+   homePt=pt;place=where;travelKm=km;
    map.setView(homePt,20);if(home)map.removeLayer(home);
    home=L.circleMarker(homePt,{radius:8,color:'#fff',weight:3,fillOpacity:0,interactive:false}).addTo(map);
-   msg.textContent='Found '+place+'.'+(dist(Q.base,homePt)>80000?' That’s a long way from '+Q.base.label+'. Not right? Add your suburb.':'');if($('qt-ai'))$('qt-ai').hidden=false;
-   travelKm=dist(Q.base,homePt)/1000*1.3;
+   msg.textContent='Found '+place+'.';if($('qt-ai'))$('qt-ai').hidden=false;
    loadRoofs();loadParcel(msg);
-   try{const o=await fetch('https://router.project-osrm.org/route/v1/driving/'+homePt.lng+','+homePt.lat+';'+Q.base.lng+','+Q.base.lat+'?overview=false').then(x=>x.json());
-    if(o.routes&&o.routes[0])travelKm=o.routes[0].distance/1000;}catch(e){}
    update();
   }catch(e){msg.textContent='Address lookup is unavailable right now. Move the map to your place instead.';}
  });
@@ -520,7 +526,7 @@ window.addEventListener('DOMContentLoaded',()=>{
 </div></section>
 <script>
 window.addEventListener('DOMContentLoaded',()=>{
- const C={"lat": -37.787, "lng": 175.279, "label": "Hamilton", "name": "Alpha", "owner": "Sreeju"};
+ const C={"lat": -37.787, "lng": 175.279, "label": "Hamilton", "name": "Alpha", "owner": "Sreeju", "maxMin": 30};
  const ink=getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim()||'#2f7a2f';
  const map=L.map('map',{scrollWheelZoom:false}).setView([C.lat,C.lng],11);
  new ResizeObserver(()=>map.invalidateSize()).observe(document.getElementById('map'));
@@ -539,7 +545,9 @@ window.addEventListener('DOMContentLoaded',()=>{
    const rt=r.routes[0];
    route=L.geoJSON(rt.geometry,{style:{color:ink,weight:4,opacity:.8}}).addTo(map);
    map.fitBounds(route.getBounds(),{padding:[30,30]});
-   say(`About ${(rt.distance/1000).toFixed(rt.distance<10000?1:0)} km by road, roughly ${Math.max(1,Math.round(rt.duration/60))} min drive`,`From ${C.owner}'s ${C.label} base${where?' to '+where:''}. Not sure if that's in our area? Just ask.`);
+   const mins=Math.max(1,Math.round(rt.duration/60)),kms=(rt.distance/1000).toFixed(rt.distance<10000?1:0);
+   if(mins>C.maxMin)say(`About ${kms} km, roughly ${mins} min drive: outside our area`,`${C.owner} covers places up to ${C.maxMin} min from ${C.label}. Call to check.`);
+   else say(`About ${kms} km by road, roughly ${mins} min drive: we come to you`,`From ${C.owner}'s ${C.label} base${where?' to '+where:''}.`);
   }catch(e){
    map.fitBounds(L.latLngBounds([[C.lat,C.lng],[lat,lng]]),{padding:[30,30]});
    say(`About ${straight.toFixed(straight<10?1:0)} km away in a straight line`,`From ${C.owner}'s ${C.label} base. Not sure if that's in our area? Just ask.`);
@@ -556,7 +564,7 @@ window.addEventListener('DOMContentLoaded',()=>{
    let r=await nm('&bounded=1');if(r.length)r.sort((a,b)=>near(a)-near(b));else r=await nm('');
    if(!r.length){say("We couldn't find that place","Try a suburb name, or just call "+C.owner+".");return;}
    show(+r[0].lat,+r[0].lon,r[0].display_name.split(',').slice(0,2).join(','));
-  }catch(e){say('Map lookup is unavailable right now','Call '+C.owner+' and he can tell you straight away.');}
+  }catch(e){say('Map lookup is unavailable right now','Call '+C.owner+' to check.');}
  });
  document.getElementById('dist-geo').addEventListener('click',()=>{
   if(!navigator.geolocation){say('Your browser does not share location','Type your suburb instead.');return;}
