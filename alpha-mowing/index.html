@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Alpha Lawn Mowing | Lawn mowing and edging in Hamilton</title>
+<meta name="description" content="Regular and one-off lawn mowing, edging and section tidy-ups from Sreeju and the Alpha team, across Hamilton.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Onest:wght@400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-paper: oklch(96% 0.009 82); --color-paper-2: oklch(92% 0.012 82); --color-paper-3: oklch(87.5% 0.014 80);
+  --color-plate: oklch(99.5% 0.003 82);
+  --color-ink: oklch(16% 0.006 60); --color-ink-2: oklch(27% 0.006 60); --color-muted: oklch(46% 0.01 60);
+  --color-rule: oklch(81% 0.012 80);
+  --color-accent: oklch(53% 0.15 38); --color-accent-soft: oklch(91% 0.035 45); --color-accent-ink: oklch(99.5% 0.003 82); --color-focus: oklch(50% 0.16 38);
+  --font-display: "Syne", ui-sans-serif, sans-serif; --font-body: "Onest", ui-sans-serif, sans-serif;
+  --font-outlier: "JetBrains Mono", ui-monospace, monospace;
+  --radius-card: 0; --radius-pill: 0; --rule-hair: 1px; --rule-bar: 2px;
+  --shadow-card: 14px 14px 0 var(--color-paper-3); --shadow-card-hover: 14px 14px 0 var(--color-ink);
+  --tracking-display: -0.025em; --display-weight: 700;
+  --color-rule-2: color-mix(in oklch, var(--color-rule), var(--color-ink) 25%); --color-accent-2: var(--color-accent-soft); --tint-moss: var(--color-paper-2);
+}
+:root { --space-xs:.5rem; --space-sm:.75rem; --space-md:1.25rem; --space-lg:2rem; --space-xl:3.5rem; --space-2xl:6rem;
+  --text-sm:.9rem; --dur-short:160ms; --ease-out:cubic-bezier(.2,.7,.2,1); --measure:62ch; }
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--color-paper);color:var(--color-ink-2);font:400 1.0625rem/1.6 var(--font-body);font-variant-numeric:oldstyle-nums;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--font-display);font-weight:var(--display-weight);color:var(--color-ink);letter-spacing:var(--tracking-display);line-height:1.06;margin:0}
+a{color:var(--color-ink);text-underline-offset:.2em;text-decoration-thickness:1px;transition:text-decoration-color var(--dur-short) var(--ease-out)}
+a:hover{text-decoration-color:var(--color-accent)}
+::selection{background:color-mix(in oklab,var(--color-accent) 22%,transparent)}
+:focus-visible{outline:2px solid var(--color-focus);outline-offset:3px}
+img{max-width:100%;display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+.demo{background:var(--color-ink);color:var(--color-accent-ink);font-size:.82rem;text-align:center;padding:.45rem 1rem}
+[hidden]{display:none!important}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;border-radius:var(--radius-pill);border:var(--rule-hair) solid var(--color-rule-2);padding:.7rem 1.4rem;font:500 1rem/1 var(--font-body);color:var(--color-ink);text-decoration:none;background:transparent;cursor:pointer;transition:background var(--dur-short) var(--ease-out),border-color var(--dur-short) var(--ease-out)}
+.btn:hover{border-color:var(--color-ink)}
+.btn--primary{background:var(--color-accent);border-color:var(--color-accent);color:var(--color-accent-ink)}
+.btn--primary:hover{background:color-mix(in oklab,var(--color-accent) 82%,black);border-color:transparent}
+header.top{position:sticky;top:0;z-index:20;background:color-mix(in oklab,var(--color-paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:var(--rule-hair) solid var(--color-rule)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:68px}
+.brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;color:var(--color-ink)}
+.brand svg{width:38px;height:34px;color:var(--color-accent)}
+.brand b{font:600 1.2rem/1 var(--font-display);letter-spacing:var(--tracking-display)}
+.brand small{display:block;font:500 .78rem/1.2 var(--font-body);color:var(--color-muted);margin-top:.2rem}
+nav.links{display:flex;gap:1.6rem;font-weight:500;font-size:.95rem}
+nav.links a{text-decoration:none;color:var(--color-ink-2)} nav.links a:hover{color:var(--color-ink);text-decoration:underline;text-decoration-color:var(--color-accent)}
+.hero{padding:clamp(1.75rem,4vw,3.25rem) 0 var(--space-xl)}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.hero h1{font-size:clamp(2.5rem,4.6vw,3.9rem);max-width:15ch}
+.hero .photo img{aspect-ratio:1/1}
+.hero .sub{font-size:clamp(1.08rem,1.5vw,1.2rem);max-width:34em;margin:1.4rem 0 1.8rem;color:var(--color-ink-2)}
+.actions{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+.rating{margin-top:1.6rem;display:flex;align-items:center;gap:.6rem;font-weight:500;color:var(--color-ink)}
+.rating .st{color:var(--color-accent);letter-spacing:.08em;font-size:1.05rem}
+.rating span{color:var(--color-muted);font-weight:400}
+.photo{margin:0}
+.photo img{border-radius:var(--radius-card);outline:var(--rule-hair) solid var(--color-rule);outline-offset:-1px;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;filter:contrast(1.06) saturate(.94)}
+.photo figcaption{font:400 var(--text-sm)/1.4 var(--font-outlier);color:var(--color-muted);margin-top:.55rem}
+.figs{border-top:var(--rule-hair) solid var(--color-rule);border-bottom:var(--rule-hair) solid var(--color-rule)}
+.figs .wrap{display:grid;grid-template-columns:repeat(3,1fr)}
+.fig{padding:var(--space-lg) 0;display:flex;flex-direction:column;gap:.4rem}
+.fig+.fig{border-left:var(--rule-hair) solid var(--color-rule);padding-left:clamp(1rem,3vw,2.5rem)}
+.fig-n{font:600 clamp(4rem,10vw,8.5rem)/.86 var(--font-display);font-variant-numeric:oldstyle-nums proportional-nums;color:var(--color-ink)}
+.fig-l{color:var(--color-muted);font-weight:500;font-size:.95rem}
+section{padding:var(--space-2xl) 0}
+.sec-h{display:flex;justify-content:space-between;align-items:end;gap:2rem;margin-bottom:var(--space-xl)}
+.sec-h h2{font-size:clamp(2rem,3.6vw,3rem);max-width:16ch}
+.sec-h p{max-width:32em;margin:0;color:var(--color-muted)}
+.reviews{background:var(--color-paper-2)}
+.lead-rev{margin:0 0 var(--space-xl);max-width:30em}
+.lead-rev blockquote{margin:0;font:600 clamp(1.6rem,3vw,2.35rem)/1.22 var(--font-display);color:var(--color-ink);letter-spacing:var(--tracking-display)}
+.lead-rev figcaption{margin-top:1rem;font-weight:500;color:var(--color-ink)}
+.lead-rev figcaption span,.rev figcaption span{color:var(--color-muted);font-weight:400}
+.revs{display:grid;grid-template-columns:repeat(4,1fr);border-top:var(--rule-hair) solid var(--color-rule-2)}
+.rev{margin:0;padding:var(--space-lg) clamp(1rem,2vw,1.6rem) 0 0}
+.rev+.rev{border-left:var(--rule-hair) solid var(--color-rule);padding-left:clamp(1rem,2vw,1.6rem)}
+.rev blockquote{margin:0 0 1rem;font-size:.98rem}
+.rev figcaption{font-weight:500;color:var(--color-ink);font-size:.92rem}
+.see-all{margin-top:var(--space-lg);font-weight:500}
+.services .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4.5rem)}
+.svc{list-style:none;margin:0;padding:0;border-top:var(--rule-hair) solid var(--color-rule-2)}
+.svc li{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:baseline;padding:1.05rem 0;border-bottom:var(--rule-hair) solid var(--color-rule)}
+.svc-t{font:600 1.3rem/1.2 var(--font-display);color:var(--color-ink)}
+.svc-n{font:400 1rem/1.45 var(--font-outlier);color:var(--color-muted)}
+.work{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-content:start}
+.work .photo img{aspect-ratio:3/4}
+.feature{background:var(--color-ink);color:var(--color-accent-ink)}
+.feature .wrap{display:grid;grid-template-columns:1.3fr .7fr;gap:2rem;align-items:end}
+.feature h2{color:var(--color-accent-ink);font-size:clamp(2rem,4.2vw,3.4rem);max-width:17ch}
+.feature p{color:color-mix(in oklab,var(--color-accent-ink) 82%,transparent);max-width:34em;margin:1.2rem 0 0}
+.feature .btn{background:var(--color-accent-2);border-color:var(--color-accent-2);color:var(--color-ink);justify-self:start}
+.about{background:var(--tint-moss)}
+.about .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5rem);align-items:center}
+.about p{max-width:var(--measure)}
+.pull{margin:0;padding-left:1.4rem;border-left:var(--rule-hair) solid var(--color-rule-2)}
+.pull blockquote{margin:0;font:600 clamp(1.5rem,2.6vw,2.1rem)/1.25 var(--font-display);color:var(--color-ink)}
+.pull figcaption{margin-top:.8rem;font:400 var(--text-sm)/1.4 var(--font-outlier);color:var(--color-muted)}
+.dist{border-top:var(--rule-hair) solid var(--color-rule)}
+.dist-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:stretch}
+.dist-row{display:flex;gap:.5rem} .dist-row input{flex:1}
+.dist-geo{margin-top:.75rem}
+.dist-out{margin-top:var(--space-lg);padding-top:var(--space-md);border-top:var(--rule-hair) solid var(--color-rule)}
+.dist-big{margin:0;font:600 clamp(1.5rem,2.6vw,2.1rem)/1.2 var(--font-display);color:var(--color-ink);min-height:1.2em}
+.dist-sub{margin:.5rem 0 0;font:400 var(--text-sm)/1.45 var(--font-outlier);color:var(--color-muted)}
+.dist-call{margin-top:var(--space-md)}
+.map{min-height:420px;border-radius:var(--radius-card);outline:var(--rule-hair) solid var(--color-rule);outline-offset:-1px;z-index:0}
+.contact .grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,6vw,5rem)}
+.contact h2{font-size:clamp(2rem,3.6vw,3rem)}
+.lines{list-style:none;padding:0;margin:var(--space-lg) 0 0;border-top:var(--rule-hair) solid var(--color-rule)}
+.lines li{display:flex;justify-content:space-between;gap:1rem;padding:.85rem 0;border-bottom:var(--rule-hair) solid var(--color-rule)}
+.lines li span{color:var(--color-muted)}
+form.quote{background:var(--color-paper-2);border-radius:var(--radius-card);padding:clamp(1.25rem,3vw,2.25rem)}
+form.quote h3{font-size:1.6rem;margin-bottom:.3rem}
+form.quote p.hint{margin:0 0 1.2rem;color:var(--color-muted)}
+label{display:block;font-weight:500;font-size:.92rem;color:var(--color-ink);margin:1rem 0 .4rem}
+input,select{width:100%;min-height:48px;border:var(--rule-hair) solid var(--color-muted);border-radius:var(--radius-card);background:var(--color-paper);padding:.7rem .85rem;font:inherit;color:var(--color-ink)}
+form.quote .btn{width:100%;margin-top:1.4rem}
+.note{font-size:.85rem;color:var(--color-muted);margin-top:.8rem;text-align:center}
+footer{border-top:var(--rule-hair) solid var(--color-rule);padding:var(--space-xl) 0 7rem;font-size:.95rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2rem}
+footer p{margin:.3rem 0;color:var(--color-muted)}
+.callbar{display:none}
+@media (max-width:900px){
+ nav.links{display:none}
+ .hero .wrap,.services .grid,.about .wrap,.contact .grid,.feature .wrap,.dist-grid{grid-template-columns:1fr}
+ .map{min-height:320px}
+ .hero .photo{order:-1} .hero .photo img{aspect-ratio:5/4}
+ .revs{grid-template-columns:1fr 1fr} .rev:nth-child(3){border-left:0;padding-left:0}
+ .sec-h{flex-direction:column;align-items:start}
+ section{padding:var(--space-xl) 0}
+}
+@media (max-width:600px){
+ .top .btn{display:none}
+ .figs .wrap{grid-template-columns:1fr} .fig+.fig{border-left:0;padding-left:0;border-top:var(--rule-hair) solid var(--color-rule)}
+ .fig{flex-direction:row;align-items:baseline;gap:1rem;padding:1rem 0} .fig-n{font-size:3.4rem;min-width:2.2em}
+ .revs{grid-template-columns:1fr} .rev+.rev{border-left:0;padding-left:0;border-top:var(--rule-hair) solid var(--color-rule)} .rev{padding:1.2rem 0}
+ .svc li{grid-template-columns:1fr;gap:.2rem}
+ .callbar{display:flex;position:fixed;left:.75rem;right:.75rem;bottom:.75rem;z-index:30;gap:.5rem}
+ .callbar .btn{flex:1;background:var(--color-paper)} .callbar .btn--primary{flex:2;background:var(--color-accent)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.qt{border-top:var(--rule-hair) solid var(--color-rule)}
+.qt-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
+.qt-panel label,.qt-step{display:block;font-weight:500;color:var(--color-ink);margin:0 0 .4rem}
+.qt-step{margin-top:var(--space-lg)}
+.qt-msg,.qt-how{margin:.5rem 0 0;font:400 var(--text-sm)/1.45 var(--font-outlier);color:var(--color-muted);min-height:1.2em}
+.qt-link{margin:.35rem 0 0;padding:.5rem 0;min-height:44px;background:none;border:0;font:600 var(--text-sm)/1 var(--font-body,inherit);color:var(--color-ink,inherit);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.qt-link[hidden]{display:none}
+.qt-svc,.qt-tools{display:flex;flex-wrap:wrap;gap:.5rem}
+.qt-svc .btn[aria-pressed="true"]{background:var(--color-ink);border-color:var(--color-ink);color:var(--color-paper)}
+.qt-svc .btn{padding:.4rem .95rem;font-size:var(--text-sm)}
+.qt-tools{margin-top:.75rem} .qt-tools .btn{padding:.35rem 1rem;font-size:var(--text-sm)}
+.qt-step span{font-weight:400;color:var(--color-muted);font-size:var(--text-sm)}
+.qt-card{border:0;margin:var(--space-md) 0 0;padding:var(--space-md) 0 0;border-top:var(--rule-hair) solid var(--color-rule);min-width:0}
+.qt-card legend{float:left;width:100%;padding:0;margin:0 0 .4rem;font:600 1.15rem/1.3 var(--font-display);color:var(--color-ink)}
+.qt-field{display:grid;grid-template-columns:1fr auto;gap:.3rem .75rem;align-items:center;margin:.55rem 0;clear:both}
+.qt-field label{margin:0;font-weight:400} .qt-field select{max-width:15rem}
+.qt-num{display:inline-flex;align-items:center;gap:.4rem} .qt-num input{width:5.5rem}
+.qt-hint{grid-column:1/-1;margin:0;font:400 var(--text-sm)/1.4 var(--font-outlier);color:var(--color-muted)}
+.qt-lawnsum{margin:.6rem 0 0;font-size:var(--text-sm);color:var(--color-ink)}
+.qt-tip span{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;color:#fff;font:600 .85rem/1 var(--font-body,sans-serif);text-shadow:0 1px 3px #000,0 0 2px #000}
+.qt-lines b{font-weight:600;color:var(--color-ink)} .qt-lines strong{white-space:nowrap}
+.qt-out{margin-top:var(--space-lg);padding-top:var(--space-md);border-top:var(--rule-hair) solid var(--color-rule)}
+.qt-big{margin:0;font:600 clamp(1.6rem,2.8vw,2.3rem)/1.15 var(--font-display);color:var(--color-ink)}
+.qt-sub{margin:.5rem 0 0;font:400 var(--text-sm)/1.45 var(--font-outlier);color:var(--color-muted)}
+.qt-lines{list-style:none;margin:.75rem 0 0;padding:0}
+.qt-lines li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:var(--rule-hair) solid var(--color-rule);font-size:var(--text-sm)}
+.qt-lines .qt-travel{color:var(--color-muted)}
+#qt-send{margin-top:var(--space-md)}
+.qt-demo{margin-top:var(--space-md);font:400 var(--text-sm)/1.45 var(--font-outlier);color:var(--color-muted);font-style:italic}
+.qt-mapcol{position:sticky;top:96px} .qt-map{height:560px;cursor:crosshair}
+.qt-maptools{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin-top:.6rem} .qt-maprow{display:flex;gap:.4rem}
+.qt-maptools .btn,.qt-maptools select{background:var(--color-paper);padding:.45rem .9rem;font-size:var(--text-sm)}
+.qt-maptools select{border-radius:var(--radius-pill);border:var(--rule-hair) solid var(--color-rule-2);color:var(--color-ink);width:auto}
+.qt-v i{display:block;width:12px;height:12px;margin:6px;border:2px solid #fff;border-radius:50%;box-shadow:0 0 3px rgb(0 0 0/.7)}
+.qt-v.qt-sm i{width:8px;height:8px;margin:8px;border-width:1.5px}
+.qt-aibtn{margin-top:.25rem}
+.qt-badge{background:var(--color-paper);color:var(--color-ink);font:600 1.15rem/1 var(--font-display);padding:.6rem .9rem;border-radius:var(--radius-pill);box-shadow:0 1px 4px rgb(0 0 0/.3)}
+@media (max-width:860px){.qt-grid{display:flex;flex-direction:column} .qt-mapcol{position:relative;top:auto;order:-1;width:100%} .qt-map{height:380px}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
+</head>
+<body>
+<div class="demo">Preview made for Alpha Lawn Mowing by SiteRefresh (working name). Not live, and not affiliated with Alpha Lawn Mowing.</div>
+<header class="top"><div class="wrap">
+ <a class="brand" href="#"><svg viewBox="0 0 64 56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 25 32 5l27 20"/><path d="M14 30v20h36V22"/><path d="M14 22v3"/><path d="M23 47c-6-7-5-15 3-18 4 7 2 14-3 18z"/><path d="M29 46c0-9 5-14 14-15 0 9-5 14-14 15z"/><path d="M50 35h-5M50 41h-5"/></svg><span><b>Alpha</b><small>Lawn Mowing</small></span></a>
+ <nav class="links" aria-label="Main"><a href="#reviews">Reviews</a><a href="#services">Services</a><a href="#price">Instant price</a><a href="#contact">Contact</a></nav>
+ <a class="btn btn--primary" href="tel:+642102950774">Call Sreeju 021 0295 0774</a>
+</div></header>
+<main>
+<section class="hero" aria-labelledby="h1"><div class="wrap">
+ <div>
+  <h1 id="h1">Hamilton lawns, mown and edged properly.</h1>
+  <p class="sub">Regular and one-off lawn mowing, edging and section tidy-ups from Sreeju and the Alpha team, across Hamilton.</p>
+  <div class="actions">
+   <a class="btn btn--primary" href="tel:+642102950774">Call Sreeju 021 0295 0774</a>
+   <a class="btn" href="sms:+642102950774">Text Sreeju</a>
+   <a href="#price">or get an instant price</a>
+  </div>
+  <p class="rating"><span class="st" aria-hidden="true">★★★★★</span>4.9 on Google <span>from 74 reviews</span></p>
+ </div>
+ <figure class="photo"><img src="img/hero_lawn.jpg" alt="A freshly mown, striped lawn beside a brick house, with a leaf blower on the grass" width="800" height="800" fetchpriority="high"><figcaption>A lawn just mown and edged by the Alpha team, from our Google photos.</figcaption></figure>
+</div></section>
+<div class="figs" role="list" aria-label="At a glance"><div class="wrap"><div class="fig"><span class="fig-n">4.9</span><span class="fig-l">Google rating</span></div><div class="fig"><span class="fig-n">74</span><span class="fig-l">Google reviews, 70 of them 5 stars</span></div><div class="fig"><span class="fig-n">60s</span><span class="fig-l">to get a price, measured from the aerial photo</span></div></div></div>
+<section class="reviews" id="reviews" aria-labelledby="rv"><div class="wrap">
+ <div class="sec-h"><h2 id="rv">What Hamilton customers say</h2><p>70 of our 74 Google reviews are five stars. A few, word for word:</p></div>
+ <figure class="lead-rev"><blockquote>&ldquo;Brilliant job every time. Lawn looks perfect, edges are sharp, and they&#x27;re always on time. Sreeju is reliable, friendly, and great value. Highly recommend!&rdquo;</blockquote><figcaption>asakh s <span>· Google review, 6 months ago</span></figcaption></figure>
+ <div class="revs"><figure class="rev"><blockquote>They are very professional and punctual in their work and also affordable prices. Sreeju and his team are really good.</blockquote><figcaption>Prasanth MS <span>· Google review, 6 months ago</span></figcaption></figure><figure class="rev"><blockquote>From the moment we contacted them, the communication was prompt and clear. They did an amazing job, mowing, trimming &amp; edging the lawn.</blockquote><figcaption>H P <span>· Google review, 10 months ago</span></figcaption></figure><figure class="rev"><blockquote>Our property now looks exceptionally well-maintained and tidy. They truly transformed our outdoor space.</blockquote><figcaption>ashik sathyanaq <span>· Google review, 5 months ago</span></figcaption></figure><figure class="rev"><blockquote>They were incredibly efficient and fast, and the whole job was handled with real professionalism.</blockquote><figcaption>RosH <span>· Google review, 10 months ago</span></figcaption></figure></div>
+</div></section>
+<section class="services" id="services" aria-labelledby="sv"><div class="wrap">
+ <div class="sec-h"><h2 id="sv">What we do</h2><p>Lawns are what we do, from a weekly mow to getting an overgrown section back under control.</p></div>
+ <div class="grid"><ul class="svc"><li><span class="svc-t">Lawn mowing</span><span class="svc-n">Weekly, fortnightly or one-off.</span></li><li><span class="svc-t">Edging and line trimming</span><span class="svc-n">Sharp edges on paths, beds and fences.</span></li><li><span class="svc-t">Roadside berms</span><span class="svc-n">Mown with the lawn, both sides of the footpath.</span></li><li><span class="svc-t">Clippings blown and cleared</span><span class="svc-n">Paths and driveway left clean.</span></li><li><span class="svc-t">Section tidy-ups</span><span class="svc-n">Overgrown grass and weeds brought back.</span></li><li><span class="svc-t">Hedge trimming</span><span class="svc-n">Shaped and cleared away.</span></li></ul><div class="work"><figure class="photo"><img src="img/edge_detail.jpg" alt="Close-up of a freshly cut lawn edge along a garden bed, with a leaf blower" loading="lazy" width="800" height="800"><figcaption>Edges finished and clippings blown off, every visit.</figcaption></figure></div></div>
+</div></section>
+<section class="qt" id="price" aria-labelledby="qtt"><div class="wrap">
+ <div class="sec-h"><h2 id="qtt">Get a price in a minute</h2><p>Find your place on the aerial photo, pick the jobs you need, and see a price straight away. We measure your lawn from the photo. No waiting for a call back.</p></div>
+ <div class="qt-grid">
+  <div class="qt-panel">
+   <form id="qt-find"><label for="qt-q">1. Your address</label>
+    <div class="dist-row"><input id="qt-q" autocomplete="street-address" placeholder="e.g. 12 Grey Street, Hamilton East" required><button class="btn btn--primary" type="submit">Find</button></div>
+    <p class="qt-msg" id="qt-findmsg" aria-live="polite"></p><button type="button" class="qt-link" id="qt-notmine" hidden>Not your part?</button></form>
+   
+   <p class="qt-step">2. What do you need? <span>Pick as many as you like.</span></p>
+   <div class="qt-svc" id="qt-svcs" role="group" aria-label="Jobs"></div>
+   <div id="qt-fields"></div>
+   <div class="qt-out" id="qt-out" aria-live="polite"></div>
+   <a class="btn btn--primary" id="qt-send" hidden>Text this price to Sreeju</a>
+   <p class="qt-demo">Preview: these are example prices. Sreeju sets his own rates before the site goes live.</p>
+  </div>
+  <div class="qt-mapcol"><div id="qt-map" class="map qt-map" role="application" aria-label="Aerial photo. Tap around an area to measure it, or drag a corner to adjust it."></div><div class="qt-maptools" id="qt-tools"></div></div>
+ </div>
+</div></section>
+<script>
+window.addEventListener('DOMContentLoaded',()=>{
+ const Q={"base": {"lat": -37.787, "lng": 175.279, "label": "Hamilton"}, "owner": "Sreeju", "tel": "+642102950774", "services": [{"id": "lawn", "label": "Lawn mowing", "unit_note": "per mow", "base": 35, "min": 40, "fields": [{"id": "area", "type": "map_area", "layer": "lawn", "label": "Lawn", "color": "#3fae4a", "per": 0.07, "max": 5000}, {"id": "berm", "type": "map_area", "layer": "berm", "label": "Roadside berm", "color": "#c5e86c", "per": 0.07, "max": 1500}], "how": "Tap around each lawn on the photo. Front and back? Finish one, tap New area, then do the next. Want the grass verge by the road done too? Choose Marking: Roadside berm and mark it. Drag any corner to adjust."}, {"id": "hedge", "label": "Hedge trimming", "unit_note": "one-off", "base": 30, "min": 80, "fields": [{"id": "len", "type": "number", "label": "Total hedge length", "unit": "m", "per": 4.5, "default": 10, "hint": "One big step is about a metre.", "max": 300}, {"id": "h", "type": "select", "label": "Height", "options": [{"label": "Up to waist height", "x": 0.8}, {"label": "About head height", "x": 1}, {"label": "Taller, needs a ladder", "x": 1.6}], "default": 1}]}, {"id": "clear", "label": "Section tidy-up", "unit_note": "one-off, green waste taken away", "base": 0, "min": 150, "fields": [{"id": "size", "type": "select", "label": "How much", "options": [{"label": "A garden bed or corner", "add": 150}, {"label": "Part of the section", "add": 400}, {"label": "A whole overgrown section", "add": 900}], "default": 0}, {"id": "growth", "type": "select", "label": "How bad is it", "options": [{"label": "Light weeds", "x": 0.8}, {"label": "Properly overgrown", "x": 1}, {"label": "Ivy, vines or blackberry", "x": 1.5}], "default": 1}]}], "travel": {"free_km": 20, "per_km": 1.0}, "ai": null, "parcel": null, "storeysApi": null, "linz": "https://services.arcgis.com/xdsHIIxuCWByZiCB/ArcGIS/rest/services/LINZ_NZ_Building_Outlines/FeatureServer/0/query"};
+ const $=id=>document.getElementById(id), mk=(t,c,txt)=>{const e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e;};
+ const ink=getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim()||'#2f7a2f';
+ const map=L.map('qt-map',{scrollWheelZoom:false,doubleClickZoom:false,maxZoom:21}).setView([Q.base.lat,Q.base.lng],15);
+ new ResizeObserver(()=>map.invalidateSize()).observe($('qt-map'));
+ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+  {maxZoom:21,maxNativeZoom:20,attribution:'Imagery &copy; Esri, Maxar, Earthstar Geographics; buildings &copy; LINZ CC BY 4.0'}).addTo(map);
+ const ctl=(pos,el)=>{L.DomEvent.disableClickPropagation(el);L.DomEvent.disableScrollPropagation(el);new (L.Control.extend({onAdd:()=>el}))({position:pos}).addTo(map);return el;};
+ const badge=ctl('topright',mk('div','qt-badge'));badge.hidden=true;
+ const R=6371000, rad=x=>x*Math.PI/180, r5=x=>Math.round(x/5)*5;
+ const xy=(p,la)=>[R*rad(p.lng)*Math.cos(la),R*rad(p.lat)];
+ const area=p=>{if(p.length<3)return 0;const la=rad(p[0].lat),v=p.map(q=>xy(q,la));let s=0;
+  for(let i=0;i<v.length;i++){const a=v[i],b=v[(i+1)%v.length];s+=a[0]*b[1]-b[0]*a[1];}return Math.abs(s)/2;};
+ const perim=p=>{const la=rad(p[0].lat),v=p.map(q=>xy(q,la));let s=0;for(let i=0;i<v.length;i++){const a=v[i],b=v[(i+1)%v.length];s+=Math.hypot(a[0]-b[0],a[1]-b[1]);}return s;};
+ const dist=(a,b)=>{const dl=rad(b.lat-a.lat),dn=rad(b.lng-a.lng);const h=Math.sin(dl/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h));};
+ const inside=(pt,p)=>{let c=false;for(let i=0,j=p.length-1;i<p.length;j=i++){const a=p[i],b=p[j];
+  if((a.lat>pt.lat)!==(b.lat>pt.lat)&&pt.lng<(b.lng-a.lng)*(pt.lat-a.lat)/(b.lat-a.lat)+a.lng)c=!c;}return c;};
+ const centre=p=>L.latLng(p.reduce((t,q)=>t+q.lat,0)/p.length,p.reduce((t,q)=>t+q.lng,0)/p.length);
+
+ const sel={}, val={};
+ let home=null, homePt=null, place='', travelKm=null, parcelLayer=null, zoneLayer=null, clInfo=null, pick=null, touched=false;
+ // map-traced things (lawn, driveway, deck, paths): one "target" per map_area field
+ const targets=[];
+ Q.services.forEach(s=>s.fields.forEach(f=>{if(f.type==='map_area')targets.push({key:f.layer,svc:s.id,f,shapes:[{pts:[],assumed:false}],cur:0});}));
+ const T=k=>targets.find(t=>t.key===k);
+ let active=targets[0].key;
+ const roofSvc=Q.services.find(s=>s.fields.some(f=>f.type==='roof_edge'));
+ let roofs=[], storeyNote='';   // [{pts, on}]
+ async function autoStoreys(){
+  storeyNote='';if(!Q.storeysApi||!roofSvc)return;
+  const on=roofs.filter(r=>r.on).sort((a,b)=>area(b.pts)-area(a.pts))[0];if(!on){drawRoofs();return;}
+  try{const r=await fetch(Q.storeysApi,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({points:on.pts.map(p=>[p.lat,p.lng])})});
+   if(!r.ok){drawRoofs();return;}const d=await r.json();
+   const f=roofSvc.fields.find(f=>f.id==='storeys'),el=$('qt-'+roofSvc.id+'-storeys');
+   if(f&&el){val[roofSvc.id].storeys=d.storeys===2?1:0;el.value=val[roofSvc.id].storeys;}
+   storeyNote=d.sure?' The LiDAR height survey puts the roof about '+d.height+' m high, so we’ve set it to '+(d.storeys===2?'two storeys':'single storey')+'. Change it if that’s wrong.':
+    ' The LiDAR height survey puts the roof about '+d.height+' m high, which could be either, so please check the storeys below.';
+  }catch(e){}
+  drawRoofs();update();
+ }
+ const shapeLayer=L.layerGroup().addTo(map), roofLayer=L.layerGroup().addTo(map);
+ const sum=t=>t.shapes.reduce((a,s)=>a+area(s.pts),0);
+ const roofLen=()=>roofs.filter(r=>r.on).reduce((a,r)=>a+perim(r.pts),0);
+
+ function drawShapes(){
+  shapeLayer.clearLayers();
+  targets.forEach(t=>{if(!sel[t.svc])return;const col=t.f.color;
+   t.shapes.forEach((s,si)=>{const p=s.pts;if(!p.length)return;
+    const isCur=t.key===active&&si===t.cur;
+    const poly=(p.length>2?L.polygon(p,{color:'#fff',weight:2,dashArray:s.assumed?'6 5':null,fillColor:col,fillOpacity:.4,interactive:false})
+     :L.polyline(p,{color:'#fff',weight:2,interactive:false})).addTo(shapeLayer);
+    if(t.key===active)p.forEach((q,j)=>{const m=L.marker(q,{draggable:true,autoPan:false,icon:L.divIcon({className:isCur?'qt-v':'qt-v qt-sm',iconSize:[24,24],
+       html:'<i style="background:'+(isCur?'#ffd84d':col)+'"></i>'})}).addTo(shapeLayer);
+     m.on('drag',e=>{p[j]=e.target.getLatLng();poly.setLatLngs(p);});
+     m.on('dragend',()=>{touched=true;drawShapes();update();});
+     m.on('click',()=>{if(active==='__roof'||(t.key===active&&si===t.cur))return;const c=T0();c.shapes[c.cur].pts.push(L.latLng(q.lat,q.lng));drawShapes();update();});});
+    if(p.length>2)L.marker(centre(p),{interactive:false,icon:L.divIcon({className:'qt-tip',iconSize:null,
+      html:'<span>'+t.f.label+' '+Math.round(area(p))+' m²'+(s.assumed?' (assumed)':'')+'</span>'})}).addTo(shapeLayer);});});
+  targets.forEach(t=>{const el=$('qt-sum-'+t.key);if(!el)return;const n=t.shapes.filter(s=>s.pts.length>2);
+   el.textContent=t.f.label+': '+(n.length?n.map(s=>Math.round(area(s.pts))+' m²').join(' + ')+(n.length>1?' = '+Math.round(sum(t))+' m²':''):'not marked yet');});
+ }
+ function drawRoofs(){
+  roofLayer.clearLayers();if(!roofSvc||!sel[roofSvc.id])return;
+  const picking=active==='__roof';
+  roofs.forEach(r=>{if(!r.on&&!picking)return;
+   const pg=L.polygon(r.pts,{interactive:picking,color:r.on?'#ff8a3d':'#ffffff',weight:r.on?4:1.5,dashArray:r.on?null:'4 4',fillOpacity:r.on?.12:0,fillColor:'#ff8a3d'}).addTo(roofLayer);
+   if(picking)pg.on('click',e=>{L.DomEvent.stopPropagation(e);r.on=!r.on;drawRoofs();update();autoStoreys();});});
+  const el=$('qt-roofsum');if(!el)return;
+  const on=roofs.filter(r=>r.on);
+  el.textContent=!homePt?'Find your address above and we’ll measure your roof from the official building outlines.':
+   !roofs.length?'We couldn’t load the building outline here. Call '+Q.owner+' for a gutter price.':
+   'Roof edge: '+Math.round(roofLen())+' m ('+on.length+(on.length===1?' building':' buildings')+', in orange). Wrong building, or want the garage too? Choose Marking: Roofs on the map, then tap roofs to add or remove them.'+storeyNote;
+ }
+ function fv(s,f){if(f.type==='map_area')return sum(T(f.layer));if(f.type==='roof_edge')return roofLen();return val[s.id][f.id];}
+ function priceOf(s){let work=0,x=1,big=false;
+  s.fields.forEach(f=>{const v=fv(s,f);
+   if(f.type==='select'){const o=f.options[v];work+=o.add||0;x*=o.x||1;}
+   else{work+=(+v||0)*f.per;if(f.max&&v>f.max)big=true;}});
+  if(big)return 'big'; if(work<=0)return null;
+  const p=Math.max(s.min,(s.base+work)*x);return [Math.max(s.min,r5(p*0.9)),r5(p*1.15)];}
+ function summary(s){return s.fields.map(f=>{const v=fv(s,f);
+  if(f.type==='select')return f.options[v].label.toLowerCase();
+  if(!(+v))return '';
+  if(f.type==='map_area')return f.label.toLowerCase()+' '+Math.round(v)+' m²';
+  if(f.type==='roof_edge')return Math.round(v)+' m roof edge';
+  return v+' '+f.unit;}).filter(Boolean).join(', ');}
+
+ // service picker + one card of questions per service
+ const pills=$('qt-svcs'), cards=$('qt-fields');
+ Q.services.forEach(s=>{
+  val[s.id]={};
+  const b=mk('button','btn',s.label);b.type='button';b.dataset.id=s.id;b.setAttribute('aria-pressed','false');
+  b.addEventListener('click',()=>toggle(s.id,!sel[s.id]));pills.appendChild(b);
+  const card=mk('fieldset','qt-card');card.id='qt-card-'+s.id;card.hidden=true;card.appendChild(mk('legend','',s.label));
+  if(s.how)card.appendChild(mk('p','qt-how',s.how));
+  s.fields.forEach(f=>{
+   if(f.type==='map_area'){const p=mk('p','qt-lawnsum');p.id='qt-sum-'+f.layer;card.appendChild(p);return;}
+   if(f.type==='roof_edge'){const p=mk('p','qt-lawnsum');p.id='qt-roofsum';card.appendChild(p);return;}
+   const row=mk('div','qt-field'),id='qt-'+s.id+'-'+f.id,lab=mk('label','',f.label);lab.htmlFor=id;row.appendChild(lab);
+   let inp;
+   if(f.type==='select'){inp=mk('select');f.options.forEach((o,i)=>{const op=mk('option','',o.label);op.value=i;inp.appendChild(op);});
+    inp.value=f.default||0;val[s.id][f.id]=+(f.default||0);
+    inp.addEventListener('change',()=>{val[s.id][f.id]=+inp.value;update();});row.appendChild(inp);}
+   else{const w=mk('span','qt-num');inp=mk('input');inp.type='number';inp.inputMode='decimal';inp.min=0;inp.max=f.max||9999;inp.step=f.step||1;
+    inp.value=f.default||0;val[s.id][f.id]=+(f.default||0);
+    inp.addEventListener('input',()=>{val[s.id][f.id]=Math.max(0,+inp.value||0);update();});w.append(inp,mk('span','',f.unit));row.appendChild(w);}
+   inp.id=id;if(f.hint)row.appendChild(mk('p','qt-hint',f.hint));card.appendChild(row);});
+  cards.appendChild(card);
+ });
+
+ // tracing tools on the map: what you're marking + Undo / New area / Clear
+ const tools=$('qt-tools');
+ const tsel=mk('select');tsel.setAttribute('aria-label','What you are marking');
+ tsel.addEventListener('change',()=>{active=tsel.value;row.hidden=active==='__roof';drawShapes();drawRoofs();});
+ const row=mk('div','qt-maprow');
+ const T0=()=>T(active), C0=()=>T0().shapes[T0().cur];
+ [['Undo',()=>{const t=T0();if(C0().pts.length)C0().pts.pop();else if(t.cur>0){t.shapes.pop();t.cur--;t.shapes[t.cur].pts.pop();}}],
+  ['New area',()=>{const t=T0();if(C0().pts.length>2){t.shapes.push({pts:[],assumed:false});t.cur=t.shapes.length-1;}}],
+  ['Clear',()=>{const t=T0();t.shapes=[{pts:[],assumed:false}];t.cur=0;}]].forEach(([l,fn])=>{
+   const bt=mk('button','btn',l);bt.type='button';bt.addEventListener('click',()=>{touched=true;fn();drawShapes();update();});row.appendChild(bt);});
+ tools.append(tsel,row);
+ function refreshTools(){
+  const live=targets.filter(t=>sel[t.svc]).map(t=>[t.key,t.f.label]);
+  if(roofSvc&&sel[roofSvc.id]&&roofs.length)live.push(['__roof','Roofs (gutters)']);
+  tools.hidden=!live.length;
+  tsel.innerHTML='';live.forEach(([k,l])=>{const o=mk('option','','Marking: '+l);o.value=k;tsel.appendChild(o);});
+  if(live.length&&!live.some(([k])=>k===active))active=live[0][0];tsel.value=active;tsel.hidden=live.length<2;row.hidden=active==='__roof';}
+
+ function toggle(id,on){sel[id]=on;document.querySelector('#qt-svcs [data-id="'+id+'"]').setAttribute('aria-pressed',on);$('qt-card-'+id).hidden=!on;
+  refreshTools();drawShapes();drawRoofs();update();}
+ function update(){
+  const lines=[];let lo=0,hi=0,bigs=[];
+  Q.services.forEach(s=>{if(!sel[s.id])return;const p=priceOf(s);
+   if(p==='big'){bigs.push(s.label);return;} if(!p)return;
+   lo+=p[0];hi+=p[1];lines.push({t:s.label,d:summary(s),u:s.unit_note,p:'$'+p[0]+'–$'+p[1]});});
+  let travel='';
+  if(lines.length&&travelKm!=null){const extra=r5(Math.max(0,travelKm-Q.travel.free_km)*Q.travel.per_km),km=Math.max(1,Math.round(travelKm));
+   if(extra>0){lo+=extra;hi+=extra;travel='Travel from '+Q.base.label+': +$'+extra+' ('+km+' km by road)';}
+   else travel='Travel: included ('+km+' km from '+Q.base.label+')';}
+  const out=$('qt-out');out.innerHTML='';
+  if(!lines.length){
+   out.append(mk('p','qt-big',bigs.length?'That’s a big job':'Your price appears here'),
+    mk('p','qt-sub',bigs.length?Q.owner+' will price '+bigs.join(' and ').toLowerCase()+' after a quick look. Give him a call.':'Pick a job above, then mark it on the photo or answer a question or two.'));
+   $('qt-send').hidden=true;badge.hidden=true;return;}
+  const ul=mk('ul','qt-lines');
+  lines.forEach(l=>{const li=mk('li');const a=mk('span');a.append(mk('b','',l.t),document.createTextNode(' '+l.d+' ('+l.u+')'));li.append(a,mk('strong','',l.p));ul.appendChild(li);});
+  if(travel)ul.appendChild(mk('li','qt-travel',travel));
+  if(bigs.length)ul.appendChild(mk('li','qt-travel',bigs.join(', ')+': priced after a look'));
+  out.append(mk('p','qt-big','About $'+lo+'–$'+hi),ul,mk('p','qt-sub','An estimate from what you’ve told us. '+Q.owner+' confirms the price before any work starts.'));
+  badge.hidden=false;badge.textContent='About $'+lo+'–$'+hi;
+  const body='Hi '+Q.owner+', I got an instant price on your website'+(place?' for '+place:'')+'. '+lines.map(l=>l.t+' ('+l.d+') '+l.p).join('; ')+(travel?'. '+travel:'')+'. Estimate $'+lo+'-$'+hi+'. Can you confirm?';
+  const a=$('qt-send');a.href='sms:'+Q.tel+'?&body='+encodeURIComponent(body);a.hidden=false;
+ }
+ map.on('click',e=>{if(active==='__roof')return;touched=true;if(!targets.some(t=>sel[t.svc]))toggle(targets[0].svc,true);const t=T0();t.shapes[t.cur].pts.push(e.latlng);drawShapes();update();});
+
+ async function loadRoofs(){
+  roofs=[];
+  try{const u=Q.linz+'?'+new URLSearchParams({geometry:homePt.lng+','+homePt.lat,geometryType:'esriGeometryPoint',inSR:4326,distance:45,
+     units:'esriSRUnit_Meter',spatialRel:'esriSpatialRelIntersects',outFields:'building_id',returnGeometry:'true',outSR:4326,f:'geojson'});
+   const d=await fetch(u).then(x=>x.json());
+   roofs=(d.features||[]).filter(f=>f.geometry&&f.geometry.type==='Polygon').map(f=>({pts:f.geometry.coordinates[0].slice(0,-1).map(c=>L.latLng(c[1],c[0])),on:false}));
+   const home_=roofs.find(r=>inside(homePt,r.pts))||roofs.filter(r=>area(r.pts)>=60).sort((a,b)=>dist(homePt,centre(a.pts))-dist(homePt,centre(b.pts)))[0];
+   if(home_)home_.on=true;
+  }catch(e){roofs=[];}
+  refreshTools();drawRoofs();update();autoStoreys();
+ }
+ async function loadParcel(msg){
+  if(!Q.parcel)return;if(parcelLayer){map.removeLayer(parcelLayer);parcelLayer=null;}if(zoneLayer){map.removeLayer(zoneLayer);zoneLayer=null;}
+  try{const r=await fetch(Q.parcel+'?lat='+homePt.lat+'&lng='+homePt.lng);if(!r.ok)return;const d=await r.json();
+   parcelLayer=L.polygon(d.points,{interactive:false,color:'#ff4fd8',weight:3,dashArray:'8 6',fill:false}).addTo(map);
+   msg.textContent='Found '+place+'. Your section is '+Math.round(d.area).toLocaleString()+' m², outlined in pink.';
+   clInfo=d.crosslease||null;pick=clInfo&&clInfo.homes?clInfo.mine:null;
+   if(clInfo){showPart();if($('qt-notmine'))$('qt-notmine').hidden=!clInfo.homes;}
+   else if($('qt-notmine'))$('qt-notmine').hidden=true;
+   startAI();
+  }catch(e){}
+ }
+ $('qt-find').addEventListener('submit',async ev=>{ev.preventDefault();const q=$('qt-q').value.trim();if(!q)return;
+  const msg=$('qt-findmsg');msg.textContent='Finding your property…';
+  try{const r=await fetch('https://nominatim.openstreetmap.org/search?format=json&countrycodes=nz&limit=1&q='+encodeURIComponent(q)).then(x=>x.json());
+   if(!r.length){msg.textContent='We couldn’t find that address. Try adding the suburb, or move the map yourself.';return;}
+   homePt=L.latLng(+r[0].lat,+r[0].lon);place=r[0].display_name.split(',').slice(0,2).join('').trim();
+   map.setView(homePt,20);if(home)map.removeLayer(home);
+   home=L.circleMarker(homePt,{radius:8,color:'#fff',weight:3,fillOpacity:0,interactive:false}).addTo(map);
+   msg.textContent='Found '+place+'.';if($('qt-ai'))$('qt-ai').hidden=false;
+   travelKm=dist(Q.base,homePt)/1000*1.3;
+   loadRoofs();loadParcel(msg);
+   try{const o=await fetch('https://router.project-osrm.org/route/v1/driving/'+homePt.lng+','+homePt.lat+';'+Q.base.lng+','+Q.base.lat+'?overview=false').then(x=>x.json());
+    if(o.routes&&o.routes[0])travelKm=o.routes[0].distance/1000;}catch(e){}
+   update();
+  }catch(e){msg.textContent='Address lookup is unavailable right now. Move the map to your place instead.';}
+ });
+
+ // Cross-lease: which home's part to measure (pick = index into clInfo.homes, or 'whole' for the whole section)
+ function showPart(part){
+  if(zoneLayer){map.removeLayer(zoneLayer);zoneLayer=null;}
+  const msg=$('qt-findmsg');
+  if(pick==='whole'){msg.textContent='Found '+place+'. Measuring the whole cross-lease section (pink), shared by '+clInfo.flats+' homes.';return;}
+  const pts=part||(clInfo.parts?clInfo.parts[pick]:null);
+  if(pts)zoneLayer=L.polygon(pts,{interactive:false,color:'#ffd23f',weight:3,dashArray:'2 6',fill:false}).addTo(map);
+  msg.textContent='Found '+place+'. It’s a cross-lease: '+clInfo.flats+' homes share this section (pink). We’ll measure '+(pick===clInfo.mine?'the part around your home':'the part around the other home')+' (yellow dots).';
+ }
+ const nm=$('qt-notmine');
+ if(nm)nm.addEventListener('click',()=>{if(!clInfo||!clInfo.homes)return;const n=clInfo.homes.length;
+  pick=pick==='whole'?clInfo.mine:(pick+1)%n===clInfo.mine?'whole':(pick+1)%n;
+  nm.textContent=pick==='whole'?'Just my part':'Not your part?';showPart();startAI();});
+
+ // AI pre-draw: lawn, driveway, deck and paths, which the customer then adjusts. Two versions start as soon as the
+ // address is found: a quick draft (AI on low effort, ~30 s) and a careful one (~70 s, a closer match). The page shows
+ // whichever is ready, and swaps in the careful one when it lands unless the customer has already started editing.
+ let aiJobs=null,aiKey=null;
+ function aiBody(){if(!clInfo||pick===null||pick===clInfo.mine)return{lat:homePt.lat,lng:homePt.lng};
+  if(pick==='whole')return{lat:homePt.lat,lng:homePt.lng,whole:true};
+  return{lat:clInfo.homes[pick][0],lng:clInfo.homes[pick][1]};}
+ const post=b=>fetch(Q.ai,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)})
+  .then(r=>r.json().then(d=>({ok:r.ok&&!d.error,d}))).catch(()=>({ok:false,d:{}}));
+ function startAI(){if(!Q.ai||!homePt)return null;const b=aiBody(),k=JSON.stringify(b);
+  if(!aiJobs||aiKey!==k){aiKey=k;aiJobs={fast:post(Object.assign({quality:'fast'},b)),full:post(b)};}
+  return aiJobs;}
+ function applyAI(d){
+  let any=false;
+  targets.forEach(t=>{const got=(d[t.key]||[]).map(a=>({pts:a.points.map(p=>L.latLng(p[0],p[1])),assumed:a.assumed}));
+   if(got.length){t.shapes=got;t.cur=got.length-1;any=true;if(t.key===targets[0].key&&!sel[t.svc])toggle(t.svc,true);}});
+  if(d.crosslease&&d.crosslease.part&&clInfo&&pick!=='whole')showPart(d.crosslease.part);
+  touched=false;drawShapes();update();return any;}
+ function doneText(d){
+  const assumed=targets.some(t=>t.shapes.some(s=>s.assumed));
+  const split=d.crosslease?(d.crosslease.split==='fences'?' We’ve followed the fences between the homes for your part.':' We couldn’t see a clear fence between the homes, so your part is the half nearest your home.'):'';
+  return 'Check the shapes on the photo and drag any corner that’s off.'+split+(assumed?' Dashed shapes run under trees or a roof, so we’ve assumed where they go.':'')+(d.notes?' '+d.notes:'');}
+ const ai=$('qt-ai');
+ if(ai)ai.addEventListener('click',async()=>{if(!homePt)return;
+  const msg=$('qt-aimsg'),jobs=startAI(),key=aiKey;ai.disabled=true;
+  msg.textContent='Looking at your property from above… this takes up to a minute.';
+  const fail=()=>{aiJobs=null;msg.textContent='Auto-draw isn’t available right now. You can still tap around each area yourself.';};
+  try{
+   const first=await Promise.race([jobs.full.then(x=>({x,full:true})),jobs.fast.then(x=>({x,full:false}))]);
+   let res=first.x,full=first.full;
+   if(!res.ok){res=await (full?jobs.fast:jobs.full);full=!full;}
+   if(!res.ok)return fail();
+   if(!res.d.property_found){msg.textContent='We couldn’t work out which property is yours. Tap around each area yourself instead.';return;}
+   if(!applyAI(res.d)){msg.textContent='We couldn’t spot anything to measure. Tap around each area yourself instead.';return;}
+   if(full){msg.textContent='Done. '+doneText(res.d);return;}
+   msg.textContent='Here’s a quick first draft. A more careful drawing is on its way and will replace it in under a minute. '+doneText(res.d);
+   jobs.full.then(r=>{if(aiKey!==key)return;
+    if(!r.ok||!r.d.property_found){msg.textContent='Done. '+doneText(res.d);return;}
+    if(!touched){applyAI(r.d);msg.textContent='Updated with our more careful drawing. '+doneText(r.d);return;}
+    msg.textContent='Our more careful drawing is ready. ';
+    const use=document.createElement('button');use.type='button';use.className='qt-link';use.textContent='Use it instead of my changes';
+    use.addEventListener('click',()=>{applyAI(r.d);msg.textContent='Updated with our more careful drawing. '+doneText(r.d);});
+    msg.appendChild(use);});
+  }catch(e){fail();}
+  finally{ai.disabled=false;}
+ });
+ toggle(targets[0].svc,true);
+ window.__qt={map,targets};
+});
+</script>
+<section class="feature" aria-labelledby="ft"><div class="wrap">
+ <div><h2 id="ft">Rental inspection or open home coming up?</h2><p>A sharp lawn is the first thing people see. Tell us the date and we&#x27;ll have the lawns and edges done before it.</p></div>
+ <a class="btn" href="tel:+642102950774">Book Sreeju in</a>
+</div></section>
+<section class="about" id="about" aria-labelledby="ab"><div class="wrap">
+ <div><h2 id="ab">Sreeju and the Alpha team</h2><p>Alpha Lawn Mowing is a Hamilton lawn care team led by Sreeju.</p><p>Customers keep coming back for the same few things: turning up on time, sharp edges, clear communication and a fair price.</p></div>
+ <figure class="pull"><blockquote>&ldquo;Brilliant job every time. Lawn looks perfect, edges are sharp, and they&#x27;re always on time.&rdquo;</blockquote><figcaption>asakh s, Google review</figcaption></figure>
+</div></section>
+<section class="dist" id="distance" aria-labelledby="ds"><div class="wrap">
+ <div class="sec-h"><h2 id="ds">How far are you from Sreeju?</h2><p>Type your street or suburb, or use your location, to see the distance and drive time from our Hamilton base.</p></div>
+ <div class="dist-grid">
+  <div class="dist-panel">
+   <form id="dist-form" class="dist-form">
+    <label for="dist-q">Your street or suburb</label>
+    <div class="dist-row"><input id="dist-q" autocomplete="street-address" placeholder="e.g. Rototuna" required><button class="btn btn--primary" type="submit">Check</button></div>
+   </form>
+   <button class="btn dist-geo" id="dist-geo" type="button">Use my location</button>
+   <div class="dist-out" id="dist-out" aria-live="polite"><p class="dist-big">&nbsp;</p><p class="dist-sub">Your location is only used in your browser to work this out.</p></div>
+   <a class="btn btn--primary dist-call" id="dist-call" href="tel:+642102950774" hidden>Call Sreeju to book</a>
+  </div>
+  <div id="map" class="map" role="img" aria-label="Map of the area around Hamilton"></div>
+ </div>
+</div></section>
+<script>
+window.addEventListener('DOMContentLoaded',()=>{
+ const C={"lat": -37.787, "lng": 175.279, "label": "Hamilton", "name": "Alpha", "owner": "Sreeju"};
+ const ink=getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim()||'#2f7a2f';
+ const map=L.map('map',{scrollWheelZoom:false}).setView([C.lat,C.lng],11);
+ new ResizeObserver(()=>map.invalidateSize()).observe(document.getElementById('map'));
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+ L.circle([C.lat,C.lng],{radius:1200,color:ink,weight:1.5,fillColor:ink,fillOpacity:.18}).addTo(map).bindTooltip(C.name+' base, '+C.label+' (approximate)');
+ let you=null,route=null;
+ const out=document.getElementById('dist-out'),call=document.getElementById('dist-call');
+ const km=(a,b)=>{const R=6371,t=x=>x*Math.PI/180,dl=t(b[0]-a[0]),dn=t(b[1]-a[1]);const h=Math.sin(dl/2)**2+Math.cos(t(a[0]))*Math.cos(t(b[0]))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h));};
+ const say=(big,sub)=>{out.innerHTML='<p class="dist-big"></p><p class="dist-sub"></p>';out.children[0].textContent=big;out.children[1].textContent=sub;};
+ async function show(lat,lng,where){
+  if(you)map.removeLayer(you); if(route)map.removeLayer(route);
+  you=L.circleMarker([lat,lng],{radius:7,color:ink,weight:2,fillColor:'#fff',fillOpacity:1}).addTo(map).bindTooltip(where||'You');
+  const straight=km([C.lat,C.lng],[lat,lng]);
+  try{
+   const r=await fetch(`https://router.project-osrm.org/route/v1/driving/${lng},${lat};${C.lng},${C.lat}?overview=full&geometries=geojson`).then(x=>x.json());
+   const rt=r.routes[0];
+   route=L.geoJSON(rt.geometry,{style:{color:ink,weight:4,opacity:.8}}).addTo(map);
+   map.fitBounds(route.getBounds(),{padding:[30,30]});
+   say(`About ${(rt.distance/1000).toFixed(rt.distance<10000?1:0)} km by road, roughly ${Math.max(1,Math.round(rt.duration/60))} min drive`,`From ${C.owner}'s ${C.label} base${where?' to '+where:''}. Not sure if that's in our area? Just ask.`);
+  }catch(e){
+   map.fitBounds(L.latLngBounds([[C.lat,C.lng],[lat,lng]]),{padding:[30,30]});
+   say(`About ${straight.toFixed(straight<10?1:0)} km away in a straight line`,`From ${C.owner}'s ${C.label} base. Not sure if that's in our area? Just ask.`);
+  }
+  call.hidden=false;
+ }
+ document.getElementById('dist-form').addEventListener('submit',async ev=>{
+  ev.preventDefault(); const q=document.getElementById('dist-q').value.trim(); if(!q)return;
+  say('Finding '+q+'…','');
+  try{
+   const r=await fetch('https://nominatim.openstreetmap.org/search?format=json&countrycodes=nz&limit=1&q='+encodeURIComponent(q)).then(x=>x.json());
+   if(!r.length){say("We couldn't find that place","Try a suburb name, or just call "+C.owner+".");return;}
+   show(+r[0].lat,+r[0].lon,r[0].display_name.split(',').slice(0,2).join(','));
+  }catch(e){say('Map lookup is unavailable right now','Call '+C.owner+' and he can tell you straight away.');}
+ });
+ document.getElementById('dist-geo').addEventListener('click',()=>{
+  if(!navigator.geolocation){say('Your browser does not share location','Type your suburb instead.');return;}
+  say('Getting your location…','');
+  navigator.geolocation.getCurrentPosition(p=>show(p.coords.latitude,p.coords.longitude,'your location'),()=>say('Location was not shared','Type your suburb instead.'),{timeout:10000});
+ });
+});
+</script>
+<section class="contact" id="contact" aria-labelledby="ct"><div class="wrap"><div class="grid">
+ <div>
+  <h2 id="ct">Get a free quote</h2>
+  <p>Based in Hamilton. Not sure if we cover your street? Just ask.</p>
+  <ul class="lines">
+   <li><span>Sreeju</span><a href="tel:+642102950774">021 0295 0774</a></li>
+   
+   
+   
+   
+  </ul>
+ </div>
+ <form class="quote" id="quote-form" data-email="" data-tel="+642102950774" data-owner="Sreeju" data-site="Alpha Lawn Mowing">
+  <h3>Tell us about the job</h3><p class="hint">Three quick details and Sreeju will get back to you.</p>
+  <label for="f-n">Your name</label><input id="f-n" name="name" autocomplete="name" required>
+  <label for="f-p">Phone</label><input id="f-p" name="phone" type="tel" autocomplete="tel" required>
+  <label for="f-s">What do you need?</label><select id="f-s" name="service"><option>Lawn mowing</option><option>Edging and line trimming</option><option>Roadside berms</option><option>Clippings blown and cleared</option><option>Section tidy-ups</option><option>Hedge trimming</option><option>Something else</option></select>
+  <button class="btn btn--primary" type="submit">Text this to Sreeju</button>
+  <p class="note">Opens your messages app with this filled in. Or call 021 0295 0774</p>
+ </form>
+ <script>
+ // No server: the form opens the visitor's own email (or text) app addressed to the owner, details filled in.
+ document.getElementById('quote-form').addEventListener('submit',e=>{
+  e.preventDefault(); const f=e.target, d=f.dataset;
+  const body=['Hi '+d.owner+', I would like a quote for: '+f.service.value+'.','Name: '+f.name.value,'Phone: '+f.phone.value,'(Sent from your website)'].join(String.fromCharCode(10));
+  location.href = d.email
+   ? 'mailto:'+d.email+'?subject='+encodeURIComponent('Quote request: '+f.service.value)+'&body='+encodeURIComponent(body)
+   : 'sms:'+d.tel+'?&body='+encodeURIComponent(body);
+ });
+ </script>
+</div></div></section>
+</main>
+<footer><div class="wrap">
+ <div><a class="brand" href="#"><svg viewBox="0 0 64 56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 25 32 5l27 20"/><path d="M14 30v20h36V22"/><path d="M14 22v3"/><path d="M23 47c-6-7-5-15 3-18 4 7 2 14-3 18z"/><path d="M29 46c0-9 5-14 14-15 0 9-5 14-14 15z"/><path d="M50 35h-5M50 41h-5"/></svg><span><b>Alpha</b><small>Lawn Mowing</small></span></a><p>Lawn mowing, edging and berms across Hamilton.</p></div>
+ <div><p><a href="tel:+642102950774">021 0295 0774</a></p><p></p></div>
+</div></footer>
+<div class="callbar"><a class="btn btn--primary" href="tel:+642102950774">Call Sreeju</a><a class="btn" href="sms:+642102950774">Text</a></div>
+</body>
+</html>
