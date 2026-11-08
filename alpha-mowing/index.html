@@ -146,7 +146,7 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
 .qt-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
 .qt-panel label,.qt-step{display:block;font-weight:500;color:var(--color-ink);margin:0 0 .4rem}
 .qt-step{margin-top:var(--space-lg)}
-.qt-msg,.qt-how{margin:.5rem 0 0;font:400 var(--text-sm)/1.45 var(--font-outlier);color:var(--color-muted);min-height:1.2em}
+.qt-qwrap{position:relative}.qt-sug{position:absolute;left:0;right:0;top:100%;z-index:1100;margin:.25rem 0 0;padding:.25rem 0;list-style:none;background:var(--color-paper);border:1px solid var(--color-ink);box-shadow:0 10px 28px rgba(0,0,0,.14);max-height:20rem;overflow:auto}.qt-sugi{display:flex;flex-direction:column;justify-content:center;gap:.1rem;min-height:48px;padding:.5rem .85rem;cursor:pointer;color:var(--color-ink)}.qt-sugi small{font:400 var(--text-sm)/1.3 var(--font-outlier);color:var(--color-muted)}.qt-sugi[aria-selected=true],.qt-sugi:hover{background:var(--color-paper-2)}.qt-area{margin:.4rem 0 0;font:400 var(--text-sm)/1.4 var(--font-outlier);color:var(--color-muted)}.qt-msg,.qt-how{margin:.5rem 0 0;font:400 var(--text-sm)/1.45 var(--font-outlier);color:var(--color-muted);min-height:1.2em}
 .qt-link{margin:.35rem 0 0;padding:.5rem 0;min-height:44px;background:none;border:0;font:600 var(--text-sm)/1 var(--font-body,inherit);color:var(--color-ink,inherit);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .qt-link[hidden]{display:none}
 .qt-svc,.qt-tools{display:flex;flex-wrap:wrap;gap:.5rem}
@@ -220,7 +220,9 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
  <div class="qt-grid">
   <div class="qt-panel">
    <form id="qt-find"><label for="qt-q">1. Your address</label>
-    <div class="dist-row"><input id="qt-q" autocomplete="street-address" placeholder="e.g. 12 Grey Street, Hamilton East" required><button class="btn btn--primary" type="submit">Find</button></div>
+    <div class="qt-qwrap"><div class="dist-row"><input id="qt-q" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="qt-sug" aria-expanded="false" aria-describedby="qt-area" placeholder="Start typing, e.g. 12 Grey Street, Hamilton East" required><button class="btn btn--primary" type="submit">Find</button></div>
+    <ul class="qt-sug" id="qt-sug" role="listbox" aria-label="Matching addresses" hidden></ul></div>
+    <p class="qt-area" id="qt-area">Sreeju covers places up to 30 min drive from Hamilton.</p>
     <p class="qt-msg" id="qt-findmsg" aria-live="polite"></p><button type="button" class="qt-link" id="qt-notmine" hidden>Not your part?</button></form>
    
    <p class="qt-step">2. What do you need? <span>Pick as many as you like.</span></p>
@@ -412,29 +414,73 @@ window.addEventListener('DOMContentLoaded',()=>{
    startAI();
   }catch(e){}
  }
- $('qt-find').addEventListener('submit',async ev=>{ev.preventDefault();const q=$('qt-q').value.trim();if(!q)return;
-  const msg=$('qt-findmsg');msg.textContent='Finding your property…';
+ // Address: suggestions as you type (Photon, OpenStreetMap data, biased to the base), then the drive-time check
+ const qIn=$('qt-q'),sug=$('qt-sug'),msg0=$('qt-findmsg');let sugs=[],sugSel=-1,picked=null,sugT=null,sugN=0;
+ const near=pt=>dist(Q.base,pt)/1000<=Q.maxMin*1.1;
+ const ROADW=new Set(['st','street','rd','road','ave','avenue','dr','drive','pl','place','cres','crescent','tce','terrace','lane','ln','way','cl','close','ct','court','hwy','highway','sq','square','pde','parade','nz','new','zealand']);
+ const fold=t=>(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+ // every word typed (apart from the number and road types) must start a word of the address; the number must match too
+ function sameAddr(q,txt,hn){const ws=fold(q).replace(/,/g,' ').split(/\s+/).filter(w=>w&&!/^\d/.test(w)&&!ROADW.has(w)),tt=fold(txt).split(/[\s,\/-]+/);
+  if(!ws.length||!ws.every(w=>tt.some(t=>t.startsWith(w))))return false;
+  const m=fold(q).match(/^\s*(\d+)([a-z]?)\b/);if(!m||hn==null)return true;const h=fold(hn),n=m[1]+m[2];
+  return h===n||h.endsWith('/'+n)||(!m[2]&&h.startsWith(m[1])&&/^[a-z]$/.test(h.slice(m[1].length)));}
+ function drawSug(){sug.innerHTML='';
+  sugs.forEach((s,i)=>{const li=mk('li','qt-sugi');li.id='qt-sug-'+i;li.setAttribute('role','option');li.setAttribute('aria-selected',i===sugSel?'true':'false');
+   li.append(mk('span','',s.main),mk('small','',s.sub+(s.far?' · probably outside our area':'')));
+   li.addEventListener('mousedown',e=>{e.preventDefault();choose(i);});sug.append(li);});
+  sug.hidden=!sugs.length;qIn.setAttribute('aria-expanded',sugs.length?'true':'false');
+  if(sugSel>=0)qIn.setAttribute('aria-activedescendant','qt-sug-'+sugSel);else qIn.removeAttribute('aria-activedescendant');}
+ async function suggest(q){const n=++sugN,b=Q.base;
+  try{const d=await fetch('https://photon.komoot.io/api/?limit=10&lang=en&layer=house&layer=street&lat='+b.lat+'&lon='+b.lng+'&bbox='+[b.lng-0.6,b.lat-0.45,b.lng+0.6,b.lat+0.45].join(',')+'&q='+encodeURIComponent(q)).then(x=>x.json());
+   if(n!==sugN)return;
+   let f=d.features.filter(x=>{const p=x.properties;return p.countrycode==='NZ'&&(p.street||p.name)&&sameAddr(q,[p.street||p.name,p.district,p.locality,p.city].join(' '),p.housenumber==null?null:p.housenumber);});
+   const houses=f.filter(x=>x.properties.housenumber);if(/^\s*\d/.test(q)&&houses.length)f=houses;
+   const seen=new Set();sugs=[];
+   for(const x of f){const p=x.properties,area=p.district||p.locality||p.city||'',main=(p.housenumber?p.housenumber+' ':'')+(p.street||p.name);
+    const sub=area+(p.city&&p.city!==area?', '+p.city:''),k=main+'|'+sub;if(seen.has(k))continue;seen.add(k);
+    const lat=x.geometry.coordinates[1],lng=x.geometry.coordinates[0];sugs.push({main,sub,area,lat,lng,far:!near({lat,lng})});if(sugs.length>=5)break;}
+   sugs.sort((a,b)=>a.far-b.far);sugSel=-1;drawSug();
+   if(!sugs.length&&q.length>=6)msg0.textContent='We don’t know that address yet. Keep typing, add your suburb, or call '+Q.owner+'.';
+   else if(msg0.textContent.startsWith('We don’t know'))msg0.textContent='';
+  }catch(e){}
+ }
+ qIn.addEventListener('input',()=>{picked=null;clearTimeout(sugT);if(!homePt||!msg0.textContent.startsWith('Found'))msg0.textContent='';const q=qIn.value.trim();if(q.length<3){sugN++;sugs=[];drawSug();return;}sugT=setTimeout(()=>suggest(q),250);});
+ qIn.addEventListener('keydown',e=>{if(sug.hidden)return;
+  if(e.key==='ArrowDown'){e.preventDefault();sugSel=(sugSel+1)%sugs.length;drawSug();}
+  else if(e.key==='ArrowUp'){e.preventDefault();sugSel=(sugSel-1+sugs.length)%sugs.length;drawSug();}
+  else if(e.key==='Enter'&&sugSel>=0){e.preventDefault();choose(sugSel);}
+  else if(e.key==='Escape'){sugs=[];drawSug();}});
+ qIn.addEventListener('blur',()=>setTimeout(()=>{sugs=[];drawSug();},150));
+ function choose(i){const s=sugs[i];picked=s;qIn.value=s.main+(s.sub?', '+s.sub:'');sugN++;sugs=[];drawSug();goTo(L.latLng(s.lat,s.lng),s.main+(s.area?', '+s.area:''));}
+ async function goTo(pt,where){const b=Q.base,msg=msg0;msg.textContent='Checking '+where+'…';
+  let km=dist(b,pt)/1000*1.3,mins=km/50*60;
+  try{const o=await fetch('https://router.project-osrm.org/route/v1/driving/'+pt.lng+','+pt.lat+';'+b.lng+','+b.lat+'?overview=false').then(x=>x.json());
+   if(o.routes&&o.routes[0]){km=o.routes[0].distance/1000;mins=o.routes[0].duration/60;}}catch(e){}
+  if(mins>Q.maxMin){
+   if(home){map.removeLayer(home);home=null;}homePt=null;travelKm=null;if($('qt-ai'))$('qt-ai').hidden=true;
+   map.setView(pt,15);
+   msg.textContent=where+' is about '+Math.round(mins)+' min drive from '+b.label+', outside the area '+Q.owner+' covers (up to '+Q.maxMin+' min). Call '+Q.owner+' to check.';
+   update();return;}
+  homePt=pt;place=where;travelKm=km;
+  map.setView(homePt,20);if(home)map.removeLayer(home);
+  home=L.circleMarker(homePt,{radius:8,color:'#fff',weight:3,fillOpacity:0,interactive:false}).addTo(map);
+  msg.textContent='Found '+place+'.';if($('qt-ai'))$('qt-ai').hidden=false;
+  loadRoofs();loadParcel(msg);
+  update();
+ }
+ $('qt-find').addEventListener('submit',async ev=>{ev.preventDefault();const q=qIn.value.trim();if(!q)return;
+  if(picked)return goTo(L.latLng(picked.lat,picked.lng),picked.main+(picked.area?', '+picked.area:''));
+  if(sugs.length)return choose(Math.max(sugSel,0));
+  msg0.textContent='Finding your property…';
   try{const b=Q.base,vb=[b.lng-0.6,b.lat+0.45,b.lng+0.6,b.lat-0.45].join(',');
    const r=await fetch('https://nominatim.openstreetmap.org/search?format=json&countrycodes=nz&limit=10&bounded=1&viewbox='+vb+'&q='+encodeURIComponent(q)).then(x=>x.json());
-   if(!r.length){msg.textContent='We couldn’t find that address near '+b.label+'. Try adding the suburb, or call '+Q.owner+'.';return;}
+   if(!r.length){msg0.textContent='We don’t know that address near '+b.label+'. Check the spelling, add your suburb, or call '+Q.owner+'.';return;}
+   r=r.filter(x=>sameAddr(q,x.display_name,null));
+   if(!r.length){msg0.textContent='We don’t know that address near '+b.label+'. Check the spelling, add your suburb, or call '+Q.owner+'.';return;}
    r.sort((x,y)=>dist(b,{lat:+x.lat,lng:+x.lon})-dist(b,{lat:+y.lat,lng:+y.lon}));
-   const pt=L.latLng(+r[0].lat,+r[0].lon),pp=r[0].display_name.split(',').map(t=>t.trim());
-   const where=(/^[0-9]/.test(pp[0])?pp[0]+' '+pp[1]+(pp[2]?', '+pp[2]:''):pp[0]+(pp[1]?', '+pp[1]:''));
-   let km=dist(b,pt)/1000*1.3,mins=km/50*60;
-   try{const o=await fetch('https://router.project-osrm.org/route/v1/driving/'+pt.lng+','+pt.lat+';'+b.lng+','+b.lat+'?overview=false').then(x=>x.json());
-    if(o.routes&&o.routes[0]){km=o.routes[0].distance/1000;mins=o.routes[0].duration/60;}}catch(e){}
-   if(mins>Q.maxMin){
-    if(home){map.removeLayer(home);home=null;}homePt=null;travelKm=null;if($('qt-ai'))$('qt-ai').hidden=true;
-    map.setView(pt,15);
-    msg.textContent='Found '+where+'. That’s about '+Math.round(mins)+' min drive from '+b.label+', outside the area '+Q.owner+' covers (up to '+Q.maxMin+' min). Call '+Q.owner+' to check.';
-    update();return;}
-   homePt=pt;place=where;travelKm=km;
-   map.setView(homePt,20);if(home)map.removeLayer(home);
-   home=L.circleMarker(homePt,{radius:8,color:'#fff',weight:3,fillOpacity:0,interactive:false}).addTo(map);
-   msg.textContent='Found '+place+'.';if($('qt-ai'))$('qt-ai').hidden=false;
-   loadRoofs();loadParcel(msg);
-   update();
-  }catch(e){msg.textContent='Address lookup is unavailable right now. Move the map to your place instead.';}
+   const pp=r[0].display_name.split(',').map(t=>t.trim());
+   goTo(L.latLng(+r[0].lat,+r[0].lon),(/^[0-9]/.test(pp[0])?pp[0]+' '+pp[1]+(pp[2]?', '+pp[2]:''):pp[0]+(pp[1]?', '+pp[1]:'')));
+  }catch(e){msg0.textContent='Address lookup is unavailable right now. Move the map to your place instead.';}
  });
 
  // Cross-lease: which home's part to measure (pick = index into clInfo.homes, or 'whole' for the whole section)
