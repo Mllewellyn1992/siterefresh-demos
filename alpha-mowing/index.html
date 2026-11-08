@@ -414,12 +414,15 @@ window.addEventListener('DOMContentLoaded',()=>{
  }
  $('qt-find').addEventListener('submit',async ev=>{ev.preventDefault();const q=$('qt-q').value.trim();if(!q)return;
   const msg=$('qt-findmsg');msg.textContent='Finding your property…';
-  try{const r=await fetch('https://nominatim.openstreetmap.org/search?format=json&countrycodes=nz&limit=1&q='+encodeURIComponent(q)).then(x=>x.json());
+  try{const b=Q.base,vb=[b.lng-0.6,b.lat+0.45,b.lng+0.6,b.lat-0.45].join(',');
+   const nm=bd=>fetch('https://nominatim.openstreetmap.org/search?format=json&countrycodes=nz&limit=10&viewbox='+vb+bd+'&q='+encodeURIComponent(q)).then(x=>x.json());
+   let r=await nm('&bounded=1');if(r.length)r.sort((x,y)=>dist(b,{lat:+x.lat,lng:+x.lon})-dist(b,{lat:+y.lat,lng:+y.lon}));else r=await nm('');
    if(!r.length){msg.textContent='We couldn’t find that address. Try adding the suburb, or move the map yourself.';return;}
-   homePt=L.latLng(+r[0].lat,+r[0].lon);place=r[0].display_name.split(',').slice(0,2).join('').trim();
+   homePt=L.latLng(+r[0].lat,+r[0].lon);const pp=r[0].display_name.split(',').map(t=>t.trim());
+   place=(/^[0-9]/.test(pp[0])?pp[0]+' '+pp[1]+(pp[2]?', '+pp[2]:''):pp[0]+(pp[1]?', '+pp[1]:''));
    map.setView(homePt,20);if(home)map.removeLayer(home);
    home=L.circleMarker(homePt,{radius:8,color:'#fff',weight:3,fillOpacity:0,interactive:false}).addTo(map);
-   msg.textContent='Found '+place+'.';if($('qt-ai'))$('qt-ai').hidden=false;
+   msg.textContent='Found '+place+'.'+(dist(Q.base,homePt)>80000?' That’s a long way from '+Q.base.label+'. Not right? Add your suburb.':'');if($('qt-ai'))$('qt-ai').hidden=false;
    travelKm=dist(Q.base,homePt)/1000*1.3;
    loadRoofs();loadParcel(msg);
    try{const o=await fetch('https://router.project-osrm.org/route/v1/driving/'+homePt.lng+','+homePt.lat+';'+Q.base.lng+','+Q.base.lat+'?overview=false').then(x=>x.json());
@@ -547,7 +550,10 @@ window.addEventListener('DOMContentLoaded',()=>{
   ev.preventDefault(); const q=document.getElementById('dist-q').value.trim(); if(!q)return;
   say('Finding '+q+'…','');
   try{
-   const r=await fetch('https://nominatim.openstreetmap.org/search?format=json&countrycodes=nz&limit=1&q='+encodeURIComponent(q)).then(x=>x.json());
+   const vb=[C.lng-0.6,C.lat+0.45,C.lng+0.6,C.lat-0.45].join(',');
+   const nm=bd=>fetch('https://nominatim.openstreetmap.org/search?format=json&countrycodes=nz&limit=10&viewbox='+vb+bd+'&q='+encodeURIComponent(q)).then(x=>x.json());
+   const near=o=>Math.hypot(+o.lat-C.lat,(+o.lon-C.lng)*Math.cos(C.lat*Math.PI/180));
+   let r=await nm('&bounded=1');if(r.length)r.sort((a,b)=>near(a)-near(b));else r=await nm('');
    if(!r.length){say("We couldn't find that place","Try a suburb name, or just call "+C.owner+".");return;}
    show(+r[0].lat,+r[0].lon,r[0].display_name.split(',').slice(0,2).join(','));
   }catch(e){say('Map lookup is unavailable right now','Call '+C.owner+' and he can tell you straight away.');}
