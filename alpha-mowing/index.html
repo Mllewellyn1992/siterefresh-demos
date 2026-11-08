@@ -70,7 +70,10 @@ section{padding:var(--space-2xl) 0}
 .sec-h h2{font-size:clamp(2rem,3.6vw,3rem);max-width:16ch}
 .sec-h p{max-width:32em;margin:0;color:var(--color-muted)}
 .reviews{background:var(--color-paper-2)}
-.lead-rev{margin:0 0 var(--space-xl);max-width:30em}
+.rv-top{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(2rem,5vw,4.5rem);align-items:start;margin-bottom:var(--space-xl)}
+.rv-h h2{font-size:clamp(2rem,3.6vw,3rem);max-width:16ch}
+.rv-h p{max-width:28em;margin:1rem 0 0;color:var(--color-muted)}
+.lead-rev{margin:0;max-width:30em}
 .lead-rev blockquote{margin:0;font:600 clamp(1.6rem,3vw,2.35rem)/1.22 var(--font-display);color:var(--color-ink);letter-spacing:var(--tracking-display)}
 .lead-rev figcaption{margin-top:1rem;font-weight:500;color:var(--color-ink)}
 .lead-rev figcaption span,.rev figcaption span{color:var(--color-muted);font-weight:400}
@@ -129,7 +132,7 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
  .map{min-height:320px}
  .hero .photo{order:-1} .hero .photo img{aspect-ratio:5/4}
  .revs{grid-template-columns:1fr 1fr} .rev:nth-child(3){border-left:0;padding-left:0}
- .sec-h{flex-direction:column;align-items:start}
+ .sec-h{flex-direction:column;align-items:start} .rv-top{grid-template-columns:1fr}
  section{padding:var(--space-xl) 0}
 }
 @media (max-width:600px){
@@ -207,8 +210,8 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
 </div></section>
 <div class="figs" role="list" aria-label="At a glance"><div class="wrap"><div class="fig"><span class="fig-n">4.9</span><span class="fig-l">Google rating</span></div><div class="fig"><span class="fig-n">74</span><span class="fig-l">Google reviews, 70 of them 5 stars</span></div><div class="fig"><span class="fig-n">60s</span><span class="fig-l">to get a price, measured from the aerial photo</span></div></div></div>
 <section class="reviews" id="reviews" aria-labelledby="rv"><div class="wrap">
- <div class="sec-h"><h2 id="rv">What Hamilton customers say</h2><p>70 of our 74 Google reviews are five stars. A few, word for word:</p></div>
- <figure class="lead-rev"><blockquote>&ldquo;Brilliant job every time. Lawn looks perfect, edges are sharp, and they&#x27;re always on time. Sreeju is reliable, friendly, and great value. Highly recommend!&rdquo;</blockquote><figcaption>asakh s <span>· Google review, 6 months ago</span></figcaption></figure>
+ <div class="rv-top"><div class="rv-h"><h2 id="rv">What Hamilton customers say</h2><p>70 of our 74 Google reviews are five stars. A few, word for word:</p></div>
+ <figure class="lead-rev"><blockquote>&ldquo;Brilliant job every time. Lawn looks perfect, edges are sharp, and they&#x27;re always on time. Sreeju is reliable, friendly, and great value. Highly recommend!&rdquo;</blockquote><figcaption>asakh s <span>· Google review, 6 months ago</span></figcaption></figure></div>
  <div class="revs"><figure class="rev"><blockquote>They are very professional and punctual in their work and also affordable prices. Sreeju and his team are really good.</blockquote><figcaption>Prasanth MS <span>· Google review, 6 months ago</span></figcaption></figure><figure class="rev"><blockquote>From the moment we contacted them, the communication was prompt and clear. They did an amazing job, mowing, trimming &amp; edging the lawn.</blockquote><figcaption>H P <span>· Google review, 10 months ago</span></figcaption></figure><figure class="rev"><blockquote>Our property now looks exceptionally well-maintained and tidy. They truly transformed our outdoor space.</blockquote><figcaption>ashik sathyanaq <span>· Google review, 5 months ago</span></figcaption></figure><figure class="rev"><blockquote>They were incredibly efficient and fast, and the whole job was handled with real professionalism.</blockquote><figcaption>RosH <span>· Google review, 10 months ago</span></figcaption></figure></div>
 </div></section>
 <section class="services" id="services" aria-labelledby="sv"><div class="wrap">
