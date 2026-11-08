@@ -132,6 +132,9 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
  .map{min-height:320px}
  .hero .photo{order:-1} .hero .photo img{aspect-ratio:5/4}
  .revs{grid-template-columns:1fr 1fr} .rev:nth-child(3){border-left:0;padding-left:0}
+ .qt-flow{grid-template-columns:1fr;gap:1.6rem;max-width:26rem}
+ .qt-flow li+li::before{left:1.95rem;top:-1.45rem;width:2px;height:1.3rem;transform:none}
+ .qt-flow li+li::after{left:1.79rem;top:-.62rem;transform:rotate(135deg)}
  .sec-h{flex-direction:column;align-items:start} .rv-top{grid-template-columns:1fr}
  section{padding:var(--space-xl) 0}
 }
@@ -173,6 +176,13 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
 .qt-lines li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:var(--rule-hair) solid var(--color-rule);font-size:var(--text-sm)}
 .qt-lines .qt-travel{color:var(--color-muted)}
 #qt-send{margin-top:var(--space-md)}
+.qt-head{margin-bottom:var(--space-xl)}
+.qt-head h2{font-size:clamp(2rem,3.6vw,3rem);max-width:16ch}
+.qt-flow{list-style:none;margin:var(--space-lg) 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2.2rem}
+.qt-flow li{position:relative;display:flex;align-items:center;gap:.75rem;padding:1rem 1.1rem;border:var(--rule-hair) solid var(--color-rule-2);background:var(--color-paper);font-weight:500;color:var(--color-ink);line-height:1.25}
+.qt-flow b{flex:none;display:grid;place-items:center;width:2rem;height:2rem;border-radius:50%;background:var(--color-accent);color:var(--color-accent-ink);font:600 .95rem/1 var(--font-display)}
+.qt-flow li+li::before{content:"";position:absolute;left:-1.85rem;top:50%;width:1.5rem;height:2px;background:var(--color-ink);transform:translateY(-50%)}
+.qt-flow li+li::after{content:"";position:absolute;left:-.62rem;top:50%;width:.5rem;height:.5rem;border-top:2px solid var(--color-ink);border-right:2px solid var(--color-ink);transform:translateY(-50%) rotate(45deg)}
 .qt-demo{margin-top:var(--space-md);font:400 var(--text-sm)/1.45 var(--font-outlier);color:var(--color-muted);font-style:italic}
 .qt-mapcol{position:sticky;top:96px} .qt-map{height:560px;cursor:crosshair}
 .qt-maptools{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin-top:.6rem} .qt-maprow{display:flex;gap:.4rem}
@@ -206,9 +216,9 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
   </div>
   <p class="rating"><span class="st" aria-hidden="true">★★★★★</span>4.9 on Google <span>from 74 reviews</span></p>
  </div>
- <figure class="photo"><img src="img/hero_lawn.jpg" alt="A freshly mown, striped lawn beside a brick house, with a leaf blower on the grass" width="800" height="800" fetchpriority="high"><figcaption>A lawn just mown and edged by the Alpha team, from our Google photos.</figcaption></figure>
+ <figure class="photo"><img src="img/hero_lawn.jpg" alt="A freshly mown, striped lawn beside a brick house, with a leaf blower on the grass" width="800" height="800" fetchpriority="high"><figcaption>A lawn just mown and edged by the Alpha team.</figcaption></figure>
 </div></section>
-<div class="figs" role="list" aria-label="At a glance"><div class="wrap"><div class="fig"><span class="fig-n">4.9</span><span class="fig-l">Google rating</span></div><div class="fig"><span class="fig-n">74</span><span class="fig-l">Google reviews, 70 of them 5 stars</span></div><div class="fig"><span class="fig-n">60s</span><span class="fig-l">to get a price, measured from the aerial photo</span></div></div></div>
+<div class="figs" role="list" aria-label="At a glance"><div class="wrap"><div class="fig"><span class="fig-n">4.9</span><span class="fig-l">Google rating</span></div><div class="fig"><span class="fig-n">74</span><span class="fig-l">Google reviews, 70 of them 5 stars</span></div><div class="fig"><span class="fig-n">60s</span><span class="fig-l">Quotes in a minute</span></div></div></div>
 <section class="reviews" id="reviews" aria-labelledby="rv"><div class="wrap">
  <div class="rv-top"><div class="rv-h"><h2 id="rv">What Hamilton customers say</h2><p>70 of our 74 Google reviews are five stars. A few, word for word:</p></div>
  <figure class="lead-rev"><blockquote>&ldquo;Brilliant job every time. Lawn looks perfect, edges are sharp, and they&#x27;re always on time. Sreeju is reliable, friendly, and great value. Highly recommend!&rdquo;</blockquote><figcaption>asakh s <span>· Google review, 6 months ago</span></figcaption></figure></div>
@@ -224,7 +234,14 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
  dec6:s=>{let i=0,la=0,ln=0;const o=[];while(i<s.length){for(let k=0;k<2;k++){let r=0,sh=0,b;do{b=s.charCodeAt(i++)-63;r|=(b&31)<<sh;sh+=5;}while(b>=32);const d=(r&1)?~(r>>1):(r>>1);if(k)ln+=d;else la+=d;}o.push([la/1e6,ln/1e6]);}return o;}
 };</script>
 <section class="qt" id="price" aria-labelledby="qtt"><div class="wrap">
- <div class="sec-h"><h2 id="qtt">Get a price in a minute</h2><p>Find your place on the aerial photo, pick the jobs you need, and see a price straight away. We measure your lawn from the photo. No waiting for a call back.</p></div>
+ <div class="qt-head"><h2 id="qtt">Get a price in a minute</h2>
+ <ol class="qt-flow" aria-label="How it works">
+  <li><b>1</b><span>Type your address</span></li>
+  <li><b>2</b><span>Pick the jobs you need</span></li>
+  <li><b>3</b><span>We measure your lawn</span></li>
+  <li><b>4</b><span>See your price</span></li>
+  <li><b>5</b><span>Send it to Sreeju</span></li>
+ </ol></div>
  <div class="qt-grid">
   <div class="qt-panel">
    <form id="qt-find"><label for="qt-q">1. Your address</label>
@@ -237,8 +254,7 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
    <div class="qt-svc" id="qt-svcs" role="group" aria-label="Jobs"></div>
    <div id="qt-fields"></div>
    <div class="qt-out" id="qt-out" aria-live="polite"></div>
-   <a class="btn btn--primary" id="qt-send" hidden>Text this price to Sreeju</a>
-   <p class="qt-demo">Preview: these are example prices. Sreeju sets the real rates before the site goes live.</p>
+   <a class="btn btn--primary" id="qt-send" hidden>Send this quote to Sreeju</a>
   </div>
   <div class="qt-mapcol"><div id="qt-map" class="map qt-map" role="application" aria-label="Aerial photo. Tap around an area to measure it, or drag a corner to adjust it."></div><div class="qt-maptools" id="qt-tools"></div></div>
  </div>
@@ -395,9 +411,19 @@ window.addEventListener('DOMContentLoaded',()=>{
   if(bigs.length)ul.appendChild(mk('li','qt-travel',bigs.join(', ')+': priced after a look'));
   out.append(mk('p','qt-big','About $'+lo+'–$'+hi),ul,mk('p','qt-sub','An estimate from what you’ve told us. '+Q.owner+' confirms the price before any work starts.'));
   badge.hidden=false;badge.textContent='About $'+lo+'–$'+hi;
-  const body='Hi '+Q.owner+', I got an instant price on your website'+(place?' for '+place:'')+'. '+lines.map(l=>l.t+' ('+l.d+') '+l.p).join('; ')+(travel?'. '+travel:'')+'. Estimate $'+lo+'-$'+hi+'. Can you confirm?';
+  const link=checkLink(lines,travel,lo,hi);
+  const body='Hi '+Q.owner+', I got an instant price on your website'+(place?' for '+place:'')+'. '+lines.map(l=>l.t+' ('+l.d+') '+l.p).join('; ')+(travel?'. '+travel:'')+'. Estimate $'+lo+'-$'+hi+'. Can you confirm?'+(link?' What was measured: '+link:'');
   const a=$('qt-send');a.href='sms:'+Q.tel+'?&body='+encodeURIComponent(body);a.hidden=false;
  }
+ // Link to quote.html with the whole quote (address, prices, measured shapes) packed into the # part.
+ // No server: the owner opens it from the customer's text and sees the shapes on the aerial photo.
+ const enc5=pts=>{let o='',pl=0,pn=0;const e=v=>{v=v<0?~(v<<1):(v<<1);while(v>=32){o+=String.fromCharCode((32|(v&31))+63);v>>=5;}o+=String.fromCharCode(v+63);};
+  pts.forEach(q=>{const la=Math.round(q.lat*1e5),ln=Math.round(q.lng*1e5);e(la-pl);e(ln-pn);pl=la;pn=ln;});return o;};
+ function checkLink(lines,travel,lo,hi){
+  try{const d={a:place,h:homePt?[+homePt.lat.toFixed(5),+homePt.lng.toFixed(5)]:null,l:lines.map(l=>[l.t,l.d,l.p]),t:travel,r:[lo,hi],
+    s:targets.filter(t=>sel[t.svc]).flatMap(t=>t.shapes.filter(x=>x.pts.length>2).map(x=>[t.f.label,t.f.color,Math.round(area(x.pts)),enc5(x.pts),x.assumed?1:0]))};
+   const b=new TextEncoder().encode(JSON.stringify(d));let bin='';b.forEach(c=>bin+=String.fromCharCode(c));
+   return new URL('quote.html',location.href).href+'#'+btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}catch(e){return '';}}
  map.on('click',e=>{if(locked||active==='__roof')return;touched=true;if(!targets.some(t=>sel[t.svc]))toggle(targets[0].svc,true);const t=T0();t.shapes[t.cur].pts.push(e.latlng);drawShapes();update();});
 
  async function loadRoofs(){
@@ -525,12 +551,12 @@ window.addEventListener('DOMContentLoaded',()=>{
  function doneText(d){
   const assumed=targets.some(t=>t.shapes.some(s=>s.assumed));
   const split=d.crosslease?(d.crosslease.split==='fences'?' We’ve followed the fences between the homes for your part.':' We couldn’t see a clear fence between the homes, so your part is the half nearest your home.'):'';
-  return 'Measured from the aerial photo.'+split+(assumed?' Dashed shapes run under trees or a roof, so we’ve estimated them.':'')+' '+Q.owner+' confirms the price before any work starts.';}
+  return (split+(assumed?' Dashed shapes run under trees or a roof, so we’ve estimated them.':'')).trim();}
  // Card text: in AI mode the lawn is measured for the customer; otherwise they tap around it
  function setHow(aiMode){Q.services.forEach(s=>{const fs=s.fields.filter(f=>f.type==='map_area');if(!fs.length)return;
   const p=document.querySelector('#qt-card-'+s.id+' .qt-how');if(!p)return;
   const ls=fs.map(f=>f.label.toLowerCase()),what=ls.length>1?ls.slice(0,-1).join(', ')+' and '+ls[ls.length-1]:ls[0];
-  p.textContent=aiMode?'We measure your '+what+' from the aerial photo for you as soon as you find your address.':(s.how||'').replace(', or use Draw it for me','');});}
+  p.hidden=aiMode;if(!aiMode)p.textContent=(s.how||'').replace(', or use Draw it for me','');});}
  function setLock(v){locked=v;refreshTools();drawShapes();}
  // Pitch mode: ../tunnel.json names Mike's PC; if it answers, switch on the AI drawing and the LINZ section outline
  if(Q.remote)fetch(Q.remote+'?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(async t=>{
