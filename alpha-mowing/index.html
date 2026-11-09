@@ -614,6 +614,7 @@ window.addEventListener('DOMContentLoaded',()=>{
  // Hand-drawing is only offered if the automatic drawing isn't available.
  async function runAI(){if(!Q.ai||!homePt)return;
   const msg=$('qt-aimsg'),jobs=startAI(),key=aiKey;if(!jobs||!msg)return;
+  setView(true);setHow(true);
   targets.forEach(t=>{t.shapes=[{pts:[],assumed:false}];t.cur=0;});setLock(true);update();
   msg.textContent='Measuring your lawn… about 30 seconds.';
   const fail=t=>{if(aiKey!==key)return;aiJobs=null;setView(false);setLock(false);setHow(false);
