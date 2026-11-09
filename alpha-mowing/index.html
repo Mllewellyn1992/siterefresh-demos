@@ -191,6 +191,18 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
 .qt-v i{display:block;width:12px;height:12px;margin:6px;border:2px solid #fff;border-radius:50%;box-shadow:0 0 3px rgb(0 0 0/.7)}
 .qt-v.qt-sm i{width:8px;height:8px;margin:8px;border-width:1.5px}
 .qt-aibtn{margin-top:.25rem}
+.qt-hide #qt-map,.qt-hide #qt-tools{display:none}
+.qt-prop{border:var(--rule-hair) solid var(--color-rule-2);background:var(--color-paper);padding:clamp(1.25rem,2.5vw,2rem)}
+.qt-prop[hidden]{display:none}
+.qt-prop h3{margin:0 0 .9rem;font:600 1.35rem/1.2 var(--font-display);color:var(--color-ink)}
+.qt-prop dl{margin:0;display:grid;grid-template-columns:auto 1fr;column-gap:1.5rem}
+.qt-prop dt,.qt-prop dd{margin:0;padding:.8rem 0;border-top:var(--rule-hair) solid var(--color-rule)}
+.qt-prop dt{font:400 var(--text-sm)/1.4 var(--font-outlier);color:var(--color-muted);align-self:center}
+.qt-prop dd{text-align:right;font:600 1.1rem/1.35 var(--font-display);color:var(--color-ink);font-variant-numeric:tabular-nums}
+.qt-prop .qt-wait{color:var(--color-muted);font-weight:400}
+.qt-prop p{margin:.9rem 0 0;font:400 var(--text-sm)/1.45 var(--font-outlier);color:var(--color-muted)}
+.qt-prop--inline{display:none;margin-top:var(--space-md)}
+@media (max-width:860px){.qt-prop--inline:not([hidden]){display:block} .qt-mapcol .qt-prop{display:none} .qt-hide .qt-mapcol{display:none}}
 .qt-badge{background:var(--color-paper);color:var(--color-ink);font:600 1.15rem/1 var(--font-display);padding:.6rem .9rem;border-radius:var(--radius-pill);box-shadow:0 1px 4px rgb(0 0 0/.3)}
 @media (max-width:860px){.qt-grid{display:flex;flex-direction:column} .qt-mapcol{position:relative;top:auto;order:-1;width:100%} .qt-map{height:380px}}
 </style>
@@ -249,6 +261,7 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
     <ul class="qt-sug" id="qt-sug" role="listbox" aria-label="Matching addresses" hidden></ul></div>
     <p class="qt-area" id="qt-area">Sreeju covers places up to 30 min drive from Hamilton.</p>
     <p class="qt-msg" id="qt-findmsg" aria-live="polite"></p><button type="button" class="qt-link" id="qt-notmine" hidden>Not your part?</button></form>
+   <div class="qt-prop qt-prop--inline" id="qt-prop2" hidden></div>
    <p class="qt-msg" id="qt-aimsg" aria-live="polite"></p>
    <p class="qt-step">2. What do you need? <span>Pick as many as you like.</span></p>
    <div class="qt-svc" id="qt-svcs" role="group" aria-label="Jobs"></div>
@@ -256,7 +269,7 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
    <div class="qt-out" id="qt-out" aria-live="polite"></div>
    <a class="btn btn--primary" id="qt-send" hidden>Send this quote to Sreeju</a>
   </div>
-  <div class="qt-mapcol"><div id="qt-map" class="map qt-map" role="application" aria-label="Aerial photo. Tap around an area to measure it, or drag a corner to adjust it."></div><div class="qt-maptools" id="qt-tools"></div></div>
+  <div class="qt-mapcol"><div class="qt-prop" id="qt-prop" hidden></div><div id="qt-map" class="map qt-map" role="application" aria-label="Aerial photo. Tap around an area to measure it, or drag a corner to adjust it."></div><div class="qt-maptools" id="qt-tools"></div></div>
  </div>
 </div></section>
 <script>
@@ -281,6 +294,22 @@ window.addEventListener('DOMContentLoaded',()=>{
  const centre=p=>L.latLng(p.reduce((t,q)=>t+q.lat,0)/p.length,p.reduce((t,q)=>t+q.lng,0)/p.length);
 
  const sel={}, val={};
+ // Customer view: when the automatic measuring is on, the customer sees only their property facts and the price;
+ // the photo with the measured shapes goes to the owner (the "What was measured" link in the text).
+ // The map only shows for hand-drawing, when automatic measuring isn't available.
+ let hideMap=false;const prop={land:null,house:null,cl:undefined};
+ function setView(hide){hideMap=hide;document.querySelector('.qt-grid').classList.toggle('qt-hide',hide);
+  if(!hide)setTimeout(()=>map.invalidateSize(),0);drawProp();drawShapes&&targets.length&&drawShapes();}
+ function drawProp(){const els=[$('qt-prop'),$('qt-prop2')];
+  const wait='<span class="qt-wait">Looking it up…</span>',fmt=n=>Math.round(n).toLocaleString('en-NZ')+' m²';
+  let h;
+  if(!homePt)h='<h3>Your property</h3><p>Type your address and we’ll look up your section size, house size and title type.</p>';
+  else h='<h3>Your property</h3><dl><dt>Address</dt><dd>'+place.replace(/[&<>]/g,'')+'</dd>'+
+   '<dt>Land</dt><dd>'+(prop.land?fmt(prop.land):wait)+'</dd>'+
+   '<dt>House</dt><dd>'+(prop.house?'about '+fmt(prop.house):wait)+'</dd>'+
+   '<dt>Cross-lease</dt><dd>'+(prop.cl===undefined?wait:prop.cl?'Yes, '+prop.cl+' homes share the section':'No')+'</dd></dl>'+
+   '<p>'+Q.owner+' checks the measurements and confirms your price before any work starts.</p>';
+  els.forEach((e,i)=>{if(!e)return;e.innerHTML=h;e.hidden=!hideMap||(i===1&&!homePt);});}
  let home=null, homePt=null, place='', travelKm=null, parcelLayer=null, zoneLayer=null, clInfo=null, pick=null, touched=false, locked=false;
  // map-traced things (lawn, driveway, deck, paths): one "target" per map_area field
  const targets=[];
@@ -319,7 +348,7 @@ window.addEventListener('DOMContentLoaded',()=>{
      m.on('click',()=>{if(active==='__roof'||(t.key===active&&si===t.cur))return;const c=T0();c.shapes[c.cur].pts.push(L.latLng(q.lat,q.lng));drawShapes();update();});});
     if(p.length>2)L.marker(centre(p),{interactive:false,icon:L.divIcon({className:'qt-tip',iconSize:null,
       html:'<span>'+t.f.label+' '+Math.round(area(p))+' m²'+(s.assumed?' (assumed)':'')+'</span>'})}).addTo(shapeLayer);});});
-  targets.forEach(t=>{const el=$('qt-sum-'+t.key);if(!el)return;const n=t.shapes.filter(s=>s.pts.length>2);
+  targets.forEach(t=>{const el=$('qt-sum-'+t.key);if(!el)return;el.hidden=hideMap;const n=t.shapes.filter(s=>s.pts.length>2);
    el.textContent=t.f.label+': '+(n.length?n.map(s=>Math.round(area(s.pts))+' m²').join(' + ')+(n.length>1?' = '+Math.round(sum(t))+' m²':''):'not marked yet');});
  }
  function drawRoofs(){
@@ -340,8 +369,9 @@ window.addEventListener('DOMContentLoaded',()=>{
    if(f.type==='select'){const o=f.options[v];work+=o.add||0;x*=o.x||1;}
    else{work+=(+v||0)*f.per;if(f.max&&v>f.max)big=true;}});
   if(big)return 'big'; if(work<=0)return null;
-  const p=Math.max(s.min,(s.base+work)*x);return [Math.max(s.min,r5(p*0.9)),r5(p*1.15)];}
- function summary(s){return s.fields.map(f=>{const v=fv(s,f);
+  const p=Math.max(s.min,(s.base+work)*x);return hideMap?[Math.max(s.min,r5(p*0.85)),r5(p*1.25)]:[Math.max(s.min,r5(p*0.9)),r5(p*1.15)];}
+ function summary(s,forOwner){return s.fields.map(f=>{const v=fv(s,f);
+  if(hideMap&&!forOwner&&(f.type==='map_area'||f.type==='roof_edge'))return '';
   if(f.type==='select')return f.options[v].label.toLowerCase();
   if(!(+v))return '';
   if(f.type==='map_area')return f.label.toLowerCase()+' '+Math.round(v)+' m²';
@@ -395,7 +425,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   const lines=[];let lo=0,hi=0,bigs=[];
   Q.services.forEach(s=>{if(!sel[s.id])return;const p=priceOf(s);
    if(p==='big'){bigs.push(s.label);return;} if(!p)return;
-   lo+=p[0];hi+=p[1];lines.push({t:s.label,d:summary(s),u:s.unit_note,p:'$'+p[0]+'–$'+p[1]});});
+   lo+=p[0];hi+=p[1];lines.push({t:s.label,d:summary(s),o:summary(s,true),u:s.unit_note,p:'$'+p[0]+'–$'+p[1]});});
   let travel='';
   if(lines.length&&travelKm!=null){const extra=r5(Math.max(0,travelKm-Q.travel.free_km)*Q.travel.per_km),km=Math.max(1,Math.round(travelKm));
    if(extra>0){lo+=extra;hi+=extra;travel='Travel from '+Q.base.label+': +$'+extra+' ('+km+' km by road)';}
@@ -403,17 +433,17 @@ window.addEventListener('DOMContentLoaded',()=>{
   const out=$('qt-out');out.innerHTML='';
   if(!lines.length){
    out.append(mk('p','qt-big',bigs.length?'That’s a big job':'Your price appears here'),
-    mk('p','qt-sub',bigs.length?Q.owner+' will price '+bigs.join(' and ').toLowerCase()+' after a quick look. Just call.':'Pick a job above, then mark it on the photo or answer a question or two.'));
+    mk('p','qt-sub',bigs.length?Q.owner+' will price '+bigs.join(' and ').toLowerCase()+' after a quick look. Just call.':hideMap?(homePt&&locked?'Measuring your property… about 30 seconds.':'Type your address and pick the jobs you need.'):'Pick a job above, then mark it on the photo or answer a question or two.'));
    $('qt-send').hidden=true;badge.hidden=true;return;}
   const ul=mk('ul','qt-lines');
-  lines.forEach(l=>{const li=mk('li');const a=mk('span');a.append(mk('b','',l.t),document.createTextNode(' '+l.d+' ('+l.u+')'));li.append(a,mk('strong','',l.p));ul.appendChild(li);});
+  lines.forEach(l=>{const li=mk('li');const a=mk('span');a.append(mk('b','',l.t),document.createTextNode((l.d?' '+l.d:'')+' ('+l.u+')'));li.append(a,mk('strong','',l.p));ul.appendChild(li);});
   if(travel)ul.appendChild(mk('li','qt-travel',travel));
   if(bigs.length)ul.appendChild(mk('li','qt-travel',bigs.join(', ')+': priced after a look'));
-  out.append(mk('p','qt-big','About $'+lo+'–$'+hi),ul,mk('p','qt-sub','An estimate from what you’ve told us. '+Q.owner+' confirms the price before any work starts.'));
+  out.append(mk('p','qt-big','About $'+lo+'–$'+hi),ul,mk('p','qt-sub',hideMap?'An estimate. '+Q.owner+' checks the measurements and confirms the price before any work starts.':'An estimate from what you’ve told us. '+Q.owner+' confirms the price before any work starts.'));
   badge.hidden=false;badge.textContent='About $'+lo+'–$'+hi;
   lastQ={lines,travel,lo,hi};logSoon();
   const link=checkLink(lines,travel,lo,hi);
-  const body='Hi '+Q.owner+', I got an instant price on your website'+(place?' for '+place:'')+'. '+lines.map(l=>l.t+' ('+l.d+') '+l.p).join('; ')+(travel?'. '+travel:'')+'. Estimate $'+lo+'-$'+hi+'. Can you confirm?'+(link?' What was measured: '+link:'');
+  const body='Hi '+Q.owner+', I got an instant price on your website'+(place?' for '+place:'')+'. '+lines.map(l=>l.t+' ('+l.o+') '+l.p).join('; ')+(travel?'. '+travel:'')+'. Estimate $'+lo+'-$'+hi+'. Can you confirm?'+(link?' What was measured: '+link:'');
   const a=$('qt-send');a.href='sms:'+Q.tel+'?&body='+encodeURIComponent(body);a.hidden=false;
  }
  // Link to quote.html with the whole quote (address, prices, measured shapes) packed into the # part.
@@ -424,13 +454,13 @@ window.addEventListener('DOMContentLoaded',()=>{
  // which works without Mike's PC. Stats: QUOTE_LOG's /stats page.
  const sid=Math.random().toString(36).slice(2,10);let lastQ=null,logT=null,lastLogged='';
  function logQuote(ev){const u=Q.log;if(!u||!lastQ)return;const q=lastQ;
-  const rec={business:Q.biz,event:ev,session:sid,address:place,lat:homePt&&homePt.lat,lng:homePt&&homePt.lng,lines:q.lines.map(l=>[l.t,l.d,l.p]),
+  const rec={business:Q.biz,event:ev,session:sid,address:place,lat:homePt&&homePt.lat,lng:homePt&&homePt.lng,lines:q.lines.map(l=>[l.t,l.o,l.p]),
    areas:targets.filter(t=>sel[t.svc]).map(t=>[t.f.label,Math.round(sum(t))]),price_lo:q.lo,price_hi:q.hi,travel:q.travel,test:/[?&]sr_test/.test(location.search)};
   fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(rec),keepalive:true}).catch(()=>{});}
  function logSoon(){clearTimeout(logT);logT=setTimeout(()=>{if(!lastQ)return;const k=JSON.stringify([place,lastQ.lines]);if(k===lastLogged)return;lastLogged=k;logQuote('quote');},5000);}
  $('qt-send').addEventListener('click',()=>logQuote('sent'));
  function checkLink(lines,travel,lo,hi){
-  try{const d={a:place,h:homePt?[+homePt.lat.toFixed(5),+homePt.lng.toFixed(5)]:null,l:lines.map(l=>[l.t,l.d,l.p]),t:travel,r:[lo,hi],
+  try{const d={a:place,h:homePt?[+homePt.lat.toFixed(5),+homePt.lng.toFixed(5)]:null,l:lines.map(l=>[l.t,l.o,l.p]),t:travel,r:[lo,hi],
     s:targets.filter(t=>sel[t.svc]).flatMap(t=>t.shapes.filter(x=>x.pts.length>2).map(x=>[t.f.label,t.f.color,Math.round(area(x.pts)),enc5(x.pts),x.assumed?1:0]))};
    const b=new TextEncoder().encode(JSON.stringify(d));let bin='';b.forEach(c=>bin+=String.fromCharCode(c));
    return new URL('quote.html',location.href).href+'#'+btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}catch(e){return '';}}
@@ -443,16 +473,17 @@ window.addEventListener('DOMContentLoaded',()=>{
    const d=await fetch(u).then(x=>x.json());
    roofs=(d.features||[]).filter(f=>f.geometry&&f.geometry.type==='Polygon').map(f=>({pts:f.geometry.coordinates[0].slice(0,-1).map(c=>L.latLng(c[1],c[0])),on:false}));
    const home_=roofs.find(r=>inside(homePt,r.pts))||roofs.filter(r=>area(r.pts)>=60).sort((a,b)=>dist(homePt,centre(a.pts))-dist(homePt,centre(b.pts)))[0];
-   if(home_)home_.on=true;
+   if(home_){home_.on=true;prop.house=area(home_.pts);}
   }catch(e){roofs=[];}
+  drawProp();
   refreshTools();drawRoofs();update();autoStoreys();
  }
  async function loadParcel(msg){
   if(!Q.parcel){runAI();return;}if(parcelLayer){map.removeLayer(parcelLayer);parcelLayer=null;}if(zoneLayer){map.removeLayer(zoneLayer);zoneLayer=null;}
   try{const r=await fetch(Q.parcel+'?lat='+homePt.lat+'&lng='+homePt.lng);if(!r.ok){runAI();return;}const d=await r.json();
    parcelLayer=L.polygon(d.points,{interactive:false,color:'#ff4fd8',weight:3,dashArray:'8 6',fill:false}).addTo(map);
-   msg.textContent='Found '+place+'. Your section is '+Math.round(d.area).toLocaleString()+' m², outlined in pink.';
-   clInfo=d.crosslease||null;pick=clInfo&&clInfo.homes?clInfo.mine:null;
+   msg.textContent=hideMap?'Found '+place+'.':'Found '+place+'. Your section is '+Math.round(d.area).toLocaleString()+' m², outlined in pink.';
+   clInfo=d.crosslease||null;prop.land=d.area;prop.cl=clInfo?clInfo.flats:0;drawProp();pick=clInfo&&clInfo.homes?clInfo.mine:null;
    if(clInfo){showPart();if($('qt-notmine'))$('qt-notmine').hidden=!clInfo.homes;}
    else if($('qt-notmine'))$('qt-notmine').hidden=true;
   }catch(e){}
@@ -506,7 +537,7 @@ window.addEventListener('DOMContentLoaded',()=>{
    map.setView(pt,15);
    msg.textContent=where+' is outside the area '+Q.owner+' covers (up to '+Q.maxMin+' min drive from '+b.label+(mins!=null?'; it’s about '+Math.round(mins)+' min':'')+'). Call '+Q.owner+' to check.';
    update();return;}
-  homePt=pt;place=where;travelKm=km;
+  homePt=pt;place=where;travelKm=km;prop.land=null;prop.house=null;prop.cl=undefined;drawProp();
   map.setView(homePt,20);if(home)map.removeLayer(home);
   home=L.circleMarker(homePt,{radius:8,color:'#fff',weight:3,fillOpacity:0,interactive:false}).addTo(map);
   msg.textContent='Found '+place+'.';
@@ -531,10 +562,11 @@ window.addEventListener('DOMContentLoaded',()=>{
  function showPart(part){
   if(zoneLayer){map.removeLayer(zoneLayer);zoneLayer=null;}
   const msg=$('qt-findmsg');
-  if(pick==='whole'){msg.textContent='Found '+place+'. Measuring the whole cross-lease section (pink), shared by '+clInfo.flats+' homes.';return;}
+  if(pick==='whole'){msg.textContent='Found '+place+'. Measuring the whole cross-lease section'+(hideMap?'':' (pink)')+', shared by '+clInfo.flats+' homes.';return;}
   const pts=part||(clInfo.parts?clInfo.parts[pick]:null);
   if(pts)zoneLayer=L.polygon(pts,{interactive:false,color:'#ffd23f',weight:3,dashArray:'2 6',fill:false}).addTo(map);
-  msg.textContent='Found '+place+'. It’s a cross-lease: '+clInfo.flats+' homes share this section (pink). We’ll measure '+(pick===clInfo.mine?'the part around your home':'the part around the other home')+' (yellow dots).';
+  msg.textContent=hideMap?'Found '+place+'. It’s a cross-lease, so we’ll measure '+(pick===clInfo.mine?'the part around your home.':'the part around the other home.'):
+   'Found '+place+'. It’s a cross-lease: '+clInfo.flats+' homes share this section (pink). We’ll measure '+(pick===clInfo.mine?'the part around your home':'the part around the other home')+' (yellow dots).';
  }
  const nm=$('qt-notmine');
  if(nm)nm.addEventListener('click',()=>{if(!clInfo||!clInfo.homes)return;const n=clInfo.homes.length;
@@ -562,7 +594,7 @@ window.addEventListener('DOMContentLoaded',()=>{
  function doneText(d){
   const assumed=targets.some(t=>t.shapes.some(s=>s.assumed));
   const split=d.crosslease?(d.crosslease.split==='fences'?' We’ve followed the fences between the homes for your part.':' We couldn’t see a clear fence between the homes, so your part is the half nearest your home.'):'';
-  return (split+(assumed?' Dashed shapes run under trees or a roof, so we’ve estimated them.':'')).trim();}
+  return (split+(assumed&&!hideMap?' Dashed shapes run under trees or a roof, so we’ve estimated them.':'')).trim();}
  // Card text: in AI mode the lawn is measured for the customer; otherwise they tap around it
  function setHow(aiMode){Q.services.forEach(s=>{const fs=s.fields.filter(f=>f.type==='map_area');if(!fs.length)return;
   const p=document.querySelector('#qt-card-'+s.id+' .qt-how');if(!p)return;
@@ -571,19 +603,19 @@ window.addEventListener('DOMContentLoaded',()=>{
  function setLock(v){locked=v;refreshTools();drawShapes();}
  // Pitch mode: ../tunnel.json names Mike's PC; if it answers, switch on the AI drawing and the LINZ section outline
  if(Q.remote)fetch(Q.remote+'?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(async t=>{
-  if(!t||!t.api)return;
-  const up=await fetch(t.api+'/api/ping',{cache:'no-store'}).then(r=>r.ok).catch(()=>false);if(!up)return;
+  if(!t||!t.api)return setView(false);
+  const up=await fetch(t.api+'/api/ping',{cache:'no-store'}).then(r=>r.ok).catch(()=>false);if(!up)return setView(false);
   Q.ai=t.api+'/api/trace';Q.parcel=t.api+'/api/parcel';Q.storeysApi=t.api+'/api/storeys';
-  setHow(true);
+  setHow(true);setView(true);
   if(homePt)loadParcel($('qt-findmsg'));
- }).catch(()=>{});
+ }).catch(()=>setView(false));
  // Automatic drawing: starts as soon as the address is found; the shapes are locked (the customer can't change them).
  // Hand-drawing is only offered if the automatic drawing isn't available.
  async function runAI(){if(!Q.ai||!homePt)return;
   const msg=$('qt-aimsg'),jobs=startAI(),key=aiKey;if(!jobs||!msg)return;
   targets.forEach(t=>{t.shapes=[{pts:[],assumed:false}];t.cur=0;});setLock(true);update();
-  msg.textContent='Measuring your lawn from the aerial photo… about 30 seconds.';
-  const fail=t=>{if(aiKey!==key)return;aiJobs=null;setLock(false);setHow(false);
+  msg.textContent='Measuring your lawn… about 30 seconds.';
+  const fail=t=>{if(aiKey!==key)return;aiJobs=null;setView(false);setLock(false);setHow(false);
    msg.textContent=t||'We couldn’t measure it automatically right now. Tap around each lawn on the photo instead.';};
   try{
    const first=await Promise.race([jobs.full.then(x=>({x,full:true})),jobs.fast.then(x=>({x,full:false}))]);
@@ -595,12 +627,13 @@ window.addEventListener('DOMContentLoaded',()=>{
    if(!res.d.property_found)return fail('We couldn’t work out which property is yours. Tap around each lawn on the photo instead.');
    if(!applyAI(res.d))return fail('We couldn’t spot a lawn to measure. Tap around each lawn on the photo instead.');
    if(full){msg.textContent=doneText(res.d);return;}
-   msg.textContent='First measurement done. A more careful one will replace it in a few seconds. '+doneText(res.d);
+   msg.textContent=(hideMap?'First measurement done; a more careful one is on its way. ':'First measurement done. A more careful one will replace it in a few seconds. ')+doneText(res.d);
    jobs.full.then(r=>{if(aiKey!==key)return;
     if(r.ok&&r.d.property_found&&applyAI(r.d))msg.textContent=doneText(r.d);else msg.textContent=doneText(res.d);});
   }catch(e){fail();}
  }
  if(Q.ai)setHow(true);
+ setView(!!(Q.ai||Q.remote));   // remote: assume on until the check says otherwise (no map flash)
  toggle(targets[0].svc,true);
  window.__qt={map,targets};
 });
