@@ -195,7 +195,7 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
 .qt-prop{border:var(--rule-hair) solid var(--color-rule-2);background:var(--color-paper);padding:clamp(1.25rem,2.5vw,2rem)}
 .qt-prop[hidden]{display:none}
 .qt-prop h3{margin:0 0 .9rem;font:600 1.35rem/1.2 var(--font-display);color:var(--color-ink)}
-.qt-prop dl{margin:0;display:grid;grid-template-columns:auto 1fr}
+.qt-prop dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:0}
 .qt-prop dt,.qt-prop dd{margin:0;padding:.8rem 0;border-top:var(--rule-hair) solid var(--color-rule)}
 .qt-prop dt{padding-right:1.5rem;font:400 var(--text-sm)/1.4 var(--font-outlier);color:var(--color-muted);align-self:center}
 .qt-prop dd{text-align:right;font:600 1.1rem/1.35 var(--font-display);color:var(--color-ink);font-variant-numeric:tabular-nums}
@@ -434,7 +434,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   const out=$('qt-out');out.innerHTML='';
   if(!lines.length){
    out.append(mk('p','qt-big',bigs.length?'That’s a big job':'Your price appears here'),
-    mk('p','qt-sub',bigs.length?Q.owner+' will price '+bigs.join(' and ').toLowerCase()+' after a quick look. Just call.':hideMap?(homePt&&locked?'Measuring your property… about 30 seconds.':'Type your address and pick the jobs you need.'):'Pick a job above, then mark it on the photo or answer a question or two.'));
+    mk('p','qt-sub',bigs.length?Q.owner+' will price '+bigs.join(' and ').toLowerCase()+' after a quick look. Just call.':hideMap?(homePt&&locked?'Your price shows here as soon as your lawn is measured.':'Type your address and pick the jobs you need.'):'Pick a job above, then mark it on the photo or answer a question or two.'));
    $('qt-send').hidden=true;badge.hidden=true;return;}
   const ul=mk('ul','qt-lines');
   lines.forEach(l=>{const li=mk('li');const a=mk('span');a.append(mk('b','',l.t),document.createTextNode((l.d?' '+l.d:'')+' ('+l.u+')'));li.append(a,mk('strong','',l.p));ul.appendChild(li);});
