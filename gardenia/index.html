@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Gardenia Property Services | Gardening and property maintenance, Papamoa and the Bay of Plenty</title>
+<meta name="description" content="Lawns, hedges, pruning, section clearing and property maintenance from Nico and his team, based in Papamoa and working across the Bay of Plenty.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@600&family=Hanken+Grotesk:wght@400;500&family=Newsreader:opsz,wght@6..72,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-paper: oklch(95.8% 0.024 90); --color-paper-2: oklch(92.6% 0.030 90); --color-paper-3: oklch(89% 0.034 90);
+  --color-ink: oklch(23% 0.050 152); --color-ink-2: oklch(33% 0.048 150); --color-muted: oklch(46% 0.034 142);
+  --color-rule: oklch(83% 0.024 112); --color-rule-2: oklch(68% 0.042 138);
+  --color-accent: oklch(46% 0.135 142); --color-accent-2: oklch(86% 0.075 128); --color-accent-ink: oklch(97% 0.015 95);
+  --color-focus: oklch(46% 0.135 142); --tint-moss: oklch(46% 0.135 142 / 0.11); --tint-clay: oklch(54% 0.140 46 / 0.10);
+  --font-display: "Vollkorn", ui-serif, Georgia, serif; --font-body: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-outlier: "Newsreader", ui-serif, Georgia, serif;
+  --radius-card: 4px; --radius-pill: 999px; --rule-hair: 1px; --shadow-card: none;
+  --tracking-display: -0.012em; --display-weight: 600;
+}
+:root { --space-xs:.5rem; --space-sm:.75rem; --space-md:1.25rem; --space-lg:2rem; --space-xl:3.5rem; --space-2xl:6rem;
+  --text-sm:.9rem; --dur-short:160ms; --ease-out:cubic-bezier(.2,.7,.2,1); --measure:62ch; }
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--color-paper);color:var(--color-ink-2);font:400 1.0625rem/1.6 var(--font-body);font-variant-numeric:oldstyle-nums;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--font-display);font-weight:var(--display-weight);color:var(--color-ink);letter-spacing:var(--tracking-display);line-height:1.06;margin:0}
+a{color:var(--color-ink);text-underline-offset:.2em;text-decoration-thickness:1px;transition:text-decoration-color var(--dur-short) var(--ease-out)}
+a:hover{text-decoration-color:var(--color-accent)}
+::selection{background:color-mix(in oklab,var(--color-accent) 22%,transparent)}
+:focus-visible{outline:2px solid var(--color-focus);outline-offset:3px}
+img{max-width:100%;display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+.demo{background:var(--color-ink);color:var(--color-accent-ink);font-size:.82rem;text-align:center;padding:.45rem 1rem}
+[hidden]{display:none!important}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;border-radius:var(--radius-pill);border:var(--rule-hair) solid var(--color-rule-2);padding:.7rem 1.4rem;font:500 1rem/1 var(--font-body);color:var(--color-ink);text-decoration:none;background:transparent;cursor:pointer;transition:background var(--dur-short) var(--ease-out),border-color var(--dur-short) var(--ease-out)}
+.btn:hover{border-color:var(--color-ink)}
+.btn--primary{background:var(--color-accent);border-color:var(--color-accent);color:var(--color-accent-ink)}
+.btn--primary:hover{background:color-mix(in oklab,var(--color-accent) 82%,black);border-color:transparent}
+header.top{position:sticky;top:0;z-index:20;background:color-mix(in oklab,var(--color-paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:var(--rule-hair) solid var(--color-rule)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:68px}
+.brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;color:var(--color-ink)}
+.brand svg{width:38px;height:34px;color:var(--color-accent)}
+.brand b{font:600 1.2rem/1 var(--font-display);letter-spacing:var(--tracking-display)}
+.brand small{display:block;font:500 .78rem/1.2 var(--font-body);color:var(--color-muted);margin-top:.2rem}
+nav.links{display:flex;gap:1.6rem;font-weight:500;font-size:.95rem}
+nav.links a{text-decoration:none;color:var(--color-ink-2)} nav.links a:hover{color:var(--color-ink);text-decoration:underline;text-decoration-color:var(--color-accent)}
+.hero{padding:clamp(1.75rem,4vw,3.25rem) 0 var(--space-xl)}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.hero h1{font-size:clamp(2.5rem,4.6vw,3.9rem);max-width:15ch}
+.hero .photo img{aspect-ratio:1/1}
+.hero .sub{font-size:clamp(1.08rem,1.5vw,1.2rem);max-width:34em;margin:1.4rem 0 1.8rem;color:var(--color-ink-2)}
+.actions{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+.rating{margin-top:1.6rem;display:flex;align-items:center;gap:.6rem;font-weight:500;color:var(--color-ink)}
+.rating .st{color:var(--color-accent);letter-spacing:.08em;font-size:1.05rem}
+.rating span{color:var(--color-muted);font-weight:400}
+.photo{margin:0}
+.photo img{border-radius:var(--radius-card);outline:var(--rule-hair) solid var(--color-rule);outline-offset:-1px;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;filter:contrast(1.06) saturate(.94)}
+.photo figcaption{font:400 var(--text-sm)/1.4 var(--font-outlier);color:var(--color-muted);margin-top:.55rem}
+.figs{border-top:var(--rule-hair) solid var(--color-rule);border-bottom:var(--rule-hair) solid var(--color-rule)}
+.figs .wrap{display:grid;grid-template-columns:repeat(3,1fr)}
+.fig{padding:var(--space-lg) 0;display:flex;flex-direction:column;gap:.4rem}
+.fig+.fig{border-left:var(--rule-hair) solid var(--color-rule);padding-left:clamp(1rem,3vw,2.5rem)}
+.fig-n{font:600 clamp(4rem,10vw,8.5rem)/.86 var(--font-display);font-variant-numeric:oldstyle-nums proportional-nums;color:var(--color-ink)}
+.fig-l{color:var(--color-muted);font-weight:500;font-size:.95rem}
+section{padding:var(--space-2xl) 0}
+.sec-h{display:flex;justify-content:space-between;align-items:end;gap:2rem;margin-bottom:var(--space-xl)}
+.sec-h h2{font-size:clamp(2rem,3.6vw,3rem);max-width:16ch}
+.sec-h p{max-width:32em;margin:0;color:var(--color-muted)}
+.reviews{background:var(--color-paper-2)}
+.rv-top{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(2rem,5vw,4.5rem);align-items:start;margin-bottom:var(--space-xl)}
+.rv-h h2{font-size:clamp(2rem,3.6vw,3rem);max-width:16ch}
+.rv-h p{max-width:28em;margin:1rem 0 0;color:var(--color-muted)}
+.lead-rev{margin:0;max-width:30em}
+.lead-rev blockquote{margin:0;font:600 clamp(1.6rem,3vw,2.35rem)/1.22 var(--font-display);color:var(--color-ink);letter-spacing:var(--tracking-display)}
+.lead-rev figcaption{margin-top:1rem;font-weight:500;color:var(--color-ink)}
+.lead-rev figcaption span,.rev figcaption span{color:var(--color-muted);font-weight:400}
+.revs{display:grid;grid-template-columns:repeat(4,1fr);border-top:var(--rule-hair) solid var(--color-rule-2)}
+.rev{margin:0;padding:var(--space-lg) clamp(1rem,2vw,1.6rem) 0 0}
+.rev+.rev{border-left:var(--rule-hair) solid var(--color-rule);padding-left:clamp(1rem,2vw,1.6rem)}
+.rev blockquote{margin:0 0 1rem;font-size:.98rem}
+.rev figcaption{font-weight:500;color:var(--color-ink);font-size:.92rem}
+.see-all{margin-top:var(--space-lg);font-weight:500}
+.services .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4.5rem)}
+.svc{list-style:none;margin:0;padding:0;border-top:var(--rule-hair) solid var(--color-rule-2)}
+.svc li{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:baseline;padding:1.05rem 0;border-bottom:var(--rule-hair) solid var(--color-rule)}
+.svc-t{font:600 1.3rem/1.2 var(--font-display);color:var(--color-ink)}
+.svc-n{font:400 1rem/1.45 var(--font-outlier);color:var(--color-muted)}
+.work{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-content:start}
+.work .photo img{aspect-ratio:3/4}
+.feature{background:var(--color-ink);color:var(--color-accent-ink)}
+.feature .wrap{display:grid;grid-template-columns:1.3fr .7fr;gap:2rem;align-items:end}
+.feature h2{color:var(--color-accent-ink);font-size:clamp(2rem,4.2vw,3.4rem);max-width:17ch}
+.feature p{color:color-mix(in oklab,var(--color-accent-ink) 82%,transparent);max-width:34em;margin:1.2rem 0 0}
+.feature .btn{background:var(--color-accent-2);border-color:var(--color-accent-2);color:var(--color-ink);justify-self:start}
+.about{background:var(--tint-moss)}
+.about .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5rem);align-items:center}
+.about p{max-width:var(--measure)}
+.pull{margin:0;padding-left:1.4rem;border-left:var(--rule-hair) solid var(--color-rule-2)}
+.pull blockquote{margin:0;font:600 clamp(1.5rem,2.6vw,2.1rem)/1.25 var(--font-display);color:var(--color-ink)}
+.pull figcaption{margin-top:.8rem;font:400 var(--text-sm)/1.4 var(--font-outlier);color:var(--color-muted)}
+.dist{border-top:var(--rule-hair) solid var(--color-rule)}
+.dist-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:stretch}
+.dist-row{display:flex;gap:.5rem} .dist-row input{flex:1}
+.dist-geo{margin-top:.75rem}
+.dist-out{margin-top:var(--space-lg);padding-top:var(--space-md);border-top:var(--rule-hair) solid var(--color-rule)}
+.dist-big{margin:0;font:600 clamp(1.5rem,2.6vw,2.1rem)/1.2 var(--font-display);color:var(--color-ink);min-height:1.2em}
+.dist-sub{margin:.5rem 0 0;font:400 var(--text-sm)/1.45 var(--font-outlier);color:var(--color-muted)}
+.dist-call{margin-top:var(--space-md)}
+.map{min-height:420px;border-radius:var(--radius-card);outline:var(--rule-hair) solid var(--color-rule);outline-offset:-1px;z-index:0}
+.contact .grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,6vw,5rem)}
+.contact h2{font-size:clamp(2rem,3.6vw,3rem)}
+.lines{list-style:none;padding:0;margin:var(--space-lg) 0 0;border-top:var(--rule-hair) solid var(--color-rule)}
+.lines li{display:flex;justify-content:space-between;gap:1rem;padding:.85rem 0;border-bottom:var(--rule-hair) solid var(--color-rule)}
+.lines li span{color:var(--color-muted)}
+form.quote{background:var(--color-paper-2);border-radius:var(--radius-card);padding:clamp(1.25rem,3vw,2.25rem)}
+form.quote h3{font-size:1.6rem;margin-bottom:.3rem}
+form.quote p.hint{margin:0 0 1.2rem;color:var(--color-muted)}
+label{display:block;font-weight:500;font-size:.92rem;color:var(--color-ink);margin:1rem 0 .4rem}
+input,select{width:100%;min-height:48px;border:var(--rule-hair) solid var(--color-muted);border-radius:var(--radius-card);background:var(--color-paper);padding:.7rem .85rem;font:inherit;color:var(--color-ink)}
+form.quote .btn{width:100%;margin-top:1.4rem}
+.note{font-size:.85rem;color:var(--color-muted);margin-top:.8rem;text-align:center}
+footer{border-top:var(--rule-hair) solid var(--color-rule);padding:var(--space-xl) 0 7rem;font-size:.95rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2rem}
+footer p{margin:.3rem 0;color:var(--color-muted)}
+.callbar{display:none}
+@media (max-width:900px){
+ nav.links{display:none}
+ .hero .wrap,.services .grid,.about .wrap,.contact .grid,.feature .wrap,.dist-grid{grid-template-columns:1fr}
+ .map{min-height:320px}
+ .hero .photo{order:-1} .hero .photo img{aspect-ratio:5/4}
+ .revs{grid-template-columns:1fr 1fr} .rev:nth-child(3){border-left:0;padding-left:0}
+ .sec-h{flex-direction:column;align-items:start} .rv-top{grid-template-columns:1fr}
+ section{padding:var(--space-xl) 0}
+}
+@media (max-width:600px){
+ .top .btn{display:none}
+ .figs .wrap{grid-template-columns:1fr} .fig+.fig{border-left:0;padding-left:0;border-top:var(--rule-hair) solid var(--color-rule)}
+ .fig{flex-direction:row;align-items:baseline;gap:1rem;padding:1rem 0} .fig-n{font-size:3.4rem;min-width:2.2em}
+ .revs{grid-template-columns:1fr} .rev+.rev{border-left:0;padding-left:0;border-top:var(--rule-hair) solid var(--color-rule)} .rev{padding:1.2rem 0}
+ .svc li{grid-template-columns:1fr;gap:.2rem}
+ .callbar{display:flex;position:fixed;left:.75rem;right:.75rem;bottom:.75rem;z-index:30;gap:.5rem}
+ .callbar .btn{flex:1;background:var(--color-paper)} .callbar .btn--primary{flex:2;background:var(--color-accent)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.qt{border-top:var(--rule-hair) solid var(--color-rule)}
+.qt-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
+.qt-panel label,.qt-step{display:block;font-weight:500;color:var(--color-ink);margin:0 0 .4rem}
+.qt-step{margin-top:var(--space-lg)}
+.qt-qwrap{position:relative}.qt-sug{position:absolute;left:0;right:0;top:100%;z-index:1100;margin:.25rem 0 0;padding:.25rem 0;list-style:none;background:var(--color-paper);border:1px solid var(--color-ink);box-shadow:0 10px 28px rgba(0,0,0,.14);max-height:20rem;overflow:auto}.qt-sugi{display:flex;flex-direction:column;justify-content:center;gap:.1rem;min-height:48px;padding:.5rem .85rem;cursor:pointer;color:var(--color-ink)}.qt-sugi small{font:400 var(--text-sm)/1.3 var(--font-outlier);color:var(--color-muted)}.qt-sugi[aria-selected=true],.qt-sugi:hover{background:var(--color-paper-2)}.qt-area{margin:.4rem 0 0;font:400 var(--text-sm)/1.4 var(--font-outlier);color:var(--color-muted)}.qt-msg,.qt-how{margin:.5rem 0 0;font:400 var(--text-sm)/1.45 var(--font-outlier);color:var(--color-muted);min-height:1.2em}
+.qt-link{margin:.35rem 0 0;padding:.5rem 0;min-height:44px;background:none;border:0;font:600 var(--text-sm)/1 var(--font-body,inherit);color:var(--color-ink,inherit);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.qt-link[hidden]{display:none}
+.qt-svc,.qt-tools{display:flex;flex-wrap:wrap;gap:.5rem}
+.qt-svc .btn[aria-pressed="true"]{background:var(--color-ink);border-color:var(--color-ink);color:var(--color-paper)}
+.qt-svc .btn{padding:.4rem .95rem;font-size:var(--text-sm)}
+.qt-tools{margin-top:.75rem} .qt-tools .btn{padding:.35rem 1rem;font-size:var(--text-sm)}
+.qt-step span{font-weight:400;color:var(--color-muted);font-size:var(--text-sm)}
+.qt-card{border:0;margin:var(--space-md) 0 0;padding:var(--space-md) 0 0;border-top:var(--rule-hair) solid var(--color-rule);min-width:0}
+.qt-card legend{float:left;width:100%;padding:0;margin:0 0 .4rem;font:600 1.15rem/1.3 var(--font-display);color:var(--color-ink)}
+.qt-field{display:grid;grid-template-columns:1fr auto;gap:.3rem .75rem;align-items:center;margin:.55rem 0;clear:both}
+.qt-field label{margin:0;font-weight:400} .qt-field select{max-width:15rem}
+.qt-num{display:inline-flex;align-items:center;gap:.4rem} .qt-num input{width:5.5rem}
+.qt-hint{grid-column:1/-1;margin:0;font:400 var(--text-sm)/1.4 var(--font-outlier);color:var(--color-muted)}
+.qt-lawnsum{margin:.6rem 0 0;font-size:var(--text-sm);color:var(--color-ink)}
+.qt-tip span{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;color:#fff;font:600 .85rem/1 var(--font-body,sans-serif);text-shadow:0 1px 3px #000,0 0 2px #000}
+.qt-lines b{font-weight:600;color:var(--color-ink)} .qt-lines strong{white-space:nowrap}
+.qt-out{margin-top:var(--space-lg);padding-top:var(--space-md);border-top:var(--rule-hair) solid var(--color-rule)}
+.qt-big{margin:0;font:600 clamp(1.6rem,2.8vw,2.3rem)/1.15 var(--font-display);color:var(--color-ink)}
+.qt-sub{margin:.5rem 0 0;font:400 var(--text-sm)/1.45 var(--font-outlier);color:var(--color-muted)}
+.qt-lines{list-style:none;margin:.75rem 0 0;padding:0}
+.qt-lines li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:var(--rule-hair) solid var(--color-rule);font-size:var(--text-sm)}
+.qt-lines .qt-travel{color:var(--color-muted)}
+#qt-send{margin-top:var(--space-md)}
+.qt-head{margin-bottom:var(--space-xl)}
+.qt-head h2{font-size:clamp(2rem,3.6vw,3rem);max-width:16ch}
+.qt-flow{list-style:none;margin:var(--space-lg) 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2.2rem}
+.qt-flow li{position:relative;display:flex;align-items:center;gap:.75rem;padding:1rem 1.1rem;border:var(--rule-hair) solid var(--color-rule-2);background:var(--color-paper);font-weight:500;color:var(--color-ink);line-height:1.25}
+.qt-flow b{flex:none;display:grid;place-items:center;width:2rem;height:2rem;border-radius:50%;background:var(--color-accent);color:var(--color-accent-ink);font:600 .95rem/1 var(--font-display)}
+.qt-flow li+li::before{content:"";position:absolute;left:-1.85rem;top:50%;width:1.5rem;height:2px;background:var(--color-ink);transform:translateY(-50%)}
+.qt-flow li+li::after{content:"";position:absolute;left:-.62rem;top:50%;width:.5rem;height:.5rem;border-top:2px solid var(--color-ink);border-right:2px solid var(--color-ink);transform:translateY(-50%) rotate(45deg)}
+@media (max-width:900px){.qt-flow{grid-template-columns:1fr;gap:1.6rem;max-width:26rem}
+ .qt-flow li+li::before{left:1.95rem;top:-1.45rem;width:2px;height:1.3rem;transform:none}
+ .qt-flow li+li::after{left:1.79rem;top:-.62rem;transform:rotate(135deg)}}
+.qt-demo{margin-top:var(--space-md);font:400 var(--text-sm)/1.45 var(--font-outlier);color:var(--color-muted);font-style:italic}
+.qt-mapcol{position:sticky;top:96px} .qt-map{height:560px;cursor:crosshair}
+.qt-maptools{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin-top:.6rem} .qt-maprow{display:flex;gap:.4rem}
+.qt-maptools .btn,.qt-maptools select{background:var(--color-paper);padding:.45rem .9rem;font-size:var(--text-sm)}
+.qt-maptools select{border-radius:var(--radius-pill);border:var(--rule-hair) solid var(--color-rule-2);color:var(--color-ink);width:auto}
+.qt-v i{display:block;width:12px;height:12px;margin:6px;border:2px solid #fff;border-radius:50%;box-shadow:0 0 3px rgb(0 0 0/.7)}
+.qt-v.qt-sm i{width:8px;height:8px;margin:8px;border-width:1.5px}
+.qt-aibtn{margin-top:.25rem}
+.qt-hide #qt-map,.qt-hide #qt-tools{display:none}
+.qt-busy{display:block;margin:.9rem 0 0;padding:1rem 1.1rem;border:var(--rule-hair) solid var(--color-rule-2);background:var(--color-paper);color:var(--color-ink);font:500 1rem/1.4 var(--font-body)}
+.qt-busy .qt-bt{display:flex;align-items:center;gap:.75rem}
+.qt-spin{flex:none;width:1.25rem;height:1.25rem;border-radius:50%;border:3px solid var(--color-rule-2);border-top-color:var(--color-accent);animation:qtspin .8s linear infinite}
+.qt-bar{display:block;height:5px;margin-top:.8rem;background:var(--color-rule);overflow:hidden}
+.qt-bar i{display:block;height:100%;width:0;background:var(--color-accent);transition:width 1s linear}
+.qt-bs{display:block;margin-top:.45rem;font:400 var(--text-sm)/1.4 var(--font-outlier);color:var(--color-muted)}
+.qt-big.qt-wip{display:flex;align-items:center;gap:.8rem;color:var(--color-muted)}
+@keyframes qtspin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.qt-spin{animation:none;border-top-color:var(--color-rule-2);border-color:var(--color-accent)}}
+.qt-prop{border:var(--rule-hair) solid var(--color-rule-2);background:var(--color-paper);padding:clamp(1.25rem,2.5vw,2rem)}
+.qt-prop[hidden]{display:none}
+.qt-prop h3{margin:0 0 .9rem;font:600 1.35rem/1.2 var(--font-display);color:var(--color-ink)}
+.qt-prop dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:0}
+.qt-prop dt,.qt-prop dd{margin:0;padding:.8rem 0;border-top:var(--rule-hair) solid var(--color-rule)}
+.qt-prop dt{padding-right:1.5rem;font:400 var(--text-sm)/1.4 var(--font-outlier);color:var(--color-muted)}
+.qt-prop dd{text-align:right;font:600 1.1rem/1.35 var(--font-display);color:var(--color-ink);font-variant-numeric:tabular-nums}
+.qt-prop .qt-wait{color:var(--color-muted);font-weight:400}
+.qt-prop p{margin:.9rem 0 0;font:400 var(--text-sm)/1.45 var(--font-outlier);color:var(--color-muted)}
+.qt-prop--inline{display:none;margin-top:var(--space-md)}
+@media (max-width:860px){.qt-prop--inline:not([hidden]){display:block} .qt-mapcol .qt-prop{display:none} .qt-hide .qt-mapcol{display:none}}
+.qt-badge{background:var(--color-paper);color:var(--color-ink);font:600 1.15rem/1 var(--font-display);padding:.6rem .9rem;border-radius:var(--radius-pill);box-shadow:0 1px 4px rgb(0 0 0/.3)}
+@media (max-width:860px){.qt-grid{display:flex;flex-direction:column} .qt-mapcol{position:relative;top:auto;order:-1;width:100%} .qt-map{height:380px}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
+</head>
+<body>
+<div class="demo">Preview made for Gardenia Property Services by SiteRefresh (working name). Not live, and not affiliated with Gardenia Property Services.</div>
+<header class="top"><div class="wrap">
+ <a class="brand" href="#"><svg viewBox="0 0 64 56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 25 32 5l27 20"/><path d="M14 30v20h36V22"/><path d="M14 22v3"/><path d="M23 47c-6-7-5-15 3-18 4 7 2 14-3 18z"/><path d="M29 46c0-9 5-14 14-15 0 9-5 14-14 15z"/><path d="M50 35h-5M50 41h-5"/></svg><span><b>Gardenia</b><small>Property Services</small></span></a>
+ <nav class="links" aria-label="Main"><a href="#reviews">Reviews</a><a href="#services">Services</a><a href="#price">Instant price</a><a href="#contact">Contact</a></nav>
+ <a class="btn btn--primary" href="tel:+642108405856">Call Nico 021 0840 5856</a>
+</div></header>
+<main>
+<section class="hero" aria-labelledby="h1"><div class="wrap">
+ <div>
+  <h1 id="h1">Gardens and properties looked after like our own.</h1>
+  <p class="sub">Lawns, hedges, pruning, section clearing and property maintenance from Nico and his team, based in Papamoa and working across the Bay of Plenty.</p>
+  <div class="actions">
+   <a class="btn btn--primary" href="tel:+642108405856">Call Nico 021 0840 5856</a>
+   <a class="btn" href="sms:+642108405856">Text Nico</a>
+   <a href="#price">or get an instant price</a>
+  </div>
+  <p class="rating"><span class="st" aria-hidden="true">★★★★★</span>5.0 on Google <span>from 86 reviews</span></p>
+ </div>
+ <figure class="photo"><img src="img/ig_02.jpg" alt="Nico and his young son walking a job in matching Gardenia shirts" width="800" height="800" fetchpriority="high"><figcaption>Nico and his son on a job. A family business, from our Instagram.</figcaption></figure>
+</div></section>
+<div class="figs" role="list" aria-label="At a glance"><div class="wrap"><div class="fig"><span class="fig-n">5.0</span><span class="fig-l">Google rating</span></div><div class="fig"><span class="fig-n">86</span><span class="fig-l">Google reviews, every one 5 stars</span></div><div class="fig"><span class="fig-n">7</span><span class="fig-l">Services, one team</span></div></div></div>
+<section class="reviews" id="reviews" aria-labelledby="rv"><div class="wrap">
+ <div class="rv-top"><div class="rv-h"><h2 id="rv">What Bay of Plenty customers say</h2><p>Every one of our 86 Google reviews is five stars. A few, word for word:</p></div>
+ <figure class="lead-rev"><blockquote>&ldquo;Nico and his team did an amazing job with our garden. From start to end Nico has been professional, prompt and communicative and just an all round great person! Would 100% recommend!&rdquo;</blockquote><figcaption>Michelle Foster <span>· Google review, 2 months ago</span></figcaption></figure></div>
+ <div class="revs"><figure class="rev"><blockquote>Excellent service, 10/10. Great communication, fair quote, fantastic work to remove our ivy and vines. Looks amazing.</blockquote><figcaption>Milly Hemsley <span>· Google review, 2 months ago</span></figcaption></figure><figure class="rev"><blockquote>We have been away for 6 weeks and Nico looked after our whole property by doing lawns, hedges, weeding, did a paving job for us, stacked a firewood order, cleaned gutters, watered plants inside and out.</blockquote><figcaption>Clare Dennis <span>· Google review, a year ago</span></figcaption></figure><figure class="rev"><blockquote>He transformed my overgrown bush trees into beautiful, healthy-looking trees, and I was amazed to already see more fruit appearing!</blockquote><figcaption>Aprile Kellick <span>· Google review, a month ago</span></figcaption></figure><figure class="rev"><blockquote>Nicolas showed excellent gardening expertise as we discussed the work, specifically knowing how to prune and shape our overgrown trees.</blockquote><figcaption>Rachel Southon <span>· Google review, 6 months ago</span></figcaption></figure></div>
+</div></section>
+<section class="services" id="services" aria-labelledby="sv"><div class="wrap">
+ <div class="sec-h"><h2 id="sv">What we do</h2><p>One team for the whole property, from a single hedge to looking after the place while you&#x27;re away.</p></div>
+ <div class="grid"><ul class="svc"><li><span class="svc-t">Lawn mowing and edge trim</span><span class="svc-n">Regular or one-off, edges finished properly.</span></li><li><span class="svc-t">Hedge trimming</span><span class="svc-n">Shaped, tidied and cleared away.</span></li><li><span class="svc-t">Tree pruning</span><span class="svc-n">Overgrown trees shaped back to healthy.</span></li><li><span class="svc-t">Section clearing</span><span class="svc-n">Ivy, vines and overgrowth removed.</span></li><li><span class="svc-t">Irrigation installation</span><span class="svc-n">Watering systems put in.</span></li><li><span class="svc-t">Gutter cleaning</span><span class="svc-n">Cleared before the rain finds them.</span></li><li><span class="svc-t">Power washing</span><span class="svc-n">Paths, decks and driveways.</span></li></ul><div class="work"><figure class="photo"><img src="img/google_00.jpg" alt="Pruned feijoa and citrus trees along a block wall" loading="lazy" width="800" height="800"><figcaption>Tree pruning, Bay of Plenty.</figcaption></figure><figure class="photo"><img src="img/ig_03.jpg" alt="A finished tropical garden bed with fresh mulch beside a deck" loading="lazy" width="800" height="800"><figcaption>A garden made market-ready for sale.</figcaption></figure></div></div>
+</div></section>
+<script>window.SR=window.SR||{
+ inArea:(lat,lng,A)=>!A||A.some(r=>{let c=false;for(let i=0,j=r.length-1;i<r.length;j=i++){const yi=r[i][0],xi=r[i][1],yj=r[j][0],xj=r[j][1];if(((yi>lat)!==(yj>lat))&&(lng<(xj-xi)*(lat-yi)/(yj-yi)+xi))c=!c;}return c;}),
+ drive:(a,b)=>fetch('https://valhalla1.openstreetmap.de/route?json='+encodeURIComponent(JSON.stringify({locations:[{lat:a.lat,lon:a.lng},{lat:b.lat,lon:b.lng}],costing:'auto',units:'kilometers',directions_type:'none'}))).then(x=>x.json()).then(d=>({km:d.trip.summary.length,mins:d.trip.summary.time/60,shape:d.trip.legs[0].shape})),
+ dec6:s=>{let i=0,la=0,ln=0;const o=[];while(i<s.length){for(let k=0;k<2;k++){let r=0,sh=0,b;do{b=s.charCodeAt(i++)-63;r|=(b&31)<<sh;sh+=5;}while(b>=32);const d=(r&1)?~(r>>1):(r>>1);if(k)ln+=d;else la+=d;}o.push([la/1e6,ln/1e6]);}return o;}
+};</script>
+<section class="qt" id="price" aria-labelledby="qtt"><div class="wrap">
+ <div class="qt-head"><h2 id="qtt">Get a price in a minute</h2>
+ <ol class="qt-flow" aria-label="How it works">
+  <li><b>1</b><span>Type your address</span></li>
+  <li><b>2</b><span>Pick the jobs you need</span></li>
+  <li><b>3</b><span>We measure your lawn, driveway and roof</span></li>
+  <li><b>4</b><span>See your price</span></li>
+  <li><b>5</b><span>Send it to Nico</span></li>
+ </ol></div>
+ <div class="qt-grid">
+  <div class="qt-panel">
+   <form id="qt-find"><label for="qt-q">1. Your address</label>
+    <div class="qt-qwrap"><div class="dist-row"><input id="qt-q" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="qt-sug" aria-expanded="false" aria-describedby="qt-area" placeholder="Start typing, e.g. 12 Grenada Street, Mount Maunganui" required><button class="btn btn--primary" type="submit">Find</button></div>
+    <ul class="qt-sug" id="qt-sug" role="listbox" aria-label="Matching addresses" hidden></ul></div>
+    <p class="qt-area" id="qt-area">Nico covers places up to 30 min drive from Papamoa.</p>
+    <p class="qt-msg" id="qt-findmsg" aria-live="polite"></p><button type="button" class="qt-link" id="qt-notmine" hidden>Not your part?</button></form>
+   <div class="qt-prop qt-prop--inline" id="qt-prop2" hidden></div>
+   <p class="qt-msg" id="qt-aimsg" aria-live="polite"></p>
+   <p class="qt-step">2. What do you need? <span>Pick as many as you like.</span></p>
+   <div class="qt-svc" id="qt-svcs" role="group" aria-label="Jobs"></div>
+   <div id="qt-fields"></div>
+   <div class="qt-out" id="qt-out" aria-live="polite"></div>
+   <a class="btn btn--primary" id="qt-send" hidden>Send this quote to Nico</a>
+  </div>
+  <div class="qt-mapcol"><div class="qt-prop" id="qt-prop" hidden></div><div id="qt-map" class="map qt-map" role="application" aria-label="Aerial photo. Tap around an area to measure it, or drag a corner to adjust it."></div><div class="qt-maptools" id="qt-tools"></div></div>
+ </div>
+</div></section>
+<script>
+window.addEventListener('DOMContentLoaded',()=>{
+ const Q={"base": {"lat": -37.697, "lng": 176.285, "label": "Papamoa"}, "owner": "Nico", "biz": "gardenia", "log": "https://siterefresh-api.siterefresh-nz.workers.dev/log", "tel": "+642108405856", "maxMin": 30, "area": [[[-37.6292, 176.179], [-37.6312, 176.1732], [-37.645, 176.1812], [-37.661, 176.1831], [-37.6653, 176.1773], [-37.6731, 176.177], [-37.673, 176.1729], [-37.663, 176.1766], [-37.6576, 176.1744], [-37.6574, 176.1674], [-37.6672, 176.163], [-37.6595, 176.1365], [-37.6613, 176.127], [-37.658, 176.128], [-37.6575, 176.125], [-37.6693, 176.1133], [-37.6747, 176.115], [-37.6709, 176.1311], [-37.6776, 176.1216], [-37.6873, 176.123], [-37.6783, 176.1157], [-37.6778, 176.111], [-37.6821, 176.1021], [-37.689, 176.1034], [-37.6934, 176.099], [-37.6953, 176.0927], [-37.6883, 176.0937], [-37.6873, 176.091], [-37.6975, 176.087], [-37.695, 176.0843], [-37.687, 176.0885], [-37.6885, 176.0845], [-37.6954, 176.0814], [-37.6955, 176.077], [-37.6816, 176.075], [-37.6896, 176.0716], [-37.689, 176.0674], [-37.6942, 176.071], [-37.6932, 176.063], [-37.6962, 176.053], [-37.693, 176.0467], [-37.6951, 176.047], [-37.6972, 176.049], [-37.7011, 176.0609], [-37.6984, 176.0624], [-37.699, 176.0684], [-37.7058, 176.063], [-37.7055, 176.0715], [-37.6998, 176.075], [-37.704, 176.079], [-37.7027, 176.0913], [-37.7094, 176.0914], [-37.709, 176.0818], [-37.715, 176.0886], [-37.7187, 176.0847], [-37.721, 176.0846], [-37.7209, 176.0851], [-37.7196, 176.0856], [-37.718, 176.089], [-37.719, 176.0922], [-37.7106, 176.0946], [-37.7, 176.105], [-37.7096, 176.1064], [-37.711, 176.1114], [-37.713, 176.1075], [-37.7183, 176.109], [-37.717, 176.103], [-37.7243, 176.0963], [-37.727, 176.1005], [-37.729, 176.0957], [-37.733, 176.0993], [-37.7372, 176.0972], [-37.7386, 176.0866], [-37.7492, 176.0892], [-37.7474, 176.085], [-37.7514, 176.083], [-37.7495, 176.077], [-37.752, 176.072], [-37.7593, 176.0713], [-37.7605, 176.0665], [-37.779, 176.0512], [-37.7796, 176.055], [-37.7756, 176.0596], [-37.7704, 176.0604], [-37.7727, 176.065], [-37.7625, 176.071], [-37.7605, 176.085], [-37.7661, 176.087], [-37.7637, 176.0877], [-37.7634, 176.097], [-37.7586, 176.101], [-37.7666, 176.107], [-37.771, 176.1149], [-37.7736, 176.1136], [-37.775, 176.1054], [-37.7786, 176.1154], [-37.8006, 176.123], [-37.793, 176.1237], [-37.783, 176.1183], [-37.757, 176.1187], [-37.7567, 176.1273], [-37.7715, 176.129], [-37.7587, 176.1307], [-37.7588, 176.139], [-37.7618, 176.1338], [-37.765, 176.1373], [-37.767, 176.1335], [-37.7699, 176.1341], [-37.769, 176.1373], [-37.775, 176.1355], [-37.783, 176.1395], [-37.785, 176.132], [-37.791, 176.1397], [-37.7926, 176.1346], [-37.8015, 176.139], [-37.793, 176.1436], [-37.787, 176.1404], [-37.7827, 176.1427], [-37.7845, 176.1495], [-37.7907, 176.149], [-37.781, 176.1558], [-37.7786, 176.155], [-37.7814, 176.1534], [-37.7816, 176.147], [-37.775, 176.1445], [-37.773, 176.147], [-37.771, 176.1407], [-37.766, 176.145], [-37.7688, 176.153], [-37.7658, 176.1578], [-37.7623, 176.1577], [-37.7635, 176.155], [-37.759, 176.1507], [-37.7561, 176.1559], [-37.753, 176.1488], [-37.7527, 176.155], [-37.7619, 176.1621], [-37.7668, 176.1732], [-37.771, 176.166], [-37.773, 176.1774], [-37.779, 176.1679], [-37.7824, 176.1736], [-37.7873, 176.175], [-37.781, 176.1762], [-37.7746, 176.185], [-37.781, 176.1818], [-37.7806, 176.1854], [-37.7876, 176.1904], [-37.789, 176.1955], [-37.7858, 176.1922], [-37.777, 176.1923], [-37.775, 176.1876], [-37.771, 176.1917], [-37.7714, 176.185], [-37.7658, 176.1842], [-37.7673, 176.181], [-37.7652, 176.1788], [-37.759, 176.1767], [-37.7582, 176.1802], [-37.7541, 176.1799], [-37.7537, 176.1737], [-37.7571, 176.1709], [-37.753, 176.1688], [-37.7475, 176.1725], [-37.7468, 176.1688], [-37.7448, 176.171], [-37.7485, 176.1735], [-37.7489, 176.1791], [-37.7524, 176.1796], [-37.7508, 176.1872], [-37.76, 176.188], [-37.7582, 176.1922], [-37.7607, 176.1973], [-37.767, 176.1979], [-37.771, 176.2021], [-37.7547, 176.2053], [-37.7553, 176.2007], [-37.7475, 176.199], [-37.7495, 176.197], [-37.743, 176.1926], [-37.7427, 176.197], [-37.7465, 176.1975], [-37.7498, 176.209], [-37.745, 176.2125], [-37.741, 176.2095], [-37.7384, 176.2124], [-37.7308, 176.2108], [-37.7289, 176.2171], [-37.7332, 176.2192], [-37.737, 176.2142], [-37.7399, 176.2199], [-37.7229, 176.227], [-37.733, 176.2272], [-37.7386, 176.2254], [-37.7409, 176.2311], [-37.745, 176.2312], [-37.7476, 176.2216], [-37.755, 176.2165], [-37.7489, 176.2331], [-37.7592, 176.2332], [-37.765, 176.2257], [-37.7687, 176.2353], [-37.773, 176.2323], [-37.781, 176.2357], [-37.777, 176.24], [-37.7646, 176.2386], [-37.7648, 176.2452], [-37.7684, 176.247], [-37.7647, 176.255], [-37.7666, 176.263], [-37.7721, 176.2679], [-37.7688, 176.273], [-37.7709, 176.2771], [-37.7764, 176.2736], [-37.7748, 176.279], [-37.777, 176.2792], [-37.78, 176.272], [-37.789, 176.2673], [-37.7964, 176.2716], [-37.8002, 176.285], [-37.7964, 176.2964], [-37.793, 176.2948], [-37.7925, 176.2985], [-37.7895, 176.2985], [-37.7869, 176.2949], [-37.789, 176.2992], [-37.8011, 176.2991], [-37.7995, 176.2915], [-37.8032, 176.2912], [-37.8048, 176.2848], [-37.8113, 176.2853], [-37.8132, 176.2808], [-37.8154, 176.2834], [-37.819, 176.2776], [-37.8199, 176.2879], [-37.8087, 176.2907], [-37.8066, 176.295], [-37.8212, 176.2912], [-37.823, 176.2854], [-37.827, 176.2894], [-37.833, 176.2836], [-37.8354, 176.2854], [-37.8377, 176.283], [-37.8363, 176.2803], [-37.8419, 176.279], [-37.843, 176.273], [-37.8455, 176.2765], [-37.838, 176.288], [-37.829, 176.2945], [-37.8268, 176.2928], [-37.8239, 176.2979], [-37.817, 176.2967], [-37.8141, 176.3021], [-37.8084, 176.3044], [-37.8009, 176.3029], [-37.801, 176.3133], [-37.8038, 176.3058], [-37.8102, 176.3058], [-37.8087, 176.3093], [-37.8112, 176.3092], [-37.8123, 176.3043], [-37.821, 176.3015], [-37.8277, 176.3037], [-37.8348, 176.2948], [-37.8376, 176.295], [-37.8337, 176.3037], [-37.8237, 176.307], [-37.822, 176.312], [-37.8048, 176.3168], [-37.7999, 176.327], [-37.8092, 176.3292], [-37.8085, 176.3185], [-37.814, 176.318], [-37.8173, 176.3233], [-37.8235, 176.317], [-37.822, 176.312], [-37.8275, 176.3155], [-37.8351, 176.3069], [-37.8317, 176.3157], [-37.8239, 176.3239], [-37.8068, 176.3328], [-37.8063, 176.3363], [-37.7946, 176.337], [-37.807, 176.3414], [-37.8102, 176.3362], [-37.8313, 176.327], [-37.8264, 176.3336], [-37.8302, 176.337], [-37.8262, 176.341], [-37.8274, 176.3474], [-37.823, 176.3444], [-37.819, 176.3465], [-37.8099, 176.3599], [-37.8028, 176.3588], [-37.7968, 176.365], [-37.799, 176.3692], [-37.8081, 176.3639], [-37.811, 176.3715], [-37.815, 176.3594], [-37.819, 176.361], [-37.822, 176.363], [-37.8166, 176.3666], [-37.817, 176.3734], [-37.8316, 176.367], [-37.8226, 176.3746], [-37.823, 176.3846], [-37.8215, 176.3805], [-37.815, 176.3777], [-37.8164, 176.3844], [-37.8128, 176.385], [-37.815, 176.3905], [-37.8245, 176.3935], [-37.8249, 176.4071], [-37.8254, 176.3954], [-37.8286, 176.3954], [-37.829, 176.4051], [-37.8372, 176.397], [-37.8352, 176.389], [-37.8395, 176.3755], [-37.8473, 176.3733], [-37.8477, 176.3697], [-37.863, 176.3561], [-37.8667, 176.359], [-37.8408, 176.3808], [-37.8409, 176.3951], [-37.8488, 176.3912], [-37.8551, 176.3951], [-37.8592, 176.391], [-37.8577, 176.3837], [-37.8621, 176.3839], [-37.863, 176.3872], [-37.8672, 176.3852], [-37.8712, 176.381], [-37.8707, 176.3767], [-37.877, 176.3773], [-37.881, 176.372], [-37.8873, 176.375], [-37.887, 176.3793], [-37.8912, 176.377], [-37.889, 176.3813], [-37.917, 176.3764], [-37.919, 176.3797], [-37.9259, 176.3799], [-37.936, 176.375], [-37.925, 176.3821], [-37.9094, 176.3794], [-37.8953, 176.3867], [-37.8927, 176.3827], [-37.889, 176.39], [-37.881, 176.3787], [-37.8668, 176.391], [-37.869, 176.4034], [-37.875, 176.3978], [-37.8823, 176.401], [-37.877, 176.4002], [-37.8759, 176.4039], [-37.867, 176.4086], [-37.863, 176.3908], [-37.8587, 176.3973], [-37.8599, 176.4059], [-37.855, 176.4027], [-37.85, 176.408], [-37.8512, 176.399], [-37.849, 176.3968], [-37.8389, 176.4009], [-37.8389, 176.4051], [-37.8461, 176.411], [-37.8348, 176.417], [-37.849, 176.4252], [-37.8495, 176.4195], [-37.855, 176.4156], [-37.861, 176.4253], [-37.869, 176.4202], [-37.8822, 176.419], [-37.8746, 176.4226], [-37.8739, 176.4259], [-37.8607, 176.4287], [-37.859, 176.4388], [-37.8528, 176.4308], [-37.8497, 176.4457], [-37.847, 176.4407], [-37.8427, 176.445], [-37.847, 176.4514], [-37.8654, 176.447], [-37.865, 176.4517], [-37.851, 176.4545], [-37.8497, 176.459], [-37.8387, 176.465], [-37.8388, 176.4712], [-37.8445, 176.4695], [-37.8387, 176.475], [-37.8404, 176.4796], [-37.8601, 176.483], [-37.8611, 176.4911], [-37.857, 176.4843], [-37.8466, 176.487], [-37.8546, 176.507], [-37.8504, 176.5076], [-37.8474, 176.4966], [-37.8378, 176.4962], [-37.831, 176.4902], [-37.827, 176.4944], [-37.825, 176.4868], [-37.8228, 176.493], [-37.8247, 176.501], [-37.8208, 176.5008], [-37.8208, 176.5052], [-37.8453, 176.5107], [-37.8403, 176.5137], [-37.837, 176.5104], [-37.825, 176.5107], [-37.823, 176.5155], [-37.819, 176.5087], [-37.8167, 176.515], [-37.8389, 176.533], [-37.833, 176.534], [-37.827, 176.5285], [-37.821, 176.5298], [-37.8214, 176.525], [-37.8184, 176.523], [-37.8186, 176.533], [-37.8222, 176.537], [-37.8206, 176.541], [-37.8262, 176.549], [-37.8225, 176.551], [-37.825, 176.559], [-37.8224, 176.563], [-37.8306, 176.563], [-37.8223, 176.567], [-37.8219, 176.581], [-37.8278, 176.587], [-37.8248, 176.5872], [-37.8205, 176.5835], [-37.8197, 176.567], [-37.8161, 176.5679], [-37.8152, 176.563], [-37.8196, 176.563], [-37.819, 176.5533], [-37.8065, 176.553], [-37.8177, 176.5483], [-37.8173, 176.5407], [-37.8144, 176.5416], [-37.8154, 176.537], [-37.8126, 176.5346], [-37.8153, 176.521], [-37.8102, 176.5218], [-37.8132, 176.5128], [-37.801, 176.5247], [-37.793, 176.527], [-37.8035, 176.517], [-37.7985, 176.5065], [-37.805, 176.5116], [-37.8152, 176.5092], [-37.8117, 176.5057], [-37.8172, 176.503], [-37.8192, 176.4888], [-37.8141, 176.4881], [-37.813, 176.4947], [-37.803, 176.4945], [-37.803, 176.4915], [-37.8112, 176.4912], [-37.8075, 176.487], [-37.8092, 176.4848], [-37.797, 176.4826], [-37.795, 176.4873], [-37.7933, 176.4827], [-37.789, 176.4842], [-37.7853, 176.4793], [-37.7954, 176.479], [-37.7952, 176.4748], [-37.7923, 176.4777], [-37.7915, 176.473], [-37.7952, 176.4688], [-37.7844, 176.4696], [-37.7877, 176.4637], [-37.7972, 176.4632], [-37.801, 176.4521], [-37.8028, 176.4572], [-37.8092, 176.455], [-37.8056, 176.4544], [-37.8071, 176.441], [-37.8033, 176.4407], [-37.8051, 176.435], [-37.8031, 176.429], [-37.7968, 176.433], [-37.796, 176.448], [-37.7935, 176.447], [-37.7932, 176.437], [-37.791, 176.4368], [-37.7883, 176.4483], [-37.783, 176.4487], [-37.7748, 176.457], [-37.785, 176.4578], [-37.7874, 176.459], [-37.7859, 176.4619], [-37.7734, 176.4646], [-37.7752, 176.4608], [-37.7707, 176.4607], [-37.759, 176.4768], [-37.7598, 176.467], [-37.7539, 176.465], [-37.7574, 176.4606], [-37.751, 176.4641], [-37.7577, 176.4477], [-37.7692, 176.439], [-37.7636, 176.4344], [-37.7612, 176.4148], [-37.7467, 176.417], [-37.755, 176.4081], [-37.7613, 176.411], [-37.7574, 176.369], [-37.7493, 176.3587], [-37.7461, 176.359], [-37.7428, 176.371], [-37.7484, 176.383], [-37.745, 176.3845], [-37.7392, 176.3728], [-37.7331, 176.369], [-37.7365, 176.3585], [-37.739, 176.3615], [-37.7431, 176.3549], [-37.735, 176.3509], [-37.7348, 176.3548], [-37.7312, 176.3548], [-37.7269, 176.3509], [-37.7289, 176.353], [-37.7269, 176.3571], [-37.7326, 176.365], [-37.731, 176.3697], [-37.7172, 176.3528], [-37.6991, 176.293], [-37.6911, 176.2829], [-37.6931, 176.279], [-37.6852, 176.2688], [-37.6831, 176.257], [-37.6792, 176.2548], [-37.6791, 176.2469], [-37.6732, 176.2428], [-37.6611, 176.2189], [-37.6572, 176.2188], [-37.6571, 176.2129], [-37.6472, 176.2048], [-37.6411, 176.1929], [-37.6313, 176.1867], [-37.6292, 176.179]]], "services": [{"id": "lawn", "label": "Lawn mowing", "unit_note": "per mow", "base": 35, "min": 40, "fields": [{"id": "area", "type": "map_area", "layer": "lawn", "label": "Lawn", "color": "#3fae4a", "per": 0.07, "max": 5000}, {"id": "berm", "type": "map_area", "layer": "berm", "label": "Roadside berm", "color": "#c5e86c", "per": 0.07, "max": 1500}], "how": "Tap around each lawn on the photo. Front and back? Finish one, tap New area, then do the next. Want the grass verge by the road done too? Choose Marking: Roadside berm and mark it. Drag any corner to adjust.", "how_ai": "Tap around each lawn on the photo, or use Draw it for me. Front and back? Finish one, tap New area, then do the next. Want the grass verge by the road done too? Choose Marking: Roadside berm and mark it. Drag any corner to adjust."}, {"id": "hedge", "label": "Hedge trimming", "unit_note": "one-off", "base": 30, "min": 80, "fields": [{"id": "len", "type": "number", "label": "Total hedge length", "unit": "m", "per": 4.5, "default": 10, "hint": "One big step is about a metre.", "max": 300}, {"id": "h", "type": "select", "label": "Height", "options": [{"label": "Up to waist height", "x": 0.8}, {"label": "About head height", "x": 1}, {"label": "Taller, needs a ladder", "x": 1.6}], "default": 1}]}, {"id": "trees", "label": "Tree pruning", "unit_note": "one-off", "base": 20, "min": 80, "fields": [{"id": "n", "type": "number", "label": "How many trees", "unit": "trees", "per": 60, "default": 1, "max": 30}, {"id": "size", "type": "select", "label": "Size", "options": [{"label": "Small, e.g. a fruit tree", "x": 1}, {"label": "Medium, up to two storeys", "x": 1.8}, {"label": "Large, needs a ladder or climbing", "x": 3}], "default": 0}]}, {"id": "clear", "label": "Section clearing", "unit_note": "one-off, green waste taken away", "base": 0, "min": 150, "fields": [{"id": "size", "type": "select", "label": "How much", "options": [{"label": "A garden bed or corner", "add": 150}, {"label": "Part of the section", "add": 400}, {"label": "A whole overgrown section", "add": 900}], "default": 0}, {"id": "growth", "type": "select", "label": "How bad is it", "options": [{"label": "Light weeds", "x": 0.8}, {"label": "Properly overgrown", "x": 1}, {"label": "Ivy, vines or blackberry", "x": 1.5}], "default": 1}]}, {"id": "irrigation", "label": "Irrigation installation", "unit_note": "supplied and installed", "base": 400, "min": 900, "fields": [{"id": "zones", "type": "number", "label": "Areas to water", "unit": "zones", "per": 550, "default": 2, "hint": "A zone is one area watered at a time, e.g. front lawn, back lawn, vege garden.", "max": 12}]}, {"id": "gutters", "label": "Gutter cleaning", "unit_note": "one-off", "base": 40, "min": 120, "fields": [{"id": "roof", "type": "roof_edge", "per": 3.5}, {"id": "shape", "type": "select", "label": "Roof shape", "default": 0, "options": [{"label": "Hipped, gutters all round", "x": 1}, {"label": "Gabled, gutters on 2 sides", "x": 0.55}, {"label": "Not sure", "x": 0.8}]}, {"id": "storeys", "type": "select", "label": "Storeys", "default": 0, "options": [{"label": "Single storey", "x": 1}, {"label": "Two storeys", "x": 1.5}]}]}, {"id": "wash", "label": "Power washing", "unit_note": "one-off", "base": 40, "min": 120, "fields": [{"id": "drive", "type": "map_area", "layer": "driveway", "label": "Driveway", "color": "#4da3ff", "per": 2.0, "max": 2000}, {"id": "deck", "type": "map_area", "layer": "deck", "label": "Deck", "color": "#d98b45", "per": 4.0, "max": 500}, {"id": "paths", "type": "map_area", "layer": "paths", "label": "Paths", "color": "#e9c46a", "per": 2.5, "max": 500}], "how": "Mark your driveway, deck and paths on the photo: pick which one with Marking on the map, then tap around it. Drag any corner to adjust."}], "travel": {"free_km": 20, "per_km": 1.0}, "adj": 0.3, "ai": null, "parcel": null, "storeysApi": null, "remote": "../tunnel.json", "linz": "https://services.arcgis.com/xdsHIIxuCWByZiCB/ArcGIS/rest/services/LINZ_NZ_Building_Outlines/FeatureServer/0/query"};
+ const $=id=>document.getElementById(id), mk=(t,c,txt)=>{const e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e;};
+ const ink=getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim()||'#2f7a2f';
+ const map=L.map('qt-map',{scrollWheelZoom:false,doubleClickZoom:false,maxZoom:21}).setView([Q.base.lat,Q.base.lng],15);
+ new ResizeObserver(()=>map.invalidateSize()).observe($('qt-map'));
+ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+  {maxZoom:21,maxNativeZoom:20,attribution:'Imagery &copy; Esri, Maxar, Earthstar Geographics; buildings &copy; LINZ CC BY 4.0'}).addTo(map);
+ const ctl=(pos,el)=>{L.DomEvent.disableClickPropagation(el);L.DomEvent.disableScrollPropagation(el);new (L.Control.extend({onAdd:()=>el}))({position:pos}).addTo(map);return el;};
+ const badge=ctl('topright',mk('div','qt-badge'));badge.hidden=true;
+ const R=6371000, rad=x=>x*Math.PI/180, r5=x=>Math.round(x/5)*5;
+ const xy=(p,la)=>[R*rad(p.lng)*Math.cos(la),R*rad(p.lat)];
+ const area=p=>{if(p.length<3)return 0;const la=rad(p[0].lat),v=p.map(q=>xy(q,la));let s=0;
+  for(let i=0;i<v.length;i++){const a=v[i],b=v[(i+1)%v.length];s+=a[0]*b[1]-b[0]*a[1];}return Math.abs(s)/2;};
+ const perim=p=>{const la=rad(p[0].lat),v=p.map(q=>xy(q,la));let s=0;for(let i=0;i<v.length;i++){const a=v[i],b=v[(i+1)%v.length];s+=Math.hypot(a[0]-b[0],a[1]-b[1]);}return s;};
+ const dist=(a,b)=>{const dl=rad(b.lat-a.lat),dn=rad(b.lng-a.lng);const h=Math.sin(dl/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h));};
+ const inside=(pt,p)=>{let c=false;for(let i=0,j=p.length-1;i<p.length;j=i++){const a=p[i],b=p[j];
+  if((a.lat>pt.lat)!==(b.lat>pt.lat)&&pt.lng<(b.lng-a.lng)*(pt.lat-a.lat)/(b.lat-a.lat)+a.lng)c=!c;}return c;};
+ const centre=p=>L.latLng(p.reduce((t,q)=>t+q.lat,0)/p.length,p.reduce((t,q)=>t+q.lng,0)/p.length);
+
+ const sel={}, val={};
+ // Customer view: when the automatic measuring is on, the customer sees only their property facts and the price;
+ // the photo with the measured shapes goes to the owner (the "What was measured" link in the text).
+ // The map only shows for hand-drawing, when automatic measuring isn't available.
+ let hideMap=false;const prop={land:null,house:null,cl:undefined,pts:null};
+ // aiDone: the current shapes came from the automatic measuring. adjMode: the customer opened the map to adjust them
+ // (owner's limit Q.adj, e.g. 0.3 = the price uses at most 30% more or less than what we measured). photo: date etc.
+ let aiDone=false,adjMode=false,photo=null;const aiArea={};
+ function setView(hide){hideMap=hide;document.querySelector('.qt-grid').classList.toggle('qt-hide',hide);
+  if(!hide)setTimeout(()=>map.invalidateSize(),0);drawProp();if(typeof cards_==='function')cards_();drawShapes&&targets.length&&drawShapes();}
+ function drawProp(){const els=[$('qt-prop'),$('qt-prop2')];
+  const wait='<span class="qt-wait">Looking it up…</span>',fmt=n=>Math.round(n).toLocaleString('en-NZ')+' m²';
+  let h;
+  if(!homePt)h='<h3>Your property</h3><p>Type your address and we’ll look up your section size, house size and title type.</p>';
+  else h='<h3>Your property</h3><dl><dt>Address</dt><dd>'+place.replace(/[&<>]/g,'')+'</dd>'+
+   '<dt>Land</dt><dd>'+(prop.land?fmt(prop.land):wait)+'</dd>'+
+   '<dt>House</dt><dd>'+(prop.house?'about '+fmt(prop.house):prop.house===0?'none on the map yet':wait)+'</dd>'+
+   '<dt>Cross-lease</dt><dd>'+(prop.cl===undefined?wait:prop.cl?'Yes, '+prop.cl+' homes share the section':'No')+'</dd>'+
+   (photo&&photo.date?'<dt>Aerial photo</dt><dd>'+new Date(photo.date).toLocaleDateString('en-NZ',{month:'short',year:'numeric'})+'</dd>':'')+'</dl>'+
+   (photo&&photo.new_house_m2?'<p><b>The aerial photo was taken before your house was built,</b> so '+Q.owner+' will confirm your lawn size.</p>':'')+
+   '<p>'+Q.owner+' checks the measurements and confirms your price before any work starts.</p>'+
+   (aiDone&&Q.adj>0?'<p><button type="button" class="qt-link qt-adj">'+(adjMode?'Hide the map':'See or adjust the measured lawn')+'</button></p>':'');
+  els.forEach((e,i)=>{if(!e)return;e.innerHTML=h;e.hidden=(!hideMap&&!adjMode)||(i===1&&!homePt);});}
+ document.addEventListener('click',e=>{if(!e.target.closest||!e.target.closest('.qt-adj'))return;
+  adjMode=!adjMode;setView(!adjMode);setLock(!adjMode);
+  const m=$('qt-aimsg');if(m&&adjMode)m.textContent='Drag a corner to fit your lawn. Your price updates as you go; '+Q.owner+' sees what we measured and what you changed.';
+  else if(m)m.textContent='';update();});
+ // the home is the building under the address pin, else the biggest one whose middle is on this section
+ function pickHouse(){if(!roofs.length)return;
+  let h=roofs.find(r=>inside(homePt,r.pts));
+  if(!h&&prop.pts)h=roofs.filter(r=>area(r.pts)>=40&&inside(centre(r.pts),prop.pts)).sort((a,b)=>area(b.pts)-area(a.pts))[0];
+  if(!h&&!prop.pts)h=roofs.filter(r=>area(r.pts)>=60).sort((a,b)=>dist(homePt,centre(a.pts))-dist(homePt,centre(b.pts)))[0];
+  roofs.forEach(r=>r.on=r===h);prop.house=h?area(h.pts):(prop.pts?0:null);}
+ let home=null, homePt=null, place='', travelKm=null, parcelLayer=null, zoneLayer=null, clInfo=null, pick=null, touched=false, locked=false;
+ // map-traced things (lawn, driveway, deck, paths): one "target" per map_area field
+ const targets=[];
+ Q.services.forEach(s=>s.fields.forEach(f=>{if(f.type==='map_area')targets.push({key:f.layer,svc:s.id,f,shapes:[{pts:[],assumed:false}],cur:0});}));
+ const T=k=>targets.find(t=>t.key===k);
+ let active=targets[0].key;
+ const roofSvc=Q.services.find(s=>s.fields.some(f=>f.type==='roof_edge'));
+ let roofs=[], storeyNote='';   // [{pts, on}]
+ async function autoStoreys(){
+  storeyNote='';if(!Q.storeysApi||!roofSvc)return;
+  const on=roofs.filter(r=>r.on).sort((a,b)=>area(b.pts)-area(a.pts))[0];if(!on){drawRoofs();return;}
+  try{const r=await fetch(Q.storeysApi,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({points:on.pts.map(p=>[p.lat,p.lng])})});
+   if(!r.ok){drawRoofs();return;}const d=await r.json();
+   const f=roofSvc.fields.find(f=>f.id==='storeys'),el=$('qt-'+roofSvc.id+'-storeys');
+   if(f&&el){val[roofSvc.id].storeys=d.storeys===2?1:0;el.value=val[roofSvc.id].storeys;}
+   storeyNote=d.sure?' The LiDAR height survey puts the roof about '+d.height+' m high, so we’ve set it to '+(d.storeys===2?'two storeys':'single storey')+'. Change it if that’s wrong.':
+    ' The LiDAR height survey puts the roof about '+d.height+' m high, which could be either, so please check the storeys below.';
+  }catch(e){}
+  drawRoofs();update();
+ }
+ const shapeLayer=L.layerGroup().addTo(map), roofLayer=L.layerGroup().addTo(map);
+ const sum=t=>t.shapes.reduce((a,s)=>a+area(s.pts),0);
+ const roofLen=()=>roofs.filter(r=>r.on).reduce((a,r)=>a+perim(r.pts),0);
+
+ function drawShapes(){
+  shapeLayer.clearLayers();
+  targets.forEach(t=>{if(!sel[t.svc])return;const col=t.f.color;
+   t.shapes.forEach((s,si)=>{const p=s.pts;if(!p.length)return;
+    const isCur=t.key===active&&si===t.cur;
+    const poly=(p.length>2?L.polygon(p,{color:'#fff',weight:2,dashArray:s.assumed?'6 5':null,fillColor:col,fillOpacity:.4,interactive:false})
+     :L.polyline(p,{color:'#fff',weight:2,interactive:false})).addTo(shapeLayer);
+    if(t.key===active&&!locked)p.forEach((q,j)=>{const m=L.marker(q,{draggable:true,autoPan:false,icon:L.divIcon({className:isCur?'qt-v':'qt-v qt-sm',iconSize:[24,24],
+       html:'<i style="background:'+(isCur?'#ffd84d':col)+'"></i>'})}).addTo(shapeLayer);
+     m.on('drag',e=>{p[j]=e.target.getLatLng();poly.setLatLngs(p);});
+     m.on('dragend',()=>{touched=true;drawShapes();update();});
+     m.on('click',()=>{if(active==='__roof'||(t.key===active&&si===t.cur))return;const c=T0();c.shapes[c.cur].pts.push(L.latLng(q.lat,q.lng));drawShapes();update();});});
+    if(p.length>2)L.marker(centre(p),{interactive:false,icon:L.divIcon({className:'qt-tip',iconSize:null,
+      html:'<span>'+t.f.label+' '+Math.round(area(p))+' m²'+(s.assumed?' (assumed)':'')+'</span>'})}).addTo(shapeLayer);});});
+  targets.forEach(t=>{const el=$('qt-sum-'+t.key);if(!el)return;el.hidden=hideMap;const n=t.shapes.filter(s=>s.pts.length>2);
+   el.textContent=t.f.label+': '+(n.length?n.map(s=>Math.round(area(s.pts))+' m²').join(' + ')+(n.length>1?' = '+Math.round(sum(t))+' m²':''):'not marked yet');});
+ }
+ function drawRoofs(){
+  roofLayer.clearLayers();if(!roofSvc||!sel[roofSvc.id])return;
+  const picking=active==='__roof';
+  roofs.forEach(r=>{if(!r.on&&!picking)return;
+   const pg=L.polygon(r.pts,{interactive:picking,color:r.on?'#ff8a3d':'#ffffff',weight:r.on?4:1.5,dashArray:r.on?null:'4 4',fillOpacity:r.on?.12:0,fillColor:'#ff8a3d'}).addTo(roofLayer);
+   if(picking)pg.on('click',e=>{L.DomEvent.stopPropagation(e);r.on=!r.on;drawRoofs();update();autoStoreys();});});
+  const el=$('qt-roofsum');if(!el)return;
+  const on=roofs.filter(r=>r.on);
+  el.textContent=!homePt?'Find your address above and we’ll measure your roof from the official building outlines.':
+   !roofs.length?'We couldn’t load the building outline here. Call '+Q.owner+' for a gutter price.':
+   'Roof edge: '+Math.round(roofLen())+' m ('+on.length+(on.length===1?' building':' buildings')+', in orange). Wrong building, or want the garage too? Choose Marking: Roofs on the map, then tap roofs to add or remove them.'+storeyNote;
+ }
+ function fv(s,f){if(f.type==='map_area'){const v=sum(T(f.layer)),a=aiArea[f.layer];
+   return adjMode&&a>0?Math.min(a*(1+Q.adj),Math.max(a*(1-Q.adj),v)):v;}if(f.type==='roof_edge')return roofLen();return val[s.id][f.id];}
+ function priceOf(s){let work=0,x=1,big=false;
+  s.fields.forEach(f=>{const v=fv(s,f);
+   if(f.type==='select'){const o=f.options[v];work+=o.add||0;x*=o.x||1;}
+   else{work+=(+v||0)*f.per;if(f.max&&v>f.max)big=true;}});
+  if(big)return 'big'; if(work<=0)return null;
+  const p=Math.max(s.min,(s.base+work)*x);return (hideMap||aiDone)?[Math.max(s.min,r5(p*0.85)),r5(p*1.25)]:[Math.max(s.min,r5(p*0.9)),r5(p*1.15)];}
+ function summary(s,forOwner){return s.fields.map(f=>{const v=fv(s,f);
+  if(hideMap&&!forOwner&&(f.type==='map_area'||f.type==='roof_edge'))return '';
+  if(f.type==='select')return f.options[v].label.toLowerCase();
+  if(!(+v))return '';
+  if(f.type==='map_area')return f.label.toLowerCase()+' '+Math.round(v)+' m²';
+  if(f.type==='roof_edge')return Math.round(v)+' m roof edge';
+  return v+' '+f.unit;}).filter(Boolean).join(', ');}
+
+ // service picker + one card of questions per service
+ const pills=$('qt-svcs'), cards=$('qt-fields');
+ Q.services.forEach(s=>{
+  val[s.id]={};
+  const b=mk('button','btn',s.label);b.type='button';b.dataset.id=s.id;b.setAttribute('aria-pressed','false');
+  b.addEventListener('click',()=>toggle(s.id,!sel[s.id]));pills.appendChild(b);
+  const card=mk('fieldset','qt-card');card.id='qt-card-'+s.id;card.hidden=true;card.appendChild(mk('legend','',s.label));
+  if(s.how)card.appendChild(mk('p','qt-how',s.how));
+  s.fields.forEach(f=>{
+   if(f.type==='map_area'){const p=mk('p','qt-lawnsum');p.id='qt-sum-'+f.layer;card.appendChild(p);return;}
+   if(f.type==='roof_edge'){const p=mk('p','qt-lawnsum');p.id='qt-roofsum';card.appendChild(p);return;}
+   const row=mk('div','qt-field'),id='qt-'+s.id+'-'+f.id,lab=mk('label','',f.label);lab.htmlFor=id;row.appendChild(lab);
+   let inp;
+   if(f.type==='select'){inp=mk('select');f.options.forEach((o,i)=>{const op=mk('option','',o.label);op.value=i;inp.appendChild(op);});
+    inp.value=f.default||0;val[s.id][f.id]=+(f.default||0);
+    inp.addEventListener('change',()=>{val[s.id][f.id]=+inp.value;update();});row.appendChild(inp);}
+   else{const w=mk('span','qt-num');inp=mk('input');inp.type='number';inp.inputMode='decimal';inp.min=0;inp.max=f.max||9999;inp.step=f.step||1;
+    inp.value=f.default||0;val[s.id][f.id]=+(f.default||0);
+    inp.addEventListener('input',()=>{val[s.id][f.id]=Math.max(0,+inp.value||0);update();});w.append(inp,mk('span','',f.unit));row.appendChild(w);}
+   inp.id=id;if(f.hint)row.appendChild(mk('p','qt-hint',f.hint));card.appendChild(row);});
+  cards.appendChild(card);
+ });
+
+ // tracing tools on the map: what you're marking + Undo / New area / Clear
+ const tools=$('qt-tools');
+ const tsel=mk('select');tsel.setAttribute('aria-label','What you are marking');
+ tsel.addEventListener('change',()=>{active=tsel.value;row.hidden=active==='__roof';drawShapes();drawRoofs();});
+ const row=mk('div','qt-maprow');
+ const T0=()=>T(active), C0=()=>T0().shapes[T0().cur];
+ [['Undo',()=>{const t=T0();if(C0().pts.length)C0().pts.pop();else if(t.cur>0){t.shapes.pop();t.cur--;t.shapes[t.cur].pts.pop();}}],
+  ['New area',()=>{const t=T0();if(C0().pts.length>2){t.shapes.push({pts:[],assumed:false});t.cur=t.shapes.length-1;}}],
+  ['Clear',()=>{const t=T0();t.shapes=[{pts:[],assumed:false}];t.cur=0;}]].forEach(([l,fn])=>{
+   const bt=mk('button','btn',l);bt.type='button';bt.addEventListener('click',()=>{touched=true;fn();drawShapes();update();});row.appendChild(bt);});
+ tools.append(tsel,row);
+ function refreshTools(){
+  const live=targets.filter(t=>sel[t.svc]).map(t=>[t.key,t.f.label]);
+  if(roofSvc&&sel[roofSvc.id]&&roofs.length)live.push(['__roof','Roofs (gutters)']);
+  tools.hidden=!live.length||locked;
+  tsel.innerHTML='';live.forEach(([k,l])=>{const o=mk('option','','Marking: '+l);o.value=k;tsel.appendChild(o);});
+  if(live.length&&!live.some(([k])=>k===active))active=live[0][0];tsel.value=active;tsel.hidden=live.length<2;row.hidden=active==='__roof';}
+
+ function cards_(){Q.services.forEach(s=>{const c=$('qt-card-'+s.id);if(c)c.hidden=!sel[s.id]||(hideMap&&s.fields.every(f=>f.type==='map_area'||f.type==='roof_edge'));});}
+ function toggle(id,on){sel[id]=on;document.querySelector('#qt-svcs [data-id="'+id+'"]').setAttribute('aria-pressed',on);cards_();
+  refreshTools();drawShapes();drawRoofs();update();}
+ function update(){
+  const lines=[];let lo=0,hi=0,bigs=[];
+  Q.services.forEach(s=>{if(!sel[s.id])return;const p=priceOf(s);
+   if(p==='big'){bigs.push(s.label);return;} if(!p)return;
+   lo+=p[0];hi+=p[1];lines.push({t:s.label,d:summary(s),o:summary(s,true),u:s.unit_note,p:'$'+p[0]+'–$'+p[1]});});
+  let travel='';
+  if(lines.length&&travelKm!=null){const extra=r5(Math.max(0,travelKm-Q.travel.free_km)*Q.travel.per_km),km=Math.max(1,Math.round(travelKm));
+   if(extra>0){lo+=extra;hi+=extra;travel='Travel from '+Q.base.label+': +$'+extra+' ('+km+' km by road)';}
+   else travel='Travel: included ('+km+' km from '+Q.base.label+')';}
+  const out=$('qt-out');out.innerHTML='';
+  if(!lines.length&&hideMap&&homePt&&locked&&!bigs.length){const h=mk('p','qt-big qt-wip');h.append(mk('span','qt-spin'),document.createTextNode('Working out your price…'));
+   out.append(h,mk('p','qt-sub','It shows here as soon as your lawn is measured.'));$('qt-send').hidden=true;badge.hidden=true;return;}
+  if(!lines.length){
+   out.append(mk('p','qt-big',bigs.length?'That’s a big job':'Your price appears here'),
+    mk('p','qt-sub',bigs.length?Q.owner+' will price '+bigs.join(' and ').toLowerCase()+' after a quick look. Just call.':hideMap?(homePt&&locked?'Your price shows here as soon as your lawn is measured.':'Type your address and pick the jobs you need.'):'Pick a job above, then mark it on the photo or answer a question or two.'));
+   $('qt-send').hidden=true;badge.hidden=true;return;}
+  const ul=mk('ul','qt-lines');
+  lines.forEach(l=>{const li=mk('li');const a=mk('span');a.append(mk('b','',l.t),document.createTextNode((l.d?' '+l.d:'')+' ('+l.u+')'));li.append(a,mk('strong','',l.p));ul.appendChild(li);});
+  if(travel)ul.appendChild(mk('li','qt-travel',travel));
+  if(bigs.length)ul.appendChild(mk('li','qt-travel',bigs.join(', ')+': priced after a look'));
+  out.append(mk('p','qt-big','About $'+lo+'–$'+hi),ul,mk('p','qt-sub',hideMap?'An estimate. '+Q.owner+' checks the measurements and confirms the price before any work starts.':'An estimate from what you’ve told us. '+Q.owner+' confirms the price before any work starts.'));
+  badge.hidden=false;badge.textContent='About $'+lo+'–$'+hi;
+  lastQ={lines,travel,lo,hi};logSoon();
+  const link=checkLink(lines,travel,lo,hi);
+  const adjTxt=adjNote();
+  const body='Hi '+Q.owner+', I got an instant price on your website'+(place?' for '+place:'')+'. '+lines.map(l=>l.t+' ('+l.o+') '+l.p).join('; ')+(travel?'. '+travel:'')+'. Estimate $'+lo+'-$'+hi+'.'+(adjTxt?' '+adjTxt+'.':'')+(photo&&photo.new_house_m2?' Note: the aerial photo is older than the house.':'')+' Can you confirm?'+(link?' What was measured: '+link:'');
+  const a=$('qt-send');a.href='sms:'+Q.tel+'?&body='+encodeURIComponent(body);a.hidden=false;
+ }
+ function adjNote(){if(!adjMode)return '';
+  const ch=targets.filter(t=>sel[t.svc]&&aiArea[t.key]!=null&&Math.abs(sum(t)-aiArea[t.key])>=1).map(t=>t.f.label.toLowerCase()+' measured '+Math.round(aiArea[t.key])+' m², I adjusted it to '+Math.round(sum(t))+' m²');
+  return ch.length?'I adjusted the drawing: '+ch.join(', '):'';}
+ // Link to quote.html with the whole quote (address, prices, measured shapes) packed into the # part.
+ // No server: the owner opens it from the customer's text and sees the shapes on the aerial photo.
+ const enc5=pts=>{let o='',pl=0,pn=0;const e=v=>{v=v<0?~(v<<1):(v<<1);while(v>=32){o+=String.fromCharCode((32|(v&31))+63);v>>=5;}o+=String.fromCharCode(v+63);};
+  pts.forEach(q=>{const la=Math.round(q.lat*1e5),ln=Math.round(q.lng*1e5);e(la-pl);e(ln-pn);pl=la;pn=ln;});return o;};
+ // Analytics: each finished price and each Send click goes to the Cloudflare quote log (cloud/worker.js),
+ // which works without Mike's PC. Stats: QUOTE_LOG's /stats page.
+ const sid=Math.random().toString(36).slice(2,10);let lastQ=null,logT=null,lastLogged='';
+ function logQuote(ev){const u=Q.log;if(!u||!lastQ)return;const q=lastQ;
+  const rec={business:Q.biz,event:ev,session:sid,address:place,lat:homePt&&homePt.lat,lng:homePt&&homePt.lng,lines:q.lines.map(l=>[l.t,l.o,l.p]),
+   areas:targets.filter(t=>sel[t.svc]).map(t=>[t.f.label,Math.round(sum(t))]),price_lo:q.lo,price_hi:q.hi,travel:q.travel,test:/[?&]sr_test/.test(location.search)};
+  fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(rec),keepalive:true}).catch(()=>{});}
+ function logSoon(){clearTimeout(logT);logT=setTimeout(()=>{if(!lastQ)return;const k=JSON.stringify([place,lastQ.lines]);if(k===lastLogged)return;lastLogged=k;logQuote('quote');},5000);}
+ $('qt-send').addEventListener('click',()=>logQuote('sent'));
+ function checkLink(lines,travel,lo,hi){
+  try{const d={a:place,h:homePt?[+homePt.lat.toFixed(5),+homePt.lng.toFixed(5)]:null,l:lines.map(l=>[l.t,l.o,l.p]),t:travel,r:[lo,hi],
+    s:targets.filter(t=>sel[t.svc]).flatMap(t=>t.shapes.filter(x=>x.pts.length>2).map(x=>[t.f.label,t.f.color,Math.round(area(x.pts)),enc5(x.pts),x.assumed?1:0])),
+    p:photo?{d:photo.date,n:photo.name,nh:photo.new_house_m2||0,alt:photo.alt||null}:null,j:adjNote()||null};
+   const b=new TextEncoder().encode(JSON.stringify(d));let bin='';b.forEach(c=>bin+=String.fromCharCode(c));
+   return new URL('quote.html',location.href).href+'#'+btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}catch(e){return '';}}
+ map.on('click',e=>{if(locked||active==='__roof')return;touched=true;if(!targets.some(t=>sel[t.svc]))toggle(targets[0].svc,true);const t=T0();t.shapes[t.cur].pts.push(e.latlng);drawShapes();update();});
+
+ async function loadRoofs(){
+  roofs=[];
+  try{const u=Q.linz+'?'+new URLSearchParams({geometry:homePt.lng+','+homePt.lat,geometryType:'esriGeometryPoint',inSR:4326,distance:45,
+     units:'esriSRUnit_Meter',spatialRel:'esriSpatialRelIntersects',outFields:'building_id',returnGeometry:'true',outSR:4326,f:'geojson'});
+   const d=await fetch(u).then(x=>x.json());
+   roofs=(d.features||[]).filter(f=>f.geometry&&f.geometry.type==='Polygon').map(f=>({pts:f.geometry.coordinates[0].slice(0,-1).map(c=>L.latLng(c[1],c[0])),on:false}));
+   pickHouse();
+  }catch(e){roofs=[];}
+  drawProp();
+  refreshTools();drawRoofs();update();autoStoreys();
+ }
+ async function loadParcel(msg){
+  if(!Q.parcel){runAI();return;}if(parcelLayer){map.removeLayer(parcelLayer);parcelLayer=null;}if(zoneLayer){map.removeLayer(zoneLayer);zoneLayer=null;}
+  {const k=homePt;fetch(Q.parcel.replace('/api/parcel','/api/photo')+'?lat='+k.lat+'&lng='+k.lng).then(r=>r.ok?r.json():null).then(p=>{
+   if(p&&p.date&&homePt===k){photo=Object.assign({},p,photo||{});drawProp();}}).catch(()=>{});}
+  try{const r=await fetch(Q.parcel+'?lat='+homePt.lat+'&lng='+homePt.lng);if(!r.ok){runAI();return;}const d=await r.json();
+   parcelLayer=L.polygon(d.points,{interactive:false,color:'#ff4fd8',weight:3,dashArray:'8 6',fill:false}).addTo(map);
+   msg.textContent=hideMap?'Found '+place+'.':'Found '+place+'. Your section is '+Math.round(d.area).toLocaleString()+' m², outlined in pink.';
+   clInfo=d.crosslease||null;prop.land=d.area;prop.cl=clInfo?clInfo.flats:0;prop.pts=d.points.map(q=>L.latLng(q[0],q[1]));pickHouse();drawProp();pick=clInfo&&clInfo.homes?clInfo.mine:null;
+   if(clInfo){showPart();if($('qt-notmine'))$('qt-notmine').hidden=!clInfo.homes;}
+   else if($('qt-notmine'))$('qt-notmine').hidden=true;
+  }catch(e){}
+  runAI();
+ }
+ // Address: suggestions as you type (Photon, OpenStreetMap data, biased to the base), then the drive-time check
+ const qIn=$('qt-q'),sug=$('qt-sug'),msg0=$('qt-findmsg');let sugs=[],sugSel=-1,picked=null,sugT=null,sugN=0;
+ const near=pt=>Q.area?SR.inArea(pt.lat,pt.lng,Q.area):dist(Q.base,pt)/1000<=Q.maxMin*1.1;
+ const ROADW=new Set(['st','street','rd','road','ave','avenue','dr','drive','pl','place','cres','crescent','tce','terrace','lane','ln','way','cl','close','ct','court','hwy','highway','sq','square','pde','parade','nz','new','zealand']);
+ const fold=t=>(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/['’`]/g,'').replace(/\bsaint\b/g,'st').replace(/\bmount\b/g,'mt');
+ // every word typed (apart from the number and road types) must start a word of the address; the number must match too
+ function sameAddr(q,txt,hn){const ws=fold(q).replace(/,/g,' ').split(/\s+/).filter(w=>w&&!/^\d/.test(w)&&!ROADW.has(w)),tt=fold(txt).split(/[\s,\/-]+/);
+  if(!ws.length||!ws.every(w=>tt.some(t=>t.startsWith(w))))return false;
+  const m=fold(q).match(/^\s*(\d+)([a-z]?)\b/);if(!m||hn==null)return true;const h=fold(hn),n=m[1]+m[2];
+  return h===n||h.endsWith('/'+n)||(!m[2]&&h.startsWith(m[1])&&/^[a-z]$/.test(h.slice(m[1].length)));}
+ function drawSug(){sug.innerHTML='';
+  sugs.forEach((s,i)=>{const li=mk('li','qt-sugi');li.id='qt-sug-'+i;li.setAttribute('role','option');li.setAttribute('aria-selected',i===sugSel?'true':'false');
+   li.append(mk('span','',s.main),mk('small','',s.sub+(s.far?' · probably outside our area':'')));
+   li.addEventListener('mousedown',e=>{e.preventDefault();choose(i);});sug.append(li);});
+  sug.hidden=!sugs.length;qIn.setAttribute('aria-expanded',sugs.length?'true':'false');
+  if(sugSel>=0)qIn.setAttribute('aria-activedescendant','qt-sug-'+sugSel);else qIn.removeAttribute('aria-activedescendant');}
+ async function photon(q,box){const b=Q.base;
+  const d=await fetch('https://photon.komoot.io/api/?limit='+(box?10:25)+'&lang=en&layer=house&layer=street&lat='+b.lat+'&lon='+b.lng+(box?'&bbox='+[b.lng-0.6,b.lat-0.45,b.lng+0.6,b.lat+0.45].join(','):'')+'&q='+encodeURIComponent(q)).then(x=>x.json());
+  let f=d.features.filter(x=>{const p=x.properties;return p.countrycode==='NZ'&&(p.street||p.name)&&sameAddr(q,[p.street||p.name,p.district,p.locality,p.city].join(' '),p.housenumber==null?null:p.housenumber);});
+  const houses=f.filter(x=>x.properties.housenumber);if(/^\s*\d/.test(q)&&houses.length)f=houses;return f;}
+ async function suggest(q){const n=++sugN;
+  try{let f=await photon(q,1);if(n!==sugN)return;
+   if(!f.length){f=await photon(q,0);if(n!==sugN)return;}
+   const seen=new Set();sugs=[];
+   for(const x of f){const p=x.properties,area=p.district||p.locality||p.city||'',main=(p.housenumber?p.housenumber+' ':'')+(p.street||p.name);
+    const sub=area+(p.city&&p.city!==area?', '+p.city:''),k=main+'|'+sub;if(seen.has(k))continue;seen.add(k);
+    const lat=x.geometry.coordinates[1],lng=x.geometry.coordinates[0];sugs.push({main,sub,area,lat,lng,far:!near({lat,lng})});if(sugs.length>=5)break;}
+   sugs.sort((a,b)=>a.far-b.far);sugSel=-1;drawSug();
+   if(!sugs.length&&q.length>=6)msg0.textContent='We don’t know that address yet. Keep typing, add your suburb, or call '+Q.owner+'.';
+   else if(msg0.textContent.startsWith('We don’t know'))msg0.textContent='';
+  }catch(e){}
+ }
+ qIn.addEventListener('input',()=>{picked=null;clearTimeout(sugT);if(!homePt||!msg0.textContent.startsWith('Found'))msg0.textContent='';const q=qIn.value.trim();if(q.length<3){sugN++;sugs=[];drawSug();return;}sugT=setTimeout(()=>suggest(q),250);});
+ qIn.addEventListener('keydown',e=>{if(sug.hidden)return;
+  if(e.key==='ArrowDown'){e.preventDefault();sugSel=(sugSel+1)%sugs.length;drawSug();}
+  else if(e.key==='ArrowUp'){e.preventDefault();sugSel=(sugSel-1+sugs.length)%sugs.length;drawSug();}
+  else if(e.key==='Enter'&&sugSel>=0){e.preventDefault();choose(sugSel);}
+  else if(e.key==='Escape'){sugs=[];drawSug();}});
+ qIn.addEventListener('blur',()=>setTimeout(()=>{sugs=[];drawSug();},150));
+ function choose(i){const s=sugs[i];picked=s;qIn.value=s.main+(s.sub?', '+s.sub:'');sugN++;sugs=[];drawSug();goTo(L.latLng(s.lat,s.lng),s.main+(s.area?', '+s.area:''));}
+ async function goTo(pt,where){const b=Q.base,msg=msg0;msg.textContent='Checking '+where+'…';
+  let km=dist(b,pt)/1000*1.3,mins=null;
+  try{const d=await SR.drive(pt,b);km=d.km;mins=d.mins;}catch(e){}
+  if(Q.area?!near(pt):(mins!=null?mins:km/50*60)>Q.maxMin){
+   if(home){map.removeLayer(home);home=null;}homePt=null;travelKm=null;if($('qt-ai'))$('qt-ai').hidden=true;
+   map.setView(pt,15);
+   msg.textContent=where+' is outside the area '+Q.owner+' covers (up to '+Q.maxMin+' min drive from '+b.label+(mins!=null?'; it’s about '+Math.round(mins)+' min':'')+'). Call '+Q.owner+' to check.';
+   update();return;}
+  homePt=pt;place=where;travelKm=km;prop.land=null;prop.house=null;prop.cl=undefined;prop.pts=null;photo=null;aiDone=false;adjMode=false;drawProp();
+  map.setView(homePt,20);if(home)map.removeLayer(home);
+  home=L.circleMarker(homePt,{radius:8,color:'#fff',weight:3,fillOpacity:0,interactive:false}).addTo(map);
+  msg.textContent='Found '+place+'.';
+  loadRoofs();loadParcel(msg);
+  update();
+ }
+ $('qt-find').addEventListener('submit',async ev=>{ev.preventDefault();const q=qIn.value.trim();if(!q)return;
+  if(picked)return goTo(L.latLng(picked.lat,picked.lng),picked.main+(picked.area?', '+picked.area:''));
+  if(sugs.length)return choose(Math.max(sugSel,0));
+  msg0.textContent='Finding your property…';
+  try{const b=Q.base,vb=[b.lng-0.6,b.lat+0.45,b.lng+0.6,b.lat-0.45].join(',');
+   const nm=bd=>fetch('https://nominatim.openstreetmap.org/search?format=json&countrycodes=nz&limit=10'+bd+'&viewbox='+vb+'&q='+encodeURIComponent(q)).then(x=>x.json()).then(r=>r.filter(x=>sameAddr(q,x.display_name,null)));
+   let r=await nm('&bounded=1');if(!r.length)r=await nm('');
+   if(!r.length){msg0.textContent='We don’t know that address. Check the spelling, add your suburb, or call '+Q.owner+'.';return;}
+   r.sort((x,y)=>dist(b,{lat:+x.lat,lng:+x.lon})-dist(b,{lat:+y.lat,lng:+y.lon}));
+   const pp=r[0].display_name.split(',').map(t=>t.trim());
+   goTo(L.latLng(+r[0].lat,+r[0].lon),(/^[0-9]/.test(pp[0])?pp[0]+' '+pp[1]+(pp[2]?', '+pp[2]:''):pp[0]+(pp[1]?', '+pp[1]:'')));
+  }catch(e){msg0.textContent='Address lookup is unavailable right now. Move the map to your place instead.';}
+ });
+
+ // Cross-lease: which home's part to measure (pick = index into clInfo.homes, or 'whole' for the whole section)
+ function showPart(part){
+  if(zoneLayer){map.removeLayer(zoneLayer);zoneLayer=null;}
+  const msg=$('qt-findmsg');
+  if(pick==='whole'){msg.textContent='Found '+place+'. Measuring the whole cross-lease section'+(hideMap?'':' (pink)')+', shared by '+clInfo.flats+' homes.';return;}
+  const pts=part||(clInfo.parts?clInfo.parts[pick]:null);
+  if(pts)zoneLayer=L.polygon(pts,{interactive:false,color:'#ffd23f',weight:3,dashArray:'2 6',fill:false}).addTo(map);
+  msg.textContent=hideMap?'Found '+place+'. It’s a cross-lease, so we’ll measure '+(pick===clInfo.mine?'the part around your home.':'the part around the other home.'):
+   'Found '+place+'. It’s a cross-lease: '+clInfo.flats+' homes share this section (pink). We’ll measure '+(pick===clInfo.mine?'the part around your home':'the part around the other home')+' (yellow dots).';
+ }
+ const nm=$('qt-notmine');
+ if(nm)nm.addEventListener('click',()=>{if(!clInfo||!clInfo.homes)return;const n=clInfo.homes.length;
+  pick=pick==='whole'?clInfo.mine:(pick+1)%n===clInfo.mine?'whole':(pick+1)%n;
+  nm.textContent=pick==='whole'?'Just my part':'Not your part?';showPart();runAI();});
+
+ // AI pre-draw: lawn, driveway, deck and paths, which the customer then adjusts. Two versions start as soon as the
+ // address is found: a quick draft (AI on low effort, ~30 s) and a careful one (~70 s, a closer match). The page shows
+ // whichever is ready, and swaps in the careful one when it lands unless the customer has already started editing.
+ let aiJobs=null,aiKey=null;
+ function aiBody(){if(!clInfo||pick===null||pick===clInfo.mine)return{lat:homePt.lat,lng:homePt.lng};
+  if(pick==='whole')return{lat:homePt.lat,lng:homePt.lng,whole:true};
+  return{lat:clInfo.homes[pick][0],lng:clInfo.homes[pick][1]};}
+ const post=b=>fetch(Q.ai,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)})
+  .then(r=>r.json().then(d=>({ok:r.ok&&!d.error,d}))).catch(()=>({ok:false,d:{}}));
+ function startAI(){if(!Q.ai||!homePt)return null;const b=aiBody(),k=JSON.stringify(b);
+  if(!aiJobs||aiKey!==k){aiKey=k;aiJobs={fast:post(Object.assign({quality:'fast'},b)),full:post(b)};}
+  return aiJobs;}
+ function applyAI(d){
+  let any=false;
+  targets.forEach(t=>{const got=(d[t.key]||[]).map(a=>({pts:a.points.map(p=>L.latLng(p[0],p[1])),assumed:a.assumed}));
+   if(got.length){t.shapes=got;t.cur=got.length-1;any=true;if(t.key===targets[0].key&&!sel[t.svc])toggle(t.svc,true);}});
+  if(d.crosslease&&d.crosslease.part&&clInfo&&pick!=='whole')showPart(d.crosslease.part);
+  if(any){aiDone=true;targets.forEach(t=>aiArea[t.key]=sum(t));}
+  photo=Object.assign({},photo||{},d.photo||{});
+  touched=false;drawShapes();update();drawProp();return any;}
+ function doneText(d){
+  const assumed=targets.some(t=>t.shapes.some(s=>s.assumed));
+  const split=d.crosslease?(d.crosslease.split==='fences'?' We’ve followed the fences between the homes for your part.':' We couldn’t see a clear fence between the homes, so your part is the half nearest your home.'):'';
+  return (split+(assumed&&!hideMap?' Dashed shapes run under trees or a roof, so we’ve estimated them.':'')).trim();}
+ // Card text: in AI mode the lawn is measured for the customer; otherwise they tap around it
+ function setHow(aiMode){Q.services.forEach(s=>{const fs=s.fields.filter(f=>f.type==='map_area');if(!fs.length)return;
+  const p=document.querySelector('#qt-card-'+s.id+' .qt-how');if(!p)return;
+  const ls=fs.map(f=>f.label.toLowerCase()),what=ls.length>1?ls.slice(0,-1).join(', ')+' and '+ls[ls.length-1]:ls[0];
+  p.hidden=aiMode;if(!aiMode)p.textContent=(s.how||'').replace(', or use Draw it for me','');});}
+ function setLock(v){locked=v;refreshTools();drawShapes();}
+ // "Working" box while the lawn is measured: spinner, a bar that fills over ~35 s, and what it is doing now
+ let busyT=null;
+ const STEPS=[[0,'Finding your section'],[4,'Measuring your lawn'],[14,'Measuring the roadside berm'],[22,'Checking the edges'],[30,'Working out your price']];
+ function startBusy(msg){stopBusy();const t0=Date.now();msg.className='qt-msg qt-busy';
+  msg.innerHTML='<span class="qt-bt"><span class="qt-spin" aria-hidden="true"></span><span class="qt-bl"></span></span><span class="qt-bar" aria-hidden="true"><i></i></span><span class="qt-bs"></span>';
+  const tick=()=>{const t=(Date.now()-t0)/1000,st=STEPS.filter(x=>t>=x[0]).pop()[1];
+   msg.querySelector('.qt-bl').textContent=st+'…';msg.querySelector('.qt-bar i').style.width=Math.min(95,t/35*100)+'%';
+   msg.querySelector('.qt-bs').textContent=t<35?'About '+Math.max(5,Math.round((35-t)/5)*5)+' seconds to go':'Nearly there…';};
+  tick();busyT=setInterval(tick,1000);}
+ function stopBusy(){if(busyT){clearInterval(busyT);busyT=null;}const m=$('qt-aimsg');if(m){m.className='qt-msg';m.textContent='';}}
+ // Pitch mode: ../tunnel.json names Mike's PC; if it answers, switch on the AI drawing and the LINZ section outline
+ if(Q.remote)fetch(Q.remote+'?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(async t=>{
+  if(!t||!t.api)return setView(false);
+  const up=await fetch(t.api+'/api/ping',{cache:'no-store'}).then(r=>r.ok).catch(()=>false);if(!up)return setView(false);
+  Q.ai=t.api+'/api/trace';Q.parcel=t.api+'/api/parcel';Q.storeysApi=t.api+'/api/storeys';
+  setHow(true);setView(true);
+  if(homePt)loadParcel($('qt-findmsg'));
+ }).catch(()=>setView(false));
+ // Automatic drawing: starts as soon as the address is found; the shapes are locked (the customer can't change them).
+ // Hand-drawing is only offered if the automatic drawing isn't available.
+ async function runAI(){if(!Q.ai||!homePt)return;
+  const msg=$('qt-aimsg'),jobs=startAI(),key=aiKey;if(!jobs||!msg)return;
+  aiDone=false;adjMode=false;setView(true);setHow(true);
+  targets.forEach(t=>{t.shapes=[{pts:[],assumed:false}];t.cur=0;});setLock(true);update();
+  startBusy(msg);
+  const fail=t=>{if(aiKey!==key)return;stopBusy();aiJobs=null;aiDone=false;setView(false);setLock(false);setHow(false);update();
+   msg.textContent=t||'We couldn’t measure it automatically right now. Tap around each lawn on the photo instead.';};
+  try{
+   const first=await Promise.race([jobs.full.then(x=>({x,full:true})),jobs.fast.then(x=>({x,full:false}))]);
+   if(aiKey!==key)return;
+   let res=first.x,full=first.full;
+   if(!res.ok){res=await (full?jobs.fast:jobs.full);full=!full;}
+   if(aiKey!==key)return;
+   if(!res.ok)return fail();
+   if(!res.d.property_found)return fail('We couldn’t work out which property is yours. Tap around each lawn on the photo instead.');
+   if(!applyAI(res.d))return fail('We couldn’t spot a lawn to measure. Tap around each lawn on the photo instead.');
+   stopBusy();
+   if(full){msg.textContent=doneText(res.d);return;}
+   msg.textContent=(hideMap?'First measurement done; a more careful one is on its way. ':'First measurement done. A more careful one will replace it in a few seconds. ')+doneText(res.d);
+   jobs.full.then(r=>{if(aiKey!==key||adjMode)return;
+    if(r.ok&&r.d.property_found&&applyAI(r.d))msg.textContent=doneText(r.d);else msg.textContent=doneText(res.d);});
+  }catch(e){fail();}
+ }
+ if(Q.ai)setHow(true);
+ setView(!!(Q.ai||Q.remote));   // remote: assume on until the check says otherwise (no map flash)
+ toggle(targets[0].svc,true);
+ window.__qt={map,targets};
+});
+</script>
+<section class="feature" aria-labelledby="ft"><div class="wrap">
+ <div><h2 id="ft">House inspection coming up, or getting ready to sell?</h2><p>A fresh, well-kept garden makes the difference when it&#x27;s time to sell or show a rental. We&#x27;ll get the outside ready.</p></div>
+ <a class="btn" href="tel:+642108405856">Talk to Nico about it</a>
+</div></section>
+<section class="about" id="about" aria-labelledby="ab"><div class="wrap">
+ <div><h2 id="ab">A family business, done the right way</h2><p>Gardenia Property Services is Nico and his team: a family-owned business based in Papamoa.</p><p>We&#x27;re building something our kids can be proud of, so we do things properly: clear communication, a fair quote, and the job done right.</p></div>
+ <figure class="pull"><blockquote>&ldquo;We&#x27;re proud to be a family-owned business, and that means doing things the right way, always.&rdquo;</blockquote><figcaption>Nico, on our Instagram</figcaption></figure>
+</div></section>
+<section class="dist" id="distance" aria-labelledby="ds"><div class="wrap">
+ <div class="sec-h"><h2 id="ds">How far are you from Nico?</h2><p>Nico covers everywhere within about 30 minutes' drive of Papamoa, shaded on the map. Type your street or suburb, or use your location, to check.</p></div>
+ <div class="dist-grid">
+  <div class="dist-panel">
+   <form id="dist-form" class="dist-form">
+    <label for="dist-q">Your street or suburb</label>
+    <div class="dist-row"><input id="dist-q" autocomplete="street-address" placeholder="e.g. Mount Maunganui" required><button class="btn btn--primary" type="submit">Check</button></div>
+   </form>
+   <button class="btn dist-geo" id="dist-geo" type="button">Use my location</button>
+   <div class="dist-out" id="dist-out" aria-live="polite"><p class="dist-big">&nbsp;</p><p class="dist-sub">Your location is only used in your browser to work this out.</p></div>
+   <a class="btn btn--primary dist-call" id="dist-call" href="tel:+642108405856" hidden>Call Nico to book</a>
+  </div>
+  <div id="map" class="map" role="img" aria-label="Map of the area around Papamoa"></div>
+ </div>
+</div></section>
+<script>window.SR=window.SR||{
+ inArea:(lat,lng,A)=>!A||A.some(r=>{let c=false;for(let i=0,j=r.length-1;i<r.length;j=i++){const yi=r[i][0],xi=r[i][1],yj=r[j][0],xj=r[j][1];if(((yi>lat)!==(yj>lat))&&(lng<(xj-xi)*(lat-yi)/(yj-yi)+xi))c=!c;}return c;}),
+ drive:(a,b)=>fetch('https://valhalla1.openstreetmap.de/route?json='+encodeURIComponent(JSON.stringify({locations:[{lat:a.lat,lon:a.lng},{lat:b.lat,lon:b.lng}],costing:'auto',units:'kilometers',directions_type:'none'}))).then(x=>x.json()).then(d=>({km:d.trip.summary.length,mins:d.trip.summary.time/60,shape:d.trip.legs[0].shape})),
+ dec6:s=>{let i=0,la=0,ln=0;const o=[];while(i<s.length){for(let k=0;k<2;k++){let r=0,sh=0,b;do{b=s.charCodeAt(i++)-63;r|=(b&31)<<sh;sh+=5;}while(b>=32);const d=(r&1)?~(r>>1):(r>>1);if(k)ln+=d;else la+=d;}o.push([la/1e6,ln/1e6]);}return o;}
+};</script>
+<script>
+window.addEventListener('DOMContentLoaded',()=>{
+ const C={"lat": -37.697, "lng": 176.285, "label": "Papamoa", "name": "Gardenia", "owner": "Nico", "maxMin": 30, "area": [[[-37.6292, 176.179], [-37.6312, 176.1732], [-37.645, 176.1812], [-37.661, 176.1831], [-37.6653, 176.1773], [-37.6731, 176.177], [-37.673, 176.1729], [-37.663, 176.1766], [-37.6576, 176.1744], [-37.6574, 176.1674], [-37.6672, 176.163], [-37.6595, 176.1365], [-37.6613, 176.127], [-37.658, 176.128], [-37.6575, 176.125], [-37.6693, 176.1133], [-37.6747, 176.115], [-37.6709, 176.1311], [-37.6776, 176.1216], [-37.6873, 176.123], [-37.6783, 176.1157], [-37.6778, 176.111], [-37.6821, 176.1021], [-37.689, 176.1034], [-37.6934, 176.099], [-37.6953, 176.0927], [-37.6883, 176.0937], [-37.6873, 176.091], [-37.6975, 176.087], [-37.695, 176.0843], [-37.687, 176.0885], [-37.6885, 176.0845], [-37.6954, 176.0814], [-37.6955, 176.077], [-37.6816, 176.075], [-37.6896, 176.0716], [-37.689, 176.0674], [-37.6942, 176.071], [-37.6932, 176.063], [-37.6962, 176.053], [-37.693, 176.0467], [-37.6951, 176.047], [-37.6972, 176.049], [-37.7011, 176.0609], [-37.6984, 176.0624], [-37.699, 176.0684], [-37.7058, 176.063], [-37.7055, 176.0715], [-37.6998, 176.075], [-37.704, 176.079], [-37.7027, 176.0913], [-37.7094, 176.0914], [-37.709, 176.0818], [-37.715, 176.0886], [-37.7187, 176.0847], [-37.721, 176.0846], [-37.7209, 176.0851], [-37.7196, 176.0856], [-37.718, 176.089], [-37.719, 176.0922], [-37.7106, 176.0946], [-37.7, 176.105], [-37.7096, 176.1064], [-37.711, 176.1114], [-37.713, 176.1075], [-37.7183, 176.109], [-37.717, 176.103], [-37.7243, 176.0963], [-37.727, 176.1005], [-37.729, 176.0957], [-37.733, 176.0993], [-37.7372, 176.0972], [-37.7386, 176.0866], [-37.7492, 176.0892], [-37.7474, 176.085], [-37.7514, 176.083], [-37.7495, 176.077], [-37.752, 176.072], [-37.7593, 176.0713], [-37.7605, 176.0665], [-37.779, 176.0512], [-37.7796, 176.055], [-37.7756, 176.0596], [-37.7704, 176.0604], [-37.7727, 176.065], [-37.7625, 176.071], [-37.7605, 176.085], [-37.7661, 176.087], [-37.7637, 176.0877], [-37.7634, 176.097], [-37.7586, 176.101], [-37.7666, 176.107], [-37.771, 176.1149], [-37.7736, 176.1136], [-37.775, 176.1054], [-37.7786, 176.1154], [-37.8006, 176.123], [-37.793, 176.1237], [-37.783, 176.1183], [-37.757, 176.1187], [-37.7567, 176.1273], [-37.7715, 176.129], [-37.7587, 176.1307], [-37.7588, 176.139], [-37.7618, 176.1338], [-37.765, 176.1373], [-37.767, 176.1335], [-37.7699, 176.1341], [-37.769, 176.1373], [-37.775, 176.1355], [-37.783, 176.1395], [-37.785, 176.132], [-37.791, 176.1397], [-37.7926, 176.1346], [-37.8015, 176.139], [-37.793, 176.1436], [-37.787, 176.1404], [-37.7827, 176.1427], [-37.7845, 176.1495], [-37.7907, 176.149], [-37.781, 176.1558], [-37.7786, 176.155], [-37.7814, 176.1534], [-37.7816, 176.147], [-37.775, 176.1445], [-37.773, 176.147], [-37.771, 176.1407], [-37.766, 176.145], [-37.7688, 176.153], [-37.7658, 176.1578], [-37.7623, 176.1577], [-37.7635, 176.155], [-37.759, 176.1507], [-37.7561, 176.1559], [-37.753, 176.1488], [-37.7527, 176.155], [-37.7619, 176.1621], [-37.7668, 176.1732], [-37.771, 176.166], [-37.773, 176.1774], [-37.779, 176.1679], [-37.7824, 176.1736], [-37.7873, 176.175], [-37.781, 176.1762], [-37.7746, 176.185], [-37.781, 176.1818], [-37.7806, 176.1854], [-37.7876, 176.1904], [-37.789, 176.1955], [-37.7858, 176.1922], [-37.777, 176.1923], [-37.775, 176.1876], [-37.771, 176.1917], [-37.7714, 176.185], [-37.7658, 176.1842], [-37.7673, 176.181], [-37.7652, 176.1788], [-37.759, 176.1767], [-37.7582, 176.1802], [-37.7541, 176.1799], [-37.7537, 176.1737], [-37.7571, 176.1709], [-37.753, 176.1688], [-37.7475, 176.1725], [-37.7468, 176.1688], [-37.7448, 176.171], [-37.7485, 176.1735], [-37.7489, 176.1791], [-37.7524, 176.1796], [-37.7508, 176.1872], [-37.76, 176.188], [-37.7582, 176.1922], [-37.7607, 176.1973], [-37.767, 176.1979], [-37.771, 176.2021], [-37.7547, 176.2053], [-37.7553, 176.2007], [-37.7475, 176.199], [-37.7495, 176.197], [-37.743, 176.1926], [-37.7427, 176.197], [-37.7465, 176.1975], [-37.7498, 176.209], [-37.745, 176.2125], [-37.741, 176.2095], [-37.7384, 176.2124], [-37.7308, 176.2108], [-37.7289, 176.2171], [-37.7332, 176.2192], [-37.737, 176.2142], [-37.7399, 176.2199], [-37.7229, 176.227], [-37.733, 176.2272], [-37.7386, 176.2254], [-37.7409, 176.2311], [-37.745, 176.2312], [-37.7476, 176.2216], [-37.755, 176.2165], [-37.7489, 176.2331], [-37.7592, 176.2332], [-37.765, 176.2257], [-37.7687, 176.2353], [-37.773, 176.2323], [-37.781, 176.2357], [-37.777, 176.24], [-37.7646, 176.2386], [-37.7648, 176.2452], [-37.7684, 176.247], [-37.7647, 176.255], [-37.7666, 176.263], [-37.7721, 176.2679], [-37.7688, 176.273], [-37.7709, 176.2771], [-37.7764, 176.2736], [-37.7748, 176.279], [-37.777, 176.2792], [-37.78, 176.272], [-37.789, 176.2673], [-37.7964, 176.2716], [-37.8002, 176.285], [-37.7964, 176.2964], [-37.793, 176.2948], [-37.7925, 176.2985], [-37.7895, 176.2985], [-37.7869, 176.2949], [-37.789, 176.2992], [-37.8011, 176.2991], [-37.7995, 176.2915], [-37.8032, 176.2912], [-37.8048, 176.2848], [-37.8113, 176.2853], [-37.8132, 176.2808], [-37.8154, 176.2834], [-37.819, 176.2776], [-37.8199, 176.2879], [-37.8087, 176.2907], [-37.8066, 176.295], [-37.8212, 176.2912], [-37.823, 176.2854], [-37.827, 176.2894], [-37.833, 176.2836], [-37.8354, 176.2854], [-37.8377, 176.283], [-37.8363, 176.2803], [-37.8419, 176.279], [-37.843, 176.273], [-37.8455, 176.2765], [-37.838, 176.288], [-37.829, 176.2945], [-37.8268, 176.2928], [-37.8239, 176.2979], [-37.817, 176.2967], [-37.8141, 176.3021], [-37.8084, 176.3044], [-37.8009, 176.3029], [-37.801, 176.3133], [-37.8038, 176.3058], [-37.8102, 176.3058], [-37.8087, 176.3093], [-37.8112, 176.3092], [-37.8123, 176.3043], [-37.821, 176.3015], [-37.8277, 176.3037], [-37.8348, 176.2948], [-37.8376, 176.295], [-37.8337, 176.3037], [-37.8237, 176.307], [-37.822, 176.312], [-37.8048, 176.3168], [-37.7999, 176.327], [-37.8092, 176.3292], [-37.8085, 176.3185], [-37.814, 176.318], [-37.8173, 176.3233], [-37.8235, 176.317], [-37.822, 176.312], [-37.8275, 176.3155], [-37.8351, 176.3069], [-37.8317, 176.3157], [-37.8239, 176.3239], [-37.8068, 176.3328], [-37.8063, 176.3363], [-37.7946, 176.337], [-37.807, 176.3414], [-37.8102, 176.3362], [-37.8313, 176.327], [-37.8264, 176.3336], [-37.8302, 176.337], [-37.8262, 176.341], [-37.8274, 176.3474], [-37.823, 176.3444], [-37.819, 176.3465], [-37.8099, 176.3599], [-37.8028, 176.3588], [-37.7968, 176.365], [-37.799, 176.3692], [-37.8081, 176.3639], [-37.811, 176.3715], [-37.815, 176.3594], [-37.819, 176.361], [-37.822, 176.363], [-37.8166, 176.3666], [-37.817, 176.3734], [-37.8316, 176.367], [-37.8226, 176.3746], [-37.823, 176.3846], [-37.8215, 176.3805], [-37.815, 176.3777], [-37.8164, 176.3844], [-37.8128, 176.385], [-37.815, 176.3905], [-37.8245, 176.3935], [-37.8249, 176.4071], [-37.8254, 176.3954], [-37.8286, 176.3954], [-37.829, 176.4051], [-37.8372, 176.397], [-37.8352, 176.389], [-37.8395, 176.3755], [-37.8473, 176.3733], [-37.8477, 176.3697], [-37.863, 176.3561], [-37.8667, 176.359], [-37.8408, 176.3808], [-37.8409, 176.3951], [-37.8488, 176.3912], [-37.8551, 176.3951], [-37.8592, 176.391], [-37.8577, 176.3837], [-37.8621, 176.3839], [-37.863, 176.3872], [-37.8672, 176.3852], [-37.8712, 176.381], [-37.8707, 176.3767], [-37.877, 176.3773], [-37.881, 176.372], [-37.8873, 176.375], [-37.887, 176.3793], [-37.8912, 176.377], [-37.889, 176.3813], [-37.917, 176.3764], [-37.919, 176.3797], [-37.9259, 176.3799], [-37.936, 176.375], [-37.925, 176.3821], [-37.9094, 176.3794], [-37.8953, 176.3867], [-37.8927, 176.3827], [-37.889, 176.39], [-37.881, 176.3787], [-37.8668, 176.391], [-37.869, 176.4034], [-37.875, 176.3978], [-37.8823, 176.401], [-37.877, 176.4002], [-37.8759, 176.4039], [-37.867, 176.4086], [-37.863, 176.3908], [-37.8587, 176.3973], [-37.8599, 176.4059], [-37.855, 176.4027], [-37.85, 176.408], [-37.8512, 176.399], [-37.849, 176.3968], [-37.8389, 176.4009], [-37.8389, 176.4051], [-37.8461, 176.411], [-37.8348, 176.417], [-37.849, 176.4252], [-37.8495, 176.4195], [-37.855, 176.4156], [-37.861, 176.4253], [-37.869, 176.4202], [-37.8822, 176.419], [-37.8746, 176.4226], [-37.8739, 176.4259], [-37.8607, 176.4287], [-37.859, 176.4388], [-37.8528, 176.4308], [-37.8497, 176.4457], [-37.847, 176.4407], [-37.8427, 176.445], [-37.847, 176.4514], [-37.8654, 176.447], [-37.865, 176.4517], [-37.851, 176.4545], [-37.8497, 176.459], [-37.8387, 176.465], [-37.8388, 176.4712], [-37.8445, 176.4695], [-37.8387, 176.475], [-37.8404, 176.4796], [-37.8601, 176.483], [-37.8611, 176.4911], [-37.857, 176.4843], [-37.8466, 176.487], [-37.8546, 176.507], [-37.8504, 176.5076], [-37.8474, 176.4966], [-37.8378, 176.4962], [-37.831, 176.4902], [-37.827, 176.4944], [-37.825, 176.4868], [-37.8228, 176.493], [-37.8247, 176.501], [-37.8208, 176.5008], [-37.8208, 176.5052], [-37.8453, 176.5107], [-37.8403, 176.5137], [-37.837, 176.5104], [-37.825, 176.5107], [-37.823, 176.5155], [-37.819, 176.5087], [-37.8167, 176.515], [-37.8389, 176.533], [-37.833, 176.534], [-37.827, 176.5285], [-37.821, 176.5298], [-37.8214, 176.525], [-37.8184, 176.523], [-37.8186, 176.533], [-37.8222, 176.537], [-37.8206, 176.541], [-37.8262, 176.549], [-37.8225, 176.551], [-37.825, 176.559], [-37.8224, 176.563], [-37.8306, 176.563], [-37.8223, 176.567], [-37.8219, 176.581], [-37.8278, 176.587], [-37.8248, 176.5872], [-37.8205, 176.5835], [-37.8197, 176.567], [-37.8161, 176.5679], [-37.8152, 176.563], [-37.8196, 176.563], [-37.819, 176.5533], [-37.8065, 176.553], [-37.8177, 176.5483], [-37.8173, 176.5407], [-37.8144, 176.5416], [-37.8154, 176.537], [-37.8126, 176.5346], [-37.8153, 176.521], [-37.8102, 176.5218], [-37.8132, 176.5128], [-37.801, 176.5247], [-37.793, 176.527], [-37.8035, 176.517], [-37.7985, 176.5065], [-37.805, 176.5116], [-37.8152, 176.5092], [-37.8117, 176.5057], [-37.8172, 176.503], [-37.8192, 176.4888], [-37.8141, 176.4881], [-37.813, 176.4947], [-37.803, 176.4945], [-37.803, 176.4915], [-37.8112, 176.4912], [-37.8075, 176.487], [-37.8092, 176.4848], [-37.797, 176.4826], [-37.795, 176.4873], [-37.7933, 176.4827], [-37.789, 176.4842], [-37.7853, 176.4793], [-37.7954, 176.479], [-37.7952, 176.4748], [-37.7923, 176.4777], [-37.7915, 176.473], [-37.7952, 176.4688], [-37.7844, 176.4696], [-37.7877, 176.4637], [-37.7972, 176.4632], [-37.801, 176.4521], [-37.8028, 176.4572], [-37.8092, 176.455], [-37.8056, 176.4544], [-37.8071, 176.441], [-37.8033, 176.4407], [-37.8051, 176.435], [-37.8031, 176.429], [-37.7968, 176.433], [-37.796, 176.448], [-37.7935, 176.447], [-37.7932, 176.437], [-37.791, 176.4368], [-37.7883, 176.4483], [-37.783, 176.4487], [-37.7748, 176.457], [-37.785, 176.4578], [-37.7874, 176.459], [-37.7859, 176.4619], [-37.7734, 176.4646], [-37.7752, 176.4608], [-37.7707, 176.4607], [-37.759, 176.4768], [-37.7598, 176.467], [-37.7539, 176.465], [-37.7574, 176.4606], [-37.751, 176.4641], [-37.7577, 176.4477], [-37.7692, 176.439], [-37.7636, 176.4344], [-37.7612, 176.4148], [-37.7467, 176.417], [-37.755, 176.4081], [-37.7613, 176.411], [-37.7574, 176.369], [-37.7493, 176.3587], [-37.7461, 176.359], [-37.7428, 176.371], [-37.7484, 176.383], [-37.745, 176.3845], [-37.7392, 176.3728], [-37.7331, 176.369], [-37.7365, 176.3585], [-37.739, 176.3615], [-37.7431, 176.3549], [-37.735, 176.3509], [-37.7348, 176.3548], [-37.7312, 176.3548], [-37.7269, 176.3509], [-37.7289, 176.353], [-37.7269, 176.3571], [-37.7326, 176.365], [-37.731, 176.3697], [-37.7172, 176.3528], [-37.6991, 176.293], [-37.6911, 176.2829], [-37.6931, 176.279], [-37.6852, 176.2688], [-37.6831, 176.257], [-37.6792, 176.2548], [-37.6791, 176.2469], [-37.6732, 176.2428], [-37.6611, 176.2189], [-37.6572, 176.2188], [-37.6571, 176.2129], [-37.6472, 176.2048], [-37.6411, 176.1929], [-37.6313, 176.1867], [-37.6292, 176.179]]]};
+ const ink=getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim()||'#2f7a2f';
+ const map=L.map('map',{scrollWheelZoom:false}).setView([C.lat,C.lng],11);
+ new ResizeObserver(()=>map.invalidateSize()).observe(document.getElementById('map'));
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+ if(C.area){const ar=L.polygon(C.area,{color:ink,weight:1.5,fillColor:ink,fillOpacity:.12}).addTo(map).bindTooltip('Our area: up to '+C.maxMin+' min drive from '+C.label);map.fitBounds(ar.getBounds(),{padding:[10,10]});}
+ L.circleMarker([C.lat,C.lng],{radius:6,color:ink,weight:2,fillColor:ink,fillOpacity:1}).addTo(map).bindTooltip(C.name+' base, '+C.label+' (approximate)');
+ let you=null,route=null;
+ const out=document.getElementById('dist-out'),call=document.getElementById('dist-call');
+ const km=(a,b)=>{const R=6371,t=x=>x*Math.PI/180,dl=t(b[0]-a[0]),dn=t(b[1]-a[1]);const h=Math.sin(dl/2)**2+Math.cos(t(a[0]))*Math.cos(t(b[0]))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h));};
+ const say=(big,sub)=>{out.innerHTML='<p class="dist-big"></p><p class="dist-sub"></p>';out.children[0].textContent=big;out.children[1].textContent=sub;};
+ async function show(lat,lng,where){
+  if(you)map.removeLayer(you); if(route)map.removeLayer(route);
+  you=L.circleMarker([lat,lng],{radius:7,color:ink,weight:2,fillColor:'#fff',fillOpacity:1}).addTo(map).bindTooltip(where||'You');
+  const straight=km([C.lat,C.lng],[lat,lng]);
+  try{
+   const rt=await SR.drive({lat,lng},{lat:C.lat,lng:C.lng});
+   route=L.polyline(SR.dec6(rt.shape),{color:ink,weight:4,opacity:.8}).addTo(map);
+   map.fitBounds(route.getBounds(),{padding:[30,30]});
+   const mins=Math.max(1,Math.round(rt.mins)),kms=rt.km.toFixed(rt.km<10?1:0);
+   if(C.area?!SR.inArea(lat,lng,C.area):mins>C.maxMin)say(`About ${kms} km, roughly ${mins} min drive: outside our area`,`${C.owner} covers places up to ${C.maxMin} min from ${C.label}. Call to check.`);
+   else say(`About ${kms} km by road, roughly ${mins} min drive: we come to you`,`From ${C.owner}'s ${C.label} base${where?' to '+where:''}.`);
+  }catch(e){
+   map.fitBounds(L.latLngBounds([[C.lat,C.lng],[lat,lng]]),{padding:[30,30]});
+   const inside=C.area?SR.inArea(lat,lng,C.area):straight<=C.maxMin;
+   say(`About ${straight.toFixed(straight<10?1:0)} km away in a straight line: ${inside?'inside':'outside'} our area`,`${C.owner} covers places up to ${C.maxMin} min from ${C.label}.${inside?'':' Call to check.'}`);
+  }
+  call.hidden=false;
+ }
+ document.getElementById('dist-form').addEventListener('submit',async ev=>{
+  ev.preventDefault(); const q=document.getElementById('dist-q').value.trim(); if(!q)return;
+  say('Finding '+q+'…','');
+  try{
+   const vb=[C.lng-0.6,C.lat+0.45,C.lng+0.6,C.lat-0.45].join(',');
+   const nm=bd=>fetch('https://nominatim.openstreetmap.org/search?format=json&countrycodes=nz&limit=10&viewbox='+vb+bd+'&q='+encodeURIComponent(q)).then(x=>x.json());
+   const near=o=>Math.hypot(+o.lat-C.lat,(+o.lon-C.lng)*Math.cos(C.lat*Math.PI/180));
+   let r=await nm('&bounded=1');if(r.length)r.sort((a,b)=>near(a)-near(b));else r=await nm('');
+   if(!r.length){say("We couldn't find that place","Try a suburb name, or just call "+C.owner+".");return;}
+   show(+r[0].lat,+r[0].lon,r[0].display_name.split(',').slice(0,2).join(','));
+  }catch(e){say('Map lookup is unavailable right now','Call '+C.owner+' to check.');}
+ });
+ document.getElementById('dist-geo').addEventListener('click',()=>{
+  if(!navigator.geolocation){say('Your browser does not share location','Type your suburb instead.');return;}
+  say('Getting your location…','');
+  navigator.geolocation.getCurrentPosition(p=>show(p.coords.latitude,p.coords.longitude,'your location'),()=>say('Location was not shared','Type your suburb instead.'),{timeout:10000});
+ });
+});
+</script>
+<section class="contact" id="contact" aria-labelledby="ct"><div class="wrap"><div class="grid">
+ <div>
+  <h2 id="ct">Get a free quote</h2>
+  <p>Based in Papamoa and working across the Bay of Plenty. Not sure if we cover you? Just ask.</p>
+  <ul class="lines">
+   <li><span>Nico</span><a href="tel:+642108405856">021 0840 5856</a></li>
+   <li><span>Team</span><a href="tel:+642108588437">021 0858 8437</a></li>
+   <li><span>Email</span><a href="mailto:Info.GardeniaPS@gmail.com">Info.GardeniaPS@gmail.com</a></li>
+   <li><span>Instagram</span><a href="https://www.instagram.com/gardenia_property_services/">gardenia_property_services</a></li>
+   
+  </ul>
+ </div>
+ <form class="quote" id="quote-form" data-email="Info.GardeniaPS@gmail.com" data-tel="+642108405856" data-owner="Nico" data-site="Gardenia Property Services">
+  <h3>Tell us about the job</h3><p class="hint">Three quick details and Nico will get back to you.</p>
+  <label for="f-n">Your name</label><input id="f-n" name="name" autocomplete="name" required>
+  <label for="f-p">Phone</label><input id="f-p" name="phone" type="tel" autocomplete="tel" required>
+  <label for="f-s">What do you need?</label><select id="f-s" name="service"><option>Lawn mowing and edge trim</option><option>Hedge trimming</option><option>Tree pruning</option><option>Section clearing</option><option>Irrigation installation</option><option>Gutter cleaning</option><option>Power washing</option><option>Something else</option></select>
+  <button class="btn btn--primary" type="submit">Email this to Nico</button>
+  <p class="note">Opens your email app with this filled in. Or call 021 0840 5856</p>
+ </form>
+ <script>
+ // No server: the form opens the visitor's own email (or text) app addressed to the owner, details filled in.
+ document.getElementById('quote-form').addEventListener('submit',e=>{
+  e.preventDefault(); const f=e.target, d=f.dataset;
+  const body=['Hi '+d.owner+', I would like a quote for: '+f.service.value+'.','Name: '+f.name.value,'Phone: '+f.phone.value,'(Sent from your website)'].join(String.fromCharCode(10));
+  location.href = d.email
+   ? 'mailto:'+d.email+'?subject='+encodeURIComponent('Quote request: '+f.service.value)+'&body='+encodeURIComponent(body)
+   : 'sms:'+d.tel+'?&body='+encodeURIComponent(body);
+ });
+ </script>
+</div></div></section>
+</main>
+<footer><div class="wrap">
+ <div><a class="brand" href="#"><svg viewBox="0 0 64 56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 25 32 5l27 20"/><path d="M14 30v20h36V22"/><path d="M14 22v3"/><path d="M23 47c-6-7-5-15 3-18 4 7 2 14-3 18z"/><path d="M29 46c0-9 5-14 14-15 0 9-5 14-14 15z"/><path d="M50 35h-5M50 41h-5"/></svg><span><b>Gardenia</b><small>Property Services</small></span></a><p>Gardening and property maintenance, Papamoa and the Bay of Plenty.</p></div>
+ <div><p><a href="tel:+642108405856">021 0840 5856</a></p><p><a href="mailto:Info.GardeniaPS@gmail.com">Info.GardeniaPS@gmail.com</a></p><p><a href="https://www.facebook.com/Gardeniapropertyservices/">Facebook</a> · <a href="https://www.instagram.com/gardenia_property_services/">Instagram</a></p></div>
+</div></footer>
+<div class="callbar"><a class="btn btn--primary" href="tel:+642108405856">Call Nico</a><a class="btn" href="sms:+642108405856">Text</a></div>
+</body>
+</html>

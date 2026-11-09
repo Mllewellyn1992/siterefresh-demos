@@ -1,0 +1,48 @@
+<!doctype html><html lang="en-NZ"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Quote check · Gardenia Property Services</title><link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@600&family=Hanken+Grotesk:wght@400;500&family=Newsreader:opsz,wght@6..72,400&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
+<style>:root {
+  --color-paper: oklch(95.8% 0.024 90); --color-paper-2: oklch(92.6% 0.030 90); --color-paper-3: oklch(89% 0.034 90);
+  --color-ink: oklch(23% 0.050 152); --color-ink-2: oklch(33% 0.048 150); --color-muted: oklch(46% 0.034 142);
+  --color-rule: oklch(83% 0.024 112); --color-rule-2: oklch(68% 0.042 138);
+  --color-accent: oklch(46% 0.135 142); --color-accent-2: oklch(86% 0.075 128); --color-accent-ink: oklch(97% 0.015 95);
+  --color-focus: oklch(46% 0.135 142); --tint-moss: oklch(46% 0.135 142 / 0.11); --tint-clay: oklch(54% 0.140 46 / 0.10);
+  --font-display: "Vollkorn", ui-serif, Georgia, serif; --font-body: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-outlier: "Newsreader", ui-serif, Georgia, serif;
+  --radius-card: 4px; --radius-pill: 999px; --rule-hair: 1px; --shadow-card: none;
+  --tracking-display: -0.012em; --display-weight: 600;
+}
+*{box-sizing:border-box}body{margin:0;background:var(--color-paper);color:var(--color-ink);font:400 1rem/1.55 var(--font-body)}
+.w{max-width:60rem;margin:0 auto;padding:1.5rem 16px 3rem}h1{font:600 clamp(1.7rem,4vw,2.4rem)/1.1 var(--font-display);letter-spacing:var(--tracking-display);margin:.2rem 0 .4rem}
+.k{color:var(--color-muted);font-size:.9rem;margin:0}#m{height:min(62vh,520px);margin:1.2rem 0;border:1px solid var(--color-rule-2)}
+table{width:100%;border-collapse:collapse}td{padding:.6rem 0;border-bottom:1px solid var(--color-rule);vertical-align:top}td:last-child{text-align:right;white-space:nowrap;font-weight:600}
+.tot td{font:600 1.3rem/1.2 var(--font-display);border-bottom:0;padding-top:1rem}.sw{display:inline-block;width:.8rem;height:.8rem;margin-right:.45rem;vertical-align:-.05rem;border:1px solid #fff;outline:1px solid var(--color-rule-2)}
+.note{color:var(--color-muted);font-size:.9rem}.bad{padding:2rem 0}</style></head><body><div class="w">
+<p class="k">Gardenia Property Services · quote from your website</p><h1 id="a">Quote check</h1><p class="k" id="sub"></p>
+<div id="m" role="img" aria-label="Aerial photo with the measured areas"></div>
+<table id="t"></table><p class="note" id="n"></p></div>
+<script>addEventListener('DOMContentLoaded',()=>{
+ const $=id=>document.getElementById(id),esc=x=>String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ const dec5=s=>{let i=0,la=0,ln=0;const o=[];while(i<s.length){for(let k=0;k<2;k++){let r=0,sh=0,b;do{b=s.charCodeAt(i++)-63;r|=(b&31)<<sh;sh+=5;}while(b>=32);const d=(r&1)?~(r>>1):(r>>1);if(k)ln+=d;else la+=d;}o.push([la/1e5,ln/1e5]);}return o;};
+ let d;try{const b=atob(location.hash.slice(1).replace(/-/g,'+').replace(/_/g,'/'));d=JSON.parse(new TextDecoder().decode(Uint8Array.from(b,c=>c.charCodeAt(0))));}
+ catch(e){document.querySelector('.w').innerHTML='<p class="bad">This quote link is incomplete. Ask the customer to send it again.</p>';return;}
+ $('a').textContent=d.a||'Quote check';$('sub').textContent='About $'+d.r[0]+'–$'+d.r[1]+(d.s.length?' · '+d.s.length+' area'+(d.s.length>1?'s':'')+' measured from the aerial photo':'');
+ const map=L.map('m',{maxZoom:21,scrollWheelZoom:false});
+ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:21,maxNativeZoom:20,attribution:'Imagery &copy; Esri, Maxar, Earthstar Geographics'}).addTo(map);
+ const g=L.featureGroup().addTo(map);
+ d.s.forEach(([lab,col,m2,pl,est])=>L.polygon(dec5(pl),{color:'#fff',weight:2,dashArray:est?'6 5':null,fillColor:col,fillOpacity:.45}).bindTooltip(esc(lab)+': '+m2+' m²').addTo(g));
+ if(d.h)L.circleMarker(d.h,{radius:6,color:'#fff',weight:2,fillColor:'#111',fillOpacity:1}).addTo(g);
+ const fit=()=>{map.invalidateSize();if(g.getLayers().length>1||d.s.length){map.fitBounds(g.getBounds(),{padding:[24,24],maxZoom:20});if(map.getZoom()<19)map.setZoom(19);}else if(d.h)map.setView(d.h,19);else map.setView([-41,174],5);};
+ fit();addEventListener('load',fit);
+ let h=d.l.map(([t,de,p])=>'<tr><td><b>'+esc(t)+'</b> '+esc(de)+'</td><td>'+esc(p)+'</td></tr>').join('');
+ const by={};d.s.forEach(([lab,col,m2])=>{by[lab]=by[lab]||{col,m2:0,n:0};by[lab].m2+=m2;by[lab].n++;});
+ h+=Object.entries(by).map(([lab,v])=>'<tr><td><span class="sw" style="background:'+esc(v.col)+'"></span>'+esc(lab)+(v.n>1?' ('+v.n+' areas)':'')+'</td><td>'+v.m2+' m²</td></tr>').join('');
+ if(d.t)h+='<tr><td colspan="2">'+esc(d.t)+'</td></tr>';
+ h+='<tr class="tot"><td>Estimate</td><td>$'+d.r[0]+'–$'+d.r[1]+'</td></tr>';$('t').innerHTML=h;
+ const notes=[];if(d.s.some(x=>x[4]))notes.push('Dashed areas run under trees or a roof, so they were estimated.');
+ if(d.p&&d.p.d)notes.push('Aerial photo: '+esc(d.p.n||'')+', taken '+new Date(d.p.d).toLocaleDateString('en-NZ',{day:'numeric',month:'short',year:'numeric'})+'.'+(d.p.alt?' A second photo from '+esc(d.p.alt)+' was also used because of shade.':''));
+ if(d.p&&d.p.nh)notes.push('Warning: the photo is older than the house ('+d.p.nh+' m² of building isn’t in it), so check the lawn on site.');
+ if(d.j)notes.push('The customer '+esc(d.j.replace(/^I adjusted the drawing: /,'adjusted the drawing: ').replace(/I adjusted it/g,'they adjusted it'))+' (the price allows up to the owner’s limit).');
+ $('n').innerHTML=notes.join('<br>');
+});</script></body></html>
