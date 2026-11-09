@@ -326,7 +326,8 @@ window.addEventListener('DOMContentLoaded',()=>{
  document.addEventListener('click',e=>{if(!e.target.closest||!e.target.closest('.qt-adj'))return;
   adjMode=!adjMode;setView(!adjMode);setLock(!adjMode);
   const m=$('qt-aimsg');if(m&&adjMode)m.textContent='Drag a corner to fit your lawn. Your price updates as you go; '+Q.owner+' sees what we measured and what you changed.';
-  else if(m)m.textContent='';update();});
+  else if(m)m.textContent='';update();
+  if(adjMode)setTimeout(()=>{const mp=$('qt-map'),r=mp&&mp.getBoundingClientRect();if(r&&(r.top<0||r.bottom>innerHeight)){mp.scrollIntoView({behavior:'smooth',block:'center'});}map.invalidateSize();},60);});
  // the home is the building under the address pin, else the biggest one whose middle is on this section
  function pickHouse(){if(!roofs.length)return;
   let h=roofs.find(r=>inside(homePt,r.pts));
