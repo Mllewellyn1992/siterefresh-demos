@@ -152,6 +152,9 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
 .qt-qwrap{position:relative}.qt-sug{position:absolute;left:0;right:0;top:100%;z-index:1100;margin:.25rem 0 0;padding:.25rem 0;list-style:none;background:var(--color-paper);border:1px solid var(--color-ink);box-shadow:0 10px 28px rgba(0,0,0,.14);max-height:20rem;overflow:auto}.qt-sugi{display:flex;flex-direction:column;justify-content:center;gap:.1rem;min-height:48px;padding:.5rem .85rem;cursor:pointer;color:var(--color-ink)}.qt-sugi small{font:400 var(--text-sm)/1.3 var(--font-outlier);color:var(--color-muted)}.qt-sugi[aria-selected=true],.qt-sugi:hover{background:var(--color-paper-2)}.qt-area{margin:.4rem 0 0;font:400 var(--text-sm)/1.4 var(--font-outlier);color:var(--color-muted)}.qt-msg,.qt-how{margin:.5rem 0 0;font:400 var(--text-sm)/1.45 var(--font-outlier);color:var(--color-muted);min-height:1.2em}
 .qt-link{margin:.35rem 0 0;padding:.5rem 0;min-height:44px;background:none;border:0;font:600 var(--text-sm)/1 var(--font-body,inherit);color:var(--color-ink,inherit);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .qt-link[hidden]{display:none}
+.qt-line{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem;margin-top:.6rem;padding:.7rem .8rem;border:var(--rule-hair) solid var(--color-rule-2);background:var(--color-paper);font:500 var(--text-sm)/1.4 var(--font-body)}
+.qt-line[hidden]{display:none} .qt-linebtns{display:flex;gap:.5rem} .qt-lining #qt-tools{display:none}
+.qt-measure{display:block}
 .qt-svc,.qt-tools{display:flex;flex-wrap:wrap;gap:.5rem}
 .qt-svc .btn[aria-pressed="true"]{background:var(--color-ink);border-color:var(--color-ink);color:var(--color-paper)}
 .qt-svc .btn{padding:.4rem .95rem;font-size:var(--text-sm)}
@@ -278,7 +281,7 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
    <div class="qt-out" id="qt-out" aria-live="polite"></div>
    <a class="btn btn--primary" id="qt-send" hidden>Send this quote to Sreeju</a>
   </div>
-  <div class="qt-mapcol"><div class="qt-prop" id="qt-prop" hidden></div><div id="qt-map" class="map qt-map" role="application" aria-label="Aerial photo. Tap around an area to measure it, or drag a corner to adjust it."></div><div class="qt-maptools" id="qt-tools"></div></div>
+  <div class="qt-mapcol"><div class="qt-prop" id="qt-prop" hidden></div><div id="qt-map" class="map qt-map" role="application" aria-label="Aerial photo. Tap around an area to measure it, or drag a corner to adjust it."></div><div class="qt-maptools" id="qt-tools"></div><div class="qt-line" id="qt-line" hidden><span id="qt-linetxt" aria-live="polite"></span><span class="qt-linebtns"><button type="button" class="btn" id="qt-lineundo">Undo</button><button type="button" class="btn btn--primary" id="qt-linedone">Done</button></span></div></div>
  </div>
 </div></section>
 <script>
@@ -321,7 +324,7 @@ window.addEventListener('DOMContentLoaded',()=>{
    '<dt>Land</dt><dd>'+(prop.land?fmt(prop.land):wait)+'</dd>'+
    '<dt>House</dt><dd>'+(prop.house?'about '+fmt(prop.house):prop.house===0?'none on the map yet':wait)+'</dd>'+
    '<dt>Cross-lease</dt><dd>'+(prop.cl===undefined?wait:prop.cl?'Yes, '+prop.cl+' homes share the section':'No')+'</dd>'+
-   (photo&&photo.date?'<dt>Aerial photo</dt><dd>'+new Date(photo.date).toLocaleDateString('en-NZ',{month:'short',year:'numeric'})+'</dd>':'')+'</dl>'+
+   '</dl>'+
    (photo&&photo.new_house_m2?'<p><b>The aerial photo was taken before your house was built,</b> so '+Q.owner+' will confirm your lawn size.</p>':'')+
    '<p>'+Q.owner+' checks the measurements and confirms your price before any work starts.</p>'+
    (aiDone&&Q.adj>0?'<p><button type="button" class="qt-link qt-adj">'+(adjMode?'Hide the map':'See or adjust the measured lawn')+'</button></p>':'');
@@ -424,7 +427,8 @@ window.addEventListener('DOMContentLoaded',()=>{
     inp.addEventListener('change',()=>{val[s.id][f.id]=+inp.value;update();});row.appendChild(inp);}
    else{const w=mk('span','qt-num');inp=mk('input');inp.type='number';inp.inputMode='decimal';inp.min=0;inp.max=f.max||9999;inp.step=f.step||1;
     inp.value=f.default||0;val[s.id][f.id]=+(f.default||0);
-    inp.addEventListener('input',()=>{val[s.id][f.id]=Math.max(0,+inp.value||0);update();});w.append(inp,mk('span','',f.unit));row.appendChild(w);}
+    inp.addEventListener('input',()=>{val[s.id][f.id]=Math.max(0,+inp.value||0);update();});w.append(inp,mk('span','',f.unit));row.appendChild(w);
+    if(f.unit==='m'){const mb=mk('button','qt-link qt-measure','Measure it on the map');mb.type='button';mb.addEventListener('click',()=>startLine(s,f,inp));row.appendChild(mb);}}
    inp.id=id;if(f.hint)row.appendChild(mk('p','qt-hint',f.hint));card.appendChild(row);});
   cards.appendChild(card);
  });
@@ -499,10 +503,34 @@ window.addEventListener('DOMContentLoaded',()=>{
  function checkLink(lines,travel,lo,hi){
   try{const d={a:place,h:homePt?[+homePt.lat.toFixed(5),+homePt.lng.toFixed(5)]:null,l:lines.map(l=>[l.t,l.o,l.p]),t:travel,r:[lo,hi],
     s:targets.filter(t=>sel[t.svc]).flatMap(t=>t.shapes.filter(x=>x.pts.length>2).map(x=>[t.f.label,t.f.color,Math.round(area(x.pts)),enc5(x.pts),x.assumed?1:0])),
+    k:Object.values(lines_).filter(l=>sel[l.svc]).map(l=>[l.label,l.m,enc5(l.pts)]),
     p:photo?{d:photo.date,n:photo.name,nh:photo.new_house_m2||0,alt:photo.alt||null}:null,j:adjNote()||null};
    const b=new TextEncoder().encode(JSON.stringify(d));let bin='';b.forEach(c=>bin+=String.fromCharCode(c));
    return new URL('quote.html',location.href).href+'#'+btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}catch(e){return '';}}
- map.on('click',e=>{if(locked||active==='__roof')return;touched=true;if(!targets.some(t=>sel[t.svc]))toggle(targets[0].svc,true);const t=T0();t.shapes[t.cur].pts.push(e.latlng);drawShapes();update();});
+ // Measuring a hedge: tap along it on the photo, corner to corner; the length fills the box and the owner sees the line.
+ let lineM=null;const lines_={},lineLay=L.layerGroup().addTo(map);
+ const lineLen=p=>{let m=0;for(let i=1;i<p.length;i++)m+=map.distance(p[i-1],p[i]);return m;};
+ function startLine(s,f,inp){if(!homePt){const m=$('qt-findmsg');m.textContent='Type your address first, then measure the hedge on the photo.';$('qt-q').focus();return;}
+  if(lineM)endLine(false);const k=s.id+'/'+f.id;
+  lineM={k,s,f,inp,pts:lines_[k]?lines_[k].pts.slice():[],wasHidden:hideMap,lay:L.layerGroup().addTo(map)};
+  document.querySelector('.qt-grid').classList.add('qt-lining');setView(false);$('qt-line').hidden=false;drawLine();
+  if(!lineM.pts.length&&map.getZoom()<19)map.setView(homePt,19);
+  setTimeout(()=>{const mp=$('qt-map'),r=mp.getBoundingClientRect();if(r.top<0||r.bottom>innerHeight)mp.scrollIntoView({behavior:'smooth',block:'center'});},60);}
+ function drawLine(){const o=lineM;o.lay.clearLayers();lineLay.clearLayers();
+  if(o.pts.length>1)L.polyline(o.pts,{color:'#ff3b3b',weight:5,interactive:false}).addTo(o.lay);
+  o.pts.forEach(p=>L.circleMarker(p,{radius:5,color:'#fff',weight:2,fillColor:'#ff3b3b',fillOpacity:1,interactive:false}).addTo(o.lay));
+  const m=Math.round(lineLen(o.pts));
+  $('qt-linetxt').textContent=o.pts.length<2?'Tap along the hedge on the photo, from one end to the other.':(o.f.label||'Length')+': '+m+' m. Keep tapping to follow it round corners.';
+  if(o.pts.length>1){o.inp.value=m;val[o.s.id][o.f.id]=m;update();}}
+ function endLine(keep){const o=lineM;if(!o)return;lineM=null;o.lay.remove();$('qt-line').hidden=true;
+  document.querySelector('.qt-grid').classList.remove('qt-lining');
+  if(keep&&o.pts.length>1)lines_[o.k]={svc:o.s.id,pts:o.pts,label:o.s.label,m:Math.round(lineLen(o.pts))};
+  setView(o.wasHidden);drawLines();update();}
+ function drawLines(){lineLay.clearLayers();Object.values(lines_).forEach(l=>{if(sel[l.svc])L.polyline(l.pts,{color:'#ff3b3b',weight:4,opacity:.85,interactive:false}).addTo(lineLay);});}
+ $('qt-lineundo').addEventListener('click',()=>{if(lineM&&lineM.pts.length){lineM.pts.pop();drawLine();}});
+ $('qt-linedone').addEventListener('click',()=>endLine(true));
+ map.on('click',e=>{if(!lineM)return;lineM.pts.push(e.latlng);drawLine();});
+ map.on('click',e=>{if(lineM||locked||active==='__roof')return;touched=true;if(!targets.some(t=>sel[t.svc]))toggle(targets[0].svc,true);const t=T0();t.shapes[t.cur].pts.push(e.latlng);drawShapes();update();});
 
  async function loadRoofs(){
   roofs=[];

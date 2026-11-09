@@ -33,6 +33,7 @@ table{width:100%;border-collapse:collapse}td{padding:.6rem 0;border-bottom:1px s
  const map=L.map('m',{maxZoom:21,scrollWheelZoom:false});
  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:21,maxNativeZoom:20,attribution:'Imagery &copy; Esri, Maxar, Earthstar Geographics'}).addTo(map);
  const g=L.featureGroup().addTo(map);
+ (d.k||[]).forEach(([lab,m,pl])=>L.polyline(dec5(pl),{color:'#ff3b3b',weight:5}).bindTooltip(esc(lab)+': '+m+' m').addTo(g));
  d.s.forEach(([lab,col,m2,pl,est])=>L.polygon(dec5(pl),{color:'#fff',weight:2,dashArray:est?'6 5':null,fillColor:col,fillOpacity:.45}).bindTooltip(esc(lab)+': '+m2+' m²').addTo(g));
  if(d.h)L.circleMarker(d.h,{radius:6,color:'#fff',weight:2,fillColor:'#111',fillOpacity:1}).addTo(g);
  const fit=()=>{map.invalidateSize();if(g.getLayers().length>1||d.s.length){map.fitBounds(g.getBounds(),{padding:[24,24],maxZoom:20});if(map.getZoom()<19)map.setZoom(19);}else if(d.h)map.setView(d.h,19);else map.setView([-41,174],5);};
@@ -40,6 +41,7 @@ table{width:100%;border-collapse:collapse}td{padding:.6rem 0;border-bottom:1px s
  let h=d.l.map(([t,de,p])=>'<tr><td><b>'+esc(t)+'</b> '+esc(de)+'</td><td>'+esc(p)+'</td></tr>').join('');
  const by={};d.s.forEach(([lab,col,m2])=>{by[lab]=by[lab]||{col,m2:0,n:0};by[lab].m2+=m2;by[lab].n++;});
  h+=Object.entries(by).map(([lab,v])=>'<tr><td><span class="sw" style="background:'+esc(v.col)+'"></span>'+esc(lab)+(v.n>1?' ('+v.n+' areas)':'')+'</td><td>'+v.m2+' m²</td></tr>').join('');
+ h+=(d.k||[]).map(([lab,m])=>'<tr><td><span class="sw" style="background:#ff3b3b"></span>'+esc(lab)+' (measured on the photo)</td><td>'+m+' m</td></tr>').join('');
  if(d.t)h+='<tr><td colspan="2">'+esc(d.t)+'</td></tr>';
  h+='<tr class="tot"><td>Estimate</td><td>$'+d.r[0]+'–$'+d.r[1]+'</td></tr>';$('t').innerHTML=h;
  const notes=[];if(d.s.some(x=>x[4]))notes.push('Dashed areas run under trees or a roof, so they were estimated.');
