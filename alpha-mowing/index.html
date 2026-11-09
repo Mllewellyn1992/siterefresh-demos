@@ -188,6 +188,12 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
  .qt-flow li+li::after{left:1.79rem;top:-.62rem;transform:rotate(135deg)}}
 .qt-demo{margin-top:var(--space-md);font:400 var(--text-sm)/1.45 var(--font-outlier);color:var(--color-muted);font-style:italic}
 .qt-mapcol{position:sticky;top:96px} .qt-map{height:560px;cursor:crosshair}
+.qt-fs{display:grid;place-items:center;width:34px;height:34px;padding:0;border:2px solid rgb(0 0 0/.25);border-radius:4px;background:#fff;color:#222;cursor:pointer}
+.qt-fs svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.qt-full{position:fixed!important;inset:0;top:0!important;z-index:10000;display:flex!important;flex-direction:column;width:auto!important;margin:0;padding:10px;background:var(--color-paper);order:0}
+.qt-full .qt-prop{display:none!important} .qt-full .qt-map{flex:1;height:auto!important;min-height:0} .qt-full .qt-maptools,.qt-full .qt-line{flex:none}
+html.qt-noscroll,html.qt-noscroll body{overflow:hidden}
+.qt-fsdone{display:none} .qt-full .qt-fsdone{display:inline-flex;position:absolute;right:10px;bottom:10px} .qt-lining .qt-fsdone{display:none!important} .qt-full .qt-maptools{padding-right:6.5rem}
 .qt-maptools{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin-top:.6rem} .qt-maprow{display:flex;gap:.4rem}
 .qt-maptools .btn,.qt-maptools select{background:var(--color-paper);padding:.45rem .9rem;font-size:var(--text-sm)}
 .qt-maptools select{border-radius:var(--radius-pill);border:var(--rule-hair) solid var(--color-rule-2);color:var(--color-ink);width:auto}
@@ -281,7 +287,7 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
    <div class="qt-out" id="qt-out" aria-live="polite"></div>
    <a class="btn btn--primary" id="qt-send" hidden>Send this quote to Sreeju</a>
   </div>
-  <div class="qt-mapcol"><div class="qt-prop" id="qt-prop" hidden></div><div id="qt-map" class="map qt-map" role="application" aria-label="Aerial photo. Tap around an area to measure it, or drag a corner to adjust it."></div><div class="qt-maptools" id="qt-tools"></div><div class="qt-line" id="qt-line" hidden><span id="qt-linetxt" aria-live="polite"></span><span class="qt-linebtns"><button type="button" class="btn" id="qt-lineundo">Undo</button><button type="button" class="btn btn--primary" id="qt-linedone">Done</button></span></div></div>
+  <div class="qt-mapcol"><div class="qt-prop" id="qt-prop" hidden></div><div id="qt-map" class="map qt-map" role="application" aria-label="Aerial photo. Tap around an area to measure it, or drag a corner to adjust it."></div><div class="qt-maptools" id="qt-tools"></div><div class="qt-line" id="qt-line" hidden><span id="qt-linetxt" aria-live="polite"></span><span class="qt-linebtns"><button type="button" class="btn" id="qt-lineundo">Undo</button><button type="button" class="btn btn--primary" id="qt-linedone">Done</button></span></div><button type="button" class="btn btn--primary qt-fsdone" id="qt-fsdone">Done</button></div>
  </div>
 </div></section>
 <script>
@@ -295,6 +301,21 @@ window.addEventListener('DOMContentLoaded',()=>{
   {maxZoom:21,maxNativeZoom:20,attribution:'Imagery &copy; Esri, Maxar, Earthstar Geographics; buildings &copy; LINZ CC BY 4.0'}).addTo(map);
  const ctl=(pos,el)=>{L.DomEvent.disableClickPropagation(el);L.DomEvent.disableScrollPropagation(el);new (L.Control.extend({onAdd:()=>el}))({position:pos}).addTo(map);return el;};
  const badge=ctl('topright',mk('div','qt-badge'));badge.hidden=true;
+ // Full screen: the map with its tools fills the screen so the shapes can be got just right. Uses the browser's full
+ // screen where it can (needs allow="fullscreen" on an embedding frame); otherwise (iPhone) the map column covers the page.
+ const fsBtn=ctl('topleft',mk('button','qt-fs'));fsBtn.type='button';
+ const mcol=document.querySelector('.qt-mapcol');
+ function fsSet(on){mcol.classList.toggle('qt-full',on);document.documentElement.classList.toggle('qt-noscroll',on&&!document.fullscreenElement);
+  fsBtn.setAttribute('aria-label',on?'Exit full screen':'Full screen');fsBtn.title=on?'Exit full screen':'Full screen';
+  fsBtn.innerHTML=on?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>':'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
+  const c=map.getCenter(),z=map.getZoom();setTimeout(()=>{map.invalidateSize();map.setView(c,z,{animate:false});},80);}
+ fsSet(false);
+ $('qt-fsdone').addEventListener('click',()=>{if(mcol.classList.contains('qt-full'))fsBtn.click();});
+ fsBtn.addEventListener('click',()=>{const on=!mcol.classList.contains('qt-full');fsSet(on);   // fill the window now; true full screen too where the browser allows (some never answer)
+  try{if(on&&mcol.requestFullscreen&&document.fullscreenEnabled)mcol.requestFullscreen().then(()=>fsSet(true)).catch(()=>{});
+   else if(!on&&document.fullscreenElement)document.exitFullscreen().catch(()=>{});}catch(e){}});
+ document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&mcol.classList.contains('qt-full'))fsSet(false);});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mcol.classList.contains('qt-full')&&!document.fullscreenElement)fsSet(false);});
  const R=6371000, rad=x=>x*Math.PI/180, r5=x=>Math.round(x/5)*5;
  const xy=(p,la)=>[R*rad(p.lng)*Math.cos(la),R*rad(p.lat)];
  const area=p=>{if(p.length<3)return 0;const la=rad(p[0].lat),v=p.map(q=>xy(q,la));let s=0;
@@ -613,10 +634,11 @@ window.addEventListener('DOMContentLoaded',()=>{
   $('qt-area').textContent='Your local crew: '+t.owner+(t.crew?' ('+t.crew+')':'')+'. They get your quote.';
   $('qt-send').textContent='Send this quote to '+t.owner;}
  async function goTo(pt,where){const msg=msg0;msg.textContent='Checking '+where+'…';
+  clearTimeout(sugT);sugN++;sugs=[];sugSel=-1;drawSug();   // late suggestions must not cover the result
   aiKey=null;aiJobs=null;stopBusy();   // a measurement still running for the previous address must not report back
   if(Q.terr){const r=await pickTerr(pt);
    if(!r||r.mins>(r.t.max_min||Q.maxMin)){
-    if(home){map.removeLayer(home);home=null;}homePt=null;travelKm=null;map.setView(pt,15);
+    if(home){map.removeLayer(home);home=null;}homePt=null;travelKm=null;map.setView(pt,15);if(Q.alwaysMap&&Q.ai)setView(true);
     msg.textContent='There’s no '+Q.brand+' crew near '+where+' yet'+(r?' (the closest, '+r.t.owner+', is about '+Math.round(r.mins)+' min away)':'')+'. Call '+Q.brandTel+' to check.';
     Q.crew=null;$('qt-area').textContent='Type your address and we’ll find your local '+Q.brand+' crew.';drawProp();update();return;}
    useTerr(r.t);}
@@ -625,7 +647,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   try{const d=await SR.drive(pt,b);km=d.km;mins=d.mins;}catch(e){}
   if(Q.area?!near(pt):(mins!=null?mins:km/50*60)>Q.maxMin){
    if(home){map.removeLayer(home);home=null;}homePt=null;travelKm=null;if($('qt-ai'))$('qt-ai').hidden=true;
-   map.setView(pt,15);
+   map.setView(pt,15);if(Q.alwaysMap&&Q.ai)setView(true);
    msg.textContent=where+' is outside the area '+Q.owner+' covers (up to '+Q.maxMin+' min drive from '+b.label+(mins!=null?'; it’s about '+Math.round(mins)+' min':'')+'). Call '+Q.owner+' to check.';
    update();return;}
   homePt=pt;place=where;travelKm=km;prop.land=null;prop.house=null;prop.cl=undefined;prop.pts=null;photo=null;aiDone=false;adjMode=false;drawProp();
@@ -713,7 +735,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   if(!t||!t.api)return setView(false);
   const up=await fetch(t.api+'/api/ping',{cache:'no-store'}).then(r=>r.ok).catch(()=>false);if(!up)return setView(false);
   Q.ai=t.api+'/api/trace';Q.parcel=t.api+'/api/parcel';Q.storeysApi=t.api+'/api/storeys';
-  setHow(true);setView(!Q.alwaysMap);
+  setHow(true);setView(!Q.alwaysMap||!homePt);
   if(homePt)loadParcel($('qt-findmsg'));
  }).catch(()=>setView(false));
  // Automatic drawing: starts as soon as the address is found; the shapes are locked (the customer can't change them).
@@ -744,7 +766,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   }catch(e){fail();}
  }
  if(Q.ai)setHow(true);
- setView(!!(Q.ai||Q.remote)&&!Q.alwaysMap);   // remote: assume on until the check says otherwise (no map flash)
+ setView(!!(Q.ai||Q.remote)&&(!Q.alwaysMap||!homePt));   // remote: assume on until the check says otherwise (no map flash)
  // Embedded with ?jobs=lawn,wash (ticked on the host site's own form): start with those jobs, and the host page can change
  // them later with postMessage({srJobs:[...]}); &nojobs=1 hides our own job buttons so the host's tick boxes are the only ones
  const qs_=new URLSearchParams(location.search),preJobs=(qs_.get('jobs')||'').split(',').filter(id=>Q.services.some(s=>s.id===id));
