@@ -195,9 +195,9 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
 .qt-prop{border:var(--rule-hair) solid var(--color-rule-2);background:var(--color-paper);padding:clamp(1.25rem,2.5vw,2rem)}
 .qt-prop[hidden]{display:none}
 .qt-prop h3{margin:0 0 .9rem;font:600 1.35rem/1.2 var(--font-display);color:var(--color-ink)}
-.qt-prop dl{margin:0;display:grid;grid-template-columns:auto 1fr;column-gap:1.5rem}
+.qt-prop dl{margin:0;display:grid;grid-template-columns:auto 1fr}
 .qt-prop dt,.qt-prop dd{margin:0;padding:.8rem 0;border-top:var(--rule-hair) solid var(--color-rule)}
-.qt-prop dt{font:400 var(--text-sm)/1.4 var(--font-outlier);color:var(--color-muted);align-self:center}
+.qt-prop dt{padding-right:1.5rem;font:400 var(--text-sm)/1.4 var(--font-outlier);color:var(--color-muted);align-self:center}
 .qt-prop dd{text-align:right;font:600 1.1rem/1.35 var(--font-display);color:var(--color-ink);font-variant-numeric:tabular-nums}
 .qt-prop .qt-wait{color:var(--color-muted);font-weight:400}
 .qt-prop p{margin:.9rem 0 0;font:400 var(--text-sm)/1.45 var(--font-outlier);color:var(--color-muted)}
@@ -299,7 +299,7 @@ window.addEventListener('DOMContentLoaded',()=>{
  // The map only shows for hand-drawing, when automatic measuring isn't available.
  let hideMap=false;const prop={land:null,house:null,cl:undefined};
  function setView(hide){hideMap=hide;document.querySelector('.qt-grid').classList.toggle('qt-hide',hide);
-  if(!hide)setTimeout(()=>map.invalidateSize(),0);drawProp();drawShapes&&targets.length&&drawShapes();}
+  if(!hide)setTimeout(()=>map.invalidateSize(),0);drawProp();if(typeof cards_==='function')cards_();drawShapes&&targets.length&&drawShapes();}
  function drawProp(){const els=[$('qt-prop'),$('qt-prop2')];
   const wait='<span class="qt-wait">Looking it up…</span>',fmt=n=>Math.round(n).toLocaleString('en-NZ')+' m²';
   let h;
@@ -419,7 +419,8 @@ window.addEventListener('DOMContentLoaded',()=>{
   tsel.innerHTML='';live.forEach(([k,l])=>{const o=mk('option','','Marking: '+l);o.value=k;tsel.appendChild(o);});
   if(live.length&&!live.some(([k])=>k===active))active=live[0][0];tsel.value=active;tsel.hidden=live.length<2;row.hidden=active==='__roof';}
 
- function toggle(id,on){sel[id]=on;document.querySelector('#qt-svcs [data-id="'+id+'"]').setAttribute('aria-pressed',on);$('qt-card-'+id).hidden=!on;
+ function cards_(){Q.services.forEach(s=>{const c=$('qt-card-'+s.id);if(c)c.hidden=!sel[s.id]||(hideMap&&s.fields.every(f=>f.type==='map_area'||f.type==='roof_edge'));});}
+ function toggle(id,on){sel[id]=on;document.querySelector('#qt-svcs [data-id="'+id+'"]').setAttribute('aria-pressed',on);cards_();
   refreshTools();drawShapes();drawRoofs();update();}
  function update(){
   const lines=[];let lo=0,hi=0,bigs=[];
