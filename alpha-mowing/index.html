@@ -462,7 +462,7 @@ window.addEventListener('DOMContentLoaded',()=>{
  const qIn=$('qt-q'),sug=$('qt-sug'),msg0=$('qt-findmsg');let sugs=[],sugSel=-1,picked=null,sugT=null,sugN=0;
  const near=pt=>Q.area?SR.inArea(pt.lat,pt.lng,Q.area):dist(Q.base,pt)/1000<=Q.maxMin*1.1;
  const ROADW=new Set(['st','street','rd','road','ave','avenue','dr','drive','pl','place','cres','crescent','tce','terrace','lane','ln','way','cl','close','ct','court','hwy','highway','sq','square','pde','parade','nz','new','zealand']);
- const fold=t=>(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+ const fold=t=>(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/['’`]/g,'').replace(/\bsaint\b/g,'st').replace(/\bmount\b/g,'mt');
  // every word typed (apart from the number and road types) must start a word of the address; the number must match too
  function sameAddr(q,txt,hn){const ws=fold(q).replace(/,/g,' ').split(/\s+/).filter(w=>w&&!/^\d/.test(w)&&!ROADW.has(w)),tt=fold(txt).split(/[\s,\/-]+/);
   if(!ws.length||!ws.every(w=>tt.some(t=>t.startsWith(w))))return false;
@@ -474,11 +474,13 @@ window.addEventListener('DOMContentLoaded',()=>{
    li.addEventListener('mousedown',e=>{e.preventDefault();choose(i);});sug.append(li);});
   sug.hidden=!sugs.length;qIn.setAttribute('aria-expanded',sugs.length?'true':'false');
   if(sugSel>=0)qIn.setAttribute('aria-activedescendant','qt-sug-'+sugSel);else qIn.removeAttribute('aria-activedescendant');}
- async function suggest(q){const n=++sugN,b=Q.base;
-  try{const d=await fetch('https://photon.komoot.io/api/?limit=10&lang=en&layer=house&layer=street&lat='+b.lat+'&lon='+b.lng+'&bbox='+[b.lng-0.6,b.lat-0.45,b.lng+0.6,b.lat+0.45].join(',')+'&q='+encodeURIComponent(q)).then(x=>x.json());
-   if(n!==sugN)return;
-   let f=d.features.filter(x=>{const p=x.properties;return p.countrycode==='NZ'&&(p.street||p.name)&&sameAddr(q,[p.street||p.name,p.district,p.locality,p.city].join(' '),p.housenumber==null?null:p.housenumber);});
-   const houses=f.filter(x=>x.properties.housenumber);if(/^\s*\d/.test(q)&&houses.length)f=houses;
+ async function photon(q,box){const b=Q.base;
+  const d=await fetch('https://photon.komoot.io/api/?limit='+(box?10:25)+'&lang=en&layer=house&layer=street&lat='+b.lat+'&lon='+b.lng+(box?'&bbox='+[b.lng-0.6,b.lat-0.45,b.lng+0.6,b.lat+0.45].join(','):'')+'&q='+encodeURIComponent(q)).then(x=>x.json());
+  let f=d.features.filter(x=>{const p=x.properties;return p.countrycode==='NZ'&&(p.street||p.name)&&sameAddr(q,[p.street||p.name,p.district,p.locality,p.city].join(' '),p.housenumber==null?null:p.housenumber);});
+  const houses=f.filter(x=>x.properties.housenumber);if(/^\s*\d/.test(q)&&houses.length)f=houses;return f;}
+ async function suggest(q){const n=++sugN;
+  try{let f=await photon(q,1);if(n!==sugN)return;
+   if(!f.length){f=await photon(q,0);if(n!==sugN)return;}
    const seen=new Set();sugs=[];
    for(const x of f){const p=x.properties,area=p.district||p.locality||p.city||'',main=(p.housenumber?p.housenumber+' ':'')+(p.street||p.name);
     const sub=area+(p.city&&p.city!==area?', '+p.city:''),k=main+'|'+sub;if(seen.has(k))continue;seen.add(k);
@@ -516,10 +518,9 @@ window.addEventListener('DOMContentLoaded',()=>{
   if(sugs.length)return choose(Math.max(sugSel,0));
   msg0.textContent='Finding your property…';
   try{const b=Q.base,vb=[b.lng-0.6,b.lat+0.45,b.lng+0.6,b.lat-0.45].join(',');
-   const r=await fetch('https://nominatim.openstreetmap.org/search?format=json&countrycodes=nz&limit=10&bounded=1&viewbox='+vb+'&q='+encodeURIComponent(q)).then(x=>x.json());
-   if(!r.length){msg0.textContent='We don’t know that address near '+b.label+'. Check the spelling, add your suburb, or call '+Q.owner+'.';return;}
-   r=r.filter(x=>sameAddr(q,x.display_name,null));
-   if(!r.length){msg0.textContent='We don’t know that address near '+b.label+'. Check the spelling, add your suburb, or call '+Q.owner+'.';return;}
+   const nm=bd=>fetch('https://nominatim.openstreetmap.org/search?format=json&countrycodes=nz&limit=10'+bd+'&viewbox='+vb+'&q='+encodeURIComponent(q)).then(x=>x.json()).then(r=>r.filter(x=>sameAddr(q,x.display_name,null)));
+   let r=await nm('&bounded=1');if(!r.length)r=await nm('');
+   if(!r.length){msg0.textContent='We don’t know that address. Check the spelling, add your suburb, or call '+Q.owner+'.';return;}
    r.sort((x,y)=>dist(b,{lat:+x.lat,lng:+x.lon})-dist(b,{lat:+y.lat,lng:+y.lon}));
    const pp=r[0].display_name.split(',').map(t=>t.trim());
    goTo(L.latLng(+r[0].lat,+r[0].lon),(/^[0-9]/.test(pp[0])?pp[0]+' '+pp[1]+(pp[2]?', '+pp[2]:''):pp[0]+(pp[1]?', '+pp[1]:'')));
