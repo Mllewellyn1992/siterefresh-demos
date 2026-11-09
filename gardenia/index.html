@@ -192,8 +192,9 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
 .qt-full .qt-prop{display:none!important} .qt-full .qt-map{flex:1;height:auto!important;min-height:0} .qt-full .qt-maptools,.qt-full .qt-line{flex:none}
 html.qt-noscroll,html.qt-noscroll body{overflow:hidden}
 .qt-fsdone{display:none} .qt-full .qt-fsdone{display:inline-flex;position:absolute;right:10px;bottom:10px} .qt-lining .qt-fsdone{display:none!important} .qt-full .qt-maptools{padding-right:6.5rem}
+.qt-addtip{flex-basis:100%;margin:0;font:400 var(--text-sm)/1.4 var(--font-outlier);color:var(--color-muted)} .qt-addtip[hidden],.qt-pick[hidden]{display:none} .qt-pick{flex-wrap:wrap;align-items:center} .qt-picktxt{font:600 var(--text-sm)/1.3 var(--font-outlier)}
 .qt-maptools{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin-top:.6rem} .qt-maprow{display:flex;gap:.4rem}
-.qt-maptools .btn,.qt-maptools select{background:var(--color-paper);padding:.45rem .9rem;font-size:var(--text-sm)}
+.qt-maptools .btn:not(.btn--primary),.qt-maptools select{background:var(--color-paper)} .qt-maptools .btn,.qt-maptools select{padding:.45rem .9rem;font-size:var(--text-sm)}
 .qt-maptools select{border-radius:var(--radius-pill);border:var(--rule-hair) solid var(--color-rule-2);color:var(--color-ink);width:auto}
 .qt-v i{display:block;width:12px;height:12px;margin:6px;border:2px solid #fff;border-radius:50%;box-shadow:0 0 3px rgb(0 0 0/.7)}
 .qt-v.qt-sm i{width:8px;height:8px;margin:8px;border-width:1.5px}
@@ -332,6 +333,7 @@ window.addEventListener('DOMContentLoaded',()=>{
  // aiDone: the current shapes came from the automatic measuring. adjMode: the customer opened the map to adjust them
  // (owner's limit Q.adj, e.g. 0.3 = the price uses at most 30% more or less than what we measured). photo: date etc.
  let aiDone=false,adjMode=false,photo=null;const aiArea={};
+ let hist=[],aiSnap=null,adding=false;   // Undo history, the automatic measure (for Start again), adding a missed area
  function setView(hide){hideMap=hide;document.querySelector('.qt-grid').classList.toggle('qt-hide',hide);
   if(!hide)setTimeout(()=>map.invalidateSize(),0);drawProp();if(typeof cards_==='function')cards_();drawShapes&&targets.length&&drawShapes();}
  function drawProp(){const els=[$('qt-prop'),$('qt-prop2')];
@@ -387,15 +389,17 @@ window.addEventListener('DOMContentLoaded',()=>{
   shapeLayer.clearLayers();
   targets.forEach(t=>{if(!sel[t.svc])return;const col=t.f.color;
    t.shapes.forEach((s,si)=>{const p=s.pts;if(!p.length)return;
-    const isCur=t.key===active&&si===t.cur;
+    const isCur=adjMode&&!adding?true:t.key===active&&si===t.cur;
     const poly=(p.length>2?L.polygon(p,{color:'#fff',weight:2,dashArray:s.assumed?'6 5':null,fillColor:col,fillOpacity:.4,interactive:false})
      :L.polyline(p,{color:'#fff',weight:2,interactive:false})).addTo(shapeLayer);
-    if(t.key===active&&!locked)p.forEach((q,j)=>{const m=L.marker(q,{draggable:true,autoPan:false,icon:L.divIcon({className:isCur?'qt-v':'qt-v qt-sm',iconSize:[24,24],
+    if((t.key===active||adjMode&&!adding)&&!locked)p.forEach((q,j)=>{const m=L.marker(q,{draggable:true,autoPan:false,icon:L.divIcon({className:isCur?'qt-v':'qt-v qt-sm',iconSize:[24,24],
        html:'<i style="background:'+(isCur?'#ffd84d':col)+'"></i>'})}).addTo(shapeLayer);
+     m.on('dragstart',()=>{snap();if(adjMode&&!adding){active=t.key;t.cur=si;}});
      m.on('drag',e=>{p[j]=e.target.getLatLng();poly.setLatLngs(p);});
      m.on('dragend',()=>{touched=true;drawShapes();update();});
      m.on('click',()=>{if(active==='__roof')return;const c=T0(),cp=c.shapes[c.cur].pts;
-      if(cp.length&&cp.length<3&&!(si===t.cur)){cp.push(L.latLng(q.lat,q.lng));drawShapes();update();return;}   // snap while drawing
+      if(cp.length&&cp.length<3&&!(si===t.cur)){snap();cp.push(L.latLng(q.lat,q.lng));drawShapes();update();return;}   // snap while drawing
+      snap();if(adjMode&&!adding){active=t.key;t.cur=si;}
       p.splice(j,1);if(p.length<3&&p.length!==0&&t.shapes.length>1){t.shapes.splice(si,1);t.cur=Math.max(0,Math.min(t.cur,t.shapes.length-1));}
       else if(p.length<3)p.length=0;
       touched=true;drawShapes();update();});});
@@ -462,17 +466,39 @@ window.addEventListener('DOMContentLoaded',()=>{
  tsel.addEventListener('change',()=>{active=tsel.value;row.hidden=active==='__roof';drawShapes();drawRoofs();});
  const row=mk('div','qt-maprow');
  const T0=()=>T(active), C0=()=>T0().shapes[T0().cur];
- [['Undo',()=>{const t=T0();if(C0().pts.length)C0().pts.pop();else if(t.cur>0){t.shapes.pop();t.cur--;t.shapes[t.cur].pts.pop();}}],
-  ['New area',()=>{const t=T0();if(C0().pts.length>2){t.shapes.push({pts:[],assumed:false});t.cur=t.shapes.length-1;}}],
-  ['Clear',()=>{const t=T0();t.shapes=[{pts:[],assumed:false}];t.cur=0;}]].forEach(([l,fn])=>{
-   const bt=mk('button','btn',l);bt.type='button';bt.addEventListener('click',()=>{touched=true;fn();drawShapes();update();});row.appendChild(bt);});
- tools.append(tsel,row);
+ // Undo = put back exactly what was there before the last change (a drag, a removed dot, a new dot, Clear...)
+ const copyShapes=()=>targets.map(t=>({k:t.key,cur:t.cur,shapes:t.shapes.map(x=>({pts:x.pts.map(q=>L.latLng(q.lat,q.lng)),assumed:x.assumed}))}));
+ const putShapes=h=>h.forEach(x=>{const t=targets.find(y=>y.key===x.k);if(t){t.shapes=x.shapes.map(z=>({pts:z.pts.slice(),assumed:z.assumed}));t.cur=x.cur;}});
+ function snap(){hist.push(copyShapes());if(hist.length>60)hist.shift();}
+ const bt_={};
+ [['undo','Undo',()=>{const h=hist.pop();if(h)putShapes(h);}],
+  ['add','Add a missed area',()=>{const live=targets.filter(t=>sel[t.svc]);if(live.length===1)return startAdd(live[0]);
+    pickRow.hidden=false;row.hidden=true;}],
+  ['reset','Start again',()=>{if(aiSnap){snap();putShapes(aiSnap);}}],
+  ['finish','Finish',()=>{const t=T0();adding=false;if(C0().pts.length<3){if(t.shapes.length>1){t.shapes.splice(t.cur,1);t.cur=t.shapes.length-1;}else C0().pts.length=0;}refreshTools();}],
+  ['new','New area',()=>{const t=T0();if(C0().pts.length>2){snap();t.shapes.push({pts:[],assumed:false});t.cur=t.shapes.length-1;}}],
+  ['clear','Clear',()=>{const t=T0();snap();t.shapes=[{pts:[],assumed:false}];t.cur=0;}]].forEach(([k,l,fn])=>{
+   const bt=mk('button','btn',l);bt.type='button';bt_[k]=bt;bt.addEventListener('click',()=>{touched=true;fn();drawShapes();update();});row.appendChild(bt);});
+ bt_.finish.classList.add('btn--primary');
+ const addTip=mk('p','qt-addtip','Tap around the missed area on the photo, then press Finish.');addTip.setAttribute('aria-live','polite');
+ // more than one kind of area on the map (lawn and berm, driveway...): ask which one was missed
+ const pickRow=mk('div','qt-maprow qt-pick');pickRow.hidden=true;
+ function startAdd(t){pickRow.hidden=true;row.hidden=false;active=t.key;snap();t.shapes=t.shapes.filter(x=>x.pts.length>2);
+  t.shapes.push({pts:[],assumed:false});t.cur=t.shapes.length-1;adding=true;refreshTools();drawShapes();update();}
+ tools.append(tsel,row,pickRow,addTip);
  function refreshTools(){
   const live=targets.filter(t=>sel[t.svc]).map(t=>[t.key,t.f.label]);
   if(roofSvc&&sel[roofSvc.id]&&roofs.length)live.push(['__roof','Roofs (gutters)']);
   tools.hidden=!live.length||locked;
   tsel.innerHTML='';live.forEach(([k,l])=>{const o=mk('option','','Marking: '+l);o.value=k;tsel.appendChild(o);});
-  if(live.length&&!live.some(([k])=>k===active))active=live[0][0];tsel.value=active;tsel.hidden=live.length<2;row.hidden=active==='__roof';}
+  if(live.length&&!live.some(([k])=>k===active))active=live[0][0];tsel.value=active;tsel.hidden=live.length<2||adjMode;row.hidden=active==='__roof'&&!adjMode;
+  // after the automatic measure: Undo, Add a missed area, Start again (and Finish while adding). Hand-drawing: Undo, New area, Clear.
+  const adj=adjMode&&!locked;if(!adj)adding=false;
+  bt_.add.hidden=!adj||adding;bt_.reset.hidden=!adj||adding||!aiSnap;bt_.finish.hidden=!adding;bt_.new.hidden=adj;bt_.clear.hidden=adj;addTip.hidden=!adding;
+  pickRow.innerHTML='';const lv=targets.filter(t=>sel[t.svc]);pickRow.appendChild(mk('span','qt-picktxt','What did we miss?'));
+  lv.forEach(t=>{const b=mk('button','btn',t.f.label);b.type='button';b.addEventListener('click',()=>startAdd(t));pickRow.appendChild(b);});
+  const cx=mk('button','btn qt-link','Cancel');cx.type='button';cx.addEventListener('click',()=>{pickRow.hidden=true;row.hidden=false;});pickRow.appendChild(cx);
+  if(!adj){pickRow.hidden=true;}}
 
  function cards_(){Q.services.forEach(s=>{const c=$('qt-card-'+s.id);if(c)c.hidden=!sel[s.id]||(hideMap&&s.fields.every(f=>f.type==='map_area'||f.type==='roof_edge'));});}
  function toggle(id,on){sel[id]=on;document.querySelector('#qt-svcs [data-id="'+id+'"]').setAttribute('aria-pressed',on);cards_();
@@ -554,8 +580,8 @@ window.addEventListener('DOMContentLoaded',()=>{
  $('qt-linedone').addEventListener('click',()=>endLine(true));
  map.on('click',e=>{if(!lineM)return;lineM.pts.push(e.latlng);drawLine();});
  map.on('click',e=>{if(lineM||locked||active==='__roof')return;
-  if(adjMode&&C0().pts.length>=3)return;   // adjusting a measured shape: a stray tap on the photo mustn't add a corner (New area starts one)
-  touched=true;if(!targets.some(t=>sel[t.svc]))toggle(targets[0].svc,true);const t=T0();t.shapes[t.cur].pts.push(e.latlng);drawShapes();update();});
+  if(adjMode&&!adding)return;   // adjusting the measured shapes: a stray tap on the photo mustn't add a corner ("Add a missed area" does)
+  snap();touched=true;if(!targets.some(t=>sel[t.svc]))toggle(targets[0].svc,true);const t=T0();t.shapes[t.cur].pts.push(e.latlng);drawShapes();update();});
 
  async function loadRoofs(){
   roofs=[];
@@ -648,7 +674,7 @@ window.addEventListener('DOMContentLoaded',()=>{
    map.setView(pt,15);if(Q.alwaysMap&&Q.ai)setView(true);
    msg.textContent=where+' is outside the area '+Q.owner+' covers (up to '+Q.maxMin+' min drive from '+b.label+(mins!=null?'; it’s about '+Math.round(mins)+' min':'')+'). Call '+Q.owner+' to check.';
    update();return;}
-  homePt=pt;place=where;travelKm=km;prop.land=null;prop.house=null;prop.cl=undefined;prop.pts=null;photo=null;aiDone=false;adjMode=false;drawProp();
+  homePt=pt;place=where;travelKm=km;prop.land=null;prop.house=null;prop.cl=undefined;prop.pts=null;photo=null;aiDone=false;adjMode=false;hist=[];aiSnap=null;adding=false;drawProp();
   map.setView(homePt,20);if(home)map.removeLayer(home);
   home=L.circleMarker(homePt,{radius:8,color:'#fff',weight:3,fillOpacity:0,interactive:false}).addTo(map);
   msg.textContent='Found '+place+'.';
@@ -705,7 +731,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   targets.forEach(t=>{const got=(d[t.key]||[]).map(a=>({pts:a.points.map(p=>L.latLng(p[0],p[1])),assumed:a.assumed}));
    if(got.length){t.shapes=got;t.cur=got.length-1;any=true;if(t.key===targets[0].key&&!sel[t.svc]&&!hostJobs)toggle(t.svc,true);}});
   if(d.crosslease&&d.crosslease.part&&clInfo&&pick!=='whole')showPart(d.crosslease.part);
-  if(any){aiDone=true;targets.forEach(t=>aiArea[t.key]=sum(t));}
+  if(any){aiDone=true;targets.forEach(t=>aiArea[t.key]=sum(t));aiSnap=copyShapes();hist=[];adding=false;}
   photo=Object.assign({},photo||{},d.photo||{});
   touched=false;drawShapes();update();drawProp();return any;}
  function doneText(d){
