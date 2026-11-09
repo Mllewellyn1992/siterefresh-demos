@@ -630,7 +630,7 @@ window.addEventListener('DOMContentLoaded',()=>{
  function applyAI(d){
   let any=false;
   targets.forEach(t=>{const got=(d[t.key]||[]).map(a=>({pts:a.points.map(p=>L.latLng(p[0],p[1])),assumed:a.assumed}));
-   if(got.length){t.shapes=got;t.cur=got.length-1;any=true;if(t.key===targets[0].key&&!sel[t.svc])toggle(t.svc,true);}});
+   if(got.length){t.shapes=got;t.cur=got.length-1;any=true;if(t.key===targets[0].key&&!sel[t.svc]&&!hostJobs)toggle(t.svc,true);}});
   if(d.crosslease&&d.crosslease.part&&clInfo&&pick!=='whole')showPart(d.crosslease.part);
   if(any){aiDone=true;targets.forEach(t=>aiArea[t.key]=sum(t));}
   photo=Object.assign({},photo||{},d.photo||{});
@@ -690,7 +690,14 @@ window.addEventListener('DOMContentLoaded',()=>{
  }
  if(Q.ai)setHow(true);
  setView(!!(Q.ai||Q.remote));   // remote: assume on until the check says otherwise (no map flash)
- toggle(targets[0].svc,true);
+ // Embedded with ?jobs=lawn,wash (ticked on the host site's own form): start with those jobs, and the host page can change
+ // them later with postMessage({srJobs:[...]}); &nojobs=1 hides our own job buttons so the host's tick boxes are the only ones
+ const qs_=new URLSearchParams(location.search),preJobs=(qs_.get('jobs')||'').split(',').filter(id=>Q.services.some(s=>s.id===id));
+ const hostJobs=qs_.has('jobs');
+ if(preJobs.length)preJobs.forEach(id=>toggle(id,true));else if(!hostJobs)toggle(targets[0].svc,true);
+ if(qs_.get('nojobs')){pills.hidden=true;const st=pills.previousElementSibling;if(st&&st.classList.contains('qt-step'))st.hidden=true;}
+ addEventListener('message',e=>{if(e.source!==parent||!e.data||!Array.isArray(e.data.srJobs))return;
+  Q.services.forEach(s=>{const on=e.data.srJobs.includes(s.id);if(!!sel[s.id]!==on)toggle(s.id,on);});});
  window.__qt={map,targets};
 });
 </script>
