@@ -35,7 +35,8 @@ table{width:100%;border-collapse:collapse}td{padding:.6rem 0;border-bottom:1px s
  const g=L.featureGroup().addTo(map);
  d.s.forEach(([lab,col,m2,pl,est])=>L.polygon(dec5(pl),{color:'#fff',weight:2,dashArray:est?'6 5':null,fillColor:col,fillOpacity:.45}).bindTooltip(esc(lab)+': '+m2+' m²').addTo(g));
  if(d.h)L.circleMarker(d.h,{radius:6,color:'#fff',weight:2,fillColor:'#111',fillOpacity:1}).addTo(g);
- if(g.getLayers().length>1||d.s.length)map.fitBounds(g.getBounds(),{padding:[30,30],maxZoom:20});else if(d.h)map.setView(d.h,19);else map.setView([-41,174],5);
+ const fit=()=>{map.invalidateSize();if(g.getLayers().length>1||d.s.length){map.fitBounds(g.getBounds(),{padding:[24,24],maxZoom:20});if(map.getZoom()<19)map.setZoom(19);}else if(d.h)map.setView(d.h,19);else map.setView([-41,174],5);};
+ fit();addEventListener('load',fit);
  let h=d.l.map(([t,de,p])=>'<tr><td><b>'+esc(t)+'</b> '+esc(de)+'</td><td>'+esc(p)+'</td></tr>').join('');
  const by={};d.s.forEach(([lab,col,m2])=>{by[lab]=by[lab]||{col,m2:0,n:0};by[lab].m2+=m2;by[lab].n++;});
  h+=Object.entries(by).map(([lab,v])=>'<tr><td><span class="sw" style="background:'+esc(v.col)+'"></span>'+esc(lab)+(v.n>1?' ('+v.n+' areas)':'')+'</td><td>'+v.m2+' m²</td></tr>').join('');
