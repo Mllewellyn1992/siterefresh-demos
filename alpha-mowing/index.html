@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Alpha Lawn Mowing | Lawn mowing and edging in Hamilton</title>
+<title>Alpha Lawn Mowing | Lawn mowing and edging in Hamilton</title><link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2064%2056%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20stroke%3D%22%231f4d2b%22%20stroke-width%3D%223.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%2025%2032%205l27%2020%22/%3E%3Cpath%20d%3D%22M14%2030v20h36V22%22/%3E%3Cpath%20d%3D%22M14%2022v3%22/%3E%3Cpath%20d%3D%22M23%2047c-6-7-5-15%203-18%204%207%202%2014-3%2018z%22/%3E%3Cpath%20d%3D%22M29%2046c0-9%205-14%2014-15%200%209-5%2014-14%2015z%22/%3E%3Cpath%20d%3D%22M50%2035h-5M50%2041h-5%22/%3E%3C/svg%3E">
 <meta name="description" content="Regular and one-off lawn mowing, edging and section tidy-ups from Sreeju and the Alpha team, across Hamilton.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Onest:wght@400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
@@ -239,7 +239,7 @@ footer p{margin:.3rem 0;color:var(--color-muted)}
  </div>
  <figure class="photo"><img src="img/hero_lawn.jpg" alt="A freshly mown, striped lawn beside a brick house, with a leaf blower on the grass" width="800" height="800" fetchpriority="high"><figcaption>A lawn just mown and edged by the Alpha team.</figcaption></figure>
 </div></section>
-<div class="figs" role="list" aria-label="At a glance"><div class="wrap"><div class="fig"><span class="fig-n">4.9</span><span class="fig-l">Google rating</span></div><div class="fig"><span class="fig-n">74</span><span class="fig-l">Google reviews, 70 of them 5 stars</span></div><div class="fig"><span class="fig-n">60s</span><span class="fig-l">Quotes in a minute</span></div></div></div>
+<div class="figs" role="list" aria-label="At a glance"><div class="wrap"><div class="fig" role="listitem"><span class="fig-n">4.9</span><span class="fig-l">Google rating</span></div><div class="fig" role="listitem"><span class="fig-n">74</span><span class="fig-l">Google reviews, 70 of them 5 stars</span></div><div class="fig" role="listitem"><span class="fig-n">60s</span><span class="fig-l">Quotes in a minute</span></div></div></div>
 <section class="reviews" id="reviews" aria-labelledby="rv"><div class="wrap">
  <div class="rv-top"><div class="rv-h"><h2 id="rv">What Hamilton customers say</h2><p>70 of our 74 Google reviews are five stars. A few, word for word:</p></div>
  <figure class="lead-rev"><blockquote>&ldquo;Brilliant job every time. Lawn looks perfect, edges are sharp, and they&#x27;re always on time. Sreeju is reliable, friendly, and great value. Highly recommend!&rdquo;</blockquote><figcaption>asakh s <span>· Google review, 6 months ago</span></figcaption></figure></div>
@@ -530,9 +530,11 @@ window.addEventListener('DOMContentLoaded',()=>{
  const near=pt=>Q.area?SR.inArea(pt.lat,pt.lng,Q.area):dist(Q.base,pt)/1000<=Q.maxMin*1.1;
  const ROADW=new Set(['st','street','rd','road','ave','avenue','dr','drive','pl','place','cres','crescent','tce','terrace','lane','ln','way','cl','close','ct','court','hwy','highway','sq','square','pde','parade','nz','new','zealand']);
  const fold=t=>(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/['’`]/g,'').replace(/\bsaint\b/g,'st').replace(/\bmount\b/g,'mt');
- // every word typed (apart from the number and road types) must start a word of the address; the number must match too
- function sameAddr(q,txt,hn){const ws=fold(q).replace(/,/g,' ').split(/\s+/).filter(w=>w&&!/^\d/.test(w)&&!ROADW.has(w)),tt=fold(txt).split(/[\s,\/-]+/);
-  if(!ws.length||!ws.every(w=>tt.some(t=>t.startsWith(w))))return false;
+ // every street word typed (apart from the number and road types) must start a word of the address, and at least one
+ // place word after the comma ("Auckland Central" vs OSM's "City Centre, Auckland"); the number must match too
+ function sameAddr(q,txt,hn){const wd=x=>x.split(/\s+/).filter(w=>w&&!/^\d/.test(w)&&!ROADW.has(w)),fq=fold(q),c=fq.indexOf(','),
+   ws=wd(c<0?fq:fq.slice(0,c)),pw=c<0?[]:wd(fq.slice(c+1).replace(/,/g,' ')),tt=fold(txt).split(/[\s,\/-]+/),has=w=>tt.some(t=>t.startsWith(w));
+  if(!ws.length||!ws.every(has)||(pw.length&&!pw.some(has)))return false;
   const m=fold(q).match(/^\s*(\d+)([a-z]?)\b/);if(!m||hn==null)return true;const h=fold(hn),n=m[1]+m[2];
   return h===n||h.endsWith('/'+n)||(!m[2]&&h.startsWith(m[1])&&/^[a-z]$/.test(h.slice(m[1].length)));}
  function drawSug(){sug.innerHTML='';
@@ -584,6 +586,10 @@ window.addEventListener('DOMContentLoaded',()=>{
   if(picked)return goTo(L.latLng(picked.lat,picked.lng),picked.main+(picked.area?', '+picked.area:''));
   if(sugs.length)return choose(Math.max(sugSel,0));
   msg0.textContent='Finding your property…';
+  // Enter pressed before the suggestions arrived: same lookup as the suggestions first (it knows suburbs), then Nominatim
+  try{let f=await photon(q,1);if(!f.length)f=await photon(q,0);
+   if(f.length){const p=f[0].properties,area=p.district||p.locality||p.city||'';
+    return goTo(L.latLng(f[0].geometry.coordinates[1],f[0].geometry.coordinates[0]),(p.housenumber?p.housenumber+' ':'')+(p.street||p.name)+(area?', '+area:''));}}catch(e){}
   try{const b=Q.base,vb=[b.lng-0.6,b.lat+0.45,b.lng+0.6,b.lat-0.45].join(',');
    const nm=bd=>fetch('https://nominatim.openstreetmap.org/search?format=json&countrycodes=nz&limit=10'+bd+'&viewbox='+vb+'&q='+encodeURIComponent(q)).then(x=>x.json()).then(r=>r.filter(x=>sameAddr(q,x.display_name,null)));
    let r=await nm('&bounded=1');if(!r.length)r=await nm('');
@@ -708,7 +714,7 @@ window.addEventListener('DOMContentLoaded',()=>{
    <div class="dist-out" id="dist-out" aria-live="polite"><p class="dist-big">&nbsp;</p><p class="dist-sub">Your location is only used in your browser to work this out.</p></div>
    <a class="btn btn--primary dist-call" id="dist-call" href="tel:+642102950774" hidden>Call Sreeju to book</a>
   </div>
-  <div id="map" class="map" role="img" aria-label="Map of the area around Hamilton"></div>
+  <div id="map" class="map" role="region" aria-label="Map of the area around Hamilton"></div>
  </div>
 </div></section>
 <script>window.SR=window.SR||{
@@ -755,8 +761,11 @@ window.addEventListener('DOMContentLoaded',()=>{
    const nm=bd=>fetch('https://nominatim.openstreetmap.org/search?format=json&countrycodes=nz&limit=10&viewbox='+vb+bd+'&q='+encodeURIComponent(q)).then(x=>x.json());
    const near=o=>Math.hypot(+o.lat-C.lat,(+o.lon-C.lng)*Math.cos(C.lat*Math.PI/180));
    let r=await nm('&bounded=1');if(r.length)r.sort((a,b)=>near(a)-near(b));else r=await nm('');
+   // a plain town or suburb name ("Hamilton") means the town, not a local street with that name
+   if(!/[0-9]/.test(q)){const w=q.split(',')[0].trim().toLowerCase(),isPl=o=>(o.class==='place'||o.class==='boundary')&&(n=>n===w||n.startsWith(w+' '))(o.display_name.split(',')[0].trim().toLowerCase());
+    const pl=r.find(isPl)||(await nm('')).find(isPl);if(pl)r=[pl];}
    if(!r.length){say("We couldn't find that place","Try a suburb name, or just call "+C.owner+".");return;}
-   show(+r[0].lat,+r[0].lon,r[0].display_name.split(',').slice(0,2).join(','));
+   show(+r[0].lat,+r[0].lon,/[0-9]/.test(q)?q:r[0].display_name.split(',').slice(0,2).join(','));
   }catch(e){say('Map lookup is unavailable right now','Call '+C.owner+' to check.');}
  });
  document.getElementById('dist-geo').addEventListener('click',()=>{

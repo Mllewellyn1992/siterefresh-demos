@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Greg&#x27;s Lawn &amp; Garden Care | Lawn mowing and garden care in Pukekohe and Franklin</title>
+<title>Greg&#x27;s Lawn &amp; Garden Care | Lawn mowing and garden care in Pukekohe and Franklin</title><link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2064%2056%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20stroke%3D%22%231f4d2b%22%20stroke-width%3D%223.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%2025%2032%205l27%2020%22/%3E%3Cpath%20d%3D%22M14%2030v20h36V22%22/%3E%3Cpath%20d%3D%22M14%2022v3%22/%3E%3Cpath%20d%3D%22M23%2047c-6-7-5-15%203-18%204%207%202%2014-3%2018z%22/%3E%3Cpath%20d%3D%22M29%2046c0-9%205-14%2014-15%200%209-5%2014-14%2015z%22/%3E%3Cpath%20d%3D%22M50%2035h-5M50%2041h-5%22/%3E%3C/svg%3E">
 <meta name="description" content="Lawn mowing and garden care from Greg and his crew, across Pukekohe and the Franklin district. Big lawns and lifestyle blocks welcome.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@600&family=Hanken+Grotesk:wght@400;500&family=Newsreader:opsz,wght@6..72,400&display=swap" rel="stylesheet">
@@ -506,9 +506,11 @@ window.addEventListener('DOMContentLoaded',()=>{
  const near=pt=>Q.area?SR.inArea(pt.lat,pt.lng,Q.area):dist(Q.base,pt)/1000<=Q.maxMin*1.1;
  const ROADW=new Set(['st','street','rd','road','ave','avenue','dr','drive','pl','place','cres','crescent','tce','terrace','lane','ln','way','cl','close','ct','court','hwy','highway','sq','square','pde','parade','nz','new','zealand']);
  const fold=t=>(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/['’`]/g,'').replace(/\bsaint\b/g,'st').replace(/\bmount\b/g,'mt');
- // every word typed (apart from the number and road types) must start a word of the address; the number must match too
- function sameAddr(q,txt,hn){const ws=fold(q).replace(/,/g,' ').split(/\s+/).filter(w=>w&&!/^\d/.test(w)&&!ROADW.has(w)),tt=fold(txt).split(/[\s,\/-]+/);
-  if(!ws.length||!ws.every(w=>tt.some(t=>t.startsWith(w))))return false;
+ // every street word typed (apart from the number and road types) must start a word of the address, and at least one
+ // place word after the comma ("Auckland Central" vs OSM's "City Centre, Auckland"); the number must match too
+ function sameAddr(q,txt,hn){const wd=x=>x.split(/\s+/).filter(w=>w&&!/^\d/.test(w)&&!ROADW.has(w)),fq=fold(q),c=fq.indexOf(','),
+   ws=wd(c<0?fq:fq.slice(0,c)),pw=c<0?[]:wd(fq.slice(c+1).replace(/,/g,' ')),tt=fold(txt).split(/[\s,\/-]+/),has=w=>tt.some(t=>t.startsWith(w));
+  if(!ws.length||!ws.every(has)||(pw.length&&!pw.some(has)))return false;
   const m=fold(q).match(/^\s*(\d+)([a-z]?)\b/);if(!m||hn==null)return true;const h=fold(hn),n=m[1]+m[2];
   return h===n||h.endsWith('/'+n)||(!m[2]&&h.startsWith(m[1])&&/^[a-z]$/.test(h.slice(m[1].length)));}
  function drawSug(){sug.innerHTML='';
@@ -560,6 +562,10 @@ window.addEventListener('DOMContentLoaded',()=>{
   if(picked)return goTo(L.latLng(picked.lat,picked.lng),picked.main+(picked.area?', '+picked.area:''));
   if(sugs.length)return choose(Math.max(sugSel,0));
   msg0.textContent='Finding your property…';
+  // Enter pressed before the suggestions arrived: same lookup as the suggestions first (it knows suburbs), then Nominatim
+  try{let f=await photon(q,1);if(!f.length)f=await photon(q,0);
+   if(f.length){const p=f[0].properties,area=p.district||p.locality||p.city||'';
+    return goTo(L.latLng(f[0].geometry.coordinates[1],f[0].geometry.coordinates[0]),(p.housenumber?p.housenumber+' ':'')+(p.street||p.name)+(area?', '+area:''));}}catch(e){}
   try{const b=Q.base,vb=[b.lng-0.6,b.lat+0.45,b.lng+0.6,b.lat-0.45].join(',');
    const nm=bd=>fetch('https://nominatim.openstreetmap.org/search?format=json&countrycodes=nz&limit=10'+bd+'&viewbox='+vb+'&q='+encodeURIComponent(q)).then(x=>x.json()).then(r=>r.filter(x=>sameAddr(q,x.display_name,null)));
    let r=await nm('&bounded=1');if(!r.length)r=await nm('');
