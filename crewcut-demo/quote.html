@@ -49,6 +49,7 @@ body.emb .w{padding-top:1rem}</style></head><body><div class="w">
   if(d.cu&&d.cu.n)c.push(['Customer',esc(d.cu.n)+(d.cu.m?'<br><small>'+esc(d.cu.m)+'</small>':'')]);
   if(d.cu&&d.cu.day)c.push(['Wants it',esc(d.cu.day)]);
   c.push(['Cross-lease',x.cl?'Yes, '+x.cl+' homes':'No']);
+  if(d.z&&d.z.f!=null)c.push(['Lawn slope',d.z.f<1?'Flat':'Rises about '+(Math.round(d.z.f*2)/2)+' m']);
   if(x.ts)c.push(['Asked',new Date(x.ts).toLocaleString('en-NZ',{weekday:'short',day:'numeric',month:'short',hour:'numeric',minute:'2-digit'})]);
   $('job').innerHTML=c.map(([k,v])=>'<div><span>'+k+'</span><b>'+v+'</b></div>').join('');$('job').hidden=false;}
  if(d.cu&&d.cu.note)$('n').insertAdjacentHTML('beforebegin','<p class="cnote"><b>Customer note:</b> '+esc(d.cu.note)+'</p>');
@@ -59,13 +60,17 @@ body.emb .w{padding-top:1rem}</style></head><body><div class="w">
  const fit=()=>{map.invalidateSize();if(g.getLayers().length>1||d.s.length){map.fitBounds(g.getBounds(),{padding:[24,24],maxZoom:20});if(map.getZoom()<19)map.setZoom(19);}else if(d.h)map.setView(d.h,19);else map.setView([-41,174],5);};
  fit();addEventListener('load',fit);
  if(x&&x.sec)try{L.polygon(dec5(x.sec),{color:'#ff4fd8',weight:2,dashArray:'5 5',fill:false,interactive:false}).addTo(map);}catch(e){}
+ const dec6=s=>dec5(s).map(([a,b])=>[a/10,b/10]);
+ try{(d.z&&d.z.n||[]).forEach(s=>L.polyline(dec6(s),{color:'#fff',weight:1.3,opacity:.65,interactive:false}).addTo(map));
+  (d.tr||[]).forEach(([a,b,h])=>L.circleMarker([a,b],{radius:7,color:'#fff',weight:2,fillColor:'#e8590c',fillOpacity:1}).bindTooltip('Tree'+(h!=null?' '+Math.round(h)+' m':''),{permanent:true,direction:'top',offset:[0,-6]}).addTo(map));}catch(e){}
  let h=d.l.map(([t,de,p])=>'<tr><td><b>'+esc(t)+'</b> '+esc(de)+'</td><td>'+esc(p)+'</td></tr>').join('');
  const by={};d.s.forEach(([lab,col,m2])=>{by[lab]=by[lab]||{col,m2:0,n:0};by[lab].m2+=m2;by[lab].n++;});
  h+=Object.entries(by).map(([lab,v])=>'<tr><td><span class="sw" style="background:'+esc(v.col)+'"></span>'+esc(lab)+(v.n>1?' ('+v.n+' areas)':'')+'</td><td>'+v.m2+' m²</td></tr>').join('');
  h+=(d.k||[]).map(([lab,m])=>'<tr><td><span class="sw" style="background:#ff3b3b"></span>'+esc(lab)+' (measured on the photo)</td><td>'+m+' m</td></tr>').join('');
  if(d.t)h+='<tr><td colspan="2">'+esc(d.t)+'</td></tr>';
  h+='<tr class="tot"><td>Estimate</td><td>$'+d.r[0]+'–$'+d.r[1]+'</td></tr>';$('t').innerHTML=h;
- const notes=[];if(d.s.some(x=>x[4]))notes.push('Dashed areas run under trees or a roof, so they were estimated.');
+ const notes=[];if(d.z&&d.z.i)notes.push('The faint white lines on the photo are height lines, '+d.z.i+' m apart.');
+ if((d.tr||[]).length)notes.push('Orange dots: the trees the customer marked, with how tall each is.');if(d.s.some(x=>x[4]))notes.push('Dashed areas run under trees or a roof, so they were estimated.');
  if(d.p&&d.p.d)notes.push('Photo taken '+new Date(d.p.d).toLocaleDateString('en-NZ',{day:'numeric',month:'short',year:'numeric'})+'.'+(d.p.alt?' A second photo from '+esc(d.p.alt)+' was also used because of shade.':''));
  if(d.p&&d.p.nh)notes.push('Warning: the photo is older than the house ('+d.p.nh+' m² of building isn’t in it), so check the lawn on site.');
  if(d.j)notes.push('The customer '+esc(d.j.replace(/^I adjusted the drawing: /,'adjusted the drawing: ').replace(/I adjusted it/g,'they adjusted it'))+' (the price allows up to the owner’s limit).');
