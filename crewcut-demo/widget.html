@@ -372,7 +372,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   drawRoofs();update();
  }
  const shapeLayer=L.layerGroup().addTo(map), roofLayer=L.layerGroup().addTo(map);
- const sum=t=>t.shapes.reduce((a,s)=>a+area(s.pts),0);
+ const sum=t=>t.shapes.reduce((a,s)=>a+Math.round(area(s.pts)),0);   // whole m² per shape, so the parts always add up to the total shown
  const roofLen=()=>roofs.filter(r=>r.on).reduce((a,r)=>a+perim(r.pts),0);
 
  function drawShapes(){
