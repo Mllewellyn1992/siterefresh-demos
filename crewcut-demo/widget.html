@@ -706,6 +706,7 @@ window.addEventListener('DOMContentLoaded',()=>{
    if(!r||r.mins>(r.t.max_min||Q.maxMin)){
     if(home){map.removeLayer(home);home=null;}homePt=null;travelKm=null;map.setView(pt,15);if(Q.alwaysMap&&Q.ai)setView(true);
     msg.textContent='There’s no '+Q.brand+' crew near '+where+' yet'+(r?' (the closest, '+r.t.owner+', is about '+Math.round(r.mins)+' min away)':'')+'. Call '+Q.brandTel+' to check.';
+    try{dispatchEvent(new CustomEvent('sr-outside',{detail:{place:where,near:r?r.t.owner:null,mins:r&&isFinite(r.mins)?Math.round(r.mins):null,pt:[+(pt.lat!=null?pt.lat:pt[0]).toFixed(4),+(pt.lng!=null?pt.lng:pt[1]).toFixed(4)],ts:Date.now()}}));}catch(e){}
     Q.crew=null;$('qt-area').textContent='Type your address and we’ll find your local '+Q.brand+' crew.';drawProp();update();return;}
    useTerr(r.t);}
   const b=Q.base;
@@ -847,6 +848,6 @@ window.addEventListener('DOMContentLoaded',()=>{
 </script><script>(function(){let last=0;const send=()=>{const h=Math.ceil(document.documentElement.getBoundingClientRect().height);
  if(h!==last){last=h;parent.postMessage({srQuoter:1,height:h},'*');}};
  new ResizeObserver(send).observe(document.documentElement);addEventListener('load',send);setInterval(send,1000);})();</script>
-<script>document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('#qt-send');if(!a||parent===window||!window.__srJob)return;e.preventDefault();parent.postMessage({srBook:window.__srJob},location.origin);},true);</script>
+<script>document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('#qt-send');if(!a||parent===window||!window.__srJob)return;e.preventDefault();parent.postMessage({srBook:window.__srJob},location.origin);},true);addEventListener('sr-outside',e=>{const o=e.detail,K='crewcutDemoOutside';let a=[];try{a=JSON.parse(localStorage.getItem(K))||[]}catch(x){}a=a.filter(x=>x.place!==o.place);a.push(o);try{localStorage.setItem(K,JSON.stringify(a.slice(-50)))}catch(x){}const m=document.getElementById('qt-findmsg');if(m)m.textContent+=' We’ve noted your address so Crewcut can see where people want a crew.';});</script>
 </body>
 </html>

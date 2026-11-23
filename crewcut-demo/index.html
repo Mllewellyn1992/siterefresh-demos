@@ -38,7 +38,8 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:26px 16px 40p
 .sum ul{margin:6px 0 0;padding-left:18px}
 .f{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .f label{display:block;font-weight:700;font-size:15px;margin-bottom:4px}
-.f input,.f textarea{width:100%;font:inherit;padding:10px 12px;border:1px solid #bdbacb;border-radius:6px;background:#fff}
+.f [hidden]{display:none}
+.f input,.f textarea,.f select{width:100%;font:inherit;padding:10px 12px;border:1px solid #bdbacb;border-radius:6px;background:#fff}
 .f input:focus,.f textarea:focus{outline:3px solid var(--green);outline-offset:1px;border-color:var(--purple)}
 .f .full{grid-column:1/-1}
 .f small{color:var(--muted);font-size:13.5px}
@@ -77,7 +78,8 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:26px 16px 40p
    <div><label for="bk-n">Your name</label><input id="bk-n" name="n" autocomplete="name" required></div>
    <div><label for="bk-m">Mobile</label><input id="bk-m" name="m" type="tel" inputmode="tel" autocomplete="tel" placeholder="021 123 4567" required></div>
    <div><label for="bk-d">Day you'd like it done</label><input id="bk-d" name="d" type="date" required></div>
-   <div class="full"><label for="bk-t">Anything the crew should know? <small>(optional)</small></label><textarea id="bk-t" name="t" rows="2" maxlength="300" placeholder="Gate code, dog, side access, keep the clippings…"></textarea></div>
+   <div class="full" id="bk-clipw" hidden><label for="bk-c">Grass clippings</label><select id="bk-c" name="c"><option>Take them away</option><option>Leave them on the lawn</option></select></div>
+   <div class="full"><label for="bk-t">Anything the crew should know? <small>(optional)</small></label><textarea id="bk-t" name="t" rows="2" maxlength="300" placeholder="Gate code, dog, side access…"></textarea></div>
   </div>
   <p class="err" id="bk-err" role="alert"></p>
   <button class="btn" type="submit" id="bk-go">Send booking</button>
@@ -106,6 +108,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:26px 16px 40p
   $('bk-h').textContent='Book with '+job.owner;
   $('bk-sum').innerHTML='<b>'+esc(job.place||'Your property')+'</b><ul>'+job.lines.map(function(l){return '<li>'+esc(l)+'</li>'}).join('')+'</ul>'+
    '<b>About $'+job.lo+'&ndash;$'+job.hi+'</b>. '+esc(job.owner)+' checks the measurements and confirms the price before any work starts.';
+  $('bk-clipw').hidden=!job.lines.some(function(l){return /^(Lawn mowing|Ride-on mowing)/.test(l)});
   if(!dIn.value)dIn.value=iso(new Date(Date.now()+3*864e5));
   $('book').hidden=false;$('book').scrollIntoView({behavior:'smooth',block:'start'});setTimeout(function(){$('bk-n').focus({preventScroll:true})},450);
  });
@@ -118,7 +121,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:26px 16px 40p
   err.textContent='';
   var day=new Date(d+'T12:00:00').toLocaleDateString('en-NZ',{weekday:'short',day:'numeric',month:'short'});
   var id='j'+Date.now().toString(36),a=load();
-  a.push({id:id,hash:job.link.split('#')[1]||'',cu:{n:n,m:m,day:day,note:t},st:'new',ts:Date.now()});
+  a.push({id:id,hash:job.link.split('#')[1]||'',cu:{n:n,m:m,day:day,note:t,clip:$('bk-clipw').hidden?'':$('bk-c').value},st:'new',ts:Date.now()});
   var kept=save(a);
   $('book').hidden=true;
   $('sent-h').textContent='Booked with '+job.owner;

@@ -48,6 +48,7 @@ body.emb .w{padding-top:1rem}</style></head><body><div class="w">
   if(x.land)c.push(['Section',f(x.land)+' m²']);if(x.house)c.push(['House',f(x.house)+' m²']);
   if(d.cu&&d.cu.n)c.push(['Customer',esc(d.cu.n)+(d.cu.m?'<br><small>'+esc(d.cu.m)+'</small>':'')]);
   if(d.cu&&d.cu.day)c.push(['Wants it',esc(d.cu.day)]);
+  if(d.cu&&d.cu.clip)c.push(['Clippings',esc(d.cu.clip)]);
   c.push(['Cross-lease',x.cl?'Yes, '+x.cl+' homes':'No']);
   if(d.z&&d.z.f!=null)c.push(['Lawn slope',d.z.f<1?'Flat':'Rises about '+(Math.round(d.z.f*2)/2)+' m']);
   if(x.ts)c.push(['Asked',new Date(x.ts).toLocaleString('en-NZ',{weekday:'short',day:'numeric',month:'short',hour:'numeric',minute:'2-digit'})]);
