@@ -479,7 +479,7 @@ MK.dec5=(s,f)=>{f=f||1e5;let i=0,la=0,ln=0;const o=[];while(i<s.length){for(let 
 
 MK.waves='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 7c3-3 6 3 9 0s6-3 9 0"/><path d="M3 12c3-3 6 3 9 0s6-3 9 0"/><path d="M3 17c3-3 6 3 9 0s6-3 9 0"/></svg>';
 MK.shapes=(el,q,lock)=>{const off=lock?{dragging:false,boxZoom:false,keyboard:false,maxBoundsViscosity:1,bounceAtZoomLimits:false}:{};
- const map=L.map(el,Object.assign({maxZoom:21,scrollWheelZoom:true},off));MK.photo(map);const g=L.featureGroup().addTo(map);
+ const map=L.map(el,Object.assign({maxZoom:21,scrollWheelZoom:false},off));MK.wheel(map);MK.photo(map);const g=L.featureGroup().addTo(map);
  
  
  const c=q.c||{},tg=L.layerGroup().addTo(map);(c.n||[]).forEach(pl=>L.polyline(MK.dec5(pl,1e6),{color:'#fff',weight:1.2,opacity:.6,interactive:false}).addTo(tg));
@@ -510,6 +510,7 @@ MK.dot=(map,p,col)=>L.circleMarker([p.lat,p.lng],{radius:7,color:'#fff',weight:2
 
 
 MK.ROADW=new Set(['st','street','rd','road','ave','avenue','dr','drive','pl','place','cres','crescent','tce','terrace','lane','ln','way','cl','close','ct','court','hwy','highway','sq','square','pde','parade','nz','new','zealand']);
+MK.wheel=m=>{m.on('click',()=>m.scrollWheelZoom.enable());m.on('mouseout',()=>m.scrollWheelZoom.disable());};
 MK.fold=t=>(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/['’`]/g,'').replace(/\bsaint\b/g,'st').replace(/\bmount\b/g,'mt');
 MK.sameAddr=(q,txt,hn,street)=>{const wd=x=>x.split(/\s+/).filter(w=>w&&!/^\d/.test(w)&&!MK.ROADW.has(w)),fq=MK.fold(q),c=fq.indexOf(','),
   ws=wd(c<0?fq:fq.slice(0,c)),pw=c<0?[]:wd(fq.slice(c+1).replace(/,/g,' ')),tt=MK.fold(txt).split(/[\s,\/-]+/),has=w=>tt.some(t=>t.startsWith(w));
@@ -518,16 +519,23 @@ MK.sameAddr=(q,txt,hn,street)=>{const wd=x=>x.split(/\s+/).filter(w=>w&&!/^\d/.t
  const fm=fq.match(/^\s*(\d+[a-z]?)\/(\d+[a-z]?)\b/);if(fm&&hn!=null){const h=MK.fold(hn);return h===fm[1]+'/'+fm[2]||h===fm[2];}
  const m=fq.match(/^\s*(\d+)([a-z]?)\b/);if(!m||hn==null)return true;const h=MK.fold(hn),n=m[1]+m[2];
  return h===n||h.endsWith('/'+n)||(!m[2]&&h.startsWith(m[1])&&/^[a-z]$/.test(h.slice(m[1].length)));};
+MK.ABBR={rd:'Road',ave:'Avenue',av:'Avenue',dr:'Drive',pl:'Place',cres:'Crescent',cr:'Crescent',tce:'Terrace',ln:'Lane',cl:'Close',ct:'Court',hwy:'Highway',pde:'Parade',gr:'Grove',mt:'Mount'};
+MK.expand=t=>{const w=t.replace(/[.,]/g,' ').split(/\s+/).filter(Boolean);return w.map((x,i)=>{const l=x.toLowerCase(),pv=(w[i-1]||'').toLowerCase();
+ if(l==='st')return !i||/^\d/.test(pv)||MK.ROADW.has(pv)?'Saint':'Street';return MK.ABBR[l]||x;}).join(' ');};
+MK.looseAddr=(q,hn,street)=>{const fq=MK.fold(q).replace(/,/g,' '),num=(fq.match(/^\s*(\d+[a-z]?(?:\/\d+[a-z]?)?)/)||[])[1];if(!num||hn==null)return false;
+ const tw=fq.split(/\s+/).filter(w=>w&&!/^\d/.test(w)&&!MK.ROADW.has(w)),sw=MK.fold(street).split(/[\s,\/-]+/).filter(w=>w&&!MK.ROADW.has(w));
+ return !!sw.length&&sw.includes(tw[0])&&sw.every(w=>tw.includes(w))&&MK.sameAddr(num+' '+sw.join(' '),street,hn,street);};
 MK.addr=(inp,sug,onPick,onClear,onNone)=>{let st=null,sn=0;
  inp.addEventListener('input',()=>{if(onClear)onClear();if(onNone)onNone(false);clearTimeout(st);const q=inp.value.trim().replace(/^(?:unit|flat|apartment|apt)\.?\s*(\d+[a-z]?)\s*[,\/]?\s*(?=\d)/i,'$1/').replace(/^(\d+[a-z]?)\s*\/\s*(?=\d)/,'$1/'),fl=q.match(/^(\d+[a-z]?)\/(\d+[a-z]?)\s+(.+)$/i);if(q.length<4){sug.hidden=true;return;}
-  st=setTimeout(async()=>{const k=++sn,ask=t=>fetch('https://photon.komoot.io/api/?limit=25&lang=en&layer=house&layer=street&bbox=166,-47.5,179,-34&q='+encodeURIComponent(t)).then(x=>x.json());
-   try{let d=await ask(fl?fl[2]+' '+fl[3]:q);if(k!==sn)return;const ok=x=>{const p=x.properties;return p.countrycode==='NZ'&&(p.street||p.name)&&MK.sameAddr(q,[p.street||p.name,p.district,p.locality,p.city,p.county].join(' '),p.housenumber==null?null:p.housenumber,p.street||p.name);};
+  st=setTimeout(async()=>{const k=++sn,ask=t=>fetch('https://photon.komoot.io/api/?limit=25&lang=en&layer=house&layer=street&bbox=166,-47.5,179,-34&q='+encodeURIComponent(MK.expand(t))).then(x=>x.json());
+   try{let d=await ask(fl?fl[2]+' '+fl[3]:q);if(k!==sn)return;let ok=x=>{const p=x.properties;return p.countrycode==='NZ'&&(p.street||p.name)&&MK.sameAddr(q,[p.street||p.name,p.district,p.locality,p.city,p.county,p.state].join(' '),p.housenumber==null?null:p.housenumber,p.street||p.name);};
+    const lo=x=>{const p=x.properties;return p.countrycode==='NZ'&&!!(p.street||p.name)&&MK.looseAddr(q,p.housenumber==null?null:p.housenumber,p.street||p.name);};if(!d.features.some(ok)&&d.features.some(lo))ok=lo;
     
     const num=fl?fl[1]+'/'+fl[2]:(q.match(/^\s*(\d+[a-zA-Z]?)\b/)||[])[1];if(num&&!d.features.some(ok)){d=await ask(fl?fl[3]:q.replace(/^\s*\d+[a-zA-Z]?\s*/,''));if(k!==sn)return;d.features=d.features.filter(x=>!x.properties.housenumber);}
     let fs=d.features.filter(ok);if(fl){const ex=fs.filter(x=>MK.fold(x.properties.housenumber||'')===MK.fold(fl[1]+'/'+fl[2]));if(ex.length)fs=ex;}
     const houses=fs.filter(x=>x.properties.housenumber);if(/^\s*\d/.test(q)&&houses.length)fs=houses;
     const seen=new Set();sug.innerHTML='';
-    for(const x of fs){const p=x.properties,area=p.district||p.locality||p.city||'',label=[(p.housenumber?(fl&&MK.fold(p.housenumber)===MK.fold(fl[2])?fl[1]+'/'+fl[2]:p.housenumber)+' ':num?num+' ':'')+(p.street||p.name),area,p.city&&p.city!==area?p.city:''].filter(Boolean).join(', ');
+    for(const x of fs){const p=x.properties,city=p.state==='Auckland'?'Auckland':p.city,area=p.district||p.locality||p.city||'',label=[(p.housenumber?(fl&&MK.fold(p.housenumber)===MK.fold(fl[2])?fl[1]+'/'+fl[2]:p.housenumber)+' ':num?num+' ':'')+(p.street||p.name),area,city&&city!==area?city:''].filter(Boolean).join(', ');
      if(seen.has(label))continue;seen.add(label);if(seen.size>6)break;
      const li=document.createElement('li');li.setAttribute('role','option');li.tabIndex=0;li.textContent=label;
      const pick=()=>{inp.value=label;sug.hidden=true;inp.setAttribute('aria-expanded','false');onPick({lat:x.geometry.coordinates[1],lng:x.geometry.coordinates[0],label,street:!p.housenumber&&/^\d/.test(q)});};
@@ -828,7 +836,7 @@ addEventListener('DOMContentLoaded',()=>{const E=MK.esc,s=load();
   catch(err){b.disabled=false;msg.textContent=MK.err(err);}});
  $('pjobs').addEventListener('submit',async e=>{if(e.target.dataset.done)return;e.preventDefault();const f=e.target,id=+f.dataset.bid,j=D.jobs.find(x=>x.id===id),msg=f.querySelector('.mk-msg'),b=f.querySelector('button[type=submit]');
   const same=f.pick.value==='same';if(!same&&!f.day.value){msg.textContent=MK.err('day');return;}
-  if(f.price&&!confirm('Send $'+(+f.price.value)+'? You can’t change it after, only pull it.'))return;
+  if(f.price&&!confirm('Send $'+(+f.price.value)+'? Once sent, it can’t be changed.'))return;
   b.disabled=true;msg.textContent='Sending…';
   try{await MK.call('/market/bid',{t,request:id,price:f.price?+f.price.value:j.bid.price,day:same?j.day:f.day.value,time:same?j.time:f.time.value,
     covers:j.can.length>1?[...f.querySelectorAll('[name=cv]:checked')].map(x=>x.value):j.can,note:f.note.value});await load();
