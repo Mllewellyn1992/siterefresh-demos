@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Instant lawn prices: Crewcut demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;600&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#3D2D7A;--purple-2:#2c2059;--green:#B1CD49;--ink:#1a1a1a;--muted:#5b5870;--paper:#ffffff;--paper-2:#f3f4f6;--rule:#e3e2ec}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 Lato,Arial,sans-serif}
+.demo{background:var(--green);color:#1d2410;text-align:center;font-weight:700;font-size:14px;padding:8px 16px}
+header{background:var(--purple);color:#fff;padding:44px 16px 40px}
+.wrap{max-width:860px;margin:0 auto}
+h1{font:600 clamp(28px,5vw,42px)/1.15 'Roboto Slab',Georgia,serif;margin:0 0 14px}
+.lede{font-size:19px;max-width:40em;margin:0;color:#e9e6f5}
+.steps{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;counter-reset:s}
+.steps li{background:var(--purple-2);border-radius:6px;padding:16px;counter-increment:s;color:#f1effa;font-size:15.5px}
+.steps li::before{content:counter(s);display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--green);color:#1d2410;font-weight:700;margin-bottom:8px}
+.steps b{display:block;color:#fff;margin-bottom:2px}
+main{padding:34px 16px 20px}
+h2{font:600 24px/1.25 'Roboto Slab',Georgia,serif;color:var(--purple);margin:0 0 6px}
+.note{color:var(--muted);margin:0 0 18px;font-size:15.5px}
+.box{border:1px solid var(--rule);border-radius:6px;padding:8px}
+.example{margin:26px 0 0;padding:16px 18px;background:var(--paper-2);border-left:4px solid var(--green);border-radius:4px}
+.example a{color:var(--purple);font-weight:700}
+footer{color:var(--muted);font-size:14px;text-align:center;padding:26px 16px 40px}
+@media (max-width:700px){.steps{grid-template-columns:1fr}header{padding:32px 16px}}
+</style>
+</head>
+<body>
+<div class="demo">Demo built for Crewcut. Example prices. Nothing you enter here is sent to Crewcut.</div>
+<header><div class="wrap">
+ <h1>Instant lawn prices, in every Crewcut region.</h1>
+ <p class="lede">A customer types their address and sees a price in about a minute, instead of waiting for a quote. The job goes straight to the local crew, with the lawn already measured.</p>
+ <ol class="steps">
+  <li><b>Type the address</b>Anywhere in NZ. It finds the nearest Crewcut region by drive time.</li>
+  <li><b>We measure it</b>The section, the lawn and the roadside berm, from the property itself. Cross-lease homes are picked up.</li>
+  <li><b>Price and job</b>The customer sees a price range. The crew gets the measured shapes to check before the first mow.</li>
+ </ol>
+</div></header>
+<main><div class="wrap">
+ <h2>Try it</h2>
+ <p class="note">This box drops into any page on crewcut.co.nz with one line of code. Prices are made-up examples; Crewcut would set its own.</p>
+ <div class="box"><script src="../embed.js" data-business="crewcut-demo"></script></div>
+ <p class="example"><b>What the crew gets.</b> Each quote comes with the measured shapes on the photo, so the crew can check it before the first mow. <a href="quote.html#eyJhIjoiNTggVGFoYXBhIENyZXNjZW50LCBNZWFkb3diYW5rIiwiaCI6Wy0zNi44Njc3NCwxNzQuODI0MzVdLCJsIjpbWyJMYXduIG1vd2luZyIsImxhd24gMjI4IG3Csiwgcm9hZHNpZGUgYmVybSA2NSBtwrIiLCIkNDXigJMkNzAiXV0sInQiOiJUcmF2ZWw6IGluY2x1ZGVkICg5IGttIGZyb20gQXVja2xhbmQpIiwiciI6WzQ1LDcwXSwicyI6W1siTGF3biIsIiMzZmFlNGEiLDE3MCwiYHdfYEZra2BqYEBCQEZFSklAR0NAQUVAQ0BCQEFFS1dSIiwwXSxbIkxhd24iLCIjM2ZhZTRhIiw1OCwieHVfYEZna2BqYEBAQkhAQEA_Qj9CP0BAP0BDQkNBQ0NFQUU_QUM_Q0AiLDBdLFsiUm9hZHNpZGUgYmVybSIsIiNjNWU4NmMiLDY1LCJwdV9gRmdrYGpgQEBIRk5EQEFCRENNXUM_IiwwXV0sImsiOltdLCJwIjp7ImQiOiIyMDI0LTAxLTMxIiwibiI6IkF1Y2tsYW5kIENvdW5jaWwgMjAyNCIsIm5oIjowLCJhbHQiOm51bGx9LCJqIjpudWxsfQ">See a real one for a Meadowbank property</a> (Crewcut Auckland, 228 m² of lawn plus a 65 m² roadside berm).</p>
+</div></main>
+<footer>A demo for discussion. Not a Crewcut website.</footer>
+</body>
+</html>
