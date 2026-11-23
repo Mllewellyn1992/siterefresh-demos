@@ -645,7 +645,7 @@ function measure(job){if(job.measure!=='pending'||busy[job.id])return;busy[job.i
 const find=(s,f)=>{const j=s.jobs.find(f);if(!j)throw 'not_found';return j;};
 function proView(j,all){const booked=j.status==='booked',q=j.quote?Object.assign({},j.quote):null;
  
- if(q&&!j.services.some(k=>k==='trees'||k==='hedge'||k==='clear')){delete q.v;delete q.vy;}
+ if(q){delete q.v;delete q.vy;}
  return {id:j.id,services:j.services,where:(booked?j.address:j.suburb)+(all?' · '+j.crew:''),km:j.drive.km,drive:j.drive,day:j.day,time:j.time,
   state:j.status==='cancelled'?'cancelled':booked?'won':'open',bid:j.bid?{price:j.bid.price,day:j.bid.day,time:j.bid.time,covers:j.bid.covers,note:j.bid.note}:null,
   quote:q,measure:j.measure,details:j.details,notes:j.notes,outline_ok:j.outline,to:booked?[j.lat,j.lng]:null,customer:booked?{name:j.name,phone:j.phone}:null,
@@ -719,9 +719,9 @@ addEventListener('DOMContentLoaded',()=>{const E=MK.esc,s=load();
     h+='<div class="mk-map mk-map--job" id="map'+j.id+'" data-shapes="'+j.id+'"'+(j.state==='won'?'':' data-lock="1"')+' role="img" aria-label="The property from above, with what we measured"></div>'
      +'<p class="mk-legend mk-legend--sm">'+Object.entries(key).map(([lab,col])=>'<span><i class="mk-sw" style="background:'+E(col)+'"></i>'+E(lab)+'</span>').join('')
      +(j.quote.y?'<span><i class="mk-sw" style="background:#ffd400"></i>This home’s part (our estimate)</span>':'')+(j.quote.p?'<span><i class="mk-sw" style="background:#fff;border:2px dotted #666"></i>Whole shared section</span>':'')
-     +(j.quote.c&&j.quote.c.i&&(j.quote.c.n||[]).length?'<span class="mk-lnk">'+MK.waves+E(String(j.quote.c.i))+' m between height lines</span>':j.quote.c?'<span>Ground is near flat</span>':'')+(j.quote.v&&j.quote.v.length?'<span><i class="cc-ht cc-htk">3 m</i>How tall each tree or hedge is</span>':'')+'</p>';}
+     +(j.quote.c&&j.quote.c.i&&(j.quote.c.n||[]).length?'<span class="mk-lnk">'+MK.waves+E(String(j.quote.c.i))+' m between height lines</span>':j.quote.c?'<span>Ground is near flat</span>':'')+'</p>';}
    h+=MK.sizes(j.quote,j.services,true);
-   if(j.details){const d=j.details,r=[];if(d.hedge)r.push(['Hedge',d.hedge.len+', '+d.hedge.h]);if(d.trees)r.push(['Trees',d.trees.n+', '+d.trees.h]);if(d.bags)r.push(['Garden bags',d.bags.n+', '+d.bags.often]);if(d.clear)r.push(['Clean up',d.clear.size+', '+d.clear.growth]);if(d.wash)r.push(['Water blasting',d.wash.what]);if(d.help)r.push(['Gardening help',d.help.hrs]);if(r.length)h+='<p class="mk-lab">What they asked for</p><ul class="mk-list">'+r.map(x=>'<li><span>'+E(x[0])+'</span><b>'+E(x[1])+'</b></li>').join('')+'</ul>';const v=j.quote&&j.quote.v;if(v&&v.length)h+='<p class="mk-muted"><b>Sense check.</b> Trees and hedges on this section are '+v.map(x=>(x[2]<2?x[2].toFixed(1):Math.round(x[2]))+' m').join(', ')+' tall'+(j.quote.vy?', as surveyed in '+E(j.quote.vy)+' (they may have grown since)':'')+'. Each one is marked on the photo.</p>';}
+   if(j.details){const d=j.details,r=[];if(d.hedge)r.push(['Hedge',d.hedge.len+', '+d.hedge.h]);if(d.trees)r.push(['Trees',d.trees.n+', '+d.trees.h]);if(d.bags)r.push(['Garden bags',d.bags.n+', '+d.bags.often]);if(d.clear)r.push(['Clean up',d.clear.size+', '+d.clear.growth]);if(d.wash)r.push(['Water blasting',d.wash.what]);if(d.help)r.push(['Gardening help',d.help.hrs]);if(r.length)h+='<p class="mk-lab">What they asked for</p><ul class="mk-list">'+r.map(x=>'<li><span>'+E(x[0])+'</span><b>'+E(x[1])+'</b></li>').join('')+'</ul>';}
    if(j.details&&j.details.clip)h+='<p class="mk-lab">Clippings: '+(j.details.clip==='yes'?'take them away':'leave them')+'</p>';
    if(j.notes)h+='<p class="mk-lab">The customer says</p><div class="mk-tags">'+j.notes.tags.map(k=>'<span class="mk-tag">'+E(D.notes[k]||k)+'</span>').join('')+'</div>'+(j.notes.other?'<p class="mk-muted">“'+E(j.notes.other)+'”</p>':'');
    if(j.outline_ok===0)h+='<p class="mk-muted">The customer says our outline isn’t quite their place. Check on the day.</p>';

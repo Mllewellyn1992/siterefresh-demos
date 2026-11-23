@@ -632,7 +632,7 @@ function measure(job){if(job.measure!=='pending'||busy[job.id])return;busy[job.i
 const find=(s,f)=>{const j=s.jobs.find(f);if(!j)throw 'not_found';return j;};
 function proView(j,all){const booked=j.status==='booked',q=j.quote?Object.assign({},j.quote):null;
  
- if(q&&!j.services.some(k=>k==='trees'||k==='hedge'||k==='clear')){delete q.v;delete q.vy;}
+ if(q){delete q.v;delete q.vy;}
  return {id:j.id,services:j.services,where:(booked?j.address:j.suburb)+(all?' · '+j.crew:''),km:j.drive.km,drive:j.drive,day:j.day,time:j.time,
   state:j.status==='cancelled'?'cancelled':booked?'won':'open',bid:j.bid?{price:j.bid.price,day:j.bid.day,time:j.bid.time,covers:j.bid.covers,note:j.bid.note}:null,
   quote:q,measure:j.measure,details:j.details,notes:j.notes,outline_ok:j.outline,to:booked?[j.lat,j.lng]:null,customer:booked?{name:j.name,phone:j.phone}:null,
