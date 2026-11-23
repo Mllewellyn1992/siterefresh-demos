@@ -372,6 +372,7 @@ input,select,textarea{font-size:max(16px,1rem);max-width:100%;min-width:0;box-si
 .cc-ht{background:#e8590c;color:#fff;font:700 11px/18px system-ui,sans-serif;text-align:center;border-radius:9px;border:1.5px solid #fff;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.4)}
 .cc-htk{display:inline-block;padding:0 .4rem;margin-right:.35rem;font-style:normal;vertical-align:middle}
 .mk-card>h2:first-child{margin-top:0}
+body[data-one] #psched,body[data-one] .cc-rg,body[data-one] #ccout,body[data-one] .mk-group{display:none}
 @media (max-width:640px){.top .wrap{flex-wrap:wrap}.cc-steps{margin-left:0;width:100%}.cc-steps a{flex:1 1 auto;justify-content:center;padding:0 .5rem;font-size:.82rem}}
 </style>
 </head>
@@ -380,7 +381,7 @@ input,select,textarea{font-size:max(16px,1rem);max-width:100%;min-width:0;box-si
 <div class="demo">Demo built for Crewcut. Example prices and sample jobs. Nothing you enter is sent to anyone: it stays in this browser.</div>
 <header class="top"><div class="wrap">
  <a class="brand" href="./"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><clipPath id="mkl"><rect width="48" height="48" rx="12"/></clipPath></defs><g clip-path="url(#mkl)"><rect width="48" height="48" fill="currentColor"/><g fill="none" stroke="#fff" stroke-opacity=".36" stroke-width="5.5"><path d="M-6 13 12 -5 24 7 36 -5 54 13"/><path d="M-6 29 12 11 24 23 36 11 54 29"/><path d="M-6 45 12 27 24 39 36 27 54 45"/><path d="M-6 61 12 43 24 55 36 43 54 61"/></g></g></svg><span><b>Crewcut</b><small>Lawn &amp; Garden</small></span></a>
- <nav class="cc-steps" aria-label="Demo views"><a href="./" aria-current="page">1. Customer asks</a><a href="pro.html">2. Crew prices it</a><a href="r.html" id="cct3">3. Customer’s price</a></nav>
+ <nav class="cc-steps" aria-label="Demo views"><a href="./" aria-current="page">1. Customer asks</a><a href="job.html">2. What the crew gets</a><a href="r.html" id="cct3">3. Customer’s price</a><a href="pro.html">All crew jobs</a></nav>
 </div></header>
 <main>
 <section class="mk-hero"><div class="wrap mk-narrow">
@@ -726,8 +727,11 @@ function proView(j,all){const booked=j.status==='booked',q=j.quote?Object.assign
   state:j.status==='cancelled'?'cancelled':booked?'won':'open',bid:j.bid?{price:j.bid.price,day:j.bid.day,time:j.bid.time,covers:j.bid.covers,note:j.bid.note}:null,
   quote:q,measure:j.measure,details:j.details,notes:j.notes,outline_ok:j.outline,to:booked?[j.lat,j.lng]:null,customer:booked?{name:j.name,phone:j.phone}:null,
   done:j.done?j.done.at:null,review:j.review,due:null,late:false,can:j.services,min_day:tomorrow()};}
-function proGet(t){const s=load(),all=t==='all',crew=TERR.find(x=>x.owner===t)||TERR[0],b=crew.base;
- const jobs=s.jobs.filter(j=>(all||j.crew===t)&&!(j.status==='cancelled'&&!j.bid));jobs.forEach(measure);
+
+MK.one=document.body.hasAttribute('data-one');
+const oneJob=s=>s.jobs.find(j=>j.id>100&&j.status!=='cancelled')||s.jobs.find(j=>j.id===1)||s.jobs[0];
+function proGet(t){const s=load(),o=MK.one?oneJob(s):null;if(o)t=o.crew;const all=t==='all',crew=TERR.find(x=>x.owner===t)||TERR[0],b=crew.base;
+ const jobs=o?[o]:s.jobs.filter(j=>(all||j.crew===t)&&!(j.status==='cancelled'&&!j.bid));jobs.forEach(measure);
  return {pro:{name:all?'Crewcut head office, all '+TERR.length+' regions':crew.owner+(crew.crew?' ('+crew.crew+')':''),contact:'',rating:null,google:null,status:'active',phone:'',address:'',mins:crew.max_min||40,years:null,
    services:Object.keys(MK.names),gear:[],gear_other:'',area:[[b.lat-.01,b.lng-.01],[b.lat+.01,b.lng-.01],[b.lat,b.lng+.012]],lat:b.lat,lng:b.lng},
   jobs:jobs.map(j=>proView(j,all)),notes:MK.notes,gear:MK.gear,today:'9999-12-31'};}   
@@ -761,7 +765,9 @@ MK.me=v=>{if(v===undefined)return get('ccCrew','all');put('ccCrew',v||'all');};
 addEventListener('storage',e=>{if(e.key===KEY||e.key===OKEY)dispatchEvent(new Event('cc-change'));});
 addEventListener('DOMContentLoaded',()=>{const E=MK.esc,s=load();
  
- const mine=s.jobs.find(j=>j.id>100)||s.jobs.find(j=>j.status==='booked')||s.jobs[0],t3=MK.$('cct3');if(t3&&mine)t3.href='r.html#'+mine.token;
+ const mine=oneJob(s),t3=MK.$('cct3');if(t3&&mine)t3.href='r.html#'+mine.token;
+ const hint=MK.$('ccone');if(hint&&MK.one){const o=oneJob(s);hint.hidden=false;hint.innerHTML=o&&o.id>100?'<b>Demo.</b> This is the job you just asked for in step 1, as '+E(o.crew)+' sees it.'
+  :'<b>Demo.</b> A sample job. Ask for a price in <a href="./">1. Customer asks</a> and your own job shows here.';}
  const rg=MK.$('ccrg');
  if(rg){rg.innerHTML='<option value="all">All regions (head office)</option>'+TERR.map(t=>'<option>'+E(t.owner)+'</option>').sort().join('');rg.value=MK.me();
   rg.addEventListener('change',()=>{MK.me(rg.value);location.hash='';location.reload();});
