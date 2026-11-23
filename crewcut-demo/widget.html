@@ -319,7 +319,7 @@ window.addEventListener('DOMContentLoaded',()=>{
  // Customer view: when the automatic measuring is on, the customer sees only their property facts and the price;
  // the photo with the measured shapes goes to the owner (the "What was measured" link in the text).
  // The map only shows for hand-drawing, when automatic measuring isn't available.
- let hideMap=false;const prop={land:null,house:null,cl:undefined,pts:null};
+ let hideMap=false,travelMin=null;const prop={land:null,house:null,cl:undefined,pts:null};
  // aiDone: the current shapes came from the automatic measuring. adjMode: the customer opened the map to adjust them
  // (owner's limit Q.adj, e.g. 0.3 = the price uses at most 30% more or less than what we measured). photo: date etc.
  let aiDone=false,adjMode=false,photo=null;const aiArea={};
@@ -559,7 +559,9 @@ window.addEventListener('DOMContentLoaded',()=>{
   return {a:place,h:homePt?[+homePt.lat.toFixed(5),+homePt.lng.toFixed(5)]:null,l:lines.map(l=>[l.t,l.o,l.p]),t:travel,r:[lo,hi],
     s:targets.filter(t=>sel[t.svc]).flatMap(t=>t.shapes.filter(x=>x.pts.length>2).map(x=>[t.f.label,t.f.color,Math.round(area(x.pts)),enc5(x.pts),x.assumed?1:0])),
     k:Object.values(lines_).filter(l=>sel[l.svc]).map(l=>[l.label,l.m,enc5(l.pts)]),
-    p:photo?{d:photo.date,n:photo.name,nh:photo.new_house_m2||0,alt:photo.alt||null}:null,j:adjNote()||null};}
+    p:photo?{d:photo.date,n:photo.name,nh:photo.new_house_m2||0,alt:photo.alt||null}:null,j:adjNote()||null,
+    x:{c:Q.crew?Q.crew.owner:Q.owner,cn:Q.crew&&Q.crew.crew||null,m:travelMin!=null?Math.round(travelMin):null,km:travelKm!=null?Math.round(travelKm*10)/10:null,
+      land:prop.land?Math.round(prop.land):null,house:prop.house?Math.round(prop.house):null,cl:prop.cl||0,sec:prop.pts&&prop.pts.length>2?enc5(prop.pts):null,ts:Date.now()}};}
  function checkLink(lines,travel,lo,hi){
   try{const d=quoteData(lines,travel,lo,hi);
    const b=new TextEncoder().encode(JSON.stringify(d));let bin='';b.forEach(c=>bin+=String.fromCharCode(c));
@@ -682,7 +684,7 @@ window.addEventListener('DOMContentLoaded',()=>{
    map.setView(pt,15);if(Q.alwaysMap&&Q.ai)setView(true);
    msg.textContent=Q.market?where+' is outside the area this trial covers (up to '+Q.maxMin+' min drive from '+b.label+').':where+' is outside the area '+Q.owner+' covers (up to '+Q.maxMin+' min drive from '+b.label+(mins!=null?'; it’s about '+Math.round(mins)+' min':'')+'). Call '+Q.owner+' to check.';
    update();return;}
-  homePt=pt;place=where;travelKm=km;prop.land=null;prop.house=null;prop.cl=undefined;prop.pts=null;photo=null;aiDone=false;adjMode=false;hist=[];aiSnap=null;adding=false;drawProp();
+  homePt=pt;place=where;travelKm=km;travelMin=mins;prop.land=null;prop.house=null;prop.cl=undefined;prop.pts=null;photo=null;aiDone=false;adjMode=false;hist=[];aiSnap=null;adding=false;drawProp();
   map.setView(homePt,20);if(home)map.removeLayer(home);
   home=L.circleMarker(homePt,{radius:8,color:'#fff',weight:3,fillOpacity:0,interactive:false}).addTo(map);
   msg.textContent='Found '+place+'.';
