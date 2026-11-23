@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Instant lawn prices: Crewcut demo</title>
+<title>Instant prices: Crewcut demo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;600&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -12,42 +12,122 @@
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 Lato,Arial,sans-serif}
 .demo{background:var(--green);color:#1d2410;text-align:center;font-weight:700;font-size:14px;padding:8px 16px}
+.tabs{background:var(--purple-2);display:flex;justify-content:center;gap:4px;padding:8px 16px 0;flex-wrap:wrap}
+.tabs a{color:#d9d4f0;text-decoration:none;font-weight:700;font-size:15px;padding:10px 16px;border-radius:6px 6px 0 0}
+.tabs a:hover{color:#fff}
+.tabs a[aria-current="page"]{background:var(--purple);color:#fff}
 header{background:var(--purple);color:#fff;padding:44px 16px 40px}
 .wrap{max-width:860px;margin:0 auto}
 h1{font:600 clamp(28px,5vw,42px)/1.15 'Roboto Slab',Georgia,serif;margin:0 0 14px}
-.lede{font-size:19px;max-width:40em;margin:0;color:#e9e6f5}
+.lede{font-size:19px;max-width:42em;margin:0;color:#e9e6f5}
+main{padding:30px 16px 20px}
+h2{font:600 24px/1.25 'Roboto Slab',Georgia,serif;color:var(--purple);margin:0 0 6px}
+.note{color:var(--muted);margin:0 0 18px;font-size:15.5px}
+footer{color:var(--muted);font-size:14px;text-align:center;padding:26px 16px 40px}
+@media (max-width:700px){header{padding:30px 16px}.tabs{padding:6px 8px 0}.tabs a{font-size:14px;padding:9px 10px}}
 .steps{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;counter-reset:s}
 .steps li{background:var(--purple-2);border-radius:6px;padding:16px;counter-increment:s;color:#f1effa;font-size:15.5px}
 .steps li::before{content:counter(s);display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--green);color:#1d2410;font-weight:700;margin-bottom:8px}
 .steps b{display:block;color:#fff;margin-bottom:2px}
-main{padding:34px 16px 20px}
-h2{font:600 24px/1.25 'Roboto Slab',Georgia,serif;color:var(--purple);margin:0 0 6px}
-.note{color:var(--muted);margin:0 0 18px;font-size:15.5px}
 .box{border:1px solid var(--rule);border-radius:6px;padding:8px}
-.example{margin:26px 0 0;padding:16px 18px;background:var(--paper-2);border-left:4px solid var(--green);border-radius:4px}
-.example a{color:var(--purple);font-weight:700}
-footer{color:var(--muted);font-size:14px;text-align:center;padding:26px 16px 40px}
-@media (max-width:700px){.steps{grid-template-columns:1fr}header{padding:32px 16px}}
+.panel{margin:22px 0 0;border:2px solid var(--purple);border-radius:8px;padding:22px 20px;background:#fff}
+.panel[hidden]{display:none}
+.panel h2{margin-bottom:4px}
+.sum{margin:12px 0 18px;padding:12px 14px;background:var(--paper-2);border-radius:6px;font-size:15.5px}
+.sum b{color:var(--purple)}
+.sum ul{margin:6px 0 0;padding-left:18px}
+.f{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.f label{display:block;font-weight:700;font-size:15px;margin-bottom:4px}
+.f input,.f textarea{width:100%;font:inherit;padding:10px 12px;border:1px solid #bdbacb;border-radius:6px;background:#fff}
+.f input:focus,.f textarea:focus{outline:3px solid var(--green);outline-offset:1px;border-color:var(--purple)}
+.f .full{grid-column:1/-1}
+.f small{color:var(--muted);font-size:13.5px}
+.err{color:#b3261e;font-weight:700;margin:12px 0 0;min-height:1.2em}
+.btn{display:inline-block;font:700 17px/1 Lato,Arial,sans-serif;padding:15px 22px;border-radius:6px;border:0;background:var(--purple);color:#fff;cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--purple-2)}
+.btn.g{background:var(--green);color:#1d2410}
+.btn.g:hover{background:#9fbb3a}
+.done{border-color:var(--green);background:#f7fbe9}
+.done p{margin:6px 0 16px}
+.tiny{color:var(--muted);font-size:13.5px;margin:12px 0 0}
+@media (max-width:700px){.steps{grid-template-columns:1fr}.f{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="demo">Demo built for Crewcut. Example prices. Nothing you enter here is sent to Crewcut.</div>
+<nav class="tabs" aria-label="Demo views"><a href="index.html" aria-current="page">1. What your customer sees</a><a href="inbox.html">2. What Crewcut sees</a></nav>
 <header><div class="wrap">
- <h1>Instant lawn prices, in every Crewcut region.</h1>
- <p class="lede">A customer types their address and sees a price in about a minute, instead of waiting for a quote. The job goes straight to the local crew, with the lawn already measured.</p>
+ <h1>Instant prices for every Crewcut job.</h1>
+ <p class="lede">A customer types their address, picks the jobs and sees a price in about a minute. They book, and the job lands with the local crew, the property already measured.</p>
  <ol class="steps">
-  <li><b>Type the address</b>Anywhere in NZ. It finds the nearest Crewcut region by drive time.</li>
-  <li><b>We measure it</b>The section, the lawn and the roadside berm, from the property itself. Cross-lease homes are picked up.</li>
-  <li><b>Price and job</b>The customer sees a price range. The crew gets the measured shapes to check before the first mow.</li>
+  <li><b>Type the address</b>Anywhere in NZ. It finds the nearest of Crewcut's 26 regions by drive time.</li>
+  <li><b>Pick the jobs</b>Lawns, hedges, trees, garden bags, clean-ups, water blasting, gardening help and ride-on mowing.</li>
+  <li><b>Book it</b>Name, mobile and a day. The crew gets the job with the lawn, section and house sizes.</li>
  </ol>
 </div></header>
 <main><div class="wrap">
- <h2>Try it</h2>
- <p class="note">This box drops into any page on crewcut.co.nz with one line of code. Prices are made-up examples; Crewcut would set its own.</p>
+ <h2>Try it as a customer</h2>
+ <p class="note">This box drops into any page on crewcut.co.nz with one line of code. Prices are made-up examples; Crewcut sets its own.</p>
  <div class="box"><script src="../embed.js" data-business="crewcut-demo"></script></div>
- <p class="example"><b>What the crew gets.</b> Each quote comes with the measured shapes on the photo, so the crew can check it before the first mow, plus the section and house size, cross-lease, drive time from their base, directions and a printable job sheet. <a href="quote.html#eyJhIjoiNTggVGFoYXBhIENyZXNjZW50LCBNZWFkb3diYW5rIiwiaCI6Wy0zNi44Njc3NCwxNzQuODI0MzVdLCJsIjpbWyJMYXduIG1vd2luZyIsImxhd24gMjc4IG3Csiwgcm9hZHNpZGUgYmVybSA2NSBtwrIiLCIkNTDigJMkNzUiXV0sInQiOiJUcmF2ZWw6IGluY2x1ZGVkICg5IGttIGZyb20gQXVja2xhbmQpIiwiciI6WzUwLDc1XSwicyI6W1siTGF3biIsIiMzZmFlNGEiLDE4MCwiYndfYEZpa2BqYEBKRUJFSEVBR0NCQUNARUBCQEFFS09KRUg_RiIsMF0sWyJMYXduIiwiIzNmYWU0YSIsOTgsInh1X2BGaWtgamBARE5CRj8_REM_QUJBQENFST9BP0FBQz9BQz9FQkFAIiwwXSxbIlJvYWRzaWRlIGJlcm0iLCIjYzVlODZjIiw2NSwicHVfYEZna2BqYEBBQEJEP0BAQERMQkA_QD9ARENNXUM_IiwwXV0sImsiOltdLCJwIjp7ImQiOiIyMDI0LTAxLTMxIiwibiI6IkF1Y2tsYW5kIENvdW5jaWwgMjAyNCIsIm5oIjowLCJhbHQiOm51bGx9LCJqIjpudWxsLCJ4Ijp7ImMiOiJDcmV3Y3V0IEF1Y2tsYW5kIiwiY24iOiJHdXJpbmRlcmplZXQsIEhpbWFuc2h1LCBPZmF0aSIsIm0iOjE1LCJrbSI6OC41LCJsYW5kIjo2MTMsImhvdXNlIjoxMjQsImNsIjowLCJzZWMiOiJkdl9gRmtqYGpgQHxAbUBLXV9BbEBMXFwiLCJ0cyI6MTc5NTQwNDExODQ2OH19">See a real one for a Meadowbank property</a> (Crewcut Auckland, 278 m² of lawn plus a 65 m² roadside berm).</p>
+
+ <form class="panel" id="book" hidden novalidate>
+  <h2 id="bk-h">Book this job</h2>
+  <div class="sum" id="bk-sum"></div>
+  <div class="f">
+   <div><label for="bk-n">Your name</label><input id="bk-n" name="n" autocomplete="name" required></div>
+   <div><label for="bk-m">Mobile</label><input id="bk-m" name="m" type="tel" inputmode="tel" autocomplete="tel" placeholder="021 123 4567" required></div>
+   <div><label for="bk-d">Day you'd like it done</label><input id="bk-d" name="d" type="date" required></div>
+   <div class="full"><label for="bk-t">Anything the crew should know? <small>(optional)</small></label><textarea id="bk-t" name="t" rows="2" maxlength="300" placeholder="Gate code, dog, side access, keep the clippings…"></textarea></div>
+  </div>
+  <p class="err" id="bk-err" role="alert"></p>
+  <button class="btn" type="submit" id="bk-go">Send booking</button>
+  <p class="tiny">Demo: your booking stays in this browser so you can see it in the Crewcut view. Nothing is sent to Crewcut.</p>
+ </form>
+
+ <div class="panel done" id="sent" hidden>
+  <h2 id="sent-h">Booked</h2>
+  <p id="sent-p"></p>
+  <a class="btn g" id="sent-go" href="inbox.html">Now see what Crewcut sees &rarr;</a>
+ </div>
 </div></main>
 <footer>A demo for discussion. Not a Crewcut website.</footer>
+<script>
+(function(){
+ var KEY='crewcutDemoJobs',job=null,$=function(i){return document.getElementById(i)};
+ function esc(x){return String(x).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+ function load(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return[]}}
+ function save(a){try{localStorage.setItem(KEY,JSON.stringify(a.slice(-30)));return true}catch(e){return false}}
+ function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+ var dIn=$('bk-d');dIn.min=iso(new Date(Date.now()+864e5));dIn.max=iso(new Date(Date.now()+60*864e5));
+ // The quoter (in its frame) sends the finished quote here when the customer presses Book.
+ addEventListener('message',function(e){
+  if(e.origin!==location.origin||!e.data||!e.data.srBook)return;
+  job=e.data.srBook;$('sent').hidden=true;
+  $('bk-h').textContent='Book with '+job.owner;
+  $('bk-sum').innerHTML='<b>'+esc(job.place||'Your property')+'</b><ul>'+job.lines.map(function(l){return '<li>'+esc(l)+'</li>'}).join('')+'</ul>'+
+   '<b>About $'+job.lo+'&ndash;$'+job.hi+'</b>. '+esc(job.owner)+' checks the measurements and confirms the price before any work starts.';
+  if(!dIn.value)dIn.value=iso(new Date(Date.now()+3*864e5));
+  $('book').hidden=false;$('book').scrollIntoView({behavior:'smooth',block:'start'});setTimeout(function(){$('bk-n').focus({preventScroll:true})},450);
+ });
+ $('book').addEventListener('submit',function(e){
+  e.preventDefault();if(!job)return;
+  var n=$('bk-n').value.trim(),m=$('bk-m').value.trim(),d=dIn.value,t=$('bk-t').value.trim(),err=$('bk-err'),digits=m.replace(/[\s()-]/g,'');
+  if(n.length<2){err.textContent='Add your name.';$('bk-n').focus();return}
+  if(!/^(\+?64|0)2\d{7,9}$/.test(digits)){err.textContent='Check your mobile number. It should start with 02.';$('bk-m').focus();return}
+  if(!d||d<dIn.min){err.textContent='Pick a day from tomorrow on.';dIn.focus();return}
+  err.textContent='';
+  var day=new Date(d+'T12:00:00').toLocaleDateString('en-NZ',{weekday:'short',day:'numeric',month:'short'});
+  var id='j'+Date.now().toString(36),a=load();
+  a.push({id:id,hash:job.link.split('#')[1]||'',cu:{n:n,m:m,day:day,note:t},st:'new',ts:Date.now()});
+  var kept=save(a);
+  $('book').hidden=true;
+  $('sent-h').textContent='Booked with '+job.owner;
+  $('sent-p').innerHTML=esc(job.crew?job.crew+' at '+job.owner:job.owner)+' will text '+esc(m)+' to confirm '+esc(day)+'.'+
+   (kept?'':' (This browser blocks saving, so the Crewcut view will show the sample jobs only.)');
+  $('sent-go').href='inbox.html#'+id;$('sent').hidden=false;$('sent').scrollIntoView({behavior:'smooth',block:'center'});
+ });
+})();
+</script>
 <script>if(location.hostname.endsWith("github.io")){try{fetch("https://siterefresh-hits.siterefresh-nz.workers.dev",{method:"POST",keepalive:true,headers:{"content-type":"application/json"},body:JSON.stringify({p:location.pathname+location.search,r:document.referrer})})}catch(e){}}</script>
 </body>
 </html>
