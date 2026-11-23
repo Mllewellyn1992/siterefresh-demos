@@ -329,5 +329,6 @@ if(H&&el){var p={};new Intl.DateTimeFormat('en-NZ',{timeZone:'Pacific/Auckland',
 var inp=document.querySelector('.photos input'),th=document.getElementById('thumbs');
 if(inp&&th)inp.addEventListener('change',function(){th.innerHTML='';[].slice.call(inp.files,0,6).forEach(function(f){var i=new Image();i.alt='';i.src=URL.createObjectURL(f);th.appendChild(i);});});
 })();</script>
+<script>if(location.hostname.endsWith("github.io")){try{fetch("https://siterefresh-hits.siterefresh-nz.workers.dev",{method:"POST",keepalive:true,headers:{"content-type":"application/json"},body:JSON.stringify({p:location.pathname+location.search,r:document.referrer})})}catch(e){}}</script>
 </body>
 </html>
