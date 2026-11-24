@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en-NZ"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hash Tailor | Clothing alterations in Wesley, Mt Roskill, Auckland</title><meta name="description" content="Hems, zips, resizing and remodelling for ladies&#x27; and gents&#x27; clothing. Drop it in to Hash on Richardson Road, or call first to check."><meta name="robots" content="noindex,nofollow">
+<meta property="og:title" content="Hash Tailor"><meta property="og:description" content="Hems, zips, resizing and remodelling for ladies&#x27; and gents&#x27; clothing. Drop it in to Hash on Richardson Road, or call first to check."><meta property="og:image" content="img/hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,650;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+:root{--linen:#f5efe3;--paper:#fbf8f1;--ink:#1d2340;--soft:#5a5f78;--navy:#24306b;--navy2:#18204d;--thread:#c4362c;--brass:#b98a3e;--line:#e2d8c4;
+--serif:"Fraunces",Georgia,serif;--sans:"Work Sans",system-ui,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--linen);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;
+background-image:repeating-linear-gradient(0deg,rgba(29,35,64,.018) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(29,35,64,.018) 0 1px,transparent 1px 3px)}
+img{max-width:100%;height:auto;display:block}main{overflow-x:clip}a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.demo{background:var(--navy2);color:#e9e4f5;font-size:13.5px;text-align:center;padding:8px 16px}.demo a{color:#fff}
+header{position:sticky;top:0;z-index:20;background:rgba(245,239,227,.94);backdrop-filter:blur(6px);border-bottom:1px dashed var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo b{font:650 22px/1 var(--serif);letter-spacing:-.01em}.logo b i{color:var(--thread);font-style:italic;font-weight:500}
+.logo small{display:block;font-size:11.5px;color:var(--soft);letter-spacing:.06em;text-transform:uppercase;margin-top:3px}
+nav{display:flex;gap:4px}nav a{text-decoration:none;font-weight:500;font-size:15px;padding:8px 12px;border-radius:999px;color:var(--soft)}
+nav a[aria-current]{color:var(--ink);background:#fff;box-shadow:0 0 0 1px var(--line)}
+.call{display:inline-flex;align-items:center;gap:8px;background:var(--thread);color:#fff;text-decoration:none;font-weight:600;padding:10px 16px;border-radius:999px;white-space:nowrap}
+.call:hover{background:#a92b22}
+.tape{height:14px;background:
+repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 10px) 0 0/100% 5px no-repeat,
+repeating-linear-gradient(90deg,var(--ink) 0 1.5px,transparent 1.5px 50px) 0 0/100% 9px no-repeat,#f0c64a;border-block:1px solid #c99b23}
+section{padding:72px 0}.panel{display:none}.panel.on{display:block}
+.eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--thread);font-weight:600;margin:0 0 14px}
+h1,h2,h3{font-family:var(--serif);font-weight:650;letter-spacing:-.015em;margin:0}
+h1{font-size:clamp(34px,5vw,56px);line-height:1.06}h2{font-size:clamp(28px,3.4vw,40px);line-height:1.12;margin-bottom:14px}
+h3{font-size:20px;line-height:1.25}
+.lead{font-size:18.5px;color:var(--soft);max-width:34em;margin:18px 0 26px}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:64px 0 72px}
+.frame{position:relative;padding:14px;background:var(--paper);border-radius:6px;box-shadow:0 18px 40px -22px rgba(24,32,77,.45);transform:rotate(1.2deg)}
+.frame::after{content:"";position:absolute;inset:6px;border:1.5px dashed var(--brass);border-radius:3px;pointer-events:none}
+.frame img{border-radius:2px;aspect-ratio:4/5;object-fit:cover;width:100%}
+.tag{position:absolute;left:-18px;bottom:34px;background:var(--navy);color:#fff;padding:14px 18px 14px 26px;border-radius:4px;transform:rotate(-3deg);box-shadow:0 10px 24px -12px rgba(0,0,0,.5)}
+.tag::before{content:"";position:absolute;left:10px;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--linen)}
+.tag b{display:block;font:650 26px/1 var(--serif)}.tag span{font-size:13px;opacity:.85}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;padding:13px 20px;border-radius:999px;border:1.5px solid var(--ink)}
+.btn.solid{background:var(--ink);color:var(--linen)}.btn.solid:hover{background:var(--navy)}
+.open{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-size:14.5px;color:var(--soft)}
+.dot{width:9px;height:9px;border-radius:50%;background:#9aa0b4}.dot.on{background:#2f9e5b;box-shadow:0 0 0 4px rgba(47,158,91,.18)}
+.seam{border-top:1.5px dashed var(--line)}
+.svcs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+.svc{background:var(--paper);border-radius:6px;padding:24px;position:relative}
+.svc::after{content:"";position:absolute;inset:5px;border:1.2px dashed var(--line);border-radius:4px;pointer-events:none}
+.svc svg{width:30px;height:30px;fill:none;stroke:var(--thread);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-bottom:14px}
+.svc p{color:var(--soft);margin:8px 0 0;font-size:15.5px}
+.steps{list-style:none;padding:0;margin:34px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;position:relative}
+.steps::before{content:"";position:absolute;top:22px;left:8%;right:8%;border-top:2px dashed var(--brass)}
+.steps li{position:relative;text-align:center;padding:0 10px}
+.num{display:inline-grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--navy);color:#fff;font:650 20px var(--serif);margin-bottom:14px;box-shadow:0 0 0 6px var(--linen)}
+.steps p{color:var(--soft);margin:6px 0 0;font-size:15.5px}
+.dark{background:var(--navy2);color:#ece8f6;background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.05) 1px,transparent 0);background-size:14px 14px}
+.dark .eyebrow{color:#f0c64a}.dark .lead{color:#b9b6d3}
+.revs{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 18px;margin-top:26px}
+.rev{flex:0 0 min(360px,84%);scroll-snap-align:start;margin:0;background:var(--paper);color:var(--ink);border-radius:6px;padding:26px;position:relative}
+.rev::after{content:"";position:absolute;inset:5px;border:1.2px dashed var(--line);border-radius:4px;pointer-events:none}
+.stars{color:var(--brass);letter-spacing:2px}.rev blockquote{margin:12px 0 16px;font:500 18px/1.45 var(--serif)}
+.rev figcaption{font-weight:600;font-size:14.5px}.rev figcaption span{font-weight:400;color:var(--soft)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.pull{font:italic 500 24px/1.4 var(--serif);border-left:3px solid var(--thread);padding-left:20px;margin:26px 0 0}
+.pull cite{display:block;font:400 14px var(--sans);color:var(--soft);margin-top:8px;font-style:normal}
+.gal{columns:3 260px;column-gap:16px;margin-top:32px}
+.ph{break-inside:avoid;margin:0 0 16px;background:var(--paper);padding:8px 8px 10px;border-radius:4px;box-shadow:0 8px 20px -16px rgba(24,32,77,.5)}
+.ph img{border-radius:2px}.ph figcaption{font-size:13.5px;color:var(--soft);padding:8px 4px 0}
+.visit{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;margin-top:30px}
+#map{height:380px;border-radius:6px;border:1px solid var(--line);z-index:1}
+.card{background:var(--paper);border-radius:6px;padding:24px}
+.hours{width:100%;border-collapse:collapse;margin-top:6px}.hours th,.hours td{text-align:left;padding:7px 0;border-bottom:1px dashed var(--line);font-weight:400}
+.hours td{text-align:right}.hours tr.today th,.hours tr.today td{font-weight:600;color:var(--thread)}
+.contact{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:30px}
+.tile{display:block;text-decoration:none;background:var(--paper);border-radius:6px;padding:28px;position:relative}
+.tile::after{content:"";position:absolute;inset:5px;border:1.2px dashed var(--line);border-radius:4px}
+.tile b{display:block;font:650 24px var(--serif);margin-top:6px}.tile span{color:var(--soft)}
+footer{background:var(--ink);color:#b9b6d3;padding:40px 0 96px;font-size:14.5px}footer b{color:#fff;font-family:var(--serif);font-size:20px}
+footer a{color:#fff}
+.sticky{display:none}
+.tabs{display:none;gap:6px;overflow-x:auto;padding:10px 20px;border-bottom:1px dashed var(--line)}
+.tabs a{flex:0 0 auto;text-decoration:none;font-weight:500;font-size:14.5px;padding:7px 14px;border-radius:999px;color:var(--soft);background:var(--paper)}
+.tabs a[aria-current]{color:#fff;background:var(--ink)}
+@media (max-width:860px){
+ nav{display:none}.hero,.split,.visit{grid-template-columns:1fr}.hero{gap:34px;padding-top:36px}
+ .svcs{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr;gap:22px}.steps::before{display:none}
+ .steps li{text-align:left;display:grid;grid-template-columns:46px 1fr;column-gap:16px}.steps li .num{grid-row:span 2;margin:0}
+ .contact{grid-template-columns:1fr}.bar .call{display:none}section{padding:52px 0}
+ .tabs{display:flex}
+ .sticky{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(245,239,227,.96);border-top:1px dashed var(--line)}
+ .sticky a{flex:1;justify-content:center}
+}
+@media (max-width:520px){.svcs{grid-template-columns:1fr}.tag{left:8px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head>
+<body>
+<div class="demo">This is a free mock-up made by <a href="https://siterefresh.co.nz">SiteRefresh</a>. It isn't live yet. Hash Tailor can claim it any time.</div>
+<header><div class="wrap bar">
+ <a class="logo" href="#home"><span><b>Hash <i>Tailor</i></b><small>Ladies&#x27; and gents&#x27; clothing alterations</small></span></a>
+ <nav aria-label="Pages"><a href="#home">Home</a><a href="#work">Work</a><a href="#visit">Visit</a><a href="#contact">Contact</a></nav>
+ <a class="call" href="tel:+642102656994">Call 021 0265 6994</a>
+</div>
+<div class="tabs" aria-label="Pages"><a href="#home">Home</a><a href="#work">Work</a><a href="#visit">Visit</a><a href="#contact">Contact</a></div>
+</header>
+<div class="tape" aria-hidden="true"></div>
+
+<main>
+<div class="panel" id="p-home">
+ <div class="wrap hero">
+  <div>
+   <p class="eyebrow">Tailor on Richardson Road, Wesley</p>
+   <h1>Alterations done properly, by someone who&#x27;s done it for years.</h1>
+   <p class="lead">Hems, zips, resizing and remodelling for ladies&#x27; and gents&#x27; clothing. Drop it in to Hash on Richardson Road, or call first to check.</p>
+   <div class="btns"><a class="btn solid" href="tel:+642102656994">Call Hash</a><a class="btn" href="#visit">Hours &amp; directions</a></div>
+   <div class="open"><span class="dot" id="dot"></span><span id="openTxt">Tuesday to Saturday from 11am</span></div>
+  </div>
+  <div class="frame"><img src="img/hero.jpg" width="1400" height="1866" alt="Inside Hash Tailor&#x27;s workroom, with garments on the cutting table and sewing machines along the wall" fetchpriority="high">
+   <div class="tag"><b>4.8 ★</b><span>38 Google reviews</span></div></div>
+ </div>
+ <section class="seam"><div class="wrap">
+  <p class="eyebrow">What Hash does</p><h2>Alterations and repairs, ladies' and gents'</h2>
+  <div class="svcs"><article class="svc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17 17 3l4 4L7 21z"/><path d="m7 13 2 2M10 10l2 2M13 7l2 2"/></svg><h3>Length hemming</h3><p>Trousers, jeans, skirts and dresses taken up or let down to the right length.</p></article><article class="svc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20"/><path d="M9 5h3M12 8h3M9 11h3M12 14h3"/><rect x="9" y="16" width="6" height="6" rx="1.5"/></svg><h3>Zip changing</h3><p>Broken or stuck zips replaced on trousers, jackets, skirts and dresses.</p></article><article class="svc"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1 12 12"/></svg><h3>Remodelling</h3><p>Taking in, letting out and reshaping a garment so it fits the way it should.</p></article><article class="svc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3 3 6l2 5 3-1v11h8V10l3 1 2-5-5-3a4 4 0 0 1-8 0z"/></svg><h3>Shirts, jackets and coats</h3><p>Sleeves, sides and shoulders adjusted on everyday and formal wear.</p></article><article class="svc"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.5"/><path d="M12 9.5C10 5 14 3 12 2c-2 1 2 3 0 7.5M14.5 12c4.5-2 6.5 2 7.5 0-1-2-3 2-7.5 0M12 14.5c2 4.5-2 6.5 0 7.5 2-1-2-3 0-7.5M9.5 12C5 14 3 10 2 12c1 2 3-2 7.5 0"/></svg><h3>Puletasi and lavalava</h3><p>Pacific wear altered and fitted for you.</p></article><article class="svc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3 5 17l-2 4 4-2L21 5z"/><circle cx="18.5" cy="5.5" r=".8"/><path d="M5 17c-2-3 1-7 5-6"/></svg><h3>Dresses and more</h3><p>Ball and formal dresses fitted, plus repairs and one-off jobs like curtains.</p></article></div>
+ </div></section>
+ <section class="seam"><div class="wrap">
+  <p class="eyebrow">How it works</p><h2>Three steps, no fuss</h2>
+  <ol class="steps"><li><span class="num">1</span><h3>Bring it in</h3><p>Drop in during opening hours, or call Hash first to check he can fit you in.</p></li><li><span class="num">2</span><h3>Get it fitted</h3><p>Show Hash what needs doing and he&#x27;ll measure it up with you.</p></li><li><span class="num">3</span><h3>Pick it up</h3><p>Collect it finished and fitting right. Small fixes can be quick.</p></li></ol>
+ </div></section>
+ <section class="dark"><div class="wrap">
+  <p class="eyebrow">Reviews</p><h2>4.8 stars from 38 Google reviews</h2>
+  <p class="lead">What customers say about Hash and his work.</p>
+  <div class="revs"><figure class="rev"><div class="stars" aria-label="5 stars">★★★★★</div><blockquote>Dropped off my gym leggings and he fixed it not even 30 min after. A very kind and sweet man! Totally recommend it!</blockquote><figcaption>Tugba <span>· 3 months ago</span></figcaption></figure><figure class="rev"><div class="stars" aria-label="5 stars">★★★★★</div><blockquote>Hash Tailor made these curtains for my camper van, he has done a beautiful job, quality workmanship with exact specifications met for a perfect fit…</blockquote><figcaption>Pieter Wiekens <span>· a year ago</span></figcaption></figure><figure class="rev"><div class="stars" aria-label="5 stars">★★★★★</div><blockquote>Chose this place because of other Google reviews and Hash did not disappoint. The prices were very affordable and the quality delivered is exceptional! Hash himself is very welcoming and friendly.</blockquote><figcaption>Pula Panamgama <span>· 3 years ago</span></figcaption></figure><figure class="rev"><div class="stars" aria-label="5 stars">★★★★★</div><blockquote>Thank you so much for the fantastic alteration of my son&#x27;s trousers. Hash is awesome with lots of experience in his field.</blockquote><figcaption>Jeanne Bouladam <span>· 3 years ago</span></figcaption></figure><figure class="rev"><div class="stars" aria-label="5 stars">★★★★★</div><blockquote>Highly recommend . 5 stars all the stars and many more !</blockquote><figcaption>Oua Pelu <span>· 2 years ago</span></figcaption></figure></div>
+ </div></section>
+</div>
+
+<div class="panel" id="p-work"><section><div class="wrap">
+ <div class="split">
+  <div><p class="eyebrow">About</p><h2>A local tailor, not a counter service</h2><p>Hash Tailor is a small alterations shop on Richardson Road in Wesley, run by Hash himself. He works on everyday clothes, formal wear and Pacific wear for ladies and gents.</p><p>Customers keep coming back for the same reasons: careful work, fair prices and a friendly welcome. 34 of his 38 Google reviews are five stars.</p></div>
+  <blockquote class="pull">“Hash is awesome with lots of experience in his field.”<cite>Jeanne Bouladam, Google review</cite></blockquote>
+ </div>
+ <div class="gal"><figure class="ph"><img src="img/work0.jpg" width="1000" height="750" alt="Custom curtains Hash made for a camper van, fitted across the back window" loading="lazy"><figcaption>Camper van curtains, made to measure</figcaption></figure><figure class="ph"><img src="img/work1.jpg" width="1000" height="1642" alt="Close-up of a curtain edge with neat stitching and a velcro strip" loading="lazy"><figcaption>Neat finishing on the curtain edges</figcaption></figure><figure class="ph"><img src="img/work2.jpg" width="1000" height="750" alt="Camper van interior at sunset with the finished curtains in place" loading="lazy"><figcaption>Cut so the prints all face the right way</figcaption></figure><figure class="ph"><img src="img/work3.jpg" width="1000" height="750" alt="Close-up of patterned fabric with straight topstitching" loading="lazy"><figcaption>Straight, even stitching</figcaption></figure><figure class="ph"><img src="img/work4.jpg" width="939" height="683" alt="Hash Tailor&#x27;s shop window listing hemming, zips, remodelling and Pacific wear" loading="lazy"><figcaption>The shop window on Richardson Road</figcaption></figure><figure class="ph"><img src="img/work5.jpg" width="802" height="520" alt="Hash Tailor&#x27;s blue shopfront with red lettering" loading="lazy"><figcaption>Look for the blue shopfront</figcaption></figure></div>
+</div></section></div>
+
+<div class="panel" id="p-visit"><section><div class="wrap">
+ <p class="eyebrow">Visit the shop</p><h2>Wesley, Mt Roskill</h2><p class="lead">206 Richardson Road, Wesley, Auckland 1041. Look for the blue shopfront with the red sign.</p>
+ <div class="visit">
+  <div id="map" role="img" aria-label="Map showing where Hash Tailor is"></div>
+  <div class="card"><h3>Opening hours</h3><table class="hours"><tr data-day="0"><th>Monday</th><td>Closed</td></tr><tr data-day="1"><th>Tuesday</th><td>11am – 5:30pm</td></tr><tr data-day="2"><th>Wednesday</th><td>11am – 5:30pm</td></tr><tr data-day="3"><th>Thursday</th><td>11am – 5:30pm</td></tr><tr data-day="4"><th>Friday</th><td>11am – 5:30pm</td></tr><tr data-day="5"><th>Saturday</th><td>11am – 5pm</td></tr><tr data-day="6"><th>Sunday</th><td>Closed</td></tr></table>
+   <div class="btns" style="margin-top:20px"><a class="btn solid" href="https://www.google.com/maps/dir/?api=1&amp;destination=Hash+Tailor&amp;destination_place_id=ChIJgdbuau1GDW0RTCkgT2B9_80" target="_blank" rel="noopener">Get directions</a><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Hash+Tailor&amp;query_place_id=ChIJgdbuau1GDW0RTCkgT2B9_80" target="_blank" rel="noopener">See on Google</a></div></div>
+ </div>
+</div></section></div>
+
+<div class="panel" id="p-contact"><section><div class="wrap">
+ <p class="eyebrow">Contact</p><h2>Talk to Hash directly</h2>
+ <p class="lead">Call or text to check a job, or just drop in during opening hours.</p>
+ <div class="contact">
+  <a class="tile" href="tel:+642102656994"><span>Call</span><b>021 0265 6994</b></a>
+  <a class="tile" href="sms:+642102656994"><span>Text</span><b>Send Hash a message</b></a>
+ </div>
+</div></section></div>
+</main>
+
+<footer><div class="wrap"><b>Hash Tailor</b><p>Clothing alterations in Wesley, Mt Roskill, Auckland. <a href="tel:+642102656994">021 0265 6994</a></p><p>Website by SiteRefresh.</p></div></footer>
+<div class="sticky"><a class="btn solid" href="tel:+642102656994">Call</a><a class="btn" href="sms:+642102656994">Text</a></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const HOURS={"0": null, "1": "11:00-17:30", "2": "11:00-17:30", "3": "11:00-17:30", "4": "11:00-17:30", "5": "11:00-17:00", "6": null};
+function nzNow(){const p=new Intl.DateTimeFormat("en-NZ",{timeZone:"Pacific/Auckland",weekday:"long",hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(new Date());
+ const g=t=>p.find(x=>x.type===t).value;return{day:["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"].indexOf(g("weekday")),mins:(+g("hour")%24)*60+ +g("minute")}}
+function fmt(s){let[h,m]=s.split(":").map(Number);const ap=h<12?"am":"pm";h=h%12||12;return m?`${h}:${String(m).padStart(2,"0")}${ap}`:`${h}${ap}`}
+(function(){const n=nzNow(),h=HOURS[n.day],dot=document.getElementById("dot"),t=document.getElementById("openTxt");
+ document.querySelector(`tr[data-day="${n.day}"]`)?.classList.add("today");
+ if(h){const[a,b]=h.split("-"),toM=s=>{const[x,y]=s.split(":").map(Number);return x*60+y};
+  if(n.mins>=toM(a)&&n.mins<toM(b)){dot.classList.add("on");t.textContent="Open now, until "+fmt(b);return}
+  if(n.mins<toM(a)){t.textContent="Opens today at "+fmt(a);return}}
+ for(let i=1;i<=7;i++){const d=(n.day+i)%7;if(HOURS[d]){t.textContent="Closed now · opens "+["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"][d]+" at "+fmt(HOURS[d].split("-")[0]);return}}})();
+let map;
+function show(){const id=(location.hash||"#home").slice(1),ok=["home","work","visit","contact"].includes(id)?id:"home";
+ document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("on",p.id==="p-"+ok));
+ document.querySelectorAll('nav a,.tabs a').forEach(a=>a.toggleAttribute("aria-current",a.getAttribute("href")==="#"+ok));
+ if(ok==="visit"&&!map&&window.L){map=L.map("map",{scrollWheelZoom:false}).setView([-36.9000728,174.7199646],15.25);
+  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",{attribution:"Tiles © Esri",maxZoom:19}).addTo(map);
+  L.circleMarker([-36.9000728,174.7199646],{radius:10,color:"#fff",weight:3,fillColor:"#c4362c",fillOpacity:1}).addTo(map).bindPopup("<b>Hash Tailor</b><br>206 Richardson Road, Wesley, Auckland 1041").openPopup()}
+ if(location.hash)window.scrollTo(0,0)}
+addEventListener("hashchange",show);show();
+</script>
+<script>if(location.hostname.endsWith("github.io")){try{fetch("https://siterefresh-hits.siterefresh-nz.workers.dev",{method:"POST",keepalive:true,headers:{"content-type":"application/json"},body:JSON.stringify({p:location.pathname+location.search,r:document.referrer})})}catch(e){}}</script>
+</body></html>
