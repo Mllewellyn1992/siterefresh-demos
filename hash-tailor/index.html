@@ -88,8 +88,17 @@ h3{font-size:20px;line-height:1.25}
 .tile{display:block;text-decoration:none;background:var(--paper);border-radius:6px;padding:28px;position:relative}
 .tile::after{content:"";position:absolute;inset:5px;border:1.2px dashed var(--line);border-radius:4px}
 .tile b{display:block;font:650 24px var(--serif);margin-top:6px}.tile span{color:var(--soft)}
-footer{background:var(--ink);color:#b9b6d3;padding:40px 0 96px;font-size:14.5px}footer b{color:#fff;font-family:var(--serif);font-size:20px}
-footer a{color:#fff}
+body{display:flex;flex-direction:column;min-height:100vh}main{flex:1}
+footer{background:var(--navy2);color:#d9e3f3;font-size:15px;margin-top:40px}
+footer .tape{border-top:0}
+.fgrid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;padding-top:48px;padding-bottom:36px}
+.fname{display:block;font:650 26px/1 var(--serif);color:#fff;margin-bottom:12px}.fname i{color:#fff;opacity:.85}
+footer h4{font:600 12.5px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#fff;opacity:.75;margin:4px 0 12px}
+footer p{margin:0 0 8px}footer a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.35)}footer a:hover{border-color:#fff}
+.fcall{font:650 22px var(--serif);border:0!important}
+.frate{margin-top:14px!important}.frate span{color:#f0c64a;letter-spacing:2px;margin-right:6px}
+.fbase{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.15);padding-top:16px;padding-bottom:22px;font-size:13.5px;opacity:.8}
+@media (max-width:860px){.fgrid{grid-template-columns:1fr;gap:26px}.fbase{padding-bottom:96px}}
 .sticky{display:none}
 .tabs{display:none;gap:6px;overflow-x:auto;padding:10px 20px;border-bottom:1px dashed var(--line)}
 .tabs a{flex:0 0 auto;text-decoration:none;font-weight:500;font-size:14.5px;padding:7px 14px;border-radius:999px;color:var(--soft);background:var(--paper)}
@@ -174,7 +183,11 @@ footer a{color:#fff}
 </div></section></div>
 </main>
 
-<footer><div class="wrap"><b>Hash Tailor</b><p>Clothing alterations in Wesley, Mt Roskill, Auckland. <a href="tel:+642102656994">021 0265 6994</a></p><p>Website by SiteRefresh.</p></div></footer>
+<footer><div class="tape" aria-hidden="true"></div><div class="wrap fgrid">
+ <div><b class="fname">Hash <i>Tailor</i></b><p>Clothing alterations in Wesley, Mt Roskill, Auckland.</p><p class="frate"><span>★★★★★</span> 4.8 from 38 Google reviews</p></div>
+ <div><h4>Visit</h4><p>206 Richardson Road, Wesley, Auckland 1041</p><p>Tue–Fri 11am–5:30pm · Sat 11am–5pm</p><p><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Hash+Tailor&amp;destination_place_id=ChIJgdbuau1GDW0RTCkgT2B9_80" target="_blank" rel="noopener">Get directions →</a></p></div>
+ <div><h4>Contact</h4><p><a class="fcall" href="tel:+642102656994">021 0265 6994</a></p><p><a href="sms:+642102656994">Send a text</a></p><p><a href="https://www.google.com/maps/search/?api=1&amp;query=Hash+Tailor&amp;query_place_id=ChIJgdbuau1GDW0RTCkgT2B9_80" target="_blank" rel="noopener">See us on Google →</a></p></div>
+</div><div class="wrap fbase"><span>© Hash Tailor</span><span>Website by SiteRefresh</span></div></footer>
 <div class="sticky"><a class="btn solid" href="tel:+642102656994">Call</a><a class="btn" href="sms:+642102656994">Text</a></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
