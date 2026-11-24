@@ -15,7 +15,7 @@ background-image:repeating-linear-gradient(0deg,rgba(29,35,64,.018) 0 1px,transp
 img{max-width:100%;height:auto;display:block}main{overflow-x:clip}a{color:inherit}
 .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 .demo{background:var(--navy2);color:#e9e4f5;font-size:13.5px;text-align:center;padding:8px 16px}.demo a{color:#fff}
-header{position:sticky;top:0;z-index:20;background:rgba(245,239,227,.94);backdrop-filter:blur(6px);border-bottom:1px dashed var(--line)}
+header{position:sticky;top:0;z-index:20;background:var(--linen);backdrop-filter:blur(6px);border-bottom:1px dashed var(--line)}
 .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .logo b{font:650 22px/1 var(--serif);letter-spacing:-.01em}.logo b i{color:var(--thread);font-style:italic;font-weight:500}
@@ -100,13 +100,13 @@ footer a{color:#fff}
  .steps li{text-align:left;display:grid;grid-template-columns:46px 1fr;column-gap:16px}.steps li .num{grid-row:span 2;margin:0}
  .contact{grid-template-columns:1fr}.bar .call{display:none}section{padding:52px 0}
  .tabs{display:flex}
- .sticky{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(245,239,227,.96);border-top:1px dashed var(--line)}
+ .sticky{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:var(--linen);border-top:1px dashed var(--line)}
  .sticky a{flex:1;justify-content:center}
 }
 @media (max-width:520px){.svcs{grid-template-columns:1fr}.tag{left:8px}.logo small{display:none}.bar{height:54px}.tabs{padding:8px 14px}.tabs a{padding:6px 12px;font-size:14px}}
 @media (max-width:860px){.frame{max-width:520px;margin:0 auto;width:100%}.frame img{aspect-ratio:4/3}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-</style></head>
+:root{--linen:#f4f7fb;--paper:#ffffff;--ink:#14181f;--soft:#4d5868;--navy:#336db8;--navy2:#1f4f93;--thread:#d0281f;--brass:#d0281f;--line:#d5dfec}.heroband{background:var(--navy);color:#fff}.heroband .eyebrow{color:#fff;opacity:.9}.heroband .lead,.heroband .open{color:#eaf1fb}.heroband .btn{border-color:#fff;color:#fff}.heroband .btn.solid{background:var(--thread);border-color:var(--thread)}.heroband .tag{background:var(--thread)}.frame img{aspect-ratio:4/3}.logo b{color:var(--thread)}.logo b i{color:var(--ink)}.sticky .btn.solid,.tabs a[aria-current]{background:var(--thread);border-color:var(--thread)}</style></head>
 <body>
 <div class="demo">This is a free mock-up made by <a href="https://siterefresh.co.nz">SiteRefresh</a>. It isn't live yet. Hash Tailor can claim it any time.</div>
 <header><div class="wrap bar">
@@ -120,7 +120,7 @@ footer a{color:#fff}
 
 <main>
 <div class="panel" id="p-home">
- <div class="wrap hero">
+ <div class="heroband"><div class="wrap hero">
   <div>
    <p class="eyebrow">Tailor on Richardson Road, Wesley</p>
    <h1>Alterations done properly, by someone who&#x27;s done it for years.</h1>
@@ -128,9 +128,9 @@ footer a{color:#fff}
    <div class="btns"><a class="btn solid" href="tel:+642102656994">Call Hash</a><a class="btn" href="#visit">Hours &amp; directions</a></div>
    <div class="open"><span class="dot" id="dot"></span><span id="openTxt">Tuesday to Saturday from 11am</span></div>
   </div>
-  <div class="frame"><img src="img/hero.jpg" width="1400" height="1866" alt="Inside Hash Tailor&#x27;s workroom, with garments on the cutting table and sewing machines along the wall" fetchpriority="high">
+  <div class="frame"><img src="img/hero.jpg" width="1400" height="1050" alt="Hash Tailor&#x27;s blue shopfront with the red sign and the list of services in the window" fetchpriority="high">
    <div class="tag"><b>4.8 ★</b><span>38 Google reviews</span></div></div>
- </div>
+ </div></div>
  <section class="seam"><div class="wrap">
   <p class="eyebrow">What Hash does</p><h2>Alterations and repairs, ladies' and gents'</h2>
   <div class="svcs"><article class="svc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17 17 3l4 4L7 21z"/><path d="m7 13 2 2M10 10l2 2M13 7l2 2"/></svg><h3>Length hemming</h3><p>Trousers, jeans, skirts and dresses taken up or let down to the right length.</p></article><article class="svc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20"/><path d="M9 5h3M12 8h3M9 11h3M12 14h3"/><rect x="9" y="16" width="6" height="6" rx="1.5"/></svg><h3>Zip changing</h3><p>Broken or stuck zips replaced on trousers, jackets, skirts and dresses.</p></article><article class="svc"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1 12 12"/></svg><h3>Remodelling</h3><p>Taking in, letting out and reshaping a garment so it fits the way it should.</p></article><article class="svc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3 3 6l2 5 3-1v11h8V10l3 1 2-5-5-3a4 4 0 0 1-8 0z"/></svg><h3>Shirts, jackets and coats</h3><p>Sleeves, sides and shoulders adjusted on everyday and formal wear.</p></article><article class="svc"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.5"/><path d="M12 9.5C10 5 14 3 12 2c-2 1 2 3 0 7.5M14.5 12c4.5-2 6.5 2 7.5 0-1-2-3 2-7.5 0M12 14.5c2 4.5-2 6.5 0 7.5 2-1-2-3 0-7.5M9.5 12C5 14 3 10 2 12c1 2 3-2 7.5 0"/></svg><h3>Puletasi and lavalava</h3><p>Pacific wear altered and fitted for you.</p></article><article class="svc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3 5 17l-2 4 4-2L21 5z"/><circle cx="18.5" cy="5.5" r=".8"/><path d="M5 17c-2-3 1-7 5-6"/></svg><h3>Dresses and more</h3><p>Ball and formal dresses fitted, plus repairs and one-off jobs like curtains.</p></article></div>
@@ -152,7 +152,7 @@ footer a{color:#fff}
   <div><p class="eyebrow">About</p><h2>A local tailor, not a counter service</h2><p>Hash Tailor is a small alterations shop on Richardson Road in Wesley, run by Hash himself. He works on everyday clothes, formal wear and Pacific wear for ladies and gents.</p><p>Customers keep coming back for the same reasons: careful work, fair prices, quick turnarounds and a friendly welcome. 34 of his 38 Google reviews are five stars.</p></div>
   <blockquote class="pull">“Hash is awesome with lots of experience in his field.”<cite>Jeanne Bouladam, Google review</cite></blockquote>
  </div>
- <div class="gal"><figure class="ph"><img src="img/work0.jpg" width="1000" height="750" alt="Custom curtains Hash made for a camper van, fitted across the back window" loading="lazy"><figcaption>Camper van curtains, made to measure</figcaption></figure><figure class="ph"><img src="img/work1.jpg" width="1000" height="1642" alt="Close-up of a curtain edge with neat stitching and a velcro strip" loading="lazy"><figcaption>Neat finishing on the curtain edges</figcaption></figure><figure class="ph"><img src="img/work2.jpg" width="1000" height="750" alt="Camper van interior at sunset with the finished curtains in place" loading="lazy"><figcaption>Cut so the prints all face the right way</figcaption></figure><figure class="ph"><img src="img/work3.jpg" width="1000" height="750" alt="Close-up of patterned fabric with straight topstitching" loading="lazy"><figcaption>Straight, even stitching</figcaption></figure><figure class="ph"><img src="img/work4.jpg" width="939" height="683" alt="Hash Tailor&#x27;s shop window listing hemming, zips, remodelling and Pacific wear" loading="lazy"><figcaption>The shop window on Richardson Road</figcaption></figure><figure class="ph"><img src="img/work5.jpg" width="802" height="520" alt="Hash Tailor&#x27;s blue shopfront with red lettering" loading="lazy"><figcaption>Look for the blue shopfront</figcaption></figure></div>
+ <div class="gal"><figure class="ph"><img src="img/work0.jpg" width="1000" height="1333" alt="Inside Hash Tailor&#x27;s workroom, with garments on the cutting table and sewing machines along the wall" loading="lazy"><figcaption>Hash&#x27;s workroom</figcaption></figure><figure class="ph"><img src="img/work1.jpg" width="1000" height="750" alt="Custom curtains Hash made for a camper van, fitted across the back window" loading="lazy"><figcaption>Camper van curtains, made to measure</figcaption></figure><figure class="ph"><img src="img/work2.jpg" width="1000" height="1642" alt="Close-up of a curtain edge with neat stitching and a velcro strip" loading="lazy"><figcaption>Neat finishing on the curtain edges</figcaption></figure><figure class="ph"><img src="img/work3.jpg" width="1000" height="750" alt="Camper van interior at sunset with the finished curtains in place" loading="lazy"><figcaption>Cut so the prints all face the right way</figcaption></figure><figure class="ph"><img src="img/work4.jpg" width="1000" height="750" alt="Close-up of patterned fabric with straight topstitching" loading="lazy"><figcaption>Straight, even stitching</figcaption></figure><figure class="ph"><img src="img/work5.jpg" width="802" height="520" alt="Hash Tailor&#x27;s blue shopfront with red lettering" loading="lazy"><figcaption>Look for the blue shopfront</figcaption></figure></div>
 </div></section></div>
 
 <div class="panel" id="p-visit"><section><div class="wrap">
