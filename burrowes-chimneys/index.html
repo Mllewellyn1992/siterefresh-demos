@@ -259,9 +259,39 @@ footer .fbase a{display:inline;color:inherit;text-decoration:underline}
  footer .wrap{grid-template-columns:1.3fr 2fr}footer .fbase{grid-column:1/-1}
  .tabs .wrap{justify-content:center}.tabs a{flex:0 0 auto;padding:16px 22px 13px}
 }
+</style><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Archivo:wght@400;600;700&display=swap" rel="stylesheet"><style>
+body.st-formwork{--ink:#141414;--muted:#4a4844;--line:#141414;--bg:#d8d5cf;--tint:#cbc7c0;--paper:#d8d5cf;
+ font-family:"Archivo",system-ui,sans-serif;background:#d8d5cf;
+ background-image:radial-gradient(rgba(0,0,0,.07) 1px,transparent 1.2px);background-size:7px 7px}
+.st-formwork h1,.st-formwork h2,.st-formwork h3,.st-formwork .brand,.st-formwork .tabs a,.st-formwork .score b,
+.st-formwork .hero-cta a,.st-formwork .feature a,.st-formwork .bar a,.st-formwork .navbtn{font-family:"Oswald",sans-serif;text-transform:uppercase;letter-spacing:.01em}
+.st-formwork h1,.st-formwork h2{font-weight:700;line-height:1.02}
+.st-formwork .svc h3,.st-formwork .steps h3{font-weight:600;font-size:17px;letter-spacing:.02em}
+.st-formwork *{border-radius:0!important}
+.st-formwork .top,.st-formwork footer{background:#141414}
+.st-formwork .hero{background:#141414}
+.st-formwork .hero::after{border-color:rgba(255,255,255,.05)}
+.st-formwork .hero-photo{box-shadow:10px 10px 0 var(--main);border:3px solid #fff}
+.st-formwork .tabs{background:#d8d5cf;border-bottom:3px solid #141414;box-shadow:none}
+.st-formwork .tabs a{color:#141414;font-weight:600;letter-spacing:.06em}
+.st-formwork .tabs a[aria-current]{color:var(--main);border-bottom-width:5px}
+.st-formwork .alt{background:#cbc7c0}
+.st-formwork .svc div,.st-formwork .steps li,.st-formwork .rev,.st-formwork .faq details,.st-formwork .hours,
+.st-formwork .far,.st-formwork .direct a,.st-formwork .signs li,.st-formwork .shot{background:#f2f0ec;border:2px solid #141414;box-shadow:5px 5px 0 #141414}
+.st-formwork .svc i,.st-formwork .steps li i{background:#141414}
+.st-formwork .svc i svg{stroke:var(--on-dark)}
+.st-formwork .feature,.st-formwork .area{background:#141414;box-shadow:8px 8px 0 var(--main)}
+.st-formwork .map{border:2px solid #141414;box-shadow:5px 5px 0 #141414}
+.st-formwork .hero-cta a,.st-formwork .bar .call{box-shadow:4px 4px 0 #000}
+.st-formwork .eyebrow{color:#141414;letter-spacing:.2em}
+.st-formwork .eyebrow::after{content:"";display:block;width:44px;height:4px;background:var(--main);margin-top:8px}
+.st-formwork .bar{background:#d8d5cf;border-top:3px solid #141414}
+.st-formwork .bar .txt{background:#f2f0ec;border:2px solid #141414;color:#141414}
+.st-formwork .brandcard{background:#141414;box-shadow:8px 8px 0 var(--main)}
+@media (min-width:900px){.st-formwork .svc div:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 #141414}}
 </style>
 </head>
-<body class="lg" style="--wm:url(img/logo_mark.png)">
+<body class="lg st-formwork" style="--wm:url(img/logo_mark.png)">
 <div class="demo">Preview made for Burrowes Chimneys by SiteRefresh. Not live, and not affiliated with Burrowes Chimneys.</div>
 <header class="top"><div class="wrap nav"><a class="brand" href="#home"><img class="logo" src="img/logo_mark.png" alt="">Burrowes Chimneys</a><a class="navbtn" href="#contact">Get a quote</a></div></header>
 <nav class="tabs" aria-label="Pages"><div class="wrap"><a href="#home">Home</a><a href="#about">About</a><a href="#location">Location</a><a href="#contact">Contact</a></div></nav>
