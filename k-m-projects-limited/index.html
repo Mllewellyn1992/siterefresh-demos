@@ -267,10 +267,10 @@ body.st-brutal{--ink:#111110;--muted:#4f4f4b;--line:#111110;--rule:#111110;--pap
 .st-brutal h1{font-size:clamp(2.4rem,11vw,4.6rem)}
 .st-brutal h3{font-weight:700}
 .st-brutal .brand{font-weight:900;text-transform:uppercase;letter-spacing:-.02em}
-.st-brutal .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--soft);color:#111110;font-weight:700;letter-spacing:.08em;padding:4px 10px 4px 6px}
+.st-brutal .eyebrow{display:inline-flex;align-items:center;gap:8px;background:#edf2e9;color:#111110;font-weight:700;letter-spacing:.08em;padding:4px 10px 4px 6px}
 .st-brutal .top{background:#ffffff;color:#111110;border-bottom:1px solid #111110}
 .st-brutal .top .brand{color:#111110}
-.st-brutal .navbtn{background:#111110;color:#ffffff;border:1.5px solid #111110}
+.st-brutal .navbtn{background:var(--soft);color:#111110;border:1.5px solid #111110}
 .st-brutal .tabs{background:#ffffff;border-bottom:1px solid #111110}
 .st-brutal .tabs a{color:#111110;font-weight:700}
 .st-brutal .tabs a[aria-current]{border-bottom:3px solid #111110}
@@ -279,13 +279,13 @@ body.st-brutal{--ink:#111110;--muted:#4f4f4b;--line:#111110;--rule:#111110;--pap
 .st-brutal .hero h1 span{color:#111110;background:none}
 .st-brutal .kicker{color:#111110;font-weight:700}
 .st-brutal .hero.wm::after{opacity:.05}
-.st-brutal .rating,.st-brutal .open,.st-brutal .chips li{background:#f1f1ef;border:0;color:#111110}
+.st-brutal .rating,.st-brutal .open,.st-brutal .chips li{background:#edf2e9;border:0;color:#111110}
 .st-brutal .chips svg{stroke:#111110}
 .st-brutal .hero-photo{border:0}
 .st-brutal .hero-cta a,.st-brutal .feature a,.st-brutal .cta a,.st-brutal .gbtn{border:1.5px solid #111110;font-weight:700}
-.st-brutal .hero-cta a{background:#111110;color:#ffffff}
+.st-brutal .hero-cta a{background:#111110;color:#ffffff}.st-brutal .hero-cta a:first-child{background:var(--soft);color:#111110;border:1.5px solid #111110}
 .st-brutal .hero-cta a.ghost{background:#fff;color:#111110}
-.st-brutal .hero-cta a:hover,.st-brutal .cta a:hover,.st-brutal .navbtn:hover{background:var(--soft);color:#111110}
+.st-brutal .hero-cta a:hover,.st-brutal .cta a:hover{background:var(--soft);color:#111110}.st-brutal .navbtn:hover,.st-brutal .hero-cta a:first-child:hover{background:#111110;color:#ffffff}
 .st-brutal .alt{background:#efefea}
 .st-brutal .svc div,.st-brutal .steps li,.st-brutal .rev,.st-brutal .faq details,.st-brutal .hours,.st-brutal .far,
 .st-brutal .direct a,.st-brutal .signs li,.st-brutal .map{background:#fff;border:1px solid #111110;color:#111110}
@@ -293,7 +293,7 @@ body.st-brutal{--ink:#111110;--muted:#4f4f4b;--line:#111110;--rule:#111110;--pap
 .st-brutal .svc ul li{border-color:#dcdcd6}
 .st-brutal .direct{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.st-brutal .direct a{min-width:0}
 @media (max-width:599px){.st-brutal .direct a:nth-child(n+3){grid-column:1/-1}}
-.st-brutal .svc i,.st-brutal .steps li i{background:var(--soft)}
+.st-brutal .svc i,.st-brutal .steps li i{background:#edf2e9}
 .st-brutal .svc i svg,.st-brutal .steps li i svg,.st-brutal .signs svg,.st-brutal .direct svg{stroke:#111110}
 .st-brutal .svc div:hover{transform:none}
 .st-brutal .shot figcaption{background:#fff;color:#111110}
@@ -301,8 +301,8 @@ body.st-brutal{--ink:#111110;--muted:#4f4f4b;--line:#111110;--rule:#111110;--pap
 .st-brutal .feature h2,.st-brutal .area b{color:#ffffff}
 .st-brutal .feature p,.st-brutal .area p{color:#d6d6d0}
 .st-brutal .feature a{background:var(--soft);color:#111110;border-color:var(--soft)}
-.st-brutal .area i{background:var(--soft)}.st-brutal .area svg{stroke:#111110}
-.st-brutal .cta{background:var(--soft);border:0;color:#111110}
+.st-brutal .area i{background:#edf2e9}.st-brutal .area svg{stroke:#111110}
+.st-brutal .cta{background:#edf2e9;border:0;color:#111110}
 .st-brutal .cta a{background:#111110;color:#ffffff}
 .st-brutal .cta a:hover{background:#fff}
 .st-brutal .score b{font-weight:900}
@@ -313,7 +313,7 @@ body.st-brutal{--ink:#111110;--muted:#4f4f4b;--line:#111110;--rule:#111110;--pap
 .st-brutal .bar .txt{background:#fff;color:#111110}
 .st-brutal footer{background:#111110}
 @media (min-width:900px){.st-brutal .top .htabs a{color:#111110;font-weight:700}
- .st-brutal .top .htabs a[aria-current]{color:#111110;background:var(--soft);border-color:#111110}
+ .st-brutal .top .htabs a[aria-current]{color:#111110;background:transparent;box-shadow:inset 0 -3px 0 #111110}
  .st-brutal .hero h1{font-size:4rem}}
 
 .top .htabs{display:none}
