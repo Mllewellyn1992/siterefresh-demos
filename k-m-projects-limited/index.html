@@ -288,8 +288,9 @@ body.st-brutal{--ink:#111110;--muted:#4f4f4b;--line:#111110;--rule:#111110;--pap
 .st-brutal .hero-cta a.ghost{background:#fff;color:#111110}
 .st-brutal .hero-cta a:hover,.st-brutal .cta a:hover{background:var(--soft);color:#111110}.st-brutal .navbtn:hover,.st-brutal .hero-cta a:first-child:hover{background:#111110;color:#ffffff}
 .st-brutal .alt{background:#efefea}
-.st-brutal .svc div,.st-brutal .steps li,.st-brutal .rev,.st-brutal .faq details,.st-brutal .hours,.st-brutal .far,
-.st-brutal .direct a,.st-brutal .signs li,.st-brutal .map{background:#fff;border:1px solid #111110;color:#111110}
+.st-brutal .svc div,.st-brutal .direct a,.st-brutal .map{background:#fff;border:1px solid #111110;color:#111110}
+/* fewer box lines (Mike 26 Nov: "i like them but it's too much"): full boxes only on service cards, contact tiles and the map; the rest get one top rule */
+.st-brutal .steps li,.st-brutal .rev,.st-brutal .faq details,.st-brutal .hours,.st-brutal .far,.st-brutal .signs li{background:#fff;border:0;border-top:2px solid #111110;color:#111110}
 .st-brutal .shot{background:#fff;border:0}
 .st-brutal .svc ul li{border-color:#dcdcd6}
 .st-brutal .direct{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.st-brutal .direct a{min-width:0}
